@@ -11,7 +11,7 @@ class ViewController: UIViewController {
     
 
     let collectionView: UICollectionView = {
-        let collection = UICollectionView(frame: .init(x: 36, y: 178, width: 226, height: 473), collectionViewLayout: UICollectionViewFlowLayout())
+        let collection = UICollectionView(frame: .init(x: 0, y: 178, width: 390, height: 473), collectionViewLayout: UICollectionViewFlowLayout())
 
         
         return collection
