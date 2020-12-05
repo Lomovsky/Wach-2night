@@ -7,11 +7,13 @@
 
 import UIKit
 
+
+
 class ViewController: UIViewController {
     
 
     let collectionView: UICollectionView = {
-        let collection = UICollectionView(frame: .init(x: 0, y: 178, width: 390, height: 473), collectionViewLayout: UICollectionViewFlowLayout())
+        let collection = UICollectionView(frame: .init(x: 0, y: 178, width: 300, height: 473), collectionViewLayout: UICollectionViewFlowLayout())
 
         
         return collection
@@ -40,22 +42,23 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        
+        view.addSubview(movieLabel)
+        view.addSubview(secondLabel)
+        view.addSubview(collectionView)
+        view.addSubview(stackView)
 
+       
                 
     }
 
     //MARK: ViewWillApear
     override func viewWillAppear(_ animated: Bool) {
-        view.addSubview(movieLabel)
-        view.addSubview(secondLabel)
-        view.addSubview(collectionView)
-        view.addSubview(stackView)
-        
-        
-        
+
+
         setupStackView()
         setupLabels()
-//        setupCollectionView()
+
     }
     
     private func setupStackView(){
@@ -79,6 +82,18 @@ class ViewController: UIViewController {
         
  
     }
+    private func setupCollectionView() {
+//        collectionView.isPagingEnabled = true
+        collectionView.frame.size.width = view.frame.size.width
+        collectionView.frame.size.height = view.frame.size.height
+        
+        
+    }
 
 }
+extension ViewController: UICollectionViewDelegate {
+    
+    
+}
+
 
