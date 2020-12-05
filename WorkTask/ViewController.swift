@@ -8,6 +8,15 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+
+    let collectionView: UICollectionView = {
+        let collection = UICollectionView(frame: .init(x: 36, y: 178, width: 226, height: 473), collectionViewLayout: UICollectionViewFlowLayout())
+
+        
+        return collection
+        
+    }()
 
     let stackView: UIStackView = {  // обьединяем labels
         let stack = UIStackView()
@@ -39,8 +48,9 @@ class ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         view.addSubview(movieLabel)
         view.addSubview(secondLabel)
-//        view.addSubview(collectionView)
+        view.addSubview(collectionView)
         view.addSubview(stackView)
+        
         
         
         setupStackView()
