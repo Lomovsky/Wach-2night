@@ -11,22 +11,18 @@ var images = ["Night", "day"]
 
 class ViewController: UIViewController {
     
-  
-
-
+    
+    //MARK: Setting up ViewElements
+    
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collection.translatesAutoresizingMaskIntoConstraints = false
-//        let collection = UICollectionView(frame: .init(x: 0, y: 178, width: 300, height: 473), collectionViewLayout: UICollectionViewFlowLayout())
-        
-
-        
         return collection
         
     }()
-
+    
     let stackView: UIStackView = {  // обьединяем labels
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -48,29 +44,25 @@ class ViewController: UIViewController {
     // MARK: ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectionView.delegate = self
+        collectionView.dataSource = self
         view.backgroundColor = .white
-        
         view.addSubview(movieLabel)
         view.addSubview(secondLabel)
         view.addSubview(collectionView)
         view.addSubview(stackView)
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        
         registerNib()
-       
-                
     }
-
+    
     //MARK: ViewWillApear
     override func viewWillAppear(_ animated: Bool) {
-
-        
         setupStackView()
         setupLabels()
         setupCollectionView()
-
     }
+    
+    //MARK: Setup funcs
+    
     func registerNib() {
         let nib = UINib(nibName: CollectionViewCell.nibName, bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: CollectionViewCell.reuseIdentifier)
@@ -98,10 +90,10 @@ class ViewController: UIViewController {
         secondLabel.font = .systemFont(ofSize: 16)
         
         
- 
+        
     }
     private func setupCollectionView() {
-//        collectionView.isPagingEnabled = true
+        //        collectionView.isPagingEnabled = true
         collectionView.frame.size.width = view.frame.size.width
         collectionView.frame.size.height = view.frame.size.height
         collectionView.backgroundColor = .white
@@ -109,27 +101,30 @@ class ViewController: UIViewController {
         
         
     }
-
+    
 }
+
+//MARK: CollecctionViewDataSource extencion for ViewController
+
 extension ViewController: UICollectionViewDataSource {
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        images.count
-    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return images.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.reuseIdentifier,for: indexPath) as? CollectionViewCell {
+            let image = images[indexPath.row]
+            cell.configureCell(image: image)
+            
+            return cell
         }
-
-        func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.reuseIdentifier,for: indexPath) as? CollectionViewCell {
-                let image = images[indexPath.row]
-                cell.configureCell(image: image)
-                
-                return cell
-            }
-            return UICollectionViewCell()
-        }
+        return UICollectionViewCell()
+    }
 }
+
+//MARK: CollectionViewDelegateFlowLayout extencion for ViewController
 
 extension ViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
