@@ -13,6 +13,8 @@
 		C060DB04257BECA400C892DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C060DB03257BECA400C892DE /* Assets.xcassets */; };
 		C060DB07257BECA400C892DE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C060DB05257BECA400C892DE /* LaunchScreen.storyboard */; };
 		C060DB14257BED7C00C892DE /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = C060DB13257BED7C00C892DE /* .gitignore */; };
+		C0F2F76C257D02C800A1DAF9 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F2F76A257D02C800A1DAF9 /* CollectionViewCell.swift */; };
+		C0F2F76D257D02C800A1DAF9 /* CollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0F2F76B257D02C800A1DAF9 /* CollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		C060DB06257BECA400C892DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C060DB08257BECA400C892DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C060DB13257BED7C00C892DE /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		C0F2F76A257D02C800A1DAF9 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		C0F2F76B257D02C800A1DAF9 /* CollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +64,8 @@
 				C060DAFA257BECA200C892DE /* AppDelegate.swift */,
 				C060DAFC257BECA200C892DE /* SceneDelegate.swift */,
 				C060DAFE257BECA200C892DE /* ViewController.swift */,
+				C0F2F76A257D02C800A1DAF9 /* CollectionViewCell.swift */,
+				C0F2F76B257D02C800A1DAF9 /* CollectionViewCell.xib */,
 				C060DB03257BECA400C892DE /* Assets.xcassets */,
 				C060DB05257BECA400C892DE /* LaunchScreen.storyboard */,
 				C060DB08257BECA400C892DE /* Info.plist */,
@@ -126,6 +132,7 @@
 			files = (
 				C060DB14257BED7C00C892DE /* .gitignore in Resources */,
 				C060DB07257BECA400C892DE /* LaunchScreen.storyboard in Resources */,
+				C0F2F76D257D02C800A1DAF9 /* CollectionViewCell.xib in Resources */,
 				C060DB04257BECA400C892DE /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -139,6 +146,7 @@
 			files = (
 				C060DAFF257BECA200C892DE /* ViewController.swift in Sources */,
 				C060DAFB257BECA200C892DE /* AppDelegate.swift in Sources */,
+				C0F2F76C257D02C800A1DAF9 /* CollectionViewCell.swift in Sources */,
 				C060DAFD257BECA200C892DE /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
