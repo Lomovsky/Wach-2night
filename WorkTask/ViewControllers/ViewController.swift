@@ -15,10 +15,10 @@ class ViewController: UIViewController, UICollectionViewDelegate {
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        let collection = UICollectionView(frame: .init(x: 0, y: 178, width: 0, height: 0), collectionViewLayout: layout)
-        //        width и height не важны потому что потом мы делаем их на весь view в setupCollectionView
-        collection.translatesAutoresizingMaskIntoConstraints = false
-        return collection
+        let cv = UICollectionView(frame: .init(x: 0, y: 178, width: 0, height: 0), collectionViewLayout: layout)
+        cv.translatesAutoresizingMaskIntoConstraints = false
+        cv .register(CollectionViewCell.self, forCellWithReuseIdentifier: "CollectionViewCellReuseIdentifier")
+        return cv
         
     }()
     
@@ -66,7 +66,7 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         let nib = UINib(nibName: CollectionViewCell.nibName, bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: CollectionViewCell.reuseIdentifier)
         if let flowLayout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            flowLayout.estimatedItemSize = CGSize(width: 1, height: 1)
+            flowLayout.estimatedItemSize = CGSize(width: 226, height: 354)
         }
     }
     
@@ -87,28 +87,25 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         secondLabel.text  = "The library of my favourite movies"
         secondLabel.topAnchor.constraint(equalTo: movieLabel.topAnchor, constant: 60).isActive = true
         secondLabel.font = .systemFont(ofSize: 16)
-        
-        
-        
     }
+    
     private func setupCollectionView() {
-        
         collectionView.frame.size.width = view.frame.width
-        collectionView.frame.size.height = view.frame.size.height
-        
+        collectionView.frame.size.height = ((view.frame.height) / 0.5)
         collectionView.backgroundColor = .white
         collectionView.accessibilityScroll(.left)
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 36, bottom: 0, right: 55) // отступ первой и последней ячейки
         
     }
     
+    
+
+    
+    
 }
 //MARK: UICollectionViewDataSource extencion for ViewController
-extension ViewController: UICollectionViewDataSource {
+extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1 // количество строк
-    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return images.count // кол ячеек в этой строке
         
@@ -132,10 +129,18 @@ extension ViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.reuseIdentifier,for: indexPath) as? CollectionViewCell {
             let image = images[indexPath.row]
-            cell.configureCell(image: image)
+            let name = images[indexPath.row]
+            cell.configureCell(image: image, label: name)
+            
+            
             return cell
         }
         return UICollectionViewCell()
     }
+    
+    
 }
+
+
+
 
