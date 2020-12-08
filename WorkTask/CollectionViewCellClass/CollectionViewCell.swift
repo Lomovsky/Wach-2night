@@ -26,9 +26,7 @@ class CollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-//    func configureCell(image: String) {
-//        self.myImage.image = UIImage.init(named: image)
-//    }
+
     
     class var reuseIdentifier: String {
         return "CollectionViewCellReuseIdentifier"
