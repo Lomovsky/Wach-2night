@@ -24,7 +24,7 @@
 		C060DAFE257BECA200C892DE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C060DB03257BECA400C892DE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C060DB06257BECA400C892DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		C060DB08257BECA400C892DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C060DB08257BECA400C892DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = WorkTask/Info.plist; sourceTree = SOURCE_ROOT; };
 		C060DB13257BED7C00C892DE /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		C0F2F76A257D02C800A1DAF9 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		C0F2F76B257D02C800A1DAF9 /* CollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewCell.xib; sourceTree = "<group>"; };
@@ -61,6 +61,7 @@
 		C060DAF9257BECA200C892DE /* WorkTask */ = {
 			isa = PBXGroup;
 			children = (
+				C060DB08257BECA400C892DE /* Info.plist */,
 				C0F2F773257D452400A1DAF9 /* Delegates */,
 				C0F2F778257D455700A1DAF9 /* ViewControllers */,
 				C0F2F776257D454000A1DAF9 /* CollectionViewCellClass */,
@@ -100,7 +101,6 @@
 			children = (
 				C060DB03257BECA400C892DE /* Assets.xcassets */,
 				C060DB05257BECA400C892DE /* LaunchScreen.storyboard */,
-				C060DB08257BECA400C892DE /* Info.plist */,
 			);
 			path = Other;
 			sourceTree = "<group>";

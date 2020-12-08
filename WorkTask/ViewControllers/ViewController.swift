@@ -7,17 +7,16 @@
 
 import UIKit
 
-var images = ["Night", "day"]
+var images = ["hanSolo","day", "Night", "day", "Night",]
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UICollectionViewDelegate {
     
-    
-    //MARK: Setting up ViewElements
-    
+    //MARK: Setting up UI elements
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        let collection = UICollectionView(frame: .init(x: 0, y: 178, width: 0, height: 0), collectionViewLayout: layout)
+        //        width и height не важны потому что потом мы делаем их на весь view в setupCollectionView
         collection.translatesAutoresizingMaskIntoConstraints = false
         return collection
         
@@ -44,13 +43,13 @@ class ViewController: UIViewController {
     // MARK: ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.delegate = self
-        collectionView.dataSource = self
         view.backgroundColor = .white
         view.addSubview(movieLabel)
         view.addSubview(secondLabel)
         view.addSubview(collectionView)
         view.addSubview(stackView)
+        collectionView.delegate = self
+        collectionView.dataSource = self
         registerNib()
     }
     
@@ -59,10 +58,10 @@ class ViewController: UIViewController {
         setupStackView()
         setupLabels()
         setupCollectionView()
+        
     }
     
-    //MARK: Setup funcs
-    
+    //MARK:Set up funcs
     func registerNib() {
         let nib = UINib(nibName: CollectionViewCell.nibName, bundle: nil)
         collectionView.register(nib, forCellWithReuseIdentifier: CollectionViewCell.reuseIdentifier)
@@ -93,54 +92,50 @@ class ViewController: UIViewController {
         
     }
     private func setupCollectionView() {
-        //        collectionView.isPagingEnabled = true
-        collectionView.frame.size.width = view.frame.size.width
+        
+        collectionView.frame.size.width = view.frame.width
         collectionView.frame.size.height = view.frame.size.height
+        
         collectionView.backgroundColor = .white
         collectionView.accessibilityScroll(.left)
-        
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 36, bottom: 0, right: 55) // отступ первой и последней ячейки
         
     }
     
 }
-
-//MARK: CollecctionViewDataSource extencion for ViewController
-
+//MARK: UICollectionViewDataSource extencion for ViewController
 extension ViewController: UICollectionViewDataSource {
     
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1 // количество строк
     }
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return images.count // кол ячеек в этой строке
+        
+    }
+    //   все та же настройка размеров
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: self.view.frame.width , height: collectionView.frame.size.height - 5)
+        
+    }
+    
+    //    расстояние между ячейками
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 34
+    }
+    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.reuseIdentifier,for: indexPath) as? CollectionViewCell {
             let image = images[indexPath.row]
             cell.configureCell(image: image)
-            
             return cell
         }
         return UICollectionViewCell()
     }
 }
-
-//MARK: CollectionViewDelegateFlowLayout extencion for ViewController
-
-extension ViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-        guard let cell: CollectionViewCell = Bundle.main.loadNibNamed(CollectionViewCell.nibName,
-                                                                      owner: self,
-                                                                      options: nil)?.first as? CollectionViewCell else {
-            return CGSize.zero
-        }
-        cell.configureCell(image: images[indexPath.row])
-        cell.setNeedsLayout()
-        cell.layoutIfNeeded()
-        let size: CGSize = cell.contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
-        return CGSize(width: size.width, height: 354)
-    }
-}
-
 
