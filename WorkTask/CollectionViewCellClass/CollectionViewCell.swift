@@ -8,15 +8,18 @@
 import UIKit
 
 class CollectionViewCell: UICollectionViewCell {
-  
+    
+  //MARK: Outlets
+    @IBOutlet weak var myLabel: UILabel!
     @IBOutlet weak var myImage: UIImageView!{
         didSet {
             myImage.layer.cornerRadius = 10
         }
     }
 
-    @IBOutlet weak var myLabel: UILabel!
     
+    
+    //MARK: Initializer
     func configureCell(image: String, label: String) {
         self.myImage.image = UIImage(named: image)
         self.myLabel.text = label

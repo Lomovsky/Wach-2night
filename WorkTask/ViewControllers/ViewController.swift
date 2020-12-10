@@ -97,49 +97,11 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 36, bottom: 0, right: 55) // отступ первой и последней ячейки
         
     }
-    
-    
+}
 
-    
-    
-}
-//MARK: UICollectionViewDataSource extencion for ViewController
-extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count // кол ячеек в этой строке
-        
-    }
-    //   все та же настройка размеров
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.view.frame.width , height: collectionView.frame.size.height - 5)
-        
-    }
-    
-    //    расстояние между ячейками
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 34
-    }
-    
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.reuseIdentifier,for: indexPath) as? CollectionViewCell {
-            let image = images[indexPath.row]
-            let name = images[indexPath.row]
-            cell.configureCell(image: image, label: name)
-            
-            
-            return cell
-        }
-        return UICollectionViewCell()
-    }
-    
-    
-}
+
+
+
 
 
 

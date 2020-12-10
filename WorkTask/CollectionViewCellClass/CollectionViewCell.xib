@@ -22,11 +22,15 @@
                             <constraint firstAttribute="height" constant="354" id="pic-fS-AmB"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bib-mq-cJb">
-                        <rect key="frame" x="12" y="364" width="93" height="21"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="93" id="rHf-Ej-61h"/>
-                        </constraints>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bib-mq-cJb">
+                        <rect key="frame" x="12" y="364" width="202" height="12"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Ry-iN-wco">
+                        <rect key="frame" x="12" y="380" width="194" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -35,9 +39,7 @@
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstItem="bib-mq-cJb" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="12" id="HP7-Z9-RVE"/>
                 <constraint firstAttribute="trailing" secondItem="zAb-6l-tDh" secondAttribute="trailing" id="sx4-yC-nlp"/>
-                <constraint firstItem="bib-mq-cJb" firstAttribute="top" secondItem="zAb-6l-tDh" secondAttribute="bottom" constant="10" id="uKy-wJ-CPK"/>
                 <constraint firstItem="zAb-6l-tDh" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="vEs-Ls-YgQ"/>
                 <constraint firstItem="zAb-6l-tDh" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="zHU-Cz-6KM"/>
             </constraints>

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C003674825824CB500226ED4 /* ViewController + CollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C003674725824CB500226ED4 /* ViewController + CollectionViewDataSource.swift */; };
 		C060DAFB257BECA200C892DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C060DAFA257BECA200C892DE /* AppDelegate.swift */; };
 		C060DAFD257BECA200C892DE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C060DAFC257BECA200C892DE /* SceneDelegate.swift */; };
 		C060DAFF257BECA200C892DE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C060DAFE257BECA200C892DE /* ViewController.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C003674725824CB500226ED4 /* ViewController + CollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController + CollectionViewDataSource.swift"; sourceTree = "<group>"; };
 		C060DAF7257BECA100C892DE /* WorkTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorkTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C060DAFA257BECA200C892DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C060DAFC257BECA200C892DE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -41,6 +43,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C003674A25824CBC00226ED4 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C003674725824CB500226ED4 /* ViewController + CollectionViewDataSource.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		C060DAEE257BECA100C892DE = {
 			isa = PBXGroup;
 			children = (
@@ -65,6 +75,7 @@
 				C0F2F773257D452400A1DAF9 /* Delegates */,
 				C0F2F778257D455700A1DAF9 /* ViewControllers */,
 				C0F2F776257D454000A1DAF9 /* CollectionViewCellClass */,
+				C003674A25824CBC00226ED4 /* Extensions */,
 				C0F2F77A257D456900A1DAF9 /* Other */,
 			);
 			path = WorkTask;
@@ -179,6 +190,7 @@
 				C060DAFF257BECA200C892DE /* ViewController.swift in Sources */,
 				C060DAFB257BECA200C892DE /* AppDelegate.swift in Sources */,
 				C0F2F76C257D02C800A1DAF9 /* CollectionViewCell.swift in Sources */,
+				C003674825824CB500226ED4 /* ViewController + CollectionViewDataSource.swift in Sources */,
 				C060DAFD257BECA200C892DE /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
