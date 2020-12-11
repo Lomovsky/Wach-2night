@@ -11,6 +11,8 @@ var images = ["hanSolo","day", "Night", "day", "Night",]
 
 class ViewController: UIViewController, UICollectionViewDelegate {
     
+    var networkManager = NetworkManager()
+    
     //MARK: Setting up UI elements
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -51,6 +53,8 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         collectionView.delegate = self
         collectionView.dataSource = self
         registerNib()
+        networkManager.fetchCurrentData()
+        
     }
     
     //MARK: ViewWillApear
@@ -75,6 +79,7 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         stackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 36.0).isActive = true
         stackView.addSubview(movieLabel)
         stackView.addSubview(secondLabel)
+        
     }
     
     private func setupLabels() {
