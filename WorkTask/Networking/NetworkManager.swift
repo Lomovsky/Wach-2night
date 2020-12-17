@@ -12,24 +12,26 @@ struct NetworkManager {
         guard let url = URL(string: urlString) else {return}
         let session = URLSession(configuration: .default)
         let task = session.dataTask(with: url) {data, response, error in
-            guard let data = data else {return}
+            guard let response = response,
+                  let data = data
+            else {return}
             DispatchQueue.main.async {
+                print(response)
                 print(data)
-                self.parseJSON(withData: data)
+            
+                do {
+                    films = try JSONDecoder().decode(Welcome.self, from: data)
+                    print(films)
+                } catch let error as NSError {
+                    print(error)
+                }
+            
             }
 
             
         }
         task.resume()
     }
-    
-    func parseJSON(withData data: Data) {
-        let decoder = JSONDecoder()
-        do {
-            let currentFilmData = try decoder.decode(WelcomeElement.self, from: data)
-            print(currentFilmData)
-        } catch let error as NSError {
-            print(error)
-        }
-    }
+
+   
 }

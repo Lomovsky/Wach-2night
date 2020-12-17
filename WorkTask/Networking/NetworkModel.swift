@@ -5,6 +5,11 @@
 //  Created by Алекс Ломовской on 11.12.2020.
 //
 
+// This file was generated from JSON Schema using quicktype, do not modify it directly.
+// To parse the JSON, add this file to your project and do:
+//
+//   let welcome = try? newJSONDecoder().decode(Welcome.self, from: jsonData)
+
 import Foundation
 
 // MARK: - WelcomeElement
@@ -49,6 +54,37 @@ struct WelcomeElement: Codable {
         case response = "Response"
         case totalSeasons
     }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.title = try container.decode(String.self, forKey: .title)
+        self.year = try container.decode(String.self, forKey: .year)
+        self.rated = try container.decode(String.self, forKey: .rated)
+        self.released = try container.decode(String.self, forKey: .released)
+        self.runtime = try container.decode(String.self, forKey: .runtime)
+        self.genre = try container.decode(String.self, forKey: .genre)
+        self.director = try container.decode(String.self, forKey: .director)
+        self.writer = try container.decode(String.self, forKey: .writer)
+        self.actors  = try container.decode(String.self, forKey: .actors)
+        self.plot = try container.decode(String.self, forKey: .plot)
+        self.language = try container.decode(String.self, forKey: .language)
+        self.country = try container.decode(Country.self, forKey: .country)
+        self.awards = try container.decode(String.self, forKey: .awards)
+        self.poster = try container.decode(String.self, forKey: .poster)
+        self.ratings = try container.decode([Rating].self, forKey: .ratings)
+        self.metascore = try container.decode(String.self, forKey: .metascore)
+        self.imdbRating = try container.decode(String.self, forKey: .imdbRating)
+        self.imdbVotes = try container.decode(String.self, forKey: .imdbVotes)
+        self.imdbID  = try container.decode(String.self, forKey: .imdbID)
+        self.type  = try container.decode(TypeEnum.self, forKey: .type)
+        self.dvd = try container.decode(String?.self, forKey: .dvd)
+        self.boxOffice = try container.decode(String?.self, forKey: .boxOffice)
+        self.production = try container.decode(String?.self, forKey: .production)
+        self.website = try container.decode(Website.self, forKey: .website)
+        self.response = try container.decode(Response.self, forKey: .response)
+        self.totalSeasons = try container.decode(String?.self, forKey: .totalSeasons)
+    }
+    
 }
 
 enum Country: String, Codable {
@@ -56,8 +92,6 @@ enum Country: String, Codable {
     case usa = "USA"
     case usaSouthKorea = "USA, South Korea"
 }
-
-
 
 // MARK: - Rating
 struct Rating: Codable {
@@ -88,3 +122,5 @@ enum TypeEnum: String, Codable {
 enum Website: String, Codable {
     case nA = "N/A"
 }
+
+typealias Welcome = [WelcomeElement]

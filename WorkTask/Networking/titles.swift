@@ -6,4 +6,5 @@
 //
 
 import Foundation
-var titleArray = [String]()
+
+

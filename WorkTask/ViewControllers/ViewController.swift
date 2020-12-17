@@ -7,11 +7,14 @@
 
 import UIKit
 
-var images = ["hanSolo","day", "Night", "day", "Night",]
+var images = ["Image-1","hanSolo","day", "Night", "day", "Night",]
+var films = [WelcomeElement]()
+
 
 class ViewController: UIViewController, UICollectionViewDelegate {
-    
     var networkManager = NetworkManager()
+    let secondVC = SecondViewController()
+    
     
     //MARK: Setting up UI elements
     let collectionView: UICollectionView = {
@@ -56,12 +59,12 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         networkManager.fetchCurrentData()
         
     }
-    
     //MARK: ViewWillApear
     override func viewWillAppear(_ animated: Bool) {
         setupStackView()
         setupLabels()
         setupCollectionView()
+        
         
     }
     
