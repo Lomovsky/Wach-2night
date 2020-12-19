@@ -10,26 +10,11 @@ import UIKit
 class CollectionViewCell: UICollectionViewCell {
     
   //MARK: Outlets
-    @IBOutlet weak var myLabel: UILabel!
-    @IBOutlet var secondStackView: UIStackView!
-
-    @IBOutlet var stackView: UIStackView!{
-        didSet {
-            stackView.layer.cornerRadius = 20
-            
-            
-        }
-    }
-    @IBOutlet var imdbLabel: UILabel!{
-        didSet {
-            imdbLabel.layer.cornerRadius = 10
-        }
-    }
-    @IBOutlet var numbersLabel: UILabel!{
-        didSet {
-            numbersLabel.layer.cornerRadius = 10
-        }
-    }
+ 
+  
+    @IBOutlet weak var genreLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var writerLabel: UILabel!
     @IBOutlet weak var myImage: UIImageView!{
 
         didSet {
@@ -40,8 +25,11 @@ class CollectionViewCell: UICollectionViewCell {
     
     
     //MARK: Initializer
-    func configureCell(image: String) {
-        self.myImage.image = UIImage(named: image)
+    func configureCell(image: Data, title: String, writer: String, genre: String) {
+        self.myImage.image = UIImage(data: image)
+        self.nameLabel.text = title
+        self.genreLabel.text = genre
+        self.writerLabel.text = writer
     }
     
     

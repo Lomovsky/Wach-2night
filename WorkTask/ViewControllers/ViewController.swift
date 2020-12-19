@@ -8,12 +8,13 @@
 import UIKit
 
 var images = ["Image-1","hanSolo","day", "Night", "day", "Night",]
-var films = [WelcomeElement]()
+
 
 
 class ViewController: UIViewController, UICollectionViewDelegate {
-    var networkManager = NetworkManager()
+//    var networkManager = NetworkManager()
     let secondVC = SecondViewController()
+    public var films = [WelcomeElement]()
     
     
     //MARK: Setting up UI elements
@@ -56,7 +57,8 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         collectionView.delegate = self
         collectionView.dataSource = self
         registerNib()
-        networkManager.fetchCurrentData()
+        fetchCurrentData()
+        
         
     }
     //MARK: ViewWillApear

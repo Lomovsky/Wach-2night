@@ -76,12 +76,10 @@ Story</string>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="208" height="474"/>
             <connections>
-                <outlet property="StackView" destination="630-Q4-dn0" id="tFz-hy-n16"/>
-                <outlet property="imdbLabel" destination="kup-WM-Wg3" id="Eyr-Up-SFi"/>
+                <outlet property="genreLabel" destination="bib-mq-cJb" id="eJl-st-dJj"/>
                 <outlet property="myImage" destination="zAb-6l-tDh" id="Tkm-QD-uFf"/>
-                <outlet property="myLabel" destination="bib-mq-cJb" id="HbZ-RN-7RE"/>
-                <outlet property="numbersLabel" destination="bVy-xb-rEf" id="ywV-r1-IXg"/>
-                <outlet property="secondStackView" destination="630-Q4-dn0" id="thD-wt-5wy"/>
+                <outlet property="nameLabel" destination="6Ry-iN-wco" id="ozO-XK-dry"/>
+                <outlet property="writerLabel" destination="0gG-U6-m8Z" id="Tdp-le-MIC"/>
             </connections>
             <point key="canvasLocation" x="-252.17391304347828" y="91.071428571428569"/>
         </collectionViewCell>
