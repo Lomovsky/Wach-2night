@@ -49,12 +49,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		C003674A25824CBC00226ED4 /* Extensions */ = {
+		C003674A25824CBC00226ED4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				C003674725824CB500226ED4 /* ViewController + CollectionViewDataSource.swift */,
+				C0B6B08D2583E61F002F1F7D /* Networking */,
 			);
-			path = Extensions;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		C060DAEE257BECA100C892DE = {
@@ -82,8 +83,7 @@
 				C0F2F773257D452400A1DAF9 /* Delegates */,
 				C0F2F778257D455700A1DAF9 /* ViewControllers */,
 				C0F2F776257D454000A1DAF9 /* CollectionViewCellClass */,
-				C003674A25824CBC00226ED4 /* Extensions */,
-				C0B6B08D2583E61F002F1F7D /* Networking */,
+				C003674A25824CBC00226ED4 /* Model */,
 			);
 			path = WorkTask;
 			sourceTree = "<group>";
