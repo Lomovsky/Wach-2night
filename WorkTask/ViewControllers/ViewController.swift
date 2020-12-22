@@ -7,14 +7,11 @@
 
 import UIKit
 
-var images = ["Image-1","hanSolo","day", "Night", "day", "Night",]
-
-
-
 class ViewController: UIViewController, UICollectionViewDelegate {
 //    var networkManager = NetworkManager()
     let secondVC = SecondViewController()
     public var films = [WelcomeElement]()
+    let urlString = "https://kaverin-ddb.firebaseio.com/dbs/movies.json?print=pretty"
     
     
     //MARK: Setting up UI elements
@@ -50,16 +47,23 @@ class ViewController: UIViewController, UICollectionViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        collectionView.delegate = self
+        collectionView.dataSource = self
         view.addSubview(movieLabel)
         view.addSubview(secondLabel)
         view.addSubview(collectionView)
         view.addSubview(stackView)
-        collectionView.delegate = self
-        collectionView.dataSource = self
         registerNib()
-        fetchCurrentData()
-        
-        
+        NetworkManager.fetchCurrentData(withURL: urlString) { (data) in
+            do {
+                self.films = try JSONDecoder().decode([WelcomeElement].self, from: data)
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
+            } catch let error as NSError {
+                print(error)
+            }
+        }
     }
     //MARK: ViewWillApear
     override func viewWillAppear(_ animated: Bool) {
@@ -107,6 +111,8 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 36, bottom: 0, right: 55) // отступ первой и последней ячейки
         
     }
+    
+    
 }
 
 
