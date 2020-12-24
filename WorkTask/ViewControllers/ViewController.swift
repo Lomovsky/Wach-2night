@@ -8,9 +8,8 @@
 import UIKit
 
 class ViewController: UIViewController, UICollectionViewDelegate {
-//    var networkManager = NetworkManager()
-    let secondVC = SecondViewController()
     public var films = [WelcomeElement]()
+    let secondVC = SecondViewController()
     let urlString = "https://kaverin-ddb.firebaseio.com/dbs/movies.json?print=pretty"
     
     
@@ -114,11 +113,3 @@ class ViewController: UIViewController, UICollectionViewDelegate {
     
     
 }
-
-
-
-
-
-
-
-
