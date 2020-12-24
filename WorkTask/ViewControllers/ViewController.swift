@@ -53,6 +53,8 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         view.addSubview(collectionView)
         view.addSubview(stackView)
         registerNib()
+        //это лучшее, что я придумал, чтобы перенести NetworkManager  в отдельный класс и все работало. 
+        //причина - невозможность обновить collectionView вне класса ViewController 
         NetworkManager.fetchCurrentData(withURL: urlString) { (data) in
             do {
                 self.films = try JSONDecoder().decode([WelcomeElement].self, from: data)
