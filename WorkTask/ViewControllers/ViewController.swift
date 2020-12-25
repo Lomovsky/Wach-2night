@@ -58,6 +58,9 @@ class ViewController: UIViewController, UICollectionViewDelegate {
             
             case .success(let filmResponse):
                 self.filmResponse = filmResponse
+                DispatchQueue.main.async {
+                    self.collectionView.reloadData()
+                }
             case .failure(let error):
                 print(error)
             }
