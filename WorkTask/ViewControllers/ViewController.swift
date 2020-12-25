@@ -10,7 +10,7 @@ import UIKit
 class ViewController: UIViewController, UICollectionViewDelegate {
     let secondVC = SecondViewController()
     let urlString = "https://api.themoviedb.org/3/discover/movie?api_key=\(apiKey)&language=ru-RU&sort_by=popularity.desc&include_adult=true&include_video=false&page=1"
-    
+    var filmResponse: FilmResponse? = nil
     
     
     //MARK: Setting up UI elements
@@ -57,9 +57,7 @@ class ViewController: UIViewController, UICollectionViewDelegate {
             switch result {
             
             case .success(let filmResponse):
-                filmResponse.results.map { (film) in
-                    print(film.title)
-                }
+                self.filmResponse = filmResponse
             case .failure(let error):
                 print(error)
             }
