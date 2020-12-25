@@ -8,9 +8,8 @@
 import UIKit
 
 class ViewController: UIViewController, UICollectionViewDelegate {
-    public var films = [WelcomeElement]()
     let secondVC = SecondViewController()
-    let urlString = "https://kaverin-ddb.firebaseio.com/dbs/movies.json?print=pretty"
+    let urlString = "https://api.themoviedb.org/3/discover/movie?api_key=\(apiKey)&language=ru-RU&sort_by=popularity.desc&include_adult=true&include_video=false&page=1"
     
     
     //MARK: Setting up UI elements
@@ -53,18 +52,18 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         view.addSubview(collectionView)
         view.addSubview(stackView)
         registerNib()
-        //это лучшее, что я придумал, чтобы перенести NetworkManager  в отдельный класс и все работало. 
-        //причина - невозможность обновить collectionView вне класса ViewController 
-        NetworkManager.fetchCurrentData(withURL: urlString) { (data) in
-            do {
-                self.films = try JSONDecoder().decode([WelcomeElement].self, from: data)
-                DispatchQueue.main.async {
-                    self.collectionView.reloadData()
+        NetworkManager.fetchCurrentData(withURL: urlString) { (result) in
+            switch result {
+            
+            case .success(let filmResponse):
+                filmResponse.results.map { (film) in
+                    print(film.title)
                 }
-            } catch let error as NSError {
+            case .failure(let error):
                 print(error)
             }
         }
+        
     }
     //MARK: ViewWillApear
     override func viewWillAppear(_ animated: Bool) {

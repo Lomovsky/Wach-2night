@@ -16,7 +16,8 @@
 		C060DB07257BECA400C892DE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C060DB05257BECA400C892DE /* LaunchScreen.storyboard */; };
 		C060DB14257BED7C00C892DE /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = C060DB13257BED7C00C892DE /* .gitignore */; };
 		C0C0E7C02583C4A4006C460E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C0E7BF2583C4A4006C460E /* NetworkManager.swift */; };
-		C0C0E7C32583C74D006C460E /* NetworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C0E7C22583C74D006C460E /* NetworkModel.swift */; };
+		C0C0E7C32583C74D006C460E /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C0E7C22583C74D006C460E /* DataModel.swift */; };
+		C0D6AD532595F9D40000174A /* ApiKeyAndImageLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D6AD522595F9D40000174A /* ApiKeyAndImageLink.swift */; };
 		C0F2F76C257D02C800A1DAF9 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F2F76A257D02C800A1DAF9 /* CollectionViewCell.swift */; };
 		C0F2F76D257D02C800A1DAF9 /* CollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0F2F76B257D02C800A1DAF9 /* CollectionViewCell.xib */; };
 /* End PBXBuildFile section */
@@ -33,7 +34,8 @@
 		C060DB08257BECA400C892DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = WorkTask/Info.plist; sourceTree = SOURCE_ROOT; };
 		C060DB13257BED7C00C892DE /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		C0C0E7BF2583C4A4006C460E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		C0C0E7C22583C74D006C460E /* NetworkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkModel.swift; sourceTree = "<group>"; };
+		C0C0E7C22583C74D006C460E /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		C0D6AD522595F9D40000174A /* ApiKeyAndImageLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeyAndImageLink.swift; sourceTree = "<group>"; };
 		C0F2F76A257D02C800A1DAF9 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		C0F2F76B257D02C800A1DAF9 /* CollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -92,7 +94,8 @@
 			isa = PBXGroup;
 			children = (
 				C0C0E7BF2583C4A4006C460E /* NetworkManager.swift */,
-				C0C0E7C22583C74D006C460E /* NetworkModel.swift */,
+				C0C0E7C22583C74D006C460E /* DataModel.swift */,
+				C0D6AD522595F9D40000174A /* ApiKeyAndImageLink.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -210,7 +213,8 @@
 				C016B01D258C03F400F77CA6 /* SecondViewController.swift in Sources */,
 				C0F2F76C257D02C800A1DAF9 /* CollectionViewCell.swift in Sources */,
 				C003674825824CB500226ED4 /* ViewController + CollectionViewDataSource.swift in Sources */,
-				C0C0E7C32583C74D006C460E /* NetworkModel.swift in Sources */,
+				C0C0E7C32583C74D006C460E /* DataModel.swift in Sources */,
+				C0D6AD532595F9D40000174A /* ApiKeyAndImageLink.swift in Sources */,
 				C060DAFD257BECA200C892DE /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
