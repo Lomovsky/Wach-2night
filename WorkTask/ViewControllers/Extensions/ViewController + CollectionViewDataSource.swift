@@ -31,10 +31,11 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.reuseIdentifier,for: indexPath) as? CollectionViewCell {
             let film = filmResponse?.results[indexPath.row]
             DispatchQueue.main.async {
-//                print(film?.posterPath)
-//                guard let imageURL = URL(string: imageString) else { return }
-//                guard let imageData = try? Data(contentsOf: imageURL) else { return }
-                cell.configureCell(title: film?.title ?? "Title", writer: film?.title ?? "title", genre: film?.originalTitle ?? "title")
+                guard let secondPath = film?.posterPath else { return }
+                let imageURLString = imagePath + secondPath
+                guard let imageURL = URL(string: imageURLString) else { return }
+                guard let imageData = try? Data(contentsOf: imageURL) else { return }
+                cell.configureCell(image: imageData, title: film?.title ?? "Title", writer: film?.title ?? "title", genre: film?.originalTitle ?? "title")
                 }
             
             

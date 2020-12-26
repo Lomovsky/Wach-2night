@@ -25,8 +25,8 @@ class CollectionViewCell: UICollectionViewCell {
     
     
     //MARK: Initializer
-    func configureCell(title: String, writer: String, genre: String) {
-//        self.myImage.image = UIImage(data: image)
+    func configureCell(image: Data, title: String, writer: String, genre: String) {
+        self.myImage.image = UIImage(data: image)
         self.nameLabel.text = title
         self.genreLabel.text = genre
         self.writerLabel.text = writer

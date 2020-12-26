@@ -8,4 +8,4 @@
 import Foundation
 
 var apiKey = "50e0e45f8818a4c44fe981ac9a6b7ac7"
-var linkImage = "https://image.tmdb.org/t/p/w500"
+var imagePath = "https://image.tmdb.org/t/p/w500"
