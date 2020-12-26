@@ -30,14 +30,17 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.reuseIdentifier,for: indexPath) as? CollectionViewCell {
             let film = filmResponse?.results[indexPath.row]
-            DispatchQueue.main.async {
+            
+            DispatchQueue.global().async {
                 guard let secondPath = film?.posterPath else { return }
                 let imageURLString = imagePath + secondPath
                 guard let imageURL = URL(string: imageURLString) else { return }
                 guard let imageData = try? Data(contentsOf: imageURL) else { return }
+            
+            DispatchQueue.main.async {
                 cell.configureCell(image: imageData, title: film?.title ?? "Title", writer: film?.title ?? "title", genre: film?.originalTitle ?? "title")
                 }
-            
+            }
             
             
             return cell
