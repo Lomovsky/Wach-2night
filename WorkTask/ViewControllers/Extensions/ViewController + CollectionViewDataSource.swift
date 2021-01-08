@@ -10,7 +10,7 @@ import UIKit
 extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return (filmResponse?.results.count) ?? 1
+        return self.films.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -31,15 +31,18 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.reuseIdentifier,for: indexPath) as? CollectionViewCell {
             let film = filmResponse?.results[indexPath.row]
             
+            
             DispatchQueue.global().async {
                 guard let secondPath = film?.posterPath else { return }
                 let imageURLString = imagePath + secondPath
                 guard let imageURL = URL(string: imageURLString) else { return }
                 guard let imageData = try? Data(contentsOf: imageURL) else { return }
+                self.save(film!.title, filmOriginalTitle: film!.originalTitle, filmPoster: imageData)
+            }
             
             DispatchQueue.main.async {
-                cell.configureCell(image: imageData, title: film?.title ?? "Title", writer: film?.title ?? "title", genre: film?.originalTitle ?? "title")
-                }
+                let film = self.films[indexPath.row]
+                cell.configureCell(image: film.poster!, title: film.title ?? "errorTitle", writer: film.title ?? "error title", genre: film.originalTitle ?? "error origTitle")
             }
             
             
