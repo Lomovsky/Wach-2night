@@ -30,8 +30,9 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.reuseIdentifier,for: indexPath) as? CollectionViewCell {
             let film = self.films[indexPath.row]
-
-            cell.configureCell(image: film.poster!, title: film.title!, writer: film.originalTitle!, genre: film.title!)
+            
+            cell.configureCell(image: film.poster!, title: film.title!, originalTitle: film.originalTitle!)
+//            cell.frame.size.width = (view.frame.size.width) / 1.8
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }

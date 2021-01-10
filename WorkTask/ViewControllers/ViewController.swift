@@ -119,7 +119,7 @@ class ViewController: UIViewController, UICollectionViewDelegate {
     
     private func setupCollectionView() {
         collectionView.frame.size.width = view.frame.width
-        collectionView.frame.size.height = ((view.frame.height) / 0.5)
+        collectionView.frame.size.height = ((view.frame.height) / 1.7)
         collectionView.backgroundColor = .white
         collectionView.accessibilityScroll(.left)
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 36, bottom: 0, right: 55) // отступ первой и последней ячейки

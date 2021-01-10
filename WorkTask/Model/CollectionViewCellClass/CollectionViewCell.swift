@@ -10,26 +10,24 @@ import UIKit
 class CollectionViewCell: UICollectionViewCell {
     
   //MARK: Outlets
- 
-  
-    @IBOutlet weak var genreLabel: UILabel!
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var writerLabel: UILabel!
-    @IBOutlet weak var myImage: UIImageView!{
-
+    @IBOutlet weak var filmImage: UIImageView!{
+        
         didSet {
-            myImage.layer.cornerRadius = 10
+            filmImage.layer.cornerRadius = 10
         }
     }
+    @IBOutlet weak var originalTitle: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    
+  
+
 
     
-    
     //MARK: Initializer
-    func configureCell(image: Data, title: String, writer: String, genre: String) {
-        self.myImage.image = UIImage(data: image)
-        self.nameLabel.text = title
-        self.genreLabel.text = genre
-        self.writerLabel.text = writer
+    func configureCell(image: Data, title: String, originalTitle: String) {
+        self.filmImage.image = UIImage(data: image)
+        self.titleLabel.text = title
+        self.originalTitle.text = originalTitle
     }
     
     

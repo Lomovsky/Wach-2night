@@ -20,7 +20,7 @@
                     <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" alignment="top" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="ECW-ID-Rpl">
                         <rect key="frame" x="5" y="0.0" width="216" height="436.5"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zAb-6l-tDh">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zAb-6l-tDh">
                                 <rect key="frame" x="0.0" y="0.0" width="216" height="354"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="354" id="pic-fS-AmB"/>
@@ -76,10 +76,9 @@ Story</string>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="208" height="474"/>
             <connections>
-                <outlet property="genreLabel" destination="bib-mq-cJb" id="eJl-st-dJj"/>
-                <outlet property="myImage" destination="zAb-6l-tDh" id="Tkm-QD-uFf"/>
-                <outlet property="nameLabel" destination="6Ry-iN-wco" id="ozO-XK-dry"/>
-                <outlet property="writerLabel" destination="0gG-U6-m8Z" id="Tdp-le-MIC"/>
+                <outlet property="filmImage" destination="zAb-6l-tDh" id="OIu-t5-ZLi"/>
+                <outlet property="originalTitle" destination="bib-mq-cJb" id="LWd-6B-4Jf"/>
+                <outlet property="titleLabel" destination="6Ry-iN-wco" id="a0m-jm-hO2"/>
             </connections>
             <point key="canvasLocation" x="-252.17391304347828" y="91.071428571428569"/>
         </collectionViewCell>
