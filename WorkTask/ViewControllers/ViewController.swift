@@ -67,9 +67,10 @@ class ViewController: UIViewController, UICollectionViewDelegate {
                         let secondPath = film.posterPath
                         let imageURLString = imagePath + secondPath
                         guard let imageURL = URL(string: imageURLString) else { return }
-                        guard let imageData = try? Data(contentsOf: imageURL) else { return }
+                        guard let posterData = try? Data(contentsOf: imageURL) else { return }
                         DispatchQueue.main.async {
-                            self.save(film.title, filmOriginalTitle: film.originalTitle, filmPoster: imageData)
+                            self.save(film.title, filmOriginalTitle: film.originalTitle, filmPoster: posterData, releaseDate: film.releaseDate, overview: film.overview, rating: film.rating)
+                            print(film.rating, film.overview)
                             self.collectionView.reloadData()
                         }
                     }

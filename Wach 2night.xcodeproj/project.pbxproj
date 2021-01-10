@@ -60,10 +60,18 @@
 			children = (
 				C0F2F776257D454000A1DAF9 /* CollectionViewCellClass */,
 				C0B6B08D2583E61F002F1F7D /* Networking */,
+				C04D6E9725AB2E0900E4B151 /* CoreDataFiles */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C04D6E9725AB2E0900E4B151 /* CoreDataFiles */ = {
+			isa = PBXGroup;
+			children = (
 				C0394FDE25A8B2E700D7A7FB /* Wach 2night.xcdatamodeld */,
 				C0394FE225A8B33D00D7A7FB /* CoreDataManager.swift */,
 			);
-			path = Model;
+			path = CoreDataFiles;
 			sourceTree = "<group>";
 		};
 		C060DAEE257BECA100C892DE = {

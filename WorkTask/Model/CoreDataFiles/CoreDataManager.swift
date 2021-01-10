@@ -11,13 +11,14 @@ import CoreData
 extension ViewController {
     
     
-    public func save(_ filmTitle: String, filmOriginalTitle: String, filmPoster: Data) {
+    public func save(_ filmTitle: String, filmOriginalTitle: String, filmPoster: Data, releaseDate: String, overview: String, rating: Float) {
         //создаем сущность в качестве проводника в экземпляр нашей сущности в хранилище
         guard let entityDescription = NSEntityDescription.entity(forEntityName: "CurrentFilm", in: managedContext) else { return }
         let film = NSManagedObject(entity: entityDescription, insertInto: managedContext) as! CurrentFilm
         film.originalTitle = filmOriginalTitle
         film.title = filmTitle
         film.poster = filmPoster
+        
         
         do {
             try managedContext.save()
