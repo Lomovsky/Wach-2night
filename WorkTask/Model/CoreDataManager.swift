@@ -23,7 +23,7 @@ extension ViewController {
         do {
             try managedContext.save()
             films.append(film)
-            self.collectionView.insertItems(at: [IndexPath(row: films.count - 1, section: 0)])
+//            self.collectionView.insertItems(at: [IndexPath(row: films.count - 1, section: 0)])
         } catch let error as NSError {
             print(error)
         }

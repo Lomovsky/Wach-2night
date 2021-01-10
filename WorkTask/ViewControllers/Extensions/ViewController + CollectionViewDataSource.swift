@@ -29,22 +29,13 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.reuseIdentifier,for: indexPath) as? CollectionViewCell {
-            let film = filmResponse?.results[indexPath.row]
-            
-            
-            DispatchQueue.global().async {
-                guard let secondPath = film?.posterPath else { return }
-                let imageURLString = imagePath + secondPath
-                guard let imageURL = URL(string: imageURLString) else { return }
-                guard let imageData = try? Data(contentsOf: imageURL) else { return }
-                self.save(film!.title, filmOriginalTitle: film!.originalTitle, filmPoster: imageData)
-            }
+//            let film = filmResponse?.results[indexPath.row]
+            let film = self.films[indexPath.row]
+            cell.configureCell(image: film.poster!, title: film.title!, writer: film.originalTitle!, genre: film.title!)
             
             DispatchQueue.main.async {
-                let film = self.films[indexPath.row]
-                cell.configureCell(image: film.poster!, title: film.title ?? "errorTitle", writer: film.title ?? "error title", genre: film.originalTitle ?? "error origTitle")
+                self.collectionView.reloadData()
             }
-            
             
             return cell
         }

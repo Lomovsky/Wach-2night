@@ -61,8 +61,18 @@ class ViewController: UIViewController, UICollectionViewDelegate {
             
             case .success(let filmResponse):
                 self.filmResponse = filmResponse
-                DispatchQueue.main.async {
-                    self.collectionView.reloadData()
+                filmResponse.results.map { (film) in
+                    DispatchQueue.global().async {
+                        let secondPath = film.posterPath
+                        let imageURLString = imagePath + secondPath
+                        guard let imageURL = URL(string: imageURLString) else { return }
+                        guard let imageData = try? Data(contentsOf: imageURL) else { return }
+                        DispatchQueue.main.async {
+                            self.save(film.title, filmOriginalTitle: film.originalTitle, filmPoster: imageData)
+                            self.collectionView.reloadData()
+                        }
+                    }
+                   
                 }
             case .failure(let error):
                 print(error)
