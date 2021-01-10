@@ -15,10 +15,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let winScene = (scene as? UIWindowScene) else { return }
         //creating  vc
-        let MyViewController = ViewController()
+        let rootViewController = UINavigationController(rootViewController: ViewController())
         //creating root VC
         let win = UIWindow(windowScene: winScene)
-        win.rootViewController = MyViewController
+        win.rootViewController = rootViewController
         win.makeKeyAndVisible()
         window = win
         

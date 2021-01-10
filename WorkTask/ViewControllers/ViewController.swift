@@ -33,12 +33,6 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         return stack
     }()
     
-    let movieLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
     let secondLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -51,11 +45,12 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         return label
     }()
     
-    let tabBar: UITabBar = {
-        let tb = UITabBar()
-        tb.translatesAutoresizingMaskIntoConstraints = false
-        return tb
+    let activityIndicator: UIActivityIndicatorView = {
+        let act = UIActivityIndicatorView()
+        act.translatesAutoresizingMaskIntoConstraints = false
+        return act
     }()
+
     
     // MARK: ViewDidLoad
     override func viewDidLoad() {
@@ -64,36 +59,14 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         view.backgroundColor = .white
         collectionView.delegate = self
         collectionView.dataSource = self
-        view.addSubview(movieLabel)
         view.addSubview(secondLabel)
         view.addSubview(collectionView)
         view.addSubview(stackView)
-        view.addSubview(tabBar)
+        view.addSubview(activityIndicator)
         registerNib()
         
         if Reachability.isConnectedToNetwork() {
-            
-            NetworkManager.fetchCurrentData(withURL: urlString) { (result) in
-                switch result {
-                
-                case .success(let filmResponse):
-                    self.filmResponse = filmResponse
-                    filmResponse.results.map { (film) in
-                        DispatchQueue.global().async {
-                            let secondPath = film.posterPath
-                            let imageURLString = imagePath + secondPath
-                            guard let imageURL = URL(string: imageURLString) else { return }
-                            guard let posterData = try? Data(contentsOf: imageURL) else { return }
-                            DispatchQueue.main.async {
-                                self.save(film.title, filmOriginalTitle: film.originalTitle, filmPoster: posterData, releaseDate: film.releaseDate, overview: film.overview, rating: film.rating)
-                                self.collectionView.reloadData()
-                            }
-                        }
-                    }
-                case .failure(let error):
-                    print(error)
-                }
-            }
+            downloadFilms()
         } else {
             print(films, "Network is not availaible")
             fetchData()
@@ -101,14 +74,14 @@ class ViewController: UIViewController, UICollectionViewDelegate {
                 self.collectionView.reloadData()
             }
         }
-
     }
     //MARK: ViewWillApear
     override func viewWillAppear(_ animated: Bool) {
         setupStackView()
-        setupLabels()
+        setupLabel()
         setupCollectionView()
-        setupTabBar()
+        setupNavigationController()
+        setupActivityIndicator()
         
     }
     
@@ -123,23 +96,25 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         }
     }
     
+    private func setupNavigationController() {
+        title = "Фильмы"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh,
+                                                            target: self,
+                                                            action: #selector(downloadFilms))
+    }
+    
     private func setupStackView(){
-        stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 80.0).isActive = true
-        stackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 36.0).isActive = true
-        stackView.addSubview(movieLabel)
+        stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+        stackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20.0).isActive = true
         stackView.addSubview(secondLabel)
         
     }
     
-    private func setupLabels() {
-        movieLabel.text = "Фильмы"//настройка  первого лейбла
-        movieLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 80.0).isActive = true
-        movieLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 36.0).isActive = true
-        movieLabel.font = UIFont.preferredFont(forTextStyle: .headline)
-        movieLabel.font = .systemFont(ofSize: 32)
-        
+    private func setupLabel() {
+     
         secondLabel.text  = "Подборка лучших фильмов по рейтингу"
-        secondLabel.topAnchor.constraint(equalTo: movieLabel.topAnchor, constant: 60).isActive = true
+        secondLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
         secondLabel.font = .systemFont(ofSize: 16)
     }
     
@@ -149,6 +124,7 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         collectionView.backgroundColor = .white
         collectionView.accessibilityScroll(.left)
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 36, bottom: 0, right: 55) // отступ первой и последней ячейки
+        collectionView.isHidden = true
         
     }
     
@@ -158,8 +134,38 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         
     }
     
-    private func setupTabBar() {
-        tabBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+    private func setupActivityIndicator() {
+        activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        activityIndicator.startAnimating()
+    }
+    
+    @objc func downloadFilms() {
+        
+        NetworkManager.fetchCurrentData(withURL: urlString) { (result) in
+            switch result {
+            
+            case .success(let filmResponse):
+                self.filmResponse = filmResponse
+                filmResponse.results.map { (film) in
+                    DispatchQueue.global().async {
+                        let secondPath = film.posterPath
+                        let imageURLString = imagePath + secondPath
+                        guard let imageURL = URL(string: imageURLString) else { return }
+                        guard let posterData = try? Data(contentsOf: imageURL) else { return }
+                        DispatchQueue.main.async {
+                            self.save(film.title, filmOriginalTitle: film.originalTitle, filmPoster: posterData, releaseDate: film.releaseDate, overview: film.overview, rating: film.rating)
+                            self.collectionView.reloadData()
+                            self.activityIndicator.stopAnimating()
+                            self.activityIndicator.isHidden = true
+                            self.collectionView.isHidden = false
+                        }
+                    }
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 
     
