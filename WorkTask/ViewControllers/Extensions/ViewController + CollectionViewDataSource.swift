@@ -45,7 +45,10 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        present(secondVC, animated: true)
+        secondVC.modalPresentationStyle = .formSheet
+        navigationController?.present(secondVC, animated: true)
+        let film = self.films[indexPath.row]
+        secondVC.imageView.image = UIImage(data: film.poster!)
     }
     
 }

@@ -70,6 +70,9 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         } else {
             print(films, "Network is not availaible")
             fetchData()
+            //пофиксить баг с индикатором
+            activityIndicator.stopAnimating()
+            collectionView.isHidden = false
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }
