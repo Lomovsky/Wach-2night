@@ -31,10 +31,12 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.reuseIdentifier,for: indexPath) as? CollectionViewCell {
             let film = self.films[indexPath.row]
             
-            cell.configureCell(image: film.poster!, title: film.title!, originalTitle: film.originalTitle!)
-//            cell.frame.size.width = (view.frame.size.width) / 1.8
+            let defaultImage = #imageLiteral(resourceName: "1024px-No_image_available.svg")
+            let defaultImageData = defaultImage.pngData()
+            
             DispatchQueue.main.async {
-                self.collectionView.reloadData()
+                cell.configureCell(image: film.poster ?? defaultImageData!, title: film.title ?? "Неизвестно", originalTitle: film.originalTitle ?? "Неизвестно", releaseDate: film.releaseDate ?? "Неизвестно", rating: film.rating )
+                
             }
             return cell
         }

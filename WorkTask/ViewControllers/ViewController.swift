@@ -27,22 +27,34 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         
     }()
     
-    let stackView: UIStackView = {  // обьединяем labels
+    let stackView: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
     
-    let movieLabel: UILabel = { // первый label
+    let movieLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    let secondLabel: UILabel = { // второй label
+    let secondLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
+    }()
+    
+    let networkStatusLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let tabBar: UITabBar = {
+        let tb = UITabBar()
+        tb.translatesAutoresizingMaskIntoConstraints = false
+        return tb
     }()
     
     // MARK: ViewDidLoad
@@ -56,38 +68,51 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         view.addSubview(secondLabel)
         view.addSubview(collectionView)
         view.addSubview(stackView)
+        view.addSubview(tabBar)
         registerNib()
-        NetworkManager.fetchCurrentData(withURL: urlString) { (result) in
-            switch result {
+        
+        if Reachability.isConnectedToNetwork() {
             
-            case .success(let filmResponse):
-                self.filmResponse = filmResponse
-                filmResponse.results.map { (film) in
-                    DispatchQueue.global().async {
-                        let secondPath = film.posterPath
-                        let imageURLString = imagePath + secondPath
-                        guard let imageURL = URL(string: imageURLString) else { return }
-                        guard let posterData = try? Data(contentsOf: imageURL) else { return }
-                        DispatchQueue.main.async {
-                            self.save(film.title, filmOriginalTitle: film.originalTitle, filmPoster: posterData, releaseDate: film.releaseDate, overview: film.overview, rating: film.rating)
-                            print(film.rating, film.overview)
-                            self.collectionView.reloadData()
+            NetworkManager.fetchCurrentData(withURL: urlString) { (result) in
+                switch result {
+                
+                case .success(let filmResponse):
+                    self.filmResponse = filmResponse
+                    filmResponse.results.map { (film) in
+                        DispatchQueue.global().async {
+                            let secondPath = film.posterPath
+                            let imageURLString = imagePath + secondPath
+                            guard let imageURL = URL(string: imageURLString) else { return }
+                            guard let posterData = try? Data(contentsOf: imageURL) else { return }
+                            DispatchQueue.main.async {
+                                self.save(film.title, filmOriginalTitle: film.originalTitle, filmPoster: posterData, releaseDate: film.releaseDate, overview: film.overview, rating: film.rating)
+                                self.collectionView.reloadData()
+                            }
                         }
                     }
+                case .failure(let error):
+                    print(error)
                 }
-            case .failure(let error):
-                print(error)
+            }
+        } else {
+            print(films, "Network is not availaible")
+            fetchData()
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
             }
         }
+
     }
     //MARK: ViewWillApear
     override func viewWillAppear(_ animated: Bool) {
         setupStackView()
         setupLabels()
         setupCollectionView()
-        
+        setupTabBar()
         
     }
+    
+    
     
     //MARK:Set up funcs
     func registerNib() {
@@ -107,13 +132,13 @@ class ViewController: UIViewController, UICollectionViewDelegate {
     }
     
     private func setupLabels() {
-        movieLabel.text = "Movies"//настройка  первого лейбла
+        movieLabel.text = "Фильмы"//настройка  первого лейбла
         movieLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 80.0).isActive = true
         movieLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 36.0).isActive = true
         movieLabel.font = UIFont.preferredFont(forTextStyle: .headline)
         movieLabel.font = .systemFont(ofSize: 32)
         
-        secondLabel.text  = "The library of my favourite movies"
+        secondLabel.text  = "Подборка лучших фильмов по рейтингу"
         secondLabel.topAnchor.constraint(equalTo: movieLabel.topAnchor, constant: 60).isActive = true
         secondLabel.font = .systemFont(ofSize: 16)
     }
@@ -127,5 +152,15 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         
     }
     
+    private func setupNetworkStatusLabel() {
+        networkStatusLabel.text = "Сеть недоступна"
+        networkStatusLabel.isHidden = true
+        
+    }
+    
+    private func setupTabBar() {
+        tabBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+    }
+
     
 }

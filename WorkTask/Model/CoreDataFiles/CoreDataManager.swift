@@ -15,10 +15,12 @@ extension ViewController {
         //создаем сущность в качестве проводника в экземпляр нашей сущности в хранилище
         guard let entityDescription = NSEntityDescription.entity(forEntityName: "CurrentFilm", in: managedContext) else { return }
         let film = NSManagedObject(entity: entityDescription, insertInto: managedContext) as! CurrentFilm
-        film.originalTitle = filmOriginalTitle
         film.title = filmTitle
+        film.originalTitle = filmOriginalTitle
         film.poster = filmPoster
-        
+        film.releaseDate = releaseDate
+        film.overview = overview
+        film.rating = rating
         
         do {
             try managedContext.save()

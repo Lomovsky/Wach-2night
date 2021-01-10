@@ -5,10 +5,10 @@
         <attribute name="overview" optional="YES" attributeType="String"/>
         <attribute name="poster" optional="YES" attributeType="Binary"/>
         <attribute name="rating" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="releaseDste" optional="YES" attributeType="String"/>
+        <attribute name="releaseDate" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="CurrentFilm" positionX="-9" positionY="36" width="128" height="119"/>
+        <element name="CurrentFilm" positionX="-63" positionY="-18" width="128" height="119"/>
     </elements>
 </model>

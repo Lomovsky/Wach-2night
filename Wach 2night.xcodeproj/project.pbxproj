@@ -9,8 +9,9 @@
 /* Begin PBXBuildFile section */
 		C003674825824CB500226ED4 /* ViewController + CollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C003674725824CB500226ED4 /* ViewController + CollectionViewDataSource.swift */; };
 		C016B01D258C03F400F77CA6 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016B01C258C03F400F77CA6 /* SecondViewController.swift */; };
-		C0394FE025A8B2E700D7A7FB /* Wach 2night.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C0394FDE25A8B2E700D7A7FB /* Wach 2night.xcdatamodeld */; };
 		C0394FE325A8B33D00D7A7FB /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0394FE225A8B33D00D7A7FB /* CoreDataManager.swift */; };
+		C04D6EA025AB391C00E4B151 /* Wach 2night.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C04D6E9E25AB391C00E4B151 /* Wach 2night.xcdatamodeld */; };
+		C04D6EA325AB405E00E4B151 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04D6EA225AB405E00E4B151 /* ConnectionManager.swift */; };
 		C060DAFB257BECA200C892DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C060DAFA257BECA200C892DE /* AppDelegate.swift */; };
 		C060DAFD257BECA200C892DE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C060DAFC257BECA200C892DE /* SceneDelegate.swift */; };
 		C060DAFF257BECA200C892DE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C060DAFE257BECA200C892DE /* ViewController.swift */; };
@@ -27,8 +28,9 @@
 /* Begin PBXFileReference section */
 		C003674725824CB500226ED4 /* ViewController + CollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController + CollectionViewDataSource.swift"; sourceTree = "<group>"; };
 		C016B01C258C03F400F77CA6 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
-		C0394FDF25A8B2E700D7A7FB /* Wach 2night.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Wach 2night.xcdatamodel"; sourceTree = "<group>"; };
 		C0394FE225A8B33D00D7A7FB /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		C04D6E9F25AB391C00E4B151 /* Wach 2night.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Wach 2night.xcdatamodel"; sourceTree = "<group>"; };
+		C04D6EA225AB405E00E4B151 /* ConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
 		C060DAF7257BECA100C892DE /* WorkTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorkTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C060DAFA257BECA200C892DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C060DAFC257BECA200C892DE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -68,8 +70,8 @@
 		C04D6E9725AB2E0900E4B151 /* CoreDataFiles */ = {
 			isa = PBXGroup;
 			children = (
-				C0394FDE25A8B2E700D7A7FB /* Wach 2night.xcdatamodeld */,
 				C0394FE225A8B33D00D7A7FB /* CoreDataManager.swift */,
+				C04D6E9E25AB391C00E4B151 /* Wach 2night.xcdatamodeld */,
 			);
 			path = CoreDataFiles;
 			sourceTree = "<group>";
@@ -109,6 +111,7 @@
 				C0C0E7BF2583C4A4006C460E /* NetworkManager.swift */,
 				C0C0E7C22583C74D006C460E /* DataModel.swift */,
 				C0D6AD522595F9D40000174A /* ApiKeyAndImageLink.swift */,
+				C04D6EA225AB405E00E4B151 /* ConnectionManager.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -230,13 +233,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0C0E7C02583C4A4006C460E /* NetworkManager.swift in Sources */,
+				C04D6EA325AB405E00E4B151 /* ConnectionManager.swift in Sources */,
 				C060DAFF257BECA200C892DE /* ViewController.swift in Sources */,
 				C060DAFB257BECA200C892DE /* AppDelegate.swift in Sources */,
 				C016B01D258C03F400F77CA6 /* SecondViewController.swift in Sources */,
+				C04D6EA025AB391C00E4B151 /* Wach 2night.xcdatamodeld in Sources */,
 				C0F2F76C257D02C800A1DAF9 /* CollectionViewCell.swift in Sources */,
 				C003674825824CB500226ED4 /* ViewController + CollectionViewDataSource.swift in Sources */,
 				C0C0E7C32583C74D006C460E /* DataModel.swift in Sources */,
-				C0394FE025A8B2E700D7A7FB /* Wach 2night.xcdatamodeld in Sources */,
 				C0D6AD532595F9D40000174A /* ApiKeyAndImageLink.swift in Sources */,
 				C060DAFD257BECA200C892DE /* SceneDelegate.swift in Sources */,
 				C0394FE325A8B33D00D7A7FB /* CoreDataManager.swift in Sources */,
@@ -435,12 +439,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		C0394FDE25A8B2E700D7A7FB /* Wach 2night.xcdatamodeld */ = {
+		C04D6E9E25AB391C00E4B151 /* Wach 2night.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				C0394FDF25A8B2E700D7A7FB /* Wach 2night.xcdatamodel */,
+				C04D6E9F25AB391C00E4B151 /* Wach 2night.xcdatamodel */,
 			);
-			currentVersion = C0394FDF25A8B2E700D7A7FB /* Wach 2night.xcdatamodel */;
+			currentVersion = C04D6E9F25AB391C00E4B151 /* Wach 2night.xcdatamodel */;
 			path = "Wach 2night.xcdatamodeld";
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
