@@ -29,14 +29,12 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.reuseIdentifier,for: indexPath) as? CollectionViewCell {
-//            let film = filmResponse?.results[indexPath.row]
             let film = self.films[indexPath.row]
+
             cell.configureCell(image: film.poster!, title: film.title!, writer: film.originalTitle!, genre: film.title!)
-            
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }
-            
             return cell
         }
         return UICollectionViewCell()

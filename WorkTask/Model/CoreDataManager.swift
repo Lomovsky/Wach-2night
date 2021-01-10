@@ -15,7 +15,6 @@ extension ViewController {
         //создаем сущность в качестве проводника в экземпляр нашей сущности в хранилище
         guard let entityDescription = NSEntityDescription.entity(forEntityName: "CurrentFilm", in: managedContext) else { return }
         let film = NSManagedObject(entity: entityDescription, insertInto: managedContext) as! CurrentFilm
-        
         film.originalTitle = filmOriginalTitle
         film.title = filmTitle
         film.poster = filmPoster
@@ -23,7 +22,6 @@ extension ViewController {
         do {
             try managedContext.save()
             films.append(film)
-//            self.collectionView.insertItems(at: [IndexPath(row: films.count - 1, section: 0)])
         } catch let error as NSError {
             print(error)
         }

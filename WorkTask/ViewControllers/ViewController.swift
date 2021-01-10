@@ -8,10 +8,11 @@
 import UIKit
 
 class ViewController: UIViewController, UICollectionViewDelegate {
+    //MARK: Declarations
     let secondVC = SecondViewController()
     let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    public var films: [CurrentFilm] = []
     let urlString = "https://api.themoviedb.org/3/discover/movie?api_key=\(apiKey)&language=ru-RU&sort_by=popularity.desc&include_adult=true&include_video=false&page=1"
+    public var films: [CurrentFilm] = []
     var filmResponse: FilmResponse? = nil
     
     
@@ -72,13 +73,11 @@ class ViewController: UIViewController, UICollectionViewDelegate {
                             self.collectionView.reloadData()
                         }
                     }
-                   
                 }
             case .failure(let error):
                 print(error)
             }
         }
-        
     }
     //MARK: ViewWillApear
     override func viewWillAppear(_ animated: Bool) {
