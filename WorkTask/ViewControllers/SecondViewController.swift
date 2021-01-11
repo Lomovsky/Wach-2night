@@ -59,18 +59,24 @@ class SecondViewController: UIViewController {
         setupTitleLabel()
         setupOverviewLabel()
         setupOverviewTextField()
+//        setupNavigationController()
 //        setupScrollView()
     }
 
     
     //MARK: Setup Funcs
+    
+    private func setupNavigationController() {
+//        navigationController?.navigationBar.prefersLargeTitles = false
+    }
+    
     private func setupImageView() {
         let cornerRadius: CGFloat = 10.0
         imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        imageView.contentMode = .scaleToFill
+        imageView.contentMode = .scaleAspectFit
         imageView.layer.cornerRadius = 10
-        imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: -20).isActive = true
+        imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor,constant: -20).isActive = true
         imageView.frame.size.height = (imageView.image?.size.height) ?? (view.frame.height) / 2
         imageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         imageView.layer.shadowColor = UIColor.black.cgColor

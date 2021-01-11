@@ -45,6 +45,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         secondVC.modalPresentationStyle = .formSheet
         navigationController?.present(secondVC, animated: true)
+//        navigationController?.show(secondVC, sender: self)
         let film = ViewController.films[indexPath.row]
         let originalPosterImage = UIImage(data: film.originalSizedPoster!)!
         ImageResizer.resizeImage(image: originalPosterImage, targetSize: CGSize.init(width: 600, height: 500)) { (image) in
@@ -54,6 +55,23 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
 
         }
 
+        
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+   
+        if #available(iOS 13, *) {
+            (scrollView.subviews[(scrollView.subviews.count - 1)].subviews[0]).backgroundColor = UIColor.white //verticalIndicator
+            (scrollView.subviews[(scrollView.subviews.count - 2)].subviews[0]).backgroundColor = UIColor.white //horizontalIndicator
+        } else {
+            if let verticalIndicator: UIImageView = (scrollView.subviews[(scrollView.subviews.count - 1)] as? UIImageView) {
+                verticalIndicator.backgroundColor = UIColor.systemGray6
+            }
+
+            if let horizontalIndicator: UIImageView = (scrollView.subviews[(scrollView.subviews.count - 2)] as? UIImageView) {
+                horizontalIndicator.backgroundColor = UIColor.systemGray6
+            }
+        }
         
     }
     
