@@ -10,7 +10,7 @@ import UIKit
 extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.films.count
+        return ViewController.films.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
@@ -29,7 +29,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.reuseIdentifier,for: indexPath) as? CollectionViewCell {
-            let film = self.films[indexPath.row]
+            let film = ViewController.films[indexPath.row]
             let defaultImage = #imageLiteral(resourceName: "1024px-No_image_available.svg")
             let defaultImageData = defaultImage.pngData()
             DispatchQueue.main.async {
@@ -45,7 +45,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         secondVC.modalPresentationStyle = .formSheet
         navigationController?.present(secondVC, animated: true)
-        let film = self.films[indexPath.row]
+        let film = ViewController.films[indexPath.row]
         secondVC.imageView.image = UIImage(data: film.poster!)
     }
     

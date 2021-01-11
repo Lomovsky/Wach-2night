@@ -10,9 +10,8 @@ import UIKit
 class ViewController: UIViewController, UICollectionViewDelegate {
     //MARK: Declarations
     let secondVC = SecondViewController()
-    let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     let urlString = "https://api.themoviedb.org/3/discover/movie?api_key=\(apiKey)&language=ru-RU&sort_by=popularity.desc&include_adult=true&include_video=false&page=1"
-    public var films: [CurrentFilm] = []
+    static var films: [CurrentFilm] = []
     var filmResponse: FilmResponse? = nil
     
     
@@ -54,7 +53,8 @@ class ViewController: UIViewController, UICollectionViewDelegate {
     
     // MARK: ViewDidLoad
     override func viewDidLoad() {
-        print(self.films)
+        let coreDataManager = CoreDataManager()
+        print(ViewController.films)
         super.viewDidLoad()
         view.backgroundColor = .white
         collectionView.delegate = self
@@ -65,12 +65,13 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         view.addSubview(activityIndicator)
         registerNib()
         
+        
         if Reachability.isConnectedToNetwork() {
-            self.deleteAllData()
+            coreDataManager.deleteAllData()
             downloadFilms()
         } else {
-            print(films, "Network is not availaible")
-            fetchData()
+            print(ViewController.films, "Network is not availaible")
+            coreDataManager.fetchData()
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
                 self.activityIndicator.stopAnimating()
@@ -145,6 +146,7 @@ class ViewController: UIViewController, UICollectionViewDelegate {
     }
     
     @objc func downloadFilms() {
+        let coreDataManager = CoreDataManager()
         self.activityIndicator.isHidden = false
         self.activityIndicator.startAnimating()
         self.collectionView.isHidden = true
@@ -165,7 +167,7 @@ class ViewController: UIViewController, UICollectionViewDelegate {
                             (newPoster)  in
                             let newPosterData = newPoster.pngData()
                             DispatchQueue.main.async {
-                                self.save(film.title, filmOriginalTitle: film.originalTitle, filmPoster: newPosterData!, releaseDate: film.releaseDate, overview: film.overview, rating: film.rating)
+                                coreDataManager.save(film.title, filmOriginalTitle: film.originalTitle, filmPoster: newPosterData!, releaseDate: film.releaseDate, overview: film.overview, rating: film.rating)
                                 self.collectionView.reloadData()
                                 self.activityIndicator.stopAnimating()
                                 self.activityIndicator.isHidden = true

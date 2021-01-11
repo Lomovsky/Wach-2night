@@ -8,10 +8,10 @@
 import UIKit
 import CoreData
 
-extension ViewController {
-    
-    
+class CoreDataManager {
+    let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     public func save(_ filmTitle: String, filmOriginalTitle: String, filmPoster: Data, releaseDate: String, overview: String, rating: Float) {
+        
         //создаем сущность в качестве проводника в экземпляр нашей сущности в хранилище
         guard let entityDescription = NSEntityDescription.entity(forEntityName: "CurrentFilm", in: managedContext) else { return }
         let film = NSManagedObject(entity: entityDescription, insertInto: managedContext) as! CurrentFilm
@@ -24,7 +24,7 @@ extension ViewController {
         
         do {
             try managedContext.save()
-            films.append(film)
+            ViewController.films.append(film)
         } catch let error as NSError {
             print(error)
         }
@@ -35,7 +35,7 @@ extension ViewController {
         let fetchRequest: NSFetchRequest<CurrentFilm> = CurrentFilm.fetchRequest()
         
         do {
-            try films = managedContext.fetch(fetchRequest)
+            try ViewController.films = managedContext.fetch(fetchRequest)
         } catch let error as NSError {
             print(error)
         }
