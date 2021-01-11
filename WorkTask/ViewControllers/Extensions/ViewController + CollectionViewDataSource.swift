@@ -47,9 +47,10 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
         navigationController?.present(secondVC, animated: true)
         let film = ViewController.films[indexPath.row]
         let originalPosterImage = UIImage(data: film.originalSizedPoster!)!
-        ImageResizer.resizeImage(image: originalPosterImage, targetSize: CGSize.init(width: secondVC.view.frame.width, height: 500)) { (image) in
+        ImageResizer.resizeImage(image: originalPosterImage, targetSize: CGSize.init(width: 600, height: 500)) { (image) in
             self.secondVC.imageView.image = image
             self.secondVC.titleLabel.text = film.title
+            self.secondVC.overviewTF.text = film.overview
 
         }
 
