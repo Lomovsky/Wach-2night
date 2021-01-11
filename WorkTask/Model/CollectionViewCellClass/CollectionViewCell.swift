@@ -14,6 +14,7 @@ class CollectionViewCell: UICollectionViewCell {
         
         didSet {
             filmImage.layer.cornerRadius = 10
+            
         }
     }
     @IBOutlet weak var originalTitle: UILabel!

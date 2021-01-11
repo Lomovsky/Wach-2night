@@ -66,15 +66,16 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         registerNib()
         
         if Reachability.isConnectedToNetwork() {
+            self.deleteAllData()
             downloadFilms()
         } else {
             print(films, "Network is not availaible")
             fetchData()
-            //пофиксить баг с индикатором
-            activityIndicator.stopAnimating()
-            collectionView.isHidden = false
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
+                self.activityIndicator.stopAnimating()
+                self.activityIndicator.isHidden = true
+                self.collectionView.isHidden = false
             }
         }
     }
@@ -144,6 +145,9 @@ class ViewController: UIViewController, UICollectionViewDelegate {
     }
     
     @objc func downloadFilms() {
+        self.activityIndicator.isHidden = false
+        self.activityIndicator.startAnimating()
+        self.collectionView.isHidden = true
         
         NetworkManager.fetchCurrentData(withURL: urlString) { (result) in
             switch result {
@@ -156,13 +160,19 @@ class ViewController: UIViewController, UICollectionViewDelegate {
                         let imageURLString = imagePath + secondPath
                         guard let imageURL = URL(string: imageURLString) else { return }
                         guard let posterData = try? Data(contentsOf: imageURL) else { return }
-                        DispatchQueue.main.async {
-                            self.save(film.title, filmOriginalTitle: film.originalTitle, filmPoster: posterData, releaseDate: film.releaseDate, overview: film.overview, rating: film.rating)
-                            self.collectionView.reloadData()
-                            self.activityIndicator.stopAnimating()
-                            self.activityIndicator.isHidden = true
-                            self.collectionView.isHidden = false
+                        let posterImage = UIImage(data: posterData)
+                        ImageResizer.resizeImage(image: posterImage!, targetSize: CGSize.init(width: 300, height: 445)) {
+                            (newPoster)  in
+                            let newPosterData = newPoster.pngData()
+                            DispatchQueue.main.async {
+                                self.save(film.title, filmOriginalTitle: film.originalTitle, filmPoster: newPosterData!, releaseDate: film.releaseDate, overview: film.overview, rating: film.rating)
+                                self.collectionView.reloadData()
+                                self.activityIndicator.stopAnimating()
+                                self.activityIndicator.isHidden = true
+                                self.collectionView.isHidden = false
+                            }
                         }
+
                     }
                 }
             case .failure(let error):

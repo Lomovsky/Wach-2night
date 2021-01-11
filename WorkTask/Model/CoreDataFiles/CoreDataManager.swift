@@ -40,4 +40,20 @@ extension ViewController {
             print(error)
         }
     }
+    
+    public func deleteAllData() {
+        let fetchRequest: NSFetchRequest<CurrentFilm> = CurrentFilm.fetchRequest()
+        fetchRequest.includesPropertyValues = false
+        do {
+            let items = try managedContext.fetch(fetchRequest) as [NSManagedObject]
+            for item in items {
+                managedContext.delete(item)
+            }
+            try managedContext.save()
+
+        } catch let error as NSError{
+           print(error)
+        }
+        
+    }
 }

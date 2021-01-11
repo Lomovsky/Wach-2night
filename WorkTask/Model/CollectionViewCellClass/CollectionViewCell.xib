@@ -21,7 +21,7 @@
                     <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" alignment="top" spacing="9" translatesAutoresizingMaskIntoConstraints="NO" id="ECW-ID-Rpl">
                         <rect key="frame" x="5" y="0.0" width="216" height="436.5"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zAb-6l-tDh">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zAb-6l-tDh">
                                 <rect key="frame" x="0.0" y="0.0" width="216" height="354"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="354" id="pic-fS-AmB"/>

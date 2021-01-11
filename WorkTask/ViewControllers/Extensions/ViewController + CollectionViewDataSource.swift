@@ -16,7 +16,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.view.frame.width , height: collectionView.frame.size.height - 5)
+        return CGSize(width: 300, height: collectionView.frame.size.height - 5)
     }
     
     //    DistanceBetween Cells
@@ -30,10 +30,8 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.reuseIdentifier,for: indexPath) as? CollectionViewCell {
             let film = self.films[indexPath.row]
-            
             let defaultImage = #imageLiteral(resourceName: "1024px-No_image_available.svg")
             let defaultImageData = defaultImage.pngData()
-            
             DispatchQueue.main.async {
                 cell.configureCell(image: film.poster ?? defaultImageData!, title: film.title ?? "Неизвестно", originalTitle: film.originalTitle ?? "Неизвестно", releaseDate: film.releaseDate ?? "Неизвестно", rating: film.rating )
                 

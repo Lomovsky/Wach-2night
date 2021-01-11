@@ -36,6 +36,7 @@ class SecondViewController: UIViewController {
     private func setupImageView() {
         imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         imageView.frame.size.width = view.frame.size.width
-        imageView.frame.size.height = (imageView.image?.accessibilityFrame.height)!
+        imageView.contentMode = .scaleAspectFit
+        imageView.frame.size.height = (view.frame.height) / 2
     }
 }
