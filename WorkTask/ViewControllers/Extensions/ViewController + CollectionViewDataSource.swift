@@ -45,13 +45,10 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         secondVC.modalPresentationStyle = .formSheet
         navigationController?.present(secondVC, animated: true)
-//        navigationController?.show(secondVC, sender: self)
         let film = ViewController.films[indexPath.row]
         let originalPosterImage = UIImage(data: film.originalSizedPoster!)!
-        ImageResizer.resizeImage(image: originalPosterImage, targetSize: CGSize.init(width: 600, height: 500)) { (image) in
+        ImageResizer.resizeImage(image: originalPosterImage, targetSize: CGSize.init(width: 450, height: 600)) { (image) in
             self.secondVC.imageView.image = image
-            self.secondVC.titleLabel.text = film.title
-            self.secondVC.overviewTF.text = film.overview
 
         }
 
@@ -59,7 +56,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-   
+   //настройка ползунка при прокручивании
         if #available(iOS 13, *) {
             (scrollView.subviews[(scrollView.subviews.count - 1)].subviews[0]).backgroundColor = UIColor.white //verticalIndicator
             (scrollView.subviews[(scrollView.subviews.count - 2)].subviews[0]).backgroundColor = UIColor.white //horizontalIndicator

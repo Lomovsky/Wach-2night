@@ -15,18 +15,16 @@ class CollectionViewCell: UICollectionViewCell {
         didSet {
             let cornerRad: CGFloat = 10.0
             filmImage.layer.cornerRadius = cornerRad
-//            filmImage.layer.shadowColor = UIColor.black.cgColor
-//            filmImage.layer.shadowRadius = 7
-//            filmImage.layer.shadowOpacity = 0.7
-//            filmImage.layer.shadowOffset = CGSize.init(width: 2.5, height: 2.5)
-//
-//            let cgPath = UIBezierPath(roundedRect: filmImage.bounds, byRoundingCorners: [.allCorners], cornerRadii: CGSize.init(width: cornerRad, height: cornerRad)).cgPath
-//            filmImage.layer.shadowPath = cgPath
             
         }
     }
     @IBOutlet weak var originalTitle: UILabel!
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel! {
+        
+        didSet {
+            titleLabel.numberOfLines = 2
+        }
+    }
     @IBOutlet weak var releaseDateTitle: UILabel!
     @IBOutlet weak var ratingLabel: UILabel!
 

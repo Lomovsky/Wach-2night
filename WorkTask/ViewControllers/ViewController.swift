@@ -144,7 +144,7 @@ class ViewController: UIViewController, UICollectionViewDelegate {
     
     private func setupView() {
         view.backgroundColor = UIColor.clear
-               var backgroundLayer = colors.gl
+        let backgroundLayer = colors.gl
         backgroundLayer!.frame = view.frame
         view.layer.insertSublayer(backgroundLayer!, at: 0)
     }
