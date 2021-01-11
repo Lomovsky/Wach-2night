@@ -10,7 +10,7 @@ import CoreData
 
 class CoreDataManager {
     let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    public func save(_ filmTitle: String, filmOriginalTitle: String, filmPoster: Data, releaseDate: String, overview: String, rating: Float) {
+    public func save(_ filmTitle: String, filmOriginalTitle: String, filmPoster: Data, releaseDate: String, overview: String, rating: Float, originalPoster: Data) {
         
         //создаем сущность в качестве проводника в экземпляр нашей сущности в хранилище
         guard let entityDescription = NSEntityDescription.entity(forEntityName: "CurrentFilm", in: managedContext) else { return }
@@ -21,6 +21,8 @@ class CoreDataManager {
         film.releaseDate = releaseDate
         film.overview = overview
         film.rating = rating
+        film.originalSizedPoster = originalPoster
+        
         
         do {
             try managedContext.save()

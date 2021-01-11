@@ -167,7 +167,7 @@ class ViewController: UIViewController, UICollectionViewDelegate {
                             (newPoster)  in
                             let newPosterData = newPoster.pngData()
                             DispatchQueue.main.async {
-                                coreDataManager.save(film.title, filmOriginalTitle: film.originalTitle, filmPoster: newPosterData!, releaseDate: film.releaseDate, overview: film.overview, rating: film.rating)
+                                coreDataManager.save(film.title, filmOriginalTitle: film.originalTitle, filmPoster: newPosterData!, releaseDate: film.releaseDate, overview: film.overview, rating: film.rating, originalPoster: posterData)
                                 self.collectionView.reloadData()
                                 self.activityIndicator.stopAnimating()
                                 self.activityIndicator.isHidden = true

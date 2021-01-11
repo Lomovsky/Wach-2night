@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20D5029f" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="CurrentFilm" representedClassName="CurrentFilm" syncable="YES" codeGenerationType="class">
+        <attribute name="originalSizedPoster" optional="YES" attributeType="Binary"/>
         <attribute name="originalTitle" optional="YES" attributeType="String"/>
         <attribute name="overview" optional="YES" attributeType="String"/>
         <attribute name="poster" optional="YES" attributeType="Binary"/>
@@ -9,6 +10,6 @@
         <attribute name="title" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="CurrentFilm" positionX="-63" positionY="-18" width="128" height="119"/>
+        <element name="CurrentFilm" positionX="-63" positionY="-18" width="128" height="134"/>
     </elements>
 </model>

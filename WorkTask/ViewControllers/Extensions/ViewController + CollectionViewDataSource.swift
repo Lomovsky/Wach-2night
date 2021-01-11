@@ -46,7 +46,14 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
         secondVC.modalPresentationStyle = .formSheet
         navigationController?.present(secondVC, animated: true)
         let film = ViewController.films[indexPath.row]
-        secondVC.imageView.image = UIImage(data: film.poster!)
+        let originalPosterImage = UIImage(data: film.originalSizedPoster!)!
+        ImageResizer.resizeImage(image: originalPosterImage, targetSize: CGSize.init(width: secondVC.view.frame.width, height: 500)) { (image) in
+            self.secondVC.imageView.image = image
+            self.secondVC.titleLabel.text = film.title
+
+        }
+
+        
     }
     
 }
