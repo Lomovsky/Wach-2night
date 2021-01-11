@@ -13,16 +13,15 @@ class CollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var filmImage: UIImageView! {
         
         didSet {
-            let cornerRadius: CGFloat = 10.0
-            filmImage.layer.cornerRadius = 10
-            filmImage.layer.cornerRadius = cornerRadius
-            filmImage.layer.shadowColor = UIColor.black.cgColor
-            filmImage.layer.shadowRadius = 7
-            filmImage.layer.shadowOpacity = 0.7
-            filmImage.layer.shadowOffset = CGSize.init(width: 2.5, height: 2.5)
-            
-            let cgPath = UIBezierPath(roundedRect: filmImage.bounds, byRoundingCorners: [.allCorners], cornerRadii: CGSize.init(width: cornerRadius, height: cornerRadius)).cgPath
-            filmImage.layer.shadowPath = cgPath
+            let cornerRad: CGFloat = 10.0
+            filmImage.layer.cornerRadius = cornerRad
+//            filmImage.layer.shadowColor = UIColor.black.cgColor
+//            filmImage.layer.shadowRadius = 7
+//            filmImage.layer.shadowOpacity = 0.7
+//            filmImage.layer.shadowOffset = CGSize.init(width: 2.5, height: 2.5)
+//
+//            let cgPath = UIBezierPath(roundedRect: filmImage.bounds, byRoundingCorners: [.allCorners], cornerRadii: CGSize.init(width: cornerRad, height: cornerRad)).cgPath
+//            filmImage.layer.shadowPath = cgPath
             
         }
     }

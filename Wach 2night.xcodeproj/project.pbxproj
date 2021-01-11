@@ -19,6 +19,7 @@
 		C060DB07257BECA400C892DE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C060DB05257BECA400C892DE /* LaunchScreen.storyboard */; };
 		C060DB14257BED7C00C892DE /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = C060DB13257BED7C00C892DE /* .gitignore */; };
 		C096CFA225AC750B001ECDBE /* ImageResizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C096CFA125AC750B001ECDBE /* ImageResizer.swift */; };
+		C096CFA525ACCB4C001ECDBE /* ColorsClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C096CFA425ACCB4C001ECDBE /* ColorsClass.swift */; };
 		C0C0E7C02583C4A4006C460E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C0E7BF2583C4A4006C460E /* NetworkManager.swift */; };
 		C0C0E7C32583C74D006C460E /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C0E7C22583C74D006C460E /* DataModel.swift */; };
 		C0D6AD532595F9D40000174A /* ApiKeyAndImageLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D6AD522595F9D40000174A /* ApiKeyAndImageLink.swift */; };
@@ -41,6 +42,7 @@
 		C060DB08257BECA400C892DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = WorkTask/Info.plist; sourceTree = SOURCE_ROOT; };
 		C060DB13257BED7C00C892DE /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		C096CFA125AC750B001ECDBE /* ImageResizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResizer.swift; sourceTree = "<group>"; };
+		C096CFA425ACCB4C001ECDBE /* ColorsClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsClass.swift; sourceTree = "<group>"; };
 		C0C0E7BF2583C4A4006C460E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		C0C0E7C22583C74D006C460E /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		C0D6AD522595F9D40000174A /* ApiKeyAndImageLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeyAndImageLink.swift; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 				C0B6B08D2583E61F002F1F7D /* Networking */,
 				C04D6E9725AB2E0900E4B151 /* CoreDataFiles */,
 				C096CFA125AC750B001ECDBE /* ImageResizer.swift */,
+				C096CFA425ACCB4C001ECDBE /* ColorsClass.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -239,6 +242,7 @@
 				C04D6EA325AB405E00E4B151 /* ConnectionManager.swift in Sources */,
 				C060DAFF257BECA200C892DE /* ViewController.swift in Sources */,
 				C060DAFB257BECA200C892DE /* AppDelegate.swift in Sources */,
+				C096CFA525ACCB4C001ECDBE /* ColorsClass.swift in Sources */,
 				C016B01D258C03F400F77CA6 /* SecondViewController.swift in Sources */,
 				C04D6EA025AB391C00E4B151 /* Wach 2night.xcdatamodeld in Sources */,
 				C0F2F76C257D02C800A1DAF9 /* CollectionViewCell.swift in Sources */,
