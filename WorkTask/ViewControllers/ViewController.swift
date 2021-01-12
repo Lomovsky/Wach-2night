@@ -98,7 +98,8 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         self.activityIndicator.isHidden = false
         self.activityIndicator.startAnimating()
         
-        NetworkManager.fetchCurrentData(withURL: urlString) { (result) in
+        NetworkManager.fetchCurrentData(withURL: urlString) { [weak self ](result) in
+            guard let self = self else { return }
             switch result {
             
             case .success(let filmResponse):
@@ -110,8 +111,9 @@ class ViewController: UIViewController, UICollectionViewDelegate {
                         guard let imageURL = URL(string: imageURLString) else { return }
                         guard let posterData = try? Data(contentsOf: imageURL) else { return }
                         let posterImage = UIImage(data: posterData)
-                        ImageResizer.resizeImage(image: posterImage!, targetSize: CGSize.init(width: 300, height: 445)) {
+                        ImageResizer.resizeImage(image: posterImage!, targetSize: CGSize.init(width: 300, height: 445)) { [weak self]
                             (newPoster)  in
+                            guard let self = self else { return }
                             let newPosterData = newPoster.pngData()
                             DispatchQueue.main.async {
                                 coreDataManager.save(film.title, filmOriginalTitle: film.originalTitle, filmPoster: newPosterData!, releaseDate: film.releaseDate, overview: film.overview, rating: film.rating, originalPoster: posterData)

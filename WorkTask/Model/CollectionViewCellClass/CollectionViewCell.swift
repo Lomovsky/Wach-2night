@@ -10,6 +10,22 @@ import UIKit
 class CollectionViewCell: UICollectionViewCell {
     
   //MARK: Outlets
+    @IBOutlet weak var imageStackView: UIStackView! {
+        didSet {
+        let cornerRadius: CGFloat = 10.0
+           imageStackView.frame.size.height = filmImage.frame.height
+            imageStackView.frame.size.width = filmImage.frame.width
+           imageStackView.layer.shadowColor = UIColor.black.cgColor
+           imageStackView.layer.shadowRadius = 7
+           imageStackView.layer.shadowOpacity = 0.7
+           imageStackView.layer.shadowOffset = CGSize.init(width: 2.5, height: 2.5)
+        
+           let cgPath = UIBezierPath(roundedRect: imageStackView.bounds, byRoundingCorners: [.allCorners], cornerRadii: CGSize.init(width: cornerRadius, height: cornerRadius)).cgPath
+           imageStackView.layer.shadowPath = cgPath
+            
+        }
+    }
+    
     @IBOutlet weak var filmImage: UIImageView! {
         
         didSet {
@@ -18,6 +34,7 @@ class CollectionViewCell: UICollectionViewCell {
             
         }
     }
+    
     @IBOutlet weak var originalTitle: UILabel!
     @IBOutlet weak var titleLabel: UILabel! {
         
