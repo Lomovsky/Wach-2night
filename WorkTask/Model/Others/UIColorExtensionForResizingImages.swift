@@ -9,6 +9,7 @@ import UIKit
 import Accelerate
 
 extension UIImage {
+    
     func resizeImageUsingVImage(size:CGSize) -> UIImage? {
          let cgImage = self.cgImage!
          var format = vImage_CGImageFormat(bitsPerComponent: 8, bitsPerPixel: 32, colorSpace: nil, bitmapInfo: CGBitmapInfo(rawValue: CGImageAlphaInfo.first.rawValue), version: 0, decode: nil, renderingIntent: CGColorRenderingIntent.defaultIntent)
@@ -19,7 +20,6 @@ extension UIImage {
         var error = vImageBuffer_InitWithCGImage(&sourceBuffer, &format, nil, cgImage, numericCast(kvImageNoFlags))
          guard error == kvImageNoError else { return nil }
        // create a destination buffer
-       let scale = self.scale
        let destWidth = Int(size.width)
        let destHeight = Int(size.height)
        let bytesPerPixel = self.cgImage!.bitsPerPixel/8

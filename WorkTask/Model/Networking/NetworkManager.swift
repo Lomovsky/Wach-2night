@@ -12,7 +12,6 @@ class NetworkManager {
  
     static func fetchCurrentData(withURL url: String, completion: @escaping (Result<FilmResponse, Error>) -> Void) {
         
-        
         guard let url = URL(string: url) else {return}
         let session = URLSession(configuration: .default)
         let task = session.dataTask(with: url) {data, response, error in
@@ -40,8 +39,5 @@ class NetworkManager {
       }
         task.resume()
     }
-    
-    deinit {
-        print("Network manager was dealocated")
-    }
+
 }

@@ -32,11 +32,10 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
             let film = ViewController.films[indexPath.row]
             let defaultImage = #imageLiteral(resourceName: "1024px-No_image_available.svg")
             let poster = UIImage(data: film.poster!)
-            let newPoster = poster?.resizeImageUsingVImage(size: CGSize.init(width: cell.frame.width, height: cell.frame.height / 1.6))
+            let newPoster = poster?.resizeImageUsingVImage(size: CGSize.init(width: cell.frame.width,
+                                                                             height: cell.frame.height / 1.6))
             DispatchQueue.main.async {
                 cell.configureCell(image: newPoster ?? defaultImage, title: film.title ?? "Неизвестно", originalTitle: film.originalTitle ?? "Неизвестно", releaseDate: film.releaseDate ?? "Неизвестно", rating: film.rating )
-
-                
             }
             return cell
         }
@@ -51,17 +50,14 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
         let film = ViewController.films[indexPath.row]
         let originalPosterImage = UIImage(data: film.originalSizedPoster!)!
         
-            secondVC.imageView.image = originalPosterImage
-            secondVC.titleLabel.text = film.title
-            secondVC.yearLabel.text = film.releaseDate
-
-        
-
-        
+        secondVC.imageView.image = originalPosterImage
+        secondVC.titleLabel.text = film.title
+        secondVC.yearLabel.text = film.releaseDate
+       
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-   //настройка ползунка при прокручивании
+        //настройка ползунка при прокручивании
         if #available(iOS 13, *) {
             (scrollView.subviews[(scrollView.subviews.count - 1)].subviews[0]).backgroundColor = UIColor.white //verticalIndicator
             (scrollView.subviews[(scrollView.subviews.count - 2)].subviews[0]).backgroundColor = UIColor.white //horizontalIndicator
@@ -69,7 +65,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
             if let verticalIndicator: UIImageView = (scrollView.subviews[(scrollView.subviews.count - 1)] as? UIImageView) {
                 verticalIndicator.backgroundColor = UIColor.systemGray6
             }
-
+            
             if let horizontalIndicator: UIImageView = (scrollView.subviews[(scrollView.subviews.count - 2)] as? UIImageView) {
                 horizontalIndicator.backgroundColor = UIColor.systemGray6
             }

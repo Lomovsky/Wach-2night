@@ -17,7 +17,7 @@ class SecondViewController: UIViewController {
     }()
     
     let imageView: UIImageView = {
-       let imageV = UIImageView()
+        let imageV = UIImageView()
         imageV.translatesAutoresizingMaskIntoConstraints = false
         return imageV
     }()
@@ -46,12 +46,8 @@ class SecondViewController: UIViewController {
         return button
     }()
     
-
-
     
-    
-    
-    //MARK: ViewDidLoad
+    //MARK: viewDidLoad -
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -61,10 +57,10 @@ class SecondViewController: UIViewController {
         view.addSubview(yearLabel)
         view.addSubview(yearPlaceHolderLabel)
         view.addSubview(containerView)
-
+        
     }
     
-    //MARK: ViewWillAppear
+    //MARK: viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
         setupImageView()
         setupNavigationController()
@@ -75,7 +71,7 @@ class SecondViewController: UIViewController {
         setupYearPlaceholderLabel()
         setupContainerView()
     }
-
+    
     
     //MARK: Setup Funcs
     @objc func buttonPressed() {
@@ -87,11 +83,11 @@ class SecondViewController: UIViewController {
     }
     
     private func setupNavigationController() {
-
+        
     }
     
     private func setupImageView() {
-
+        
         imageView.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
         imageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
         imageView.frame.size.height = (imageView.image?.size.height) ?? (view.frame.height) / 2
@@ -138,7 +134,7 @@ class SecondViewController: UIViewController {
     
     private func setupContainerView() {
         let cornerRadius: CGFloat = 10.0
-
+        
         containerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         containerView.frame.size.height = (imageView.image?.size.height) ?? (view.frame.height) / 2
@@ -158,5 +154,5 @@ class SecondViewController: UIViewController {
     deinit {
         print("Sec vc was dealocated")
     }
-
+    
 }

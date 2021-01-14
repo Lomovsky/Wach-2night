@@ -33,7 +33,6 @@ class CoreDataManager {
     }
     
     public func fetchData() {
-        //запрос выборки данных из базы всех значений по ключу Task
         let fetchRequest: NSFetchRequest<CurrentFilm> = CurrentFilm.fetchRequest()
         
         do {
@@ -52,9 +51,9 @@ class CoreDataManager {
                 managedContext.delete(item)
             }
             try managedContext.save()
-
+            
         } catch let error as NSError{
-           print(error)
+            print(error)
         }
         
     }

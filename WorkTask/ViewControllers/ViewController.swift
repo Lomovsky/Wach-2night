@@ -8,14 +8,11 @@
 import UIKit
 
 class ViewController: UIViewController, UICollectionViewDelegate {
-    //MARK: Declarations
+//MARK: Declarations
     let colors = Colors()
-    let urlString = "https://api.themoviedb.org/3/discover/movie?api_key=\(apiKey)&language=ru-RU&sort_by=popularity.desc&include_adult=true&include_video=false&page=1"
+    let dataManager = DataManager()
     static var films: [CurrentFilm] = []
-    var filmResponse: FilmResponse? = nil
-    
-    
-    //MARK: Setting up UI elements
+
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -49,12 +46,12 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         act.translatesAutoresizingMaskIntoConstraints = false
         return act
     }()
-
     
-    // MARK: ViewDidLoad
+    
+// MARK: ViewDidLoad
     override func viewDidLoad() {
+        
         let coreDataManager = CoreDataManager()
-        print(ViewController.films)
         super.viewDidLoad()
         view.backgroundColor = .white
         collectionView.delegate = self
@@ -64,14 +61,14 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         view.addSubview(stackView)
         view.addSubview(activityIndicator)
         
-        
         if Reachability.isConnectedToNetwork() {
             self.activityIndicator.isHidden = false
             coreDataManager.deleteAllData()
-            downloadFilms()
-            
+            dataManager.downloadFilms()
+            NotificationCenter.default.addObserver(self, selector: #selector(reloadData(notification:)),
+                                                   name: NSNotification.Name(rawValue: "Ready to reload data"),
+                                                   object: nil)
         } else {
-            
             coreDataManager.fetchData()
             self.secondLabel.textColor = .red
             DispatchQueue.main.async {
@@ -79,7 +76,7 @@ class ViewController: UIViewController, UICollectionViewDelegate {
             }
         }
     }
-    //MARK: ViewWillApear
+//MARK: ViewWillApear
     override func viewWillAppear(_ animated: Bool) {
         setupStackView()
         setupLabel()
@@ -89,61 +86,27 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         
     }
     
-    
-    @objc func downloadFilms() {
-        let coreDataManager = CoreDataManager()
-        self.activityIndicator.isHidden = false
-        self.activityIndicator.startAnimating()
-        
-        NetworkManager.fetchCurrentData(withURL: urlString) { [weak self ] (result) in
-            guard let self = self else { return }
-            switch result {
-            
-            case .success(let filmResponse):
-                self.filmResponse = filmResponse
-                filmResponse.results.forEach { (film) in
-                    DispatchQueue.global().async {
-                        let secondPath = film.posterPath
-                        let imageURLString = imagePath + secondPath
-                        guard let imageURL = URL(string: imageURLString) else { return }
-                        guard let posterData = try? Data(contentsOf: imageURL) else { return }
-                            DispatchQueue.main.async {
-                                coreDataManager.save(film.title, filmOriginalTitle: film.originalTitle, filmPoster: posterData, releaseDate: film.releaseDate, overview: film.overview, rating: film.rating, originalPoster: posterData)
-                                self.collectionView.reloadData()
-                                self.activityIndicator.stopAnimating()
-                                self.activityIndicator.isHidden = true
-                                self.secondLabel.text = "Подборка лучших фильмов по рейтингу"
-                            }
-                        
-
-                    }
-                }
-            case .failure(let error):
-                print(error)
-            }
-        }
+    @objc func reloadData(notification: NSNotification) {
+        self.collectionView.reloadData()
+        self.activityIndicator.stopAnimating()
+        self.activityIndicator.isHidden = true
+        self.secondLabel.text = "Подборка лучших фильмов по рейтингу"
     }
+    
+    
+    
+    
+    
+//MARK:Set up funcs -
 
-    
-    
-    
-    //MARK:Set up funcs
-    
-//    private func setupView() {
-//        view.backgroundColor = UIColor.clear
-//        let backgroundLayer = colors.gl
-//        backgroundLayer!.frame = view.frame
-//        view.layer.insertSublayer(backgroundLayer!, at: 0)
-//    }
-    
     private func setupNavigationController() {
         title = "Фильмы"
         navigationController?.navigationBar.backgroundColor = .clear
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh,
                                                             target: self,
-                                                            action: #selector(downloadFilms))
-
+                                                            action: #selector(dataManager.downloadFilms))
+        
     }
     
     private func setupStackView(){
@@ -154,7 +117,7 @@ class ViewController: UIViewController, UICollectionViewDelegate {
     }
     
     private func setupLabel() {
-     
+        
         secondLabel.text  = "Загрузка"
         secondLabel.textColor = .black
         secondLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
@@ -169,7 +132,7 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         collectionView.accessibilityScroll(.left)
         collectionView.backgroundColor = .clear
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 36, bottom: 0, right: 150) // отступ первой и последней ячейки
-
+        
     }
     
     private func setupNetworkStatusLabel() {
@@ -183,9 +146,5 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         activityIndicator.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
         activityIndicator.startAnimating()
     }
-    
-
-    
-
     
 }
