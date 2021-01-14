@@ -91,8 +91,6 @@ class SecondViewController: UIViewController {
     }
     
     private func setupImageView() {
-        
-
 
         imageView.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
         imageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
@@ -147,7 +145,7 @@ class SecondViewController: UIViewController {
         containerView.frame.size.width = (imageView.image?.size.width) ?? (view.frame.width)
         containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         containerView.addSubview(imageView)
-        containerView.layer.shadowColor = UIColor.black.cgColor
+        containerView.layer.shadowColor = UIColor.red.cgColor
         containerView.layer.shadowRadius = 7
         containerView.layer.shadowOpacity = 0.7
         containerView.layer.shadowOffset = CGSize.init(width: 2.5, height: 2.5)

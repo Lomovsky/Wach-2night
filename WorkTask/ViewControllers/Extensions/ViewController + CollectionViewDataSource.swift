@@ -16,7 +16,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 300, height: collectionView.frame.size.height - 5)
+        return CGSize(width: 300, height: collectionView.frame.size.height - 10)
     }
     
     //    DistanceBetween Cells

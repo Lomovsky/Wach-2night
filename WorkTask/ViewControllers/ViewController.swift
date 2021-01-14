@@ -63,7 +63,6 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         view.addSubview(collectionView)
         view.addSubview(stackView)
         view.addSubview(activityIndicator)
-        registerNib()
         
         
         if Reachability.isConnectedToNetwork() {
@@ -110,7 +109,7 @@ class ViewController: UIViewController, UICollectionViewDelegate {
                         guard let imageURL = URL(string: imageURLString) else { return }
                         guard let posterData = try? Data(contentsOf: imageURL) else { return }
                         let posterImage = UIImage(data: posterData)
-                        ImageResizer.resizeImage(image: posterImage!, targetSize: CGSize.init(width: 300, height: 445)) { [weak self]
+                        ImageResizer.resizeImage(image: posterImage!, targetSize: CGSize.init(width: 300, height: 450)) { [weak self]
                             (newPoster)  in
                             guard let self = self else { return }
                             let newPosterData = newPoster.pngData()
@@ -135,13 +134,6 @@ class ViewController: UIViewController, UICollectionViewDelegate {
     
     
     //MARK:Set up funcs
-    func registerNib() {
-        let nib = UINib(nibName: CollectionViewCell.nibName, bundle: nil)
-        collectionView.register(nib, forCellWithReuseIdentifier: CollectionViewCell.reuseIdentifier)
-        if let flowLayout = self.collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            flowLayout.estimatedItemSize = CGSize(width: 226, height: 354)
-        }
-    }
     
     private func setupView() {
         view.backgroundColor = UIColor.clear
@@ -152,6 +144,7 @@ class ViewController: UIViewController, UICollectionViewDelegate {
     
     private func setupNavigationController() {
         title = "Фильмы"
+        navigationController?.navigationBar.backgroundColor = .clear
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh,
                                                             target: self,
