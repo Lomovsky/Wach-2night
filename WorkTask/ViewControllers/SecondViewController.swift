@@ -156,5 +156,9 @@ class SecondViewController: UIViewController {
         containerView.layer.shadowPath = cgPath
         
     }
+    
+    deinit {
+        print("Sec vc was dealocated")
+    }
 
 }

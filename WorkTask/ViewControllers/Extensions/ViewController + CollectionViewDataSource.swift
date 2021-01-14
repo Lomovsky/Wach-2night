@@ -43,15 +43,16 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let secondVC = SecondViewController()
         secondVC.modalPresentationStyle = .formSheet
         navigationController?.present(secondVC, animated: true)
         let film = ViewController.films[indexPath.row]
         let originalPosterImage = UIImage(data: film.originalSizedPoster!)!
-        ImageResizer.resizeImage(image: originalPosterImage, targetSize: CGSize.init(width: 250, height: 400)) { [weak  self] (image) in
-            guard let self = self else { return }
-            self.secondVC.imageView.image = image
-            self.secondVC.titleLabel.text = film.title
-            self.secondVC.yearLabel.text = film.releaseDate
+        ImageResizer.resizeImage(image: originalPosterImage, targetSize: CGSize.init(width: 250, height: 400)) { (image) in
+//            guard let self = self else { return }
+            secondVC.imageView.image = image
+            secondVC.titleLabel.text = film.title
+            secondVC.yearLabel.text = film.releaseDate
 
         }
 

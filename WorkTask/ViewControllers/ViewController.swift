@@ -9,7 +9,6 @@ import UIKit
 
 class ViewController: UIViewController, UICollectionViewDelegate {
     //MARK: Declarations
-    let secondVC = SecondViewController()
     let colors = Colors()
     let urlString = "https://api.themoviedb.org/3/discover/movie?api_key=\(apiKey)&language=ru-RU&sort_by=popularity.desc&include_adult=true&include_video=false&page=1"
     static var films: [CurrentFilm] = []
@@ -98,7 +97,7 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         self.activityIndicator.isHidden = false
         self.activityIndicator.startAnimating()
         
-        NetworkManager.fetchCurrentData(withURL: urlString) { [weak self ](result) in
+        NetworkManager.fetchCurrentData(withURL: urlString) { [weak self ] (result) in
             guard let self = self else { return }
             switch result {
             

@@ -34,4 +34,8 @@ class ImageResizer {
 
         completion(newImage!)
     }
+    
+    deinit {
+        print("ImageResizer was dealocated")
+    }
 }
