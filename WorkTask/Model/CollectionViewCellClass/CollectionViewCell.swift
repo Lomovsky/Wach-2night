@@ -46,6 +46,18 @@ class CollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    private let imdbLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let ratingStack: UIStackView = {
+        let stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
     private let yearLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -62,15 +74,17 @@ class CollectionViewCell: UICollectionViewCell {
         contentView.addSubview(imageView)
         contentView.addSubview(originalTitleLabel)
         contentView.addSubview(titleLabel)
-        contentView.addSubview(ratingLabel)
-        contentView.addSubview(yearLabel)
+        contentView.addSubview(ratingStack)
+        contentView.addSubview(imdbLabel)
         
         
         setupImageView()
         setupOriginalTitleLabel()
         setupTitleLabel()
         setupRatingLabel()
+        setupIMDBLabel()
         setupYearLabel()
+        setupRatingStack()
         
     }
     
@@ -98,16 +112,33 @@ class CollectionViewCell: UICollectionViewCell {
     private func setupTitleLabel() {
         titleLabel.topAnchor.constraint(equalTo: originalTitleLabel.bottomAnchor, constant: 5).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5).isActive = true
+        titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         titleLabel.font = .systemFont(ofSize: 20)
-        titleLabel.frame.size.height = 60
-        titleLabel.numberOfLines = 2
+        titleLabel.frame.size.height = 49
+        titleLabel.numberOfLines = 3
         
 
     }
     
+    private func setupRatingStack() {
+        ratingStack.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10).isActive = true
+        ratingStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5).isActive = true
+        ratingStack.frame.size.width = 70
+        ratingStack.layer.cornerRadius = 10
+        ratingStack.addSubview(imdbLabel)
+    }
+    
     private func setupRatingLabel() {
+ 
+ 
         
-        
+    }
+    
+    private func setupIMDBLabel() {
+        imdbLabel.leadingAnchor.constraint(equalTo: ratingStack.leadingAnchor, constant: 3).isActive = true
+        imdbLabel.centerYAnchor.constraint(equalTo: ratingStack.centerYAnchor).isActive = true
+        imdbLabel.text = "11"
+        imdbLabel.textColor = .white
     }
     
     private func setupYearLabel() {
