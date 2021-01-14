@@ -58,4 +58,8 @@ class CoreDataManager {
         }
         
     }
+    
+    deinit {
+        print("CoreData manager was dealocated")
+    }
 }

@@ -40,4 +40,8 @@ class NetworkManager {
       }
         task.resume()
     }
+    
+    deinit {
+        print("Network manager was dealocated")
+    }
 }

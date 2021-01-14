@@ -104,7 +104,7 @@ class ViewController: UIViewController, UICollectionViewDelegate {
             
             case .success(let filmResponse):
                 self.filmResponse = filmResponse
-                filmResponse.results.map { (film) in
+                filmResponse.results.forEach { (film) in
                     DispatchQueue.global().async {
                         let secondPath = film.posterPath
                         let imageURLString = imagePath + secondPath

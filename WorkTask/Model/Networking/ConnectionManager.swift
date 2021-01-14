@@ -41,4 +41,8 @@ public class Reachability {
         return ret
 
     }
+    
+    deinit {
+        print("Conntection manager was dealocated")
+    }
 }
