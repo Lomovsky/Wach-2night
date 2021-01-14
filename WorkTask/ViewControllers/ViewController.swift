@@ -86,7 +86,6 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         setupCollectionView()
         setupNavigationController()
         setupActivityIndicator()
-        setupView()
         
     }
     
@@ -108,19 +107,14 @@ class ViewController: UIViewController, UICollectionViewDelegate {
                         let imageURLString = imagePath + secondPath
                         guard let imageURL = URL(string: imageURLString) else { return }
                         guard let posterData = try? Data(contentsOf: imageURL) else { return }
-                        let posterImage = UIImage(data: posterData)
-                        ImageResizer.resizeImage(image: posterImage!, targetSize: CGSize.init(width: 300, height: 450)) { [weak self]
-                            (newPoster)  in
-                            guard let self = self else { return }
-                            let newPosterData = newPoster.pngData()
                             DispatchQueue.main.async {
-                                coreDataManager.save(film.title, filmOriginalTitle: film.originalTitle, filmPoster: newPosterData!, releaseDate: film.releaseDate, overview: film.overview, rating: film.rating, originalPoster: posterData)
+                                coreDataManager.save(film.title, filmOriginalTitle: film.originalTitle, filmPoster: posterData, releaseDate: film.releaseDate, overview: film.overview, rating: film.rating, originalPoster: posterData)
                                 self.collectionView.reloadData()
                                 self.activityIndicator.stopAnimating()
                                 self.activityIndicator.isHidden = true
                                 self.secondLabel.text = "Подборка лучших фильмов по рейтингу"
                             }
-                        }
+                        
 
                     }
                 }
@@ -135,12 +129,12 @@ class ViewController: UIViewController, UICollectionViewDelegate {
     
     //MARK:Set up funcs
     
-    private func setupView() {
-        view.backgroundColor = UIColor.clear
-        let backgroundLayer = colors.gl
-        backgroundLayer!.frame = view.frame
-        view.layer.insertSublayer(backgroundLayer!, at: 0)
-    }
+//    private func setupView() {
+//        view.backgroundColor = UIColor.clear
+//        let backgroundLayer = colors.gl
+//        backgroundLayer!.frame = view.frame
+//        view.layer.insertSublayer(backgroundLayer!, at: 0)
+//    }
     
     private func setupNavigationController() {
         title = "Фильмы"
@@ -168,7 +162,7 @@ class ViewController: UIViewController, UICollectionViewDelegate {
     }
     
     private func setupCollectionView() {
-        collectionView.topAnchor.constraint(equalTo: secondLabel.bottomAnchor, constant: 30).isActive = true
+        collectionView.topAnchor.constraint(equalTo: secondLabel.bottomAnchor, constant: 20).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true

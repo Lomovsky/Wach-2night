@@ -9,79 +9,6 @@ import UIKit
 
 class CollectionViewCell: UICollectionViewCell {
     
-    // MARK: Declarations
-    private let imageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
-        imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 10
-        return imageView
-    }()
-    
-    private let stackView: UIStackView = {
-        let stack = UIStackView()
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        let cornerRadius: CGFloat = 10.0
-        stack.layer.shadowColor = UIColor.black.cgColor
-        stack.layer.shadowRadius = 7
-        stack.layer.shadowOpacity = 0.7
-        stack.layer.shadowOffset = CGSize.init(width: 2.5, height: 2.5)
-        
-        let cgPath = UIBezierPath(roundedRect: stack.bounds, byRoundingCorners: [.allCorners], cornerRadii: CGSize.init(width: cornerRadius, height: cornerRadius)).cgPath
-        stack.layer.shadowPath = cgPath
-        stack.backgroundColor = .yellow
-        return stack
-    }()
-    
-
-    
-    //MARK: Initializer
-    override init(frame: CGRect) {
-        super.init(frame: .zero)
-//        contentView.addSubview(imageView)
-        contentView.addSubview(stackView)
-        setupStackView()
-        setupImageView()
-        
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func setupStackView() {
-        stackView.addSubview(imageView)
-
-        
-        stackView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: -30).isActive = true
-        stackView.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: -10).isActive = true
-        stackView.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -10).isActive = true
-        stackView.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -50).isActive = true
-
-        
-    }
-    
-    private func setupImageView() {
-
-        imageView.centerXAnchor.constraint(equalTo: stackView.centerXAnchor).isActive = true
-        imageView.centerYAnchor.constraint(equalTo: stackView.centerYAnchor).isActive = true
-
-    }
-    
-    
-    
-    func configureCell(image: Data, title: String, originalTitle: String, releaseDate: String, rating: Float) {
-        self.imageView.image = UIImage(data: image)
-//        self.titleLabel.text = title
-//        self.originalTitle.text = originalTitle
-//        self.releaseDateTitle.text = releaseDate
-//        self.ratingLabel.text = String(rating)
-    }
-
-    override class func awakeFromNib() {
-        
-    }
     
     class var reuseIdentifier: String {
         return "CollectionViewCellReuseIdentifier"
@@ -90,16 +17,123 @@ class CollectionViewCell: UICollectionViewCell {
         return "CollectionViewCell"
     }
     
+    
+// MARK: Declarations
+    private let imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 12
+        return imageView
+    }()
+    
+    private let originalTitleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let ratingLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private let yearLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+
+    
+
+    
+//MARK: Initializer
+    override init(frame: CGRect) {
+        super.init(frame: .zero)
+        contentView.addSubview(imageView)
+        contentView.addSubview(originalTitleLabel)
+        contentView.addSubview(titleLabel)
+        contentView.addSubview(ratingLabel)
+        contentView.addSubview(yearLabel)
+        
+        
+        setupImageView()
+        setupOriginalTitleLabel()
+        setupTitleLabel()
+        setupRatingLabel()
+        setupYearLabel()
+        
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+// MARK: Setup funcs -
+
+    private func setupImageView() {
+        imageView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+
+    }
+    
+    private func setupOriginalTitleLabel() {
+        originalTitleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 5).isActive = true
+        originalTitleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5).isActive = true
+        originalTitleLabel.font = .systemFont(ofSize: 12)
+        originalTitleLabel.textColor = .systemGray
+        
+    }
+    
+    private func setupTitleLabel() {
+        titleLabel.topAnchor.constraint(equalTo: originalTitleLabel.bottomAnchor, constant: 5).isActive = true
+        titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5).isActive = true
+        titleLabel.font = .systemFont(ofSize: 20)
+        titleLabel.frame.size.height = 60
+        titleLabel.numberOfLines = 2
+        
+
+    }
+    
+    private func setupRatingLabel() {
+        
+        
+    }
+    
+    private func setupYearLabel() {
+        
+    }
+    
+    
+    func configureCell(image: UIImage, title: String, originalTitle: String, releaseDate: String, rating: Float) {
+        self.imageView.image = image
+        self.originalTitleLabel.text = originalTitle
+        self.titleLabel.text = title
+//        self.releaseDateTitle.text = releaseDate
+//        self.ratingLabel.text = String(rating)
+    }
+
+
+    
 
 
 }
 
-///        let cornerRadius: CGFloat = 10.0
-//           imageStackView.layer.shadowColor = UIColor.black.cgColor
-//           imageStackView.layer.shadowRadius = 7
-//           imageStackView.layer.shadowOpacity = 0.7
-//           imageStackView.layer.shadowOffset = CGSize.init(width: 2.5, height: 2.5)
-//
-//           let cgPath = UIBezierPath(roundedRect: imageStackView.bounds, byRoundingCorners: [.allCorners], cornerRadii: CGSize.init(width: cornerRadius, height: cornerRadius)).cgPath
-//           imageStackView.layer.shadowPath = cgPath
-//
+
+///imageView.layer.cornerRadius = 10
+///imageView.layer.shadowColor = UIColor.black.cgColor
+///imageView.layer.shadowRadius = 7
+///imageView.layer.shadowOpacity = 0.7
+///imageView.layer.shadowOffset = CGSize.init(width: 2.5, height: 2.5)
+///let cgPath = UIBezierPath(roundedRect: imageView.bounds, byRoundingCorners: [.allCorners], cornerRadii: CGSize.init(width: cornerRadius, height: cornerRadius)).cgPath
+///imageView.layer.shadowPath = cgPath

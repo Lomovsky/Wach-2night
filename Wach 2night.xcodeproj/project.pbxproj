@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		C003674825824CB500226ED4 /* ViewController + CollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C003674725824CB500226ED4 /* ViewController + CollectionViewDataSource.swift */; };
 		C016B01D258C03F400F77CA6 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016B01C258C03F400F77CA6 /* SecondViewController.swift */; };
+		C028AC7025B0D8BF007799B6 /* UIColorExtensionForResizingImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = C028AC6F25B0D8BF007799B6 /* UIColorExtensionForResizingImages.swift */; };
 		C0394FE325A8B33D00D7A7FB /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0394FE225A8B33D00D7A7FB /* CoreDataManager.swift */; };
 		C04D6EA025AB391C00E4B151 /* Wach 2night.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C04D6E9E25AB391C00E4B151 /* Wach 2night.xcdatamodeld */; };
 		C04D6EA325AB405E00E4B151 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04D6EA225AB405E00E4B151 /* ConnectionManager.swift */; };
@@ -18,7 +19,6 @@
 		C060DB04257BECA400C892DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C060DB03257BECA400C892DE /* Assets.xcassets */; };
 		C060DB07257BECA400C892DE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C060DB05257BECA400C892DE /* LaunchScreen.storyboard */; };
 		C060DB14257BED7C00C892DE /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = C060DB13257BED7C00C892DE /* .gitignore */; };
-		C096CFA225AC750B001ECDBE /* ImageResizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C096CFA125AC750B001ECDBE /* ImageResizer.swift */; };
 		C096CFA525ACCB4C001ECDBE /* ColorsClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C096CFA425ACCB4C001ECDBE /* ColorsClass.swift */; };
 		C0C0E7C02583C4A4006C460E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C0E7BF2583C4A4006C460E /* NetworkManager.swift */; };
 		C0C0E7C32583C74D006C460E /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C0E7C22583C74D006C460E /* DataModel.swift */; };
@@ -29,6 +29,7 @@
 /* Begin PBXFileReference section */
 		C003674725824CB500226ED4 /* ViewController + CollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController + CollectionViewDataSource.swift"; sourceTree = "<group>"; };
 		C016B01C258C03F400F77CA6 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		C028AC6F25B0D8BF007799B6 /* UIColorExtensionForResizingImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensionForResizingImages.swift; sourceTree = "<group>"; };
 		C0394FE225A8B33D00D7A7FB /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		C04D6E9F25AB391C00E4B151 /* Wach 2night.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Wach 2night.xcdatamodel"; sourceTree = "<group>"; };
 		C04D6EA225AB405E00E4B151 /* ConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
@@ -40,7 +41,6 @@
 		C060DB06257BECA400C892DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C060DB08257BECA400C892DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = WorkTask/Info.plist; sourceTree = SOURCE_ROOT; };
 		C060DB13257BED7C00C892DE /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		C096CFA125AC750B001ECDBE /* ImageResizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResizer.swift; sourceTree = "<group>"; };
 		C096CFA425ACCB4C001ECDBE /* ColorsClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsClass.swift; sourceTree = "<group>"; };
 		C0C0E7BF2583C4A4006C460E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		C0C0E7C22583C74D006C460E /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
@@ -65,7 +65,6 @@
 				C0F2F776257D454000A1DAF9 /* CollectionViewCellClass */,
 				C0B6B08D2583E61F002F1F7D /* Networking */,
 				C04D6E9725AB2E0900E4B151 /* CoreDataFiles */,
-				C096CFA125AC750B001ECDBE /* ImageResizer.swift */,
 				C096CFA425ACCB4C001ECDBE /* ColorsClass.swift */,
 			);
 			path = Model;
@@ -124,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				C003674725824CB500226ED4 /* ViewController + CollectionViewDataSource.swift */,
+				C028AC6F25B0D8BF007799B6 /* UIColorExtensionForResizingImages.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -244,9 +244,9 @@
 				C0F2F76C257D02C800A1DAF9 /* CollectionViewCell.swift in Sources */,
 				C003674825824CB500226ED4 /* ViewController + CollectionViewDataSource.swift in Sources */,
 				C0C0E7C32583C74D006C460E /* DataModel.swift in Sources */,
+				C028AC7025B0D8BF007799B6 /* UIColorExtensionForResizingImages.swift in Sources */,
 				C0D6AD532595F9D40000174A /* ApiKeyAndImageLink.swift in Sources */,
 				C060DAFD257BECA200C892DE /* SceneDelegate.swift in Sources */,
-				C096CFA225AC750B001ECDBE /* ImageResizer.swift in Sources */,
 				C0394FE325A8B33D00D7A7FB /* CoreDataManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -16,7 +16,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 300, height: collectionView.frame.size.height - 10)
+        return CGSize(width: view.frame.width - 125, height: collectionView.frame.size.height - 10)
     }
     
     //    DistanceBetween Cells
@@ -31,9 +31,11 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.reuseIdentifier,for: indexPath) as? CollectionViewCell {
             let film = ViewController.films[indexPath.row]
             let defaultImage = #imageLiteral(resourceName: "1024px-No_image_available.svg")
-            let defaultImageData = defaultImage.pngData()
+            let poster = UIImage(data: film.poster!)
+            let newPoster = poster?.resizeImageUsingVImage(size: CGSize.init(width: cell.frame.width, height: cell.frame.height / 1.6))
             DispatchQueue.main.async {
-                cell.configureCell(image: film.poster ?? defaultImageData!, title: film.title ?? "Неизвестно", originalTitle: film.originalTitle ?? "Неизвестно", releaseDate: film.releaseDate ?? "Неизвестно", rating: film.rating )
+                cell.configureCell(image: newPoster ?? defaultImage, title: film.title ?? "Неизвестно", originalTitle: film.originalTitle ?? "Неизвестно", releaseDate: film.releaseDate ?? "Неизвестно", rating: film.rating )
+
                 
             }
             return cell
@@ -48,13 +50,12 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
         navigationController?.present(secondVC, animated: true)
         let film = ViewController.films[indexPath.row]
         let originalPosterImage = UIImage(data: film.originalSizedPoster!)!
-        ImageResizer.resizeImage(image: originalPosterImage, targetSize: CGSize.init(width: 250, height: 400)) { (image) in
-//            guard let self = self else { return }
-            secondVC.imageView.image = image
+        
+            secondVC.imageView.image = originalPosterImage
             secondVC.titleLabel.text = film.title
             secondVC.yearLabel.text = film.releaseDate
 
-        }
+        
 
         
     }
