@@ -7,6 +7,10 @@
 
 import UIKit
 
+
+//TODO: fix navigationController bug
+
+
 class ViewController: UIViewController, UICollectionViewDelegate {
 //MARK: Declarations
     let colors = Colors()
@@ -62,7 +66,6 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         view.addSubview(activityIndicator)
         
         if Reachability.isConnectedToNetwork() {
-            self.activityIndicator.isHidden = false
             coreDataManager.deleteAllData()
             dataManager.downloadFilms()
             NotificationCenter.default.addObserver(self, selector: #selector(reloadData(notification:)),
@@ -93,9 +96,7 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         self.secondLabel.text = "Подборка лучших фильмов по рейтингу"
     }
     
-    
-    
-    
+     
     
 //MARK:Set up funcs -
 
