@@ -8,6 +8,8 @@
 import UIKit
 
 class SecondViewController: UIViewController {
+    //MARK: Postponed for a few days
+    
     
     //MARK: Declarations
     let containerView: UIStackView = {

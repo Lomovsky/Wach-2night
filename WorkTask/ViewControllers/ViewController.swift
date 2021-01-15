@@ -7,16 +7,14 @@
 
 import UIKit
 
-
-//TODO: fix navigationController bug
-
-
 class ViewController: UIViewController, UICollectionViewDelegate {
 //MARK: Declarations
     let colors = Colors()
-    let dataManager = DataManager()
     static var films: [CurrentFilm] = []
     lazy var refreshControl = UIRefreshControl()
+    let urlString = "https://api.themoviedb.org/3/discover/movie?api_key=\(apiKey)&language=ru-RU&sort_by=popularity.desc&include_adult=true&include_video=false&page=1"
+    var filmResponse: FilmResponse? = nil
+    
 
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -62,7 +60,6 @@ class ViewController: UIViewController, UICollectionViewDelegate {
 // MARK: ViewDidLoad -
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = .white
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -70,10 +67,20 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         view.addSubview(collectionView)
         view.addSubview(activityIndicator)
         view.addSubview(scrollView)
-        checkConnection()
 
+        let coreDataManager = CoreDataManager()
+        if Reachability.isConnectedToNetwork() {
+            coreDataManager.deleteAllData()
+            downloadFilms()
+            
+        } else {
+            coreDataManager.fetchData()
+            self.label.textColor = .red
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
     }
-    
     
 //MARK: ViewWillApear
     override func viewWillAppear(_ animated: Bool) {
@@ -84,8 +91,6 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         setupScrollView()
         
     }
-
-     
     
 //MARK:Set up funcs -
 
@@ -93,11 +98,6 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         title = "Фильмы"
         navigationController?.navigationBar.backgroundColor = .clear
         navigationController?.navigationBar.prefersLargeTitles = true
-        //postponed due to wrong logics of updating collectionView -> fatalError
-        
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh,
-//                                                            target: self,
-//                                                            action: #selector(checkConnection))
         
     }
     
@@ -149,37 +149,4 @@ class ViewController: UIViewController, UICollectionViewDelegate {
     }
     
     
-// MARK: Helper funcs -
-    
-    @objc func checkConnection() {
-        let coreDataManager = CoreDataManager()
-        if Reachability.isConnectedToNetwork() {
-            
-            dataManager.downloadFilms()
-            NotificationCenter.default.addObserver(self, selector: #selector(reloadData(notification:)),
-                                                   name: NSNotification.Name(rawValue: "Ready to reload data"),
-                                                   object: nil)
-            
-        } else {
-            coreDataManager.fetchData()
-            self.label.textColor = .red
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
-        }
-    }
-    
-    @objc func reloadData(notification: NSNotification) {
-        self.collectionView.reloadData()
-        self.activityIndicator.stopAnimating()
-        self.activityIndicator.isHidden = true
-        self.label.text = "Подборка лучших фильмов по рейтингу"
-    }
-    
-    @objc func refresh(_ sender: AnyObject) {
-        
-        refreshControl.endRefreshing()
-    }
-    
-
 }

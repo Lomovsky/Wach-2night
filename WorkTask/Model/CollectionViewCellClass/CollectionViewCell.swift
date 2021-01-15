@@ -74,7 +74,6 @@ class CollectionViewCell: UICollectionViewCell {
         contentView.addSubview(ratingStack)
         contentView.addSubview(imdbLabel)
         
-        
         setupImageView()
         setupOriginalTitleLabel()
         setupTitleLabel()

@@ -1,5 +1,5 @@
 //
-//  DataManager.swift
+//  ViewControllerHelperFuncs.swift
 //  WorkTask
 //
 //  Created by Алекс Ломовской on 15.01.2021.
@@ -7,13 +7,11 @@
 
 import UIKit
 
-class DataManager {
-    let urlString = "https://api.themoviedb.org/3/discover/movie?api_key=\(apiKey)&language=ru-RU&sort_by=popularity.desc&include_adult=true&include_video=false&page=1"
-    var filmResponse: FilmResponse? = nil
+extension ViewController {
+    // MARK: Helper funcs -
     
-     func downloadFilms() {
+    @objc func downloadFilms() {
         let coreDataManager = CoreDataManager()
-        coreDataManager.deleteAllData()
         NetworkManager.fetchCurrentData(withURL: urlString) { [weak self ] (result) in
             guard let self = self else { return }
             switch result {
@@ -25,10 +23,15 @@ class DataManager {
                         let imageURLString = imagePath + secondPath
                         guard let imageURL = URL(string: imageURLString) else { return }
                         guard let posterData = try? Data(contentsOf: imageURL) else { return }
-                        DispatchQueue.main.async {
+                        DispatchQueue.main.async { [self] in
                             coreDataManager.save(film.title, filmOriginalTitle: film.originalTitle, filmPoster: posterData, releaseDate: film.releaseDate, overview: film.overview, rating: film.rating, originalPoster: posterData)
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                NotificationCenter.default.post(name: NSNotification.Name("Ready to reload data"), object: nil)
+                                self.collectionView.reloadData()
+                                self.activityIndicator.stopAnimating()
+                                self.collectionView.isHidden = false
+                                self.activityIndicator.isHidden = true
+                                self.label.text = "Подборка лучших фильмов по рейтингу"
+                                self.refreshControl.endRefreshing()
                             }
                         }
                     }
@@ -38,4 +41,11 @@ class DataManager {
             }
         }
     }
+    
+    @objc func refresh(_ sender: AnyObject) {
+        downloadFilms()
+    }
+    
 }
+
+

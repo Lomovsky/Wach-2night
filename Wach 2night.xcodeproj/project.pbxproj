@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C003674825824CB500226ED4 /* ViewController + CollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C003674725824CB500226ED4 /* ViewController + CollectionViewDataSource.swift */; };
+		C003674825824CB500226ED4 /* ViewController+CollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C003674725824CB500226ED4 /* ViewController+CollectionViewDataSource.swift */; };
+		C0089F5925B2184D001647F2 /* ViewController+HelperFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0089F5825B2184D001647F2 /* ViewController+HelperFuncs.swift */; };
 		C016B01D258C03F400F77CA6 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016B01C258C03F400F77CA6 /* SecondViewController.swift */; };
-		C0278C0E25B0F53C00AEAC31 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0278C0D25B0F53C00AEAC31 /* DataManager.swift */; };
 		C028AC7025B0D8BF007799B6 /* UIColorExtensionForResizingImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = C028AC6F25B0D8BF007799B6 /* UIColorExtensionForResizingImages.swift */; };
 		C0394FE325A8B33D00D7A7FB /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0394FE225A8B33D00D7A7FB /* CoreDataManager.swift */; };
 		C04D6EA025AB391C00E4B151 /* Wach 2night.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C04D6E9E25AB391C00E4B151 /* Wach 2night.xcdatamodeld */; };
@@ -28,9 +28,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		C003674725824CB500226ED4 /* ViewController + CollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController + CollectionViewDataSource.swift"; sourceTree = "<group>"; };
+		C003674725824CB500226ED4 /* ViewController+CollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+CollectionViewDataSource.swift"; sourceTree = "<group>"; };
+		C0089F5825B2184D001647F2 /* ViewController+HelperFuncs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+HelperFuncs.swift"; sourceTree = "<group>"; };
 		C016B01C258C03F400F77CA6 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
-		C0278C0D25B0F53C00AEAC31 /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		C028AC6F25B0D8BF007799B6 /* UIColorExtensionForResizingImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensionForResizingImages.swift; sourceTree = "<group>"; };
 		C0394FE225A8B33D00D7A7FB /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		C04D6E9F25AB391C00E4B151 /* Wach 2night.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Wach 2night.xcdatamodel"; sourceTree = "<group>"; };
@@ -77,7 +77,6 @@
 			children = (
 				C096CFA425ACCB4C001ECDBE /* ColorsClass.swift */,
 				C028AC6F25B0D8BF007799B6 /* UIColorExtensionForResizingImages.swift */,
-				C0278C0D25B0F53C00AEAC31 /* DataManager.swift */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -134,7 +133,8 @@
 		C0D6AD5925960A000000174A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				C003674725824CB500226ED4 /* ViewController + CollectionViewDataSource.swift */,
+				C003674725824CB500226ED4 /* ViewController+CollectionViewDataSource.swift */,
+				C0089F5825B2184D001647F2 /* ViewController+HelperFuncs.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -246,7 +246,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0C0E7C02583C4A4006C460E /* NetworkManager.swift in Sources */,
-				C0278C0E25B0F53C00AEAC31 /* DataManager.swift in Sources */,
 				C04D6EA325AB405E00E4B151 /* ConnectionManager.swift in Sources */,
 				C060DAFF257BECA200C892DE /* ViewController.swift in Sources */,
 				C060DAFB257BECA200C892DE /* AppDelegate.swift in Sources */,
@@ -254,8 +253,9 @@
 				C016B01D258C03F400F77CA6 /* SecondViewController.swift in Sources */,
 				C04D6EA025AB391C00E4B151 /* Wach 2night.xcdatamodeld in Sources */,
 				C0F2F76C257D02C800A1DAF9 /* CollectionViewCell.swift in Sources */,
-				C003674825824CB500226ED4 /* ViewController + CollectionViewDataSource.swift in Sources */,
+				C003674825824CB500226ED4 /* ViewController+CollectionViewDataSource.swift in Sources */,
 				C0C0E7C32583C74D006C460E /* DataModel.swift in Sources */,
+				C0089F5925B2184D001647F2 /* ViewController+HelperFuncs.swift in Sources */,
 				C028AC7025B0D8BF007799B6 /* UIColorExtensionForResizingImages.swift in Sources */,
 				C0D6AD532595F9D40000174A /* ApiKeyAndImageLink.swift in Sources */,
 				C060DAFD257BECA200C892DE /* SceneDelegate.swift in Sources */,
