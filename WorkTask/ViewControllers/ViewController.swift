@@ -9,10 +9,9 @@ import UIKit
 
 class ViewController: UIViewController, UICollectionViewDelegate {
 //MARK: Declarations
-    let colors = Colors()
+    let urlString = "https://api.themoviedb.org/3/discover/movie?api_key=\(apiKey)&language=ru-RU&sort_by=popularity.desc&include_adult=true&include_video=false&page=1"
     static var films: [CurrentFilm] = []
     lazy var refreshControl = UIRefreshControl()
-    let urlString = "https://api.themoviedb.org/3/discover/movie?api_key=\(apiKey)&language=ru-RU&sort_by=popularity.desc&include_adult=true&include_video=false&page=1"
     var filmResponse: FilmResponse? = nil
     
 
@@ -89,11 +88,22 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         setupNavigationController()
         setupActivityIndicator()
         setupScrollView()
+        setGradientBackground()
         
     }
     
-//MARK:Set up funcs -
-
+//MARK:Set up funcs -  
+    private func setGradientBackground() {
+        let colorTop =  UIColor.systemBlue.cgColor
+        let colorBottom = UIColor.systemTeal.cgColor
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [colorTop, colorBottom]
+        gradientLayer.locations = [0.0, 1.0]
+        gradientLayer.frame = self.view.bounds
+        self.view.layer.insertSublayer(gradientLayer, at: 0)
+    }
+    
+    
     private func setupNavigationController() {
         title = "Фильмы"
         navigationController?.navigationBar.backgroundColor = .clear
@@ -109,8 +119,8 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
-        scrollView.addSubview(collectionView)
         scrollView.refreshControl = refreshControl
+        scrollView.addSubview(collectionView)
         scrollView.addSubview(label)
         scrollView.addSubview(activityIndicator)
     }
@@ -126,9 +136,9 @@ class ViewController: UIViewController, UICollectionViewDelegate {
     
     private func setupCollectionView() {
         collectionView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 20).isActive = true
-        collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        collectionView.bottomAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        collectionView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
+        collectionView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
         collectionView.accessibilityScroll(.left)
         collectionView.backgroundColor = .clear
         // отступ первой и последней ячейки
