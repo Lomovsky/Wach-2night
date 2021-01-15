@@ -11,7 +11,7 @@ class DataManager {
     let urlString = "https://api.themoviedb.org/3/discover/movie?api_key=\(apiKey)&language=ru-RU&sort_by=popularity.desc&include_adult=true&include_video=false&page=1"
     var filmResponse: FilmResponse? = nil
     
-    @objc func downloadFilms() {
+     func downloadFilms() {
         let coreDataManager = CoreDataManager()
         NetworkManager.fetchCurrentData(withURL: urlString) { [weak self ] (result) in
             guard let self = self else { return }

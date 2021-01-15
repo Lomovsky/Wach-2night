@@ -52,11 +52,10 @@ class ViewController: UIViewController, UICollectionViewDelegate {
     }()
     
     
-// MARK: ViewDidLoad
+// MARK: ViewDidLoad -
     override func viewDidLoad() {
-        
-        let coreDataManager = CoreDataManager()
         super.viewDidLoad()
+        
         view.backgroundColor = .white
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -64,21 +63,12 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         view.addSubview(collectionView)
         view.addSubview(stackView)
         view.addSubview(activityIndicator)
-        
-        if Reachability.isConnectedToNetwork() {
-            coreDataManager.deleteAllData()
-            dataManager.downloadFilms()
-            NotificationCenter.default.addObserver(self, selector: #selector(reloadData(notification:)),
-                                                   name: NSNotification.Name(rawValue: "Ready to reload data"),
-                                                   object: nil)
-        } else {
-            coreDataManager.fetchData()
-            self.secondLabel.textColor = .red
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
-        }
+        checkConnection()
+
+
     }
+    
+    
 //MARK: ViewWillApear
     override func viewWillAppear(_ animated: Bool) {
         setupStackView()
@@ -88,14 +78,7 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         setupActivityIndicator()
         
     }
-    
-    @objc func reloadData(notification: NSNotification) {
-        self.collectionView.reloadData()
-        self.activityIndicator.stopAnimating()
-        self.activityIndicator.isHidden = true
-        self.secondLabel.text = "Подборка лучших фильмов по рейтингу"
-    }
-    
+
      
     
 //MARK:Set up funcs -
@@ -106,7 +89,7 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh,
                                                             target: self,
-                                                            action: #selector(dataManager.downloadFilms))
+                                                            action: #selector(checkConnection))
         
     }
     
@@ -146,6 +129,33 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         activityIndicator.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
         activityIndicator.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
         activityIndicator.startAnimating()
+    }
+    
+    
+// MARK: Helper funcs -
+    
+    @objc func checkConnection() {
+        let coreDataManager = CoreDataManager()
+        if Reachability.isConnectedToNetwork() {
+            coreDataManager.deleteAllData()
+            dataManager.downloadFilms()
+            NotificationCenter.default.addObserver(self, selector: #selector(reloadData(notification:)),
+                                                   name: NSNotification.Name(rawValue: "Ready to reload data"),
+                                                   object: nil)
+        } else {
+            coreDataManager.fetchData()
+            self.secondLabel.textColor = .red
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
+    }
+    
+    @objc func reloadData(notification: NSNotification) {
+        self.collectionView.reloadData()
+        self.activityIndicator.stopAnimating()
+        self.activityIndicator.isHidden = true
+        self.secondLabel.text = "Подборка лучших фильмов по рейтингу"
     }
     
 }
