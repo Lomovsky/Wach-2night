@@ -56,21 +56,21 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
        
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        //настройка ползунка при прокручивании
-        if #available(iOS 13, *) {
-            (scrollView.subviews[(scrollView.subviews.count - 1)].subviews[0]).backgroundColor = UIColor.white //verticalIndicator
-            (scrollView.subviews[(scrollView.subviews.count - 2)].subviews[0]).backgroundColor = UIColor.white //horizontalIndicator
-        } else {
-            if let verticalIndicator: UIImageView = (scrollView.subviews[(scrollView.subviews.count - 1)] as? UIImageView) {
-                verticalIndicator.backgroundColor = UIColor.systemGray6
-            }
-            
-            if let horizontalIndicator: UIImageView = (scrollView.subviews[(scrollView.subviews.count - 2)] as? UIImageView) {
-                horizontalIndicator.backgroundColor = UIColor.systemGray6
-            }
-        }
-        
-    }
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        //настройка ползунка при прокручивании
+//        if #available(iOS 13, *) {
+//            (scrollView.subviews[(scrollView.subviews.count - 1)].subviews[0]).backgroundColor = UIColor.white //verticalIndicator
+//            (scrollView.subviews[(scrollView.subviews.count - 2)].subviews[0]).backgroundColor = UIColor.white //horizontalIndicator
+//        } else {
+//            if let verticalIndicator: UIImageView = (scrollView.subviews[(scrollView.subviews.count - 1)] as? UIImageView) {
+//                verticalIndicator.backgroundColor = UIColor.systemGray6
+//            }
+//            
+//            if let horizontalIndicator: UIImageView = (scrollView.subviews[(scrollView.subviews.count - 2)] as? UIImageView) {
+//                horizontalIndicator.backgroundColor = UIColor.systemGray6
+//            }
+//        }
+//        
+//    }
     
 }

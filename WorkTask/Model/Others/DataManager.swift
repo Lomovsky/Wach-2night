@@ -13,6 +13,7 @@ class DataManager {
     
      func downloadFilms() {
         let coreDataManager = CoreDataManager()
+        coreDataManager.deleteAllData()
         NetworkManager.fetchCurrentData(withURL: urlString) { [weak self ] (result) in
             guard let self = self else { return }
             switch result {

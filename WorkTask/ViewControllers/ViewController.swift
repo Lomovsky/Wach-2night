@@ -16,6 +16,7 @@ class ViewController: UIViewController, UICollectionViewDelegate {
     let colors = Colors()
     let dataManager = DataManager()
     static var films: [CurrentFilm] = []
+    lazy var refreshControl = UIRefreshControl()
 
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -27,13 +28,19 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         
     }()
     
+    let scrollView: UIScrollView = {
+        let scroll = UIScrollView()
+        scroll.translatesAutoresizingMaskIntoConstraints = false
+        return scroll
+    }()
+    
     let stackView: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
     
-    let secondLabel: UILabel = {
+    let label: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -59,23 +66,22 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         view.backgroundColor = .white
         collectionView.delegate = self
         collectionView.dataSource = self
-        view.addSubview(secondLabel)
+        view.addSubview(label)
         view.addSubview(collectionView)
-        view.addSubview(stackView)
         view.addSubview(activityIndicator)
+        view.addSubview(scrollView)
         checkConnection()
-
 
     }
     
     
 //MARK: ViewWillApear
     override func viewWillAppear(_ animated: Bool) {
-        setupStackView()
         setupLabel()
         setupCollectionView()
         setupNavigationController()
         setupActivityIndicator()
+        setupScrollView()
         
     }
 
@@ -87,29 +93,39 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         title = "Фильмы"
         navigationController?.navigationBar.backgroundColor = .clear
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh,
-                                                            target: self,
-                                                            action: #selector(checkConnection))
+        //postponed due to wrong logics of updating collectionView -> fatalError
+        
+//        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh,
+//                                                            target: self,
+//                                                            action: #selector(checkConnection))
         
     }
     
-    private func setupStackView(){
-        stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
-        stackView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20.0).isActive = true
-        stackView.addSubview(secondLabel)
-        
+    
+    private func setupScrollView() {
+        scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        scrollView.addSubview(collectionView)
+        scrollView.refreshControl = refreshControl
+        scrollView.addSubview(label)
+        scrollView.addSubview(activityIndicator)
     }
     
     private func setupLabel() {
         
-        secondLabel.text  = "Загрузка"
-        secondLabel.textColor = .black
-        secondLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
-        secondLabel.font = .systemFont(ofSize: 16)
+        label.text  = "Загрузка"
+        label.textColor = .black
+        label.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 10).isActive = true
+        label.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 10).isActive = true
+        label.font = .systemFont(ofSize: 16)
     }
     
     private func setupCollectionView() {
-        collectionView.topAnchor.constraint(equalTo: secondLabel.bottomAnchor, constant: 20).isActive = true
+        collectionView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 20).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
@@ -137,14 +153,15 @@ class ViewController: UIViewController, UICollectionViewDelegate {
     @objc func checkConnection() {
         let coreDataManager = CoreDataManager()
         if Reachability.isConnectedToNetwork() {
-            coreDataManager.deleteAllData()
+            
             dataManager.downloadFilms()
             NotificationCenter.default.addObserver(self, selector: #selector(reloadData(notification:)),
                                                    name: NSNotification.Name(rawValue: "Ready to reload data"),
                                                    object: nil)
+            
         } else {
             coreDataManager.fetchData()
-            self.secondLabel.textColor = .red
+            self.label.textColor = .red
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }
@@ -155,7 +172,13 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         self.collectionView.reloadData()
         self.activityIndicator.stopAnimating()
         self.activityIndicator.isHidden = true
-        self.secondLabel.text = "Подборка лучших фильмов по рейтингу"
+        self.label.text = "Подборка лучших фильмов по рейтингу"
     }
     
+    @objc func refresh(_ sender: AnyObject) {
+        checkConnection()
+        refreshControl.endRefreshing()
+    }
+    
+
 }
