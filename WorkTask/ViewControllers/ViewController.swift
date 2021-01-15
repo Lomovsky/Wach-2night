@@ -131,7 +131,8 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         collectionView.accessibilityScroll(.left)
         collectionView.backgroundColor = .clear
-        collectionView.contentInset = UIEdgeInsets(top: 0, left: 36, bottom: 0, right: 150) // отступ первой и последней ячейки
+        // отступ первой и последней ячейки
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 36, bottom: 0, right: 150) 
         
     }
     
@@ -176,7 +177,7 @@ class ViewController: UIViewController, UICollectionViewDelegate {
     }
     
     @objc func refresh(_ sender: AnyObject) {
-        checkConnection()
+        
         refreshControl.endRefreshing()
     }
     
