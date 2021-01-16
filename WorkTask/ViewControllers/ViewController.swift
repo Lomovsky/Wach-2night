@@ -12,7 +12,7 @@ class ViewController: UIViewController, UICollectionViewDelegate {
     let urlString = "https://api.themoviedb.org/3/discover/movie?api_key=\(apiKey)&language=ru-RU&sort_by=popularity.desc&include_adult=true&include_video=false&page=1"
     static var films: [CurrentFilm] = []
     lazy var refreshControl = UIRefreshControl()
-    var filmResponse: FilmResponse? = nil
+    var film: Film? = nil
     
 
     let collectionView: UICollectionView = {

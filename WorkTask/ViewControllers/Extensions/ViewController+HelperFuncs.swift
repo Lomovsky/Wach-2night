@@ -15,9 +15,8 @@ extension ViewController {
         NetworkManager.fetchCurrentData(withURL: urlString) { [weak self ] (result) in
             guard let self = self else { return }
             switch result {
-            case .success(let filmResponse):
-                self.filmResponse = filmResponse
-                filmResponse.results.forEach { (film) in
+            case .success(let film):
+                self.film = film
                     DispatchQueue.global().async {
                         let secondPath = film.posterPath
                         let imageURLString = imagePath + secondPath
@@ -35,7 +34,6 @@ extension ViewController {
                             }
                         }
                     }
-                }
             case .failure(let error):
                 print(error)
             }

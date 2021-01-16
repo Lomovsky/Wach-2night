@@ -11,7 +11,7 @@ import Alamofire
 
 class NetworkManager {
     
-    static func fetchCurrentData(withURL url: String, completion: @escaping (Result<FilmResponse, Error>) -> Void) {
+    static func fetchCurrentData(withURL url: String, completion: @escaping (Result<Film, Error>) -> Void) {
         
         guard let url = URL(string: url) else { return }
         let request = AF.request(url)
@@ -24,7 +24,9 @@ class NetworkManager {
                 
                 do {
                     let films = try JSONDecoder().decode(FilmResponse.self, from: JSONData)
-                    completion(.success(films))
+                    films.results.forEach { (film) in
+                        completion(.success(film))
+                    }
                 } catch let error as NSError {
                     print(error)
                 }
