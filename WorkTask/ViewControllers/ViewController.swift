@@ -7,16 +7,13 @@
 
 import UIKit
 
-
-//TODO: fix navigationController bug
-
-
 class ViewController: UIViewController, UICollectionViewDelegate {
 //MARK: Declarations
-    let colors = Colors()
-    let dataManager = DataManager()
+    let urlString = "https://api.themoviedb.org/3/discover/movie?api_key=\(apiKey)&language=ru-RU&sort_by=popularity.desc&include_adult=true&include_video=false&page=1"
     static var films: [CurrentFilm] = []
     lazy var refreshControl = UIRefreshControl()
+    var film: Film? = nil
+    
 
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -62,7 +59,6 @@ class ViewController: UIViewController, UICollectionViewDelegate {
 // MARK: ViewDidLoad -
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = .white
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -70,10 +66,20 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         view.addSubview(collectionView)
         view.addSubview(activityIndicator)
         view.addSubview(scrollView)
-        checkConnection()
 
+        let coreDataManager = CoreDataManager()
+        if Reachability.isConnectedToNetwork() {
+            coreDataManager.deleteAllData()
+            downloadFilms()
+            
+        } else {
+            coreDataManager.fetchData()
+            self.label.textColor = .red
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
     }
-    
     
 //MARK: ViewWillApear
     override func viewWillAppear(_ animated: Bool) {
@@ -82,22 +88,26 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         setupNavigationController()
         setupActivityIndicator()
         setupScrollView()
+        setGradientBackground()
         
     }
-
-     
     
-//MARK:Set up funcs -
-
+//MARK:Set up funcs -  
+    private func setGradientBackground() {
+        let colorTop =  UIColor.systemBlue.cgColor
+        let colorBottom = UIColor.systemTeal.cgColor
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [colorTop, colorBottom]
+        gradientLayer.locations = [0.0, 1.0]
+        gradientLayer.frame = self.view.bounds
+        self.view.layer.insertSublayer(gradientLayer, at: 0)
+    }
+    
+    
     private func setupNavigationController() {
         title = "Фильмы"
         navigationController?.navigationBar.backgroundColor = .clear
         navigationController?.navigationBar.prefersLargeTitles = true
-        //postponed due to wrong logics of updating collectionView -> fatalError
-        
-//        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh,
-//                                                            target: self,
-//                                                            action: #selector(checkConnection))
         
     }
     
@@ -109,8 +119,8 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
-        scrollView.addSubview(collectionView)
         scrollView.refreshControl = refreshControl
+        scrollView.addSubview(collectionView)
         scrollView.addSubview(label)
         scrollView.addSubview(activityIndicator)
     }
@@ -149,37 +159,4 @@ class ViewController: UIViewController, UICollectionViewDelegate {
     }
     
     
-// MARK: Helper funcs -
-    
-    @objc func checkConnection() {
-        let coreDataManager = CoreDataManager()
-        if Reachability.isConnectedToNetwork() {
-            
-            dataManager.downloadFilms()
-            NotificationCenter.default.addObserver(self, selector: #selector(reloadData(notification:)),
-                                                   name: NSNotification.Name(rawValue: "Ready to reload data"),
-                                                   object: nil)
-            
-        } else {
-            coreDataManager.fetchData()
-            self.label.textColor = .red
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
-        }
-    }
-    
-    @objc func reloadData(notification: NSNotification) {
-        self.collectionView.reloadData()
-        self.activityIndicator.stopAnimating()
-        self.activityIndicator.isHidden = true
-        self.label.text = "Подборка лучших фильмов по рейтингу"
-    }
-    
-    @objc func refresh(_ sender: AnyObject) {
-        
-        refreshControl.endRefreshing()
-    }
-    
-
 }

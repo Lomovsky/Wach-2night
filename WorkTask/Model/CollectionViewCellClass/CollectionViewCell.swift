@@ -71,17 +71,16 @@ class CollectionViewCell: UICollectionViewCell {
         contentView.addSubview(imageView)
         contentView.addSubview(originalTitleLabel)
         contentView.addSubview(titleLabel)
-        contentView.addSubview(ratingStack)
-        contentView.addSubview(imdbLabel)
-        
+//        contentView.addSubview(ratingStack)
+//        contentView.addSubview(imdbLabel)
         
         setupImageView()
         setupOriginalTitleLabel()
         setupTitleLabel()
         setupRatingLabel()
-        setupIMDBLabel()
+//        setupIMDBLabel()
         setupYearLabel()
-        setupRatingStack()
+//        setupRatingStack()
         
     }
     
@@ -117,13 +116,13 @@ class CollectionViewCell: UICollectionViewCell {
         
     }
     
-    private func setupRatingStack() {
-        ratingStack.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10).isActive = true
-        ratingStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5).isActive = true
-        ratingStack.frame.size.width = 70
-        ratingStack.layer.cornerRadius = 10
-        ratingStack.addSubview(imdbLabel)
-    }
+//    private func setupRatingStack() {
+//        ratingStack.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10).isActive = true
+//        ratingStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5).isActive = true
+//        ratingStack.frame.size.width = 70
+//        ratingStack.layer.cornerRadius = 10
+//        ratingStack.addSubview(imdbLabel)
+//    }
     
     private func setupRatingLabel() {
         
