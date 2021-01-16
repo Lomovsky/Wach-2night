@@ -136,9 +136,9 @@ class ViewController: UIViewController, UICollectionViewDelegate {
     
     private func setupCollectionView() {
         collectionView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 20).isActive = true
-        collectionView.bottomAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        collectionView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
-        collectionView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
+        collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         collectionView.accessibilityScroll(.left)
         collectionView.backgroundColor = .clear
         // отступ первой и последней ячейки
