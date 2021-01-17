@@ -26,7 +26,7 @@ class CoreDataManager {
         
         do {
             try managedContext.save()
-            ViewController.films.append(film)
+            SuggestionsViewController.films.append(film)
         } catch let error as NSError {
             print(error)
         }
@@ -36,7 +36,7 @@ class CoreDataManager {
         let fetchRequest: NSFetchRequest<CurrentFilm> = CurrentFilm.fetchRequest()
         
         do {
-            try ViewController.films = managedContext.fetch(fetchRequest)
+            try SuggestionsViewController.films = managedContext.fetch(fetchRequest)
         } catch let error as NSError {
             print(error)
         }

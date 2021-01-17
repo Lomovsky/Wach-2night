@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SecondViewController: UIViewController {
+class PreviewViewController: UIViewController {
     //MARK: Postponed for a few days
     
     
@@ -88,14 +88,33 @@ class SecondViewController: UIViewController {
         
     }
     
-    private func setupImageView() {
+    private func setupContainerView() {
+        let cornerRadius: CGFloat = 10.0
         
+        containerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        containerView.frame.size.height = (imageView.image?.accessibilityFrame.height) ?? view.frame.height / 2
+        containerView.frame.size.height = view.frame.height / 2
+        containerView.addSubview(imageView)
+        containerView.layer.shadowColor = UIColor.red.cgColor
+        containerView.layer.shadowRadius = 7
+        containerView.layer.shadowOpacity = 0.7
+        containerView.layer.shadowOffset = CGSize.init(width: 2.5, height: 2.5)
+        
+        let cgPath = UIBezierPath(roundedRect: containerView.bounds, byRoundingCorners: [.allCorners], cornerRadii: CGSize.init(width: cornerRadius, height: cornerRadius)).cgPath
+        containerView.layer.shadowPath = cgPath
+        
+    }
+    
+    private func setupImageView() {
         imageView.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
         imageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
-        imageView.frame.size.height = (imageView.image?.size.height) ?? (view.frame.height) / 2
-        imageView.frame.size.width = (imageView.image?.size.width) ?? (view.frame.width)
-        imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        imageView.contentMode = .scaleAspectFill
+        imageView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
+        imageView.frame.size.height = containerView.frame.height
+//        imageView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
+//        imageView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
+        imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 10
         
@@ -121,7 +140,7 @@ class SecondViewController: UIViewController {
     }
     
     private func setupTitleLabel() {
-        titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 10).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
         titleLabel.font = .boldSystemFont(ofSize: 30)
     }
@@ -134,24 +153,7 @@ class SecondViewController: UIViewController {
         yearPlaceHolderLabel.text = "Дата релиза:"
     }
     
-    private func setupContainerView() {
-        let cornerRadius: CGFloat = 10.0
-        
-        containerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        containerView.frame.size.height = (imageView.image?.size.height) ?? (view.frame.height) / 2
-        containerView.frame.size.width = (imageView.image?.size.width) ?? (view.frame.width)
-        containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        containerView.addSubview(imageView)
-        containerView.layer.shadowColor = UIColor.red.cgColor
-        containerView.layer.shadowRadius = 7
-        containerView.layer.shadowOpacity = 0.7
-        containerView.layer.shadowOffset = CGSize.init(width: 2.5, height: 2.5)
-        
-        let cgPath = UIBezierPath(roundedRect: containerView.bounds, byRoundingCorners: [.allCorners], cornerRadii: CGSize.init(width: cornerRadius, height: cornerRadius)).cgPath
-        containerView.layer.shadowPath = cgPath
-        
-    }
+
     
     deinit {
         print("Sec vc was dealocated")

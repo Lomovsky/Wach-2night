@@ -7,11 +7,10 @@
 
 import UIKit
 
-class ViewController: UIViewController, UICollectionViewDelegate {
+class SuggestionsViewController: UIViewController {
 //MARK: Declarations
     let urlString = "https://api.themoviedb.org/3/discover/movie?api_key=\(apiKey)&language=ru-RU&sort_by=popularity.desc&include_adult=true&include_video=false&page=1"
     static var films: [CurrentFilm] = []
-    lazy var refreshControl = UIRefreshControl()
     var film: Film? = nil
     
 
@@ -23,12 +22,6 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         cv.register(CollectionViewCell.self, forCellWithReuseIdentifier: "CollectionViewCellReuseIdentifier")
         return cv
         
-    }()
-    
-    let scrollView: UIScrollView = {
-        let scroll = UIScrollView()
-        scroll.translatesAutoresizingMaskIntoConstraints = false
-        return scroll
     }()
     
     let stackView: UIStackView = {
@@ -65,7 +58,6 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         view.addSubview(label)
         view.addSubview(collectionView)
         view.addSubview(activityIndicator)
-        view.addSubview(scrollView)
 
         let coreDataManager = CoreDataManager()
         if Reachability.isConnectedToNetwork() {
@@ -87,15 +79,14 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         setupCollectionView()
         setupNavigationController()
         setupActivityIndicator()
-        setupScrollView()
         setGradientBackground()
         
     }
     
 //MARK:Set up funcs -  
     private func setGradientBackground() {
-        let colorTop =  UIColor.systemBlue.cgColor
-        let colorBottom = UIColor.systemTeal.cgColor
+        let colorTop =  UIColor(red: 0.77, green: 0.87, blue: 0.96, alpha: 1.00).cgColor
+        let colorBottom = UIColor(red: 0.07, green: 0.45, blue: 0.87, alpha: 1.00).cgColor
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = [colorTop, colorBottom]
         gradientLayer.locations = [0.0, 1.0]
@@ -105,33 +96,19 @@ class ViewController: UIViewController, UICollectionViewDelegate {
     
     
     private func setupNavigationController() {
-        title = "Фильмы"
-        navigationController?.navigationBar.backgroundColor = .clear
-        navigationController?.navigationBar.prefersLargeTitles = true
-        
+        navigationController?.navigationBar.isHidden = true
     }
     
     
-    private func setupScrollView() {
-        scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
-        scrollView.refreshControl = refreshControl
-        scrollView.addSubview(collectionView)
-        scrollView.addSubview(label)
-        scrollView.addSubview(activityIndicator)
-    }
+ 
     
     private func setupLabel() {
         
         label.text  = "Загрузка"
         label.textColor = .black
-        label.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 10).isActive = true
-        label.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 10).isActive = true
-        label.font = .systemFont(ofSize: 16)
+        label.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+        label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        label.font = .systemFont(ofSize: 16, weight: .bold)
     }
     
     private func setupCollectionView() {
@@ -141,8 +118,7 @@ class ViewController: UIViewController, UICollectionViewDelegate {
         collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         collectionView.accessibilityScroll(.left)
         collectionView.backgroundColor = .clear
-        // отступ первой и последней ячейки
-        collectionView.contentInset = UIEdgeInsets(top: 0, left: 36, bottom: 0, right: 150) 
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 36, bottom: 0, right: 150)
         
     }
     

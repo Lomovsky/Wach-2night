@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension ViewController {
+extension SuggestionsViewController {
     // MARK: Helper funcs -
     
     @objc func downloadFilms() {
@@ -30,7 +30,6 @@ extension ViewController {
                                 self.collectionView.isHidden = false
                                 self.activityIndicator.isHidden = true
                                 self.label.text = "Подборка лучших фильмов по рейтингу"
-                                self.refreshControl.endRefreshing()
                             }
                         }
                     }
@@ -39,11 +38,6 @@ extension ViewController {
             }
         }
     }
-    
-    @objc func refresh(_ sender: AnyObject) {
-        downloadFilms()
-    }
-
     
 }
 

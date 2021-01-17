@@ -7,16 +7,16 @@
 
 import UIKit
 
-extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension SuggestionsViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return ViewController.films.count
+        return SuggestionsViewController.films.count
     }
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width - 125, height: collectionView.frame.size.height - 10)
+        return CGSize(width: view.frame.width - 125, height: collectionView.frame.size.height)
     }
     
     //    DistanceBetween Cells
@@ -29,7 +29,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.reuseIdentifier,for: indexPath) as? CollectionViewCell {
-            let film = ViewController.films[indexPath.row]
+            let film = SuggestionsViewController.films[indexPath.row]
             let defaultImage = #imageLiteral(resourceName: "1024px-No_image_available.svg")
             let poster = UIImage(data: film.poster!)
             let newPoster = poster?.resizeImageUsingVImage(size: CGSize.init(width: cell.frame.width,
@@ -37,7 +37,6 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
             DispatchQueue.main.async {
                 cell.configureCell(image: newPoster ?? defaultImage, title: film.title ?? "Неизвестно", originalTitle: film.originalTitle ?? "Неизвестно", releaseDate: film.releaseDate ?? "Неизвестно", rating: film.rating )
             }
-            cell.snapshotView(afterScreenUpdates: true)
             return cell
         }
         return UICollectionViewCell()
@@ -45,33 +44,37 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegateFl
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let secondVC = SecondViewController()
-        secondVC.modalPresentationStyle = .formSheet
-        navigationController?.present(secondVC, animated: true)
-        let film = ViewController.films[indexPath.row]
-        let originalPosterImage = UIImage(data: film.originalSizedPoster!)!
+        let previewVC = PreviewViewController()
+        previewVC.modalPresentationStyle = .formSheet
+        navigationController?.present(previewVC, animated: true)
+        let film = SuggestionsViewController.films[indexPath.row]
+        let poster = UIImage(data: film.poster!)
+        let resizedPoster = poster?.resizeImageUsingVImage(size: CGSize.init(width: view.frame.width,
+                                                                             height: view.frame.height * 0.6))
         
-        secondVC.imageView.image = originalPosterImage
-        secondVC.titleLabel.text = film.title
-        secondVC.yearLabel.text = film.releaseDate
+        previewVC.imageView.image = resizedPoster
+        previewVC.titleLabel.text = film.title
+        previewVC.yearLabel.text = film.releaseDate
        
     }
     
-///    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-///        //настройка ползунка при прокручивании
-///       if #available(iOS 13, *) {
-///           (scrollView.subviews[(scrollView.subviews.count - 1)].subviews[0]).backgroundColor = UIColor.white //verticalIndicator
-///            (scrollView.subviews[(scrollView.subviews.count - 2)].subviews[0]).backgroundColor = UIColor.white //horizontalIndicator
-///        } else {
-///            if let verticalIndicator: UIImageView = (scrollView.subviews[(scrollView.subviews.count - 1)] as? UIImageView) {
-///               verticalIndicator.backgroundColor = UIColor.systemGray6
-///            }
-///
-///            if let horizontalIndicator: UIImageView = (scrollView.subviews[(scrollView.subviews.count - 2)] as? UIImageView) {
-///                horizontalIndicator.backgroundColor = UIColor.systemGray6
-///            }
-///        }
-///
-///    }
+   func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        //настройка ползунка при прокручивании
+       if #available(iOS 13, *) {
+           (scrollView.subviews[(scrollView.subviews.count - 1)].subviews[0]).backgroundColor = UIColor.white
+            //verticalIndicator
+            (scrollView.subviews[(scrollView.subviews.count - 2)].subviews[0]).isHidden = true
+        //horizontalIndicator
+        } else {
+            if let verticalIndicator: UIImageView = (scrollView.subviews[(scrollView.subviews.count - 1)] as? UIImageView) {
+               verticalIndicator.backgroundColor = UIColor.systemGray6
+            }
+
+            if let horizontalIndicator: UIImageView = (scrollView.subviews[(scrollView.subviews.count - 2)] as? UIImageView) {
+                horizontalIndicator.isHidden = true
+            }
+        }
+
+    }
     
 }

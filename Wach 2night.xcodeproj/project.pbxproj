@@ -3,21 +3,22 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		4141E9DC426233262DC0629A /* Pods_WorkTask.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65FAADEA3F9C8CA9669E7B67 /* Pods_WorkTask.framework */; };
-		C003674825824CB500226ED4 /* ViewController+CollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C003674725824CB500226ED4 /* ViewController+CollectionViewDataSource.swift */; };
-		C0089F5925B2184D001647F2 /* ViewController+HelperFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0089F5825B2184D001647F2 /* ViewController+HelperFuncs.swift */; };
-		C016B01D258C03F400F77CA6 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016B01C258C03F400F77CA6 /* SecondViewController.swift */; };
+		C003674825824CB500226ED4 /* SuggestionsViewController+CollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C003674725824CB500226ED4 /* SuggestionsViewController+CollectionViewDataSource.swift */; };
+		C004193225B35D06009F5B39 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C004193125B35D06009F5B39 /* TabBarController.swift */; };
+		C0089F5925B2184D001647F2 /* SuggestionsViewController+HelperFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0089F5825B2184D001647F2 /* SuggestionsViewController+HelperFuncs.swift */; };
+		C016B01D258C03F400F77CA6 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016B01C258C03F400F77CA6 /* PreviewViewController.swift */; };
 		C028AC7025B0D8BF007799B6 /* UIColorExtensionForResizingImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = C028AC6F25B0D8BF007799B6 /* UIColorExtensionForResizingImages.swift */; };
 		C0394FE325A8B33D00D7A7FB /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0394FE225A8B33D00D7A7FB /* CoreDataManager.swift */; };
 		C04D6EA025AB391C00E4B151 /* Wach 2night.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C04D6E9E25AB391C00E4B151 /* Wach 2night.xcdatamodeld */; };
 		C04D6EA325AB405E00E4B151 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04D6EA225AB405E00E4B151 /* ConnectionManager.swift */; };
 		C060DAFB257BECA200C892DE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C060DAFA257BECA200C892DE /* AppDelegate.swift */; };
 		C060DAFD257BECA200C892DE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C060DAFC257BECA200C892DE /* SceneDelegate.swift */; };
-		C060DAFF257BECA200C892DE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C060DAFE257BECA200C892DE /* ViewController.swift */; };
+		C060DAFF257BECA200C892DE /* SuggestionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C060DAFE257BECA200C892DE /* SuggestionsViewController.swift */; };
 		C060DB04257BECA400C892DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C060DB03257BECA400C892DE /* Assets.xcassets */; };
 		C060DB07257BECA400C892DE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C060DB05257BECA400C892DE /* LaunchScreen.storyboard */; };
 		C060DB14257BED7C00C892DE /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = C060DB13257BED7C00C892DE /* .gitignore */; };
@@ -25,16 +26,16 @@
 		C0C0E7C32583C74D006C460E /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C0E7C22583C74D006C460E /* DataModel.swift */; };
 		C0D6AD532595F9D40000174A /* ApiKeyAndImageLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D6AD522595F9D40000174A /* ApiKeyAndImageLink.swift */; };
 		C0F2F76C257D02C800A1DAF9 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F2F76A257D02C800A1DAF9 /* CollectionViewCell.swift */; };
-		F4DEE5DDA4C5EFB7DE4B6CCF /* Pods_WorkTask.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5F10CE2343E3BA8E071DEF19 /* Pods_WorkTask.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		548453D6D37E445965AA6039 /* Pods-WorkTask.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WorkTask.debug.xcconfig"; path = "Target Support Files/Pods-WorkTask/Pods-WorkTask.debug.xcconfig"; sourceTree = "<group>"; };
 		65FAADEA3F9C8CA9669E7B67 /* Pods_WorkTask.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WorkTask.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9ACCE51585E5FCFB58E8D923 /* Pods-WorkTask.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WorkTask.release.xcconfig"; path = "Target Support Files/Pods-WorkTask/Pods-WorkTask.release.xcconfig"; sourceTree = "<group>"; };
-		C003674725824CB500226ED4 /* ViewController+CollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+CollectionViewDataSource.swift"; sourceTree = "<group>"; };
-		C0089F5825B2184D001647F2 /* ViewController+HelperFuncs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+HelperFuncs.swift"; sourceTree = "<group>"; };
-		C016B01C258C03F400F77CA6 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		C003674725824CB500226ED4 /* SuggestionsViewController+CollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SuggestionsViewController+CollectionViewDataSource.swift"; sourceTree = "<group>"; };
+		C004193125B35D06009F5B39 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		C0089F5825B2184D001647F2 /* SuggestionsViewController+HelperFuncs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SuggestionsViewController+HelperFuncs.swift"; sourceTree = "<group>"; };
+		C016B01C258C03F400F77CA6 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		C028AC6F25B0D8BF007799B6 /* UIColorExtensionForResizingImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensionForResizingImages.swift; sourceTree = "<group>"; };
 		C0394FE225A8B33D00D7A7FB /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		C04D6E9F25AB391C00E4B151 /* Wach 2night.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Wach 2night.xcdatamodel"; sourceTree = "<group>"; };
@@ -42,7 +43,7 @@
 		C060DAF7257BECA100C892DE /* WorkTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorkTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C060DAFA257BECA200C892DE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C060DAFC257BECA200C892DE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		C060DAFE257BECA200C892DE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		C060DAFE257BECA200C892DE /* SuggestionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionsViewController.swift; sourceTree = "<group>"; };
 		C060DB03257BECA400C892DE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C060DB06257BECA400C892DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C060DB08257BECA400C892DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = WorkTask/Info.plist; sourceTree = SOURCE_ROOT; };
@@ -51,7 +52,6 @@
 		C0C0E7C22583C74D006C460E /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		C0D6AD522595F9D40000174A /* ApiKeyAndImageLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeyAndImageLink.swift; sourceTree = "<group>"; };
 		C0F2F76A257D02C800A1DAF9 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
-		D08B48E4150D65C7C6AB05AA /* Pods-WorkTask.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WorkTask.debug.xcconfig"; path = "Target Support Files/Pods-WorkTask/Pods-WorkTask.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,7 +80,6 @@
 				548453D6D37E445965AA6039 /* Pods-WorkTask.debug.xcconfig */,
 				9ACCE51585E5FCFB58E8D923 /* Pods-WorkTask.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -157,8 +156,8 @@
 		C0D6AD5925960A000000174A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				C003674725824CB500226ED4 /* ViewController+CollectionViewDataSource.swift */,
-				C0089F5825B2184D001647F2 /* ViewController+HelperFuncs.swift */,
+				C003674725824CB500226ED4 /* SuggestionsViewController+CollectionViewDataSource.swift */,
+				C0089F5825B2184D001647F2 /* SuggestionsViewController+HelperFuncs.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -183,8 +182,9 @@
 		C0F2F778257D455700A1DAF9 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				C060DAFE257BECA200C892DE /* ViewController.swift */,
-				C016B01C258C03F400F77CA6 /* SecondViewController.swift */,
+				C004193125B35D06009F5B39 /* TabBarController.swift */,
+				C060DAFE257BECA200C892DE /* SuggestionsViewController.swift */,
+				C016B01C258C03F400F77CA6 /* PreviewViewController.swift */,
 				C0D6AD5925960A000000174A /* Extensions */,
 			);
 			path = ViewControllers;
@@ -315,14 +315,15 @@
 			files = (
 				C0C0E7C02583C4A4006C460E /* NetworkManager.swift in Sources */,
 				C04D6EA325AB405E00E4B151 /* ConnectionManager.swift in Sources */,
-				C060DAFF257BECA200C892DE /* ViewController.swift in Sources */,
+				C060DAFF257BECA200C892DE /* SuggestionsViewController.swift in Sources */,
+				C004193225B35D06009F5B39 /* TabBarController.swift in Sources */,
 				C060DAFB257BECA200C892DE /* AppDelegate.swift in Sources */,
-				C016B01D258C03F400F77CA6 /* SecondViewController.swift in Sources */,
+				C016B01D258C03F400F77CA6 /* PreviewViewController.swift in Sources */,
 				C04D6EA025AB391C00E4B151 /* Wach 2night.xcdatamodeld in Sources */,
 				C0F2F76C257D02C800A1DAF9 /* CollectionViewCell.swift in Sources */,
-				C003674825824CB500226ED4 /* ViewController+CollectionViewDataSource.swift in Sources */,
+				C003674825824CB500226ED4 /* SuggestionsViewController+CollectionViewDataSource.swift in Sources */,
 				C0C0E7C32583C74D006C460E /* DataModel.swift in Sources */,
-				C0089F5925B2184D001647F2 /* ViewController+HelperFuncs.swift in Sources */,
+				C0089F5925B2184D001647F2 /* SuggestionsViewController+HelperFuncs.swift in Sources */,
 				C028AC7025B0D8BF007799B6 /* UIColorExtensionForResizingImages.swift in Sources */,
 				C0D6AD532595F9D40000174A /* ApiKeyAndImageLink.swift in Sources */,
 				C060DAFD257BECA200C892DE /* SceneDelegate.swift in Sources */,
