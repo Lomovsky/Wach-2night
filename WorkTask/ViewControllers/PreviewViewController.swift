@@ -90,14 +90,12 @@ class PreviewViewController: UIViewController {
     
     private func setupContainerView() {
         let cornerRadius: CGFloat = 10.0
-        
         containerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        containerView.frame.size.height = (imageView.image?.accessibilityFrame.height) ?? view.frame.height / 2
-        containerView.frame.size.height = view.frame.height / 2
+        containerView.bottomAnchor.constraint(equalTo: imageView.bottomAnchor).isActive = true
         containerView.addSubview(imageView)
-        containerView.layer.shadowColor = UIColor.red.cgColor
+        containerView.layer.shadowColor = UIColor.black.cgColor
         containerView.layer.shadowRadius = 7
         containerView.layer.shadowOpacity = 0.7
         containerView.layer.shadowOffset = CGSize.init(width: 2.5, height: 2.5)
@@ -111,12 +109,12 @@ class PreviewViewController: UIViewController {
         imageView.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
         imageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
         imageView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
-        imageView.frame.size.height = containerView.frame.height
+        imageView.frame.size.height = imageView.image!.accessibilityFrame.height
 //        imageView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
 //        imageView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 10
+        imageView.layer.cornerRadius = 12
         
         
     }
