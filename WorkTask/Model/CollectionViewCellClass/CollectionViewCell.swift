@@ -63,6 +63,12 @@ class CollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    private let ratingImage: UIImageView = {
+        let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        return image
+    }()
+    
     
     
     //MARK: Initializer -
@@ -71,16 +77,17 @@ class CollectionViewCell: UICollectionViewCell {
         contentView.addSubview(imageView)
         contentView.addSubview(originalTitleLabel)
         contentView.addSubview(titleLabel)
-//        contentView.addSubview(ratingStack)
-//        contentView.addSubview(imdbLabel)
+        contentView.addSubview(ratingLabel)
+        contentView.addSubview(ratingImage)
+        contentView.addSubview(ratingStack)
         
         setupImageView()
         setupOriginalTitleLabel()
         setupTitleLabel()
         setupRatingLabel()
-//        setupIMDBLabel()
+        setupRatingImage()
         setupYearLabel()
-//        setupRatingStack()
+        setupRatingStack()
         
     }
     
@@ -103,7 +110,7 @@ class CollectionViewCell: UICollectionViewCell {
         originalTitleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 5).isActive = true
         originalTitleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5).isActive = true
         originalTitleLabel.font = .systemFont(ofSize: 12)
-        originalTitleLabel.textColor = .systemGray
+        originalTitleLabel.textColor = .white
         
     }
     
@@ -111,6 +118,7 @@ class CollectionViewCell: UICollectionViewCell {
         titleLabel.topAnchor.constraint(equalTo: originalTitleLabel.bottomAnchor, constant: 5).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5).isActive = true
         titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        titleLabel.textColor = .white
         titleLabel.font = .systemFont(ofSize: 20)
         titleLabel.frame.size.height = 49
         titleLabel.numberOfLines = 3
@@ -118,25 +126,28 @@ class CollectionViewCell: UICollectionViewCell {
         
     }
     
-//    private func setupRatingStack() {
-//        ratingStack.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10).isActive = true
-//        ratingStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5).isActive = true
-//        ratingStack.frame.size.width = 70
-//        ratingStack.layer.cornerRadius = 10
-//        ratingStack.addSubview(imdbLabel)
-//    }
+
     
-    private func setupRatingLabel() {
-        
-        
-        
+    private func setupRatingStack() {
+        ratingStack.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20).isActive = true
+        ratingStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5).isActive = true
+        ratingStack.addSubview(ratingImage)
+        ratingStack.addSubview(ratingLabel)
     }
     
-    private func setupIMDBLabel() {
-        imdbLabel.leadingAnchor.constraint(equalTo: ratingStack.leadingAnchor, constant: 3).isActive = true
-        imdbLabel.centerYAnchor.constraint(equalTo: ratingStack.centerYAnchor).isActive = true
-        imdbLabel.text = "11"
-        imdbLabel.textColor = .white
+    private func setupRatingImage() {
+        ratingImage.centerYAnchor.constraint(equalTo: ratingStack.centerYAnchor).isActive = true
+        ratingImage.leadingAnchor.constraint(equalTo: ratingStack.leadingAnchor).isActive = true
+        ratingImage.tintColor = .systemYellow
+        ratingImage.image = UIImage(systemName: "star.fill")
+    }
+    
+    private func setupRatingLabel() {
+        ratingLabel.leadingAnchor.constraint(equalTo: ratingImage.trailingAnchor, constant: 5).isActive = true
+        ratingLabel.centerYAnchor.constraint(equalTo: ratingStack.centerYAnchor).isActive = true
+        ratingLabel.textColor = .white
+        
+        
     }
     
     private func setupYearLabel() {
@@ -149,7 +160,7 @@ class CollectionViewCell: UICollectionViewCell {
         self.originalTitleLabel.text = originalTitle
         self.titleLabel.text = title
         //        self.releaseDateTitle.text = releaseDate
-        //        self.ratingLabel.text = String(rating)
+        self.ratingLabel.text = String(rating)
     }
  
 }

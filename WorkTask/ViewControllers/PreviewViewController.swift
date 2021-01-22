@@ -8,8 +8,6 @@
 import UIKit
 
 class PreviewViewController: UIViewController {
-    //MARK: Postponed for a few days
-    
     
     //MARK: Declarations
     let containerView: UIStackView = {

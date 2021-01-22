@@ -99,9 +99,6 @@ class SuggestionsViewController: UIViewController {
         navigationController?.navigationBar.isHidden = true
     }
     
-    
- 
-    
     private func setupLabel() {
         
         label.text  = "Загрузка"

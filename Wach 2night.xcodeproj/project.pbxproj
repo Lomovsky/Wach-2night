@@ -22,6 +22,8 @@
 		C060DB04257BECA400C892DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C060DB03257BECA400C892DE /* Assets.xcassets */; };
 		C060DB07257BECA400C892DE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C060DB05257BECA400C892DE /* LaunchScreen.storyboard */; };
 		C060DB14257BED7C00C892DE /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = C060DB13257BED7C00C892DE /* .gitignore */; };
+		C07E70D225BB2EAC001EE1AC /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07E70D125BB2EAC001EE1AC /* SearchViewController.swift */; };
+		C07E70D625BB3043001EE1AC /* SearchViewController+TableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07E70D525BB3043001EE1AC /* SearchViewController+TableViewDataSource.swift */; };
 		C0C0E7C02583C4A4006C460E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C0E7BF2583C4A4006C460E /* NetworkManager.swift */; };
 		C0C0E7C32583C74D006C460E /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C0E7C22583C74D006C460E /* DataModel.swift */; };
 		C0D6AD532595F9D40000174A /* ApiKeyAndImageLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D6AD522595F9D40000174A /* ApiKeyAndImageLink.swift */; };
@@ -48,6 +50,8 @@
 		C060DB06257BECA400C892DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C060DB08257BECA400C892DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = WorkTask/Info.plist; sourceTree = SOURCE_ROOT; };
 		C060DB13257BED7C00C892DE /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		C07E70D125BB2EAC001EE1AC /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		C07E70D525BB3043001EE1AC /* SearchViewController+TableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchViewController+TableViewDataSource.swift"; sourceTree = "<group>"; };
 		C0C0E7BF2583C4A4006C460E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		C0C0E7C22583C74D006C460E /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		C0D6AD522595F9D40000174A /* ApiKeyAndImageLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeyAndImageLink.swift; sourceTree = "<group>"; };
@@ -158,6 +162,7 @@
 			children = (
 				C003674725824CB500226ED4 /* SuggestionsViewController+CollectionViewDataSource.swift */,
 				C0089F5825B2184D001647F2 /* SuggestionsViewController+HelperFuncs.swift */,
+				C07E70D525BB3043001EE1AC /* SearchViewController+TableViewDataSource.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -185,6 +190,7 @@
 				C004193125B35D06009F5B39 /* TabBarController.swift */,
 				C060DAFE257BECA200C892DE /* SuggestionsViewController.swift */,
 				C016B01C258C03F400F77CA6 /* PreviewViewController.swift */,
+				C07E70D125BB2EAC001EE1AC /* SearchViewController.swift */,
 				C0D6AD5925960A000000174A /* Extensions */,
 			);
 			path = ViewControllers;
@@ -323,8 +329,10 @@
 				C0F2F76C257D02C800A1DAF9 /* CollectionViewCell.swift in Sources */,
 				C003674825824CB500226ED4 /* SuggestionsViewController+CollectionViewDataSource.swift in Sources */,
 				C0C0E7C32583C74D006C460E /* DataModel.swift in Sources */,
+				C07E70D225BB2EAC001EE1AC /* SearchViewController.swift in Sources */,
 				C0089F5925B2184D001647F2 /* SuggestionsViewController+HelperFuncs.swift in Sources */,
 				C028AC7025B0D8BF007799B6 /* UIColorExtensionForResizingImages.swift in Sources */,
+				C07E70D625BB3043001EE1AC /* SearchViewController+TableViewDataSource.swift in Sources */,
 				C0D6AD532595F9D40000174A /* ApiKeyAndImageLink.swift in Sources */,
 				C060DAFD257BECA200C892DE /* SceneDelegate.swift in Sources */,
 				C0394FE325A8B33D00D7A7FB /* CoreDataManager.swift in Sources */,
