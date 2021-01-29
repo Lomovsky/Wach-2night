@@ -29,8 +29,8 @@ class SearchViewController: UITableViewController {
 //MARK: SetupFuncs
     
     private func setupNavigationController() {
-        navigationController?.navigationBar.isHidden = false
-        navigationItem.searchController = searchController
+//        navigationController?.navigationBar.isHidden = false
+//        navigationItem.searchController = searchController
         
     }
     

@@ -10,6 +10,18 @@ import UIKit
 class PreviewViewController: UIViewController {
     
     //MARK: Declarations
+    let scrollView: UIScrollView = {
+        let scroll = UIScrollView()
+        scroll.translatesAutoresizingMaskIntoConstraints = false
+        return scroll
+    }()
+    
+    let contentView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     let containerView: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -40,6 +52,13 @@ class PreviewViewController: UIViewController {
         return label
     }()
     
+    let overviewText: UILabel = {
+        let tf = UILabel()
+        tf.translatesAutoresizingMaskIntoConstraints = false
+        tf.sizeToFit()
+        return tf
+    }()
+    
     let infoButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -57,6 +76,8 @@ class PreviewViewController: UIViewController {
         view.addSubview(yearLabel)
         view.addSubview(yearPlaceHolderLabel)
         view.addSubview(containerView)
+        view.addSubview(scrollView)
+        view.addSubview(overviewText)
         
     }
     
@@ -70,6 +91,9 @@ class PreviewViewController: UIViewController {
         setupTitleLabel()
         setupYearPlaceholderLabel()
         setupContainerView()
+        setupScrollView()
+        setupOverviewLabel()
+        setupContentView()
     }
     
     
@@ -84,6 +108,26 @@ class PreviewViewController: UIViewController {
     
     private func setupNavigationController() {
         
+    }
+    
+    private func setupScrollView() {
+        scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        scrollView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: 200).isActive = true
+        scrollView.addSubview(contentView)
+        scrollView.showsVerticalScrollIndicator = false
+    }
+    
+    private func setupContentView() {
+        contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
+        contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
+        contentView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+        scrollView.addSubview(containerView)
+        scrollView.addSubview(titleLabel)
+        scrollView.addSubview(infoButton)
+        scrollView.addSubview(overviewText)
     }
     
     private func setupContainerView() {
@@ -112,8 +156,7 @@ class PreviewViewController: UIViewController {
 //        imageView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 12
-        
+        imageView.layer.cornerRadius = 10
         
     }
     
@@ -149,6 +192,15 @@ class PreviewViewController: UIViewController {
         yearPlaceHolderLabel.text = "Дата релиза:"
     }
     
+    private func setupOverviewLabel() {
+        overviewText.topAnchor.constraint(equalTo: infoButton.bottomAnchor, constant: 10).isActive = true
+        overviewText.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5).isActive = true
+        overviewText.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 5).isActive = true
+        overviewText.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        overviewText.numberOfLines = 0
+        
+        
+    }
 
     
     deinit {

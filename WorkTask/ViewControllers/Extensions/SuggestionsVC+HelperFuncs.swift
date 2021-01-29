@@ -24,7 +24,7 @@ extension SuggestionsViewController {
                         guard let posterData = try? Data(contentsOf: imageURL) else { return }
                         DispatchQueue.main.async {
                             coreDataManager.save(film.title, filmOriginalTitle: film.originalTitle, filmPoster: posterData, releaseDate: film.releaseDate, overview: film.overview, rating: film.rating, originalPoster: posterData)
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                                 self.collectionView.reloadData()
                                 self.activityIndicator.stopAnimating()
                                 self.collectionView.isHidden = false

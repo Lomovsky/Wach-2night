@@ -45,7 +45,6 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let previewVC = PreviewViewController()
-        previewVC.modalPresentationStyle = .formSheet
         navigationController?.present(previewVC, animated: true)
         let film = SuggestionsViewController.films[indexPath.row]
         let poster = UIImage(data: film.poster!)
@@ -55,6 +54,7 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
         previewVC.imageView.image = resizedPoster
         previewVC.titleLabel.text = film.title
         previewVC.yearLabel.text = film.releaseDate
+        previewVC.overviewText.text = film.overview
        
     }
     
