@@ -24,19 +24,17 @@ class SearchViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         setupNavigationController()
-        setupSearchBar()
     }
 
 //MARK: SetupFuncs
     
     private func setupNavigationController() {
         navigationController?.navigationBar.isHidden = false
+        navigationItem.searchController = searchController
         
     }
     
-    private func setupSearchBar() {
-        navigationItem.searchController = searchController
-    }
+ 
     
     
 

@@ -18,6 +18,8 @@ class CollectionViewCell: UICollectionViewCell {
     
     
     // MARK: Declarations
+
+    
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -74,6 +76,10 @@ class CollectionViewCell: UICollectionViewCell {
     //MARK: Initializer -
     override init(frame: CGRect) {
         super.init(frame: .zero)
+//        let blurEffect = UIBlurEffect(style: .extraLight)
+//        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+//        blurEffectView.frame = contentView.frame
+//        contentView.insertSubview(blurEffectView, at: 0)
         contentView.addSubview(imageView)
         contentView.addSubview(originalTitleLabel)
         contentView.addSubview(titleLabel)
@@ -110,7 +116,7 @@ class CollectionViewCell: UICollectionViewCell {
         originalTitleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 5).isActive = true
         originalTitleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5).isActive = true
         originalTitleLabel.font = .systemFont(ofSize: 12)
-        originalTitleLabel.textColor = .white
+        originalTitleLabel.textColor = .black
         
     }
     
@@ -118,7 +124,7 @@ class CollectionViewCell: UICollectionViewCell {
         titleLabel.topAnchor.constraint(equalTo: originalTitleLabel.bottomAnchor, constant: 5).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5).isActive = true
         titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        titleLabel.textColor = .white
+        titleLabel.textColor = .black
         titleLabel.font = .systemFont(ofSize: 20)
         titleLabel.frame.size.height = 49
         titleLabel.numberOfLines = 3
@@ -145,7 +151,7 @@ class CollectionViewCell: UICollectionViewCell {
     private func setupRatingLabel() {
         ratingLabel.leadingAnchor.constraint(equalTo: ratingImage.trailingAnchor, constant: 5).isActive = true
         ratingLabel.centerYAnchor.constraint(equalTo: ratingStack.centerYAnchor).isActive = true
-        ratingLabel.textColor = .white
+        ratingLabel.textColor = .black
         
         
     }

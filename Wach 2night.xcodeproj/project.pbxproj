@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		4141E9DC426233262DC0629A /* Pods_WorkTask.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65FAADEA3F9C8CA9669E7B67 /* Pods_WorkTask.framework */; };
-		C003674825824CB500226ED4 /* SuggestionsViewController+CollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C003674725824CB500226ED4 /* SuggestionsViewController+CollectionViewDataSource.swift */; };
+		C003674825824CB500226ED4 /* SuggestionsVC+CollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C003674725824CB500226ED4 /* SuggestionsVC+CollectionViewDataSource.swift */; };
 		C004193225B35D06009F5B39 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C004193125B35D06009F5B39 /* TabBarController.swift */; };
-		C0089F5925B2184D001647F2 /* SuggestionsViewController+HelperFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0089F5825B2184D001647F2 /* SuggestionsViewController+HelperFuncs.swift */; };
+		C0089F5925B2184D001647F2 /* SuggestionsVC+HelperFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0089F5825B2184D001647F2 /* SuggestionsVC+HelperFuncs.swift */; };
 		C016B01D258C03F400F77CA6 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016B01C258C03F400F77CA6 /* PreviewViewController.swift */; };
 		C028AC7025B0D8BF007799B6 /* UIColorExtensionForResizingImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = C028AC6F25B0D8BF007799B6 /* UIColorExtensionForResizingImages.swift */; };
 		C0394FE325A8B33D00D7A7FB /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0394FE225A8B33D00D7A7FB /* CoreDataManager.swift */; };
@@ -23,7 +23,8 @@
 		C060DB07257BECA400C892DE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C060DB05257BECA400C892DE /* LaunchScreen.storyboard */; };
 		C060DB14257BED7C00C892DE /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = C060DB13257BED7C00C892DE /* .gitignore */; };
 		C07E70D225BB2EAC001EE1AC /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07E70D125BB2EAC001EE1AC /* SearchViewController.swift */; };
-		C07E70D625BB3043001EE1AC /* SearchViewController+TableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07E70D525BB3043001EE1AC /* SearchViewController+TableViewDataSource.swift */; };
+		C07E70D625BB3043001EE1AC /* SearchVC+TableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07E70D525BB3043001EE1AC /* SearchVC+TableViewDataSource.swift */; };
+		C07E70DA25BB33F2001EE1AC /* SearchVC+SearchBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07E70D925BB33F2001EE1AC /* SearchVC+SearchBarDelegate.swift */; };
 		C0C0E7C02583C4A4006C460E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C0E7BF2583C4A4006C460E /* NetworkManager.swift */; };
 		C0C0E7C32583C74D006C460E /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C0E7C22583C74D006C460E /* DataModel.swift */; };
 		C0D6AD532595F9D40000174A /* ApiKeyAndImageLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D6AD522595F9D40000174A /* ApiKeyAndImageLink.swift */; };
@@ -34,9 +35,9 @@
 		548453D6D37E445965AA6039 /* Pods-WorkTask.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WorkTask.debug.xcconfig"; path = "Target Support Files/Pods-WorkTask/Pods-WorkTask.debug.xcconfig"; sourceTree = "<group>"; };
 		65FAADEA3F9C8CA9669E7B67 /* Pods_WorkTask.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WorkTask.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9ACCE51585E5FCFB58E8D923 /* Pods-WorkTask.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WorkTask.release.xcconfig"; path = "Target Support Files/Pods-WorkTask/Pods-WorkTask.release.xcconfig"; sourceTree = "<group>"; };
-		C003674725824CB500226ED4 /* SuggestionsViewController+CollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SuggestionsViewController+CollectionViewDataSource.swift"; sourceTree = "<group>"; };
+		C003674725824CB500226ED4 /* SuggestionsVC+CollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SuggestionsVC+CollectionViewDataSource.swift"; sourceTree = "<group>"; };
 		C004193125B35D06009F5B39 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
-		C0089F5825B2184D001647F2 /* SuggestionsViewController+HelperFuncs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SuggestionsViewController+HelperFuncs.swift"; sourceTree = "<group>"; };
+		C0089F5825B2184D001647F2 /* SuggestionsVC+HelperFuncs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SuggestionsVC+HelperFuncs.swift"; sourceTree = "<group>"; };
 		C016B01C258C03F400F77CA6 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		C028AC6F25B0D8BF007799B6 /* UIColorExtensionForResizingImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensionForResizingImages.swift; sourceTree = "<group>"; };
 		C0394FE225A8B33D00D7A7FB /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -51,7 +52,8 @@
 		C060DB08257BECA400C892DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = WorkTask/Info.plist; sourceTree = SOURCE_ROOT; };
 		C060DB13257BED7C00C892DE /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		C07E70D125BB2EAC001EE1AC /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
-		C07E70D525BB3043001EE1AC /* SearchViewController+TableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchViewController+TableViewDataSource.swift"; sourceTree = "<group>"; };
+		C07E70D525BB3043001EE1AC /* SearchVC+TableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchVC+TableViewDataSource.swift"; sourceTree = "<group>"; };
+		C07E70D925BB33F2001EE1AC /* SearchVC+SearchBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchVC+SearchBarDelegate.swift"; sourceTree = "<group>"; };
 		C0C0E7BF2583C4A4006C460E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		C0C0E7C22583C74D006C460E /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		C0D6AD522595F9D40000174A /* ApiKeyAndImageLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeyAndImageLink.swift; sourceTree = "<group>"; };
@@ -160,9 +162,10 @@
 		C0D6AD5925960A000000174A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				C003674725824CB500226ED4 /* SuggestionsViewController+CollectionViewDataSource.swift */,
-				C0089F5825B2184D001647F2 /* SuggestionsViewController+HelperFuncs.swift */,
-				C07E70D525BB3043001EE1AC /* SearchViewController+TableViewDataSource.swift */,
+				C003674725824CB500226ED4 /* SuggestionsVC+CollectionViewDataSource.swift */,
+				C0089F5825B2184D001647F2 /* SuggestionsVC+HelperFuncs.swift */,
+				C07E70D525BB3043001EE1AC /* SearchVC+TableViewDataSource.swift */,
+				C07E70D925BB33F2001EE1AC /* SearchVC+SearchBarDelegate.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -327,12 +330,13 @@
 				C016B01D258C03F400F77CA6 /* PreviewViewController.swift in Sources */,
 				C04D6EA025AB391C00E4B151 /* Wach 2night.xcdatamodeld in Sources */,
 				C0F2F76C257D02C800A1DAF9 /* CollectionViewCell.swift in Sources */,
-				C003674825824CB500226ED4 /* SuggestionsViewController+CollectionViewDataSource.swift in Sources */,
+				C003674825824CB500226ED4 /* SuggestionsVC+CollectionViewDataSource.swift in Sources */,
 				C0C0E7C32583C74D006C460E /* DataModel.swift in Sources */,
+				C07E70DA25BB33F2001EE1AC /* SearchVC+SearchBarDelegate.swift in Sources */,
 				C07E70D225BB2EAC001EE1AC /* SearchViewController.swift in Sources */,
-				C0089F5925B2184D001647F2 /* SuggestionsViewController+HelperFuncs.swift in Sources */,
+				C0089F5925B2184D001647F2 /* SuggestionsVC+HelperFuncs.swift in Sources */,
 				C028AC7025B0D8BF007799B6 /* UIColorExtensionForResizingImages.swift in Sources */,
-				C07E70D625BB3043001EE1AC /* SearchViewController+TableViewDataSource.swift in Sources */,
+				C07E70D625BB3043001EE1AC /* SearchVC+TableViewDataSource.swift in Sources */,
 				C0D6AD532595F9D40000174A /* ApiKeyAndImageLink.swift in Sources */,
 				C060DAFD257BECA200C892DE /* SceneDelegate.swift in Sources */,
 				C0394FE325A8B33D00D7A7FB /* CoreDataManager.swift in Sources */,

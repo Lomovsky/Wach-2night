@@ -85,8 +85,8 @@ class SuggestionsViewController: UIViewController {
     
 //MARK:Set up funcs -  
     private func setGradientBackground() {
-        let colorTop =  UIColor(red: 0.77, green: 0.87, blue: 0.96, alpha: 1.00).cgColor
-        let colorBottom = UIColor(red: 0.07, green: 0.45, blue: 0.87, alpha: 1.00).cgColor
+        let colorTop =  UIColor(red: 0.95, green: 0.98, blue: 0.93, alpha: 1.00).cgColor
+        let colorBottom = UIColor(red: 0.68, green: 0.76, blue: 0.81, alpha: 1.00).cgColor
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = [colorTop, colorBottom]
         gradientLayer.locations = [0.0, 1.0]
@@ -109,7 +109,7 @@ class SuggestionsViewController: UIViewController {
     }
     
     private func setupCollectionView() {
-        collectionView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 20).isActive = true
+        collectionView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 10).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
