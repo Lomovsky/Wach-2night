@@ -132,6 +132,7 @@ class PreviewViewController: UIViewController {
     
     private func setupContainerView() {
         let cornerRadius: CGFloat = 10.0
+        let cgPath = UIBezierPath(roundedRect: containerView.bounds, byRoundingCorners: [.allCorners], cornerRadii: CGSize.init(width: cornerRadius, height: cornerRadius)).cgPath
         containerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
@@ -141,8 +142,6 @@ class PreviewViewController: UIViewController {
         containerView.layer.shadowRadius = 7
         containerView.layer.shadowOpacity = 0.7
         containerView.layer.shadowOffset = CGSize.init(width: 2.5, height: 2.5)
-        
-        let cgPath = UIBezierPath(roundedRect: containerView.bounds, byRoundingCorners: [.allCorners], cornerRadii: CGSize.init(width: cornerRadius, height: cornerRadius)).cgPath
         containerView.layer.shadowPath = cgPath
         
     }
