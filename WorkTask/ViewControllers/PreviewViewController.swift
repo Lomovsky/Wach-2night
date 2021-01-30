@@ -151,8 +151,6 @@ class PreviewViewController: UIViewController {
         imageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
         imageView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
         imageView.frame.size.height = imageView.image!.accessibilityFrame.height
-//        imageView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor).isActive = true
-//        imageView.centerYAnchor.constraint(equalTo: containerView.centerYAnchor).isActive = true
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 10

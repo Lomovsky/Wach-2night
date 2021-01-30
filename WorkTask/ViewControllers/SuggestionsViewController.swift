@@ -8,18 +8,20 @@
 import UIKit
 
 class SuggestionsViewController: UIViewController {
-//MARK: Declarations
+    //MARK: Declarations
     let urlString = "https://api.themoviedb.org/3/discover/movie?api_key=\(apiKey)&language=ru-RU&sort_by=popularity.desc&include_adult=true&include_video=false&page=1"
     static var films: [CurrentFilm] = []
     var film: Film? = nil
     
-
+    
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        let cv = UICollectionView(frame: .init(x: 0, y: 178, width: 0, height: 0), collectionViewLayout: layout)
+        let cv = UICollectionView(frame: .init(x: 0, y: 178, width: 0, height: 0),
+                                  collectionViewLayout: layout)
         cv.translatesAutoresizingMaskIntoConstraints = false
-        cv.register(CollectionViewCell.self, forCellWithReuseIdentifier: "CollectionViewCellReuseIdentifier")
+        cv.register(CollectionViewCell.self,
+                    forCellWithReuseIdentifier: "CollectionViewCellReuseIdentifier")
         return cv
         
     }()
@@ -49,7 +51,7 @@ class SuggestionsViewController: UIViewController {
     }()
     
     
-// MARK: ViewDidLoad -
+    // MARK: ViewDidLoad -
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -58,22 +60,20 @@ class SuggestionsViewController: UIViewController {
         view.addSubview(label)
         view.addSubview(collectionView)
         view.addSubview(activityIndicator)
-
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateUI(notification:)), name:NSNotification.Name(rawValue: "update"), object: nil)
+        
         let coreDataManager = CoreDataManager()
         if Reachability.isConnectedToNetwork() {
             coreDataManager.deleteAllData()
             downloadFilms()
             
         } else {
-            coreDataManager.fetchData()
-            self.label.textColor = .red
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "update"), object: nil)
         }
     }
     
-//MARK: ViewWillApear
+    //MARK: ViewWillApear
     override func viewWillAppear(_ animated: Bool) {
         setupLabel()
         setupCollectionView()
@@ -83,7 +83,7 @@ class SuggestionsViewController: UIViewController {
         
     }
     
-//MARK:Set up funcs -  
+    //MARK:Set up funcs -
     private func setGradientBackground() {
         let colorTop =  UIColor(red: 0.95, green: 0.98, blue: 0.93, alpha: 1.00).cgColor
         let colorBottom = UIColor(red: 0.68, green: 0.76, blue: 0.81, alpha: 1.00).cgColor
@@ -126,8 +126,8 @@ class SuggestionsViewController: UIViewController {
     }
     
     private func setupActivityIndicator() {
-        activityIndicator.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
-        activityIndicator.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         activityIndicator.startAnimating()
     }
     

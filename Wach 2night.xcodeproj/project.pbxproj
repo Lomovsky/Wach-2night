@@ -12,7 +12,7 @@
 		C004193225B35D06009F5B39 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C004193125B35D06009F5B39 /* TabBarController.swift */; };
 		C0089F5925B2184D001647F2 /* SuggestionsVC+HelperFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0089F5825B2184D001647F2 /* SuggestionsVC+HelperFuncs.swift */; };
 		C016B01D258C03F400F77CA6 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016B01C258C03F400F77CA6 /* PreviewViewController.swift */; };
-		C028AC7025B0D8BF007799B6 /* UIColorExtensionForResizingImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = C028AC6F25B0D8BF007799B6 /* UIColorExtensionForResizingImages.swift */; };
+		C028AC7025B0D8BF007799B6 /* UIImageExtensionForResizingImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = C028AC6F25B0D8BF007799B6 /* UIImageExtensionForResizingImages.swift */; };
 		C0394FE325A8B33D00D7A7FB /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0394FE225A8B33D00D7A7FB /* CoreDataManager.swift */; };
 		C04D6EA025AB391C00E4B151 /* Wach 2night.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C04D6E9E25AB391C00E4B151 /* Wach 2night.xcdatamodeld */; };
 		C04D6EA325AB405E00E4B151 /* ConnectionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C04D6EA225AB405E00E4B151 /* ConnectionManager.swift */; };
@@ -39,7 +39,7 @@
 		C004193125B35D06009F5B39 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		C0089F5825B2184D001647F2 /* SuggestionsVC+HelperFuncs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SuggestionsVC+HelperFuncs.swift"; sourceTree = "<group>"; };
 		C016B01C258C03F400F77CA6 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
-		C028AC6F25B0D8BF007799B6 /* UIColorExtensionForResizingImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensionForResizingImages.swift; sourceTree = "<group>"; };
+		C028AC6F25B0D8BF007799B6 /* UIImageExtensionForResizingImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtensionForResizingImages.swift; sourceTree = "<group>"; };
 		C0394FE225A8B33D00D7A7FB /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		C04D6E9F25AB391C00E4B151 /* Wach 2night.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "Wach 2night.xcdatamodel"; sourceTree = "<group>"; };
 		C04D6EA225AB405E00E4B151 /* ConnectionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionManager.swift; sourceTree = "<group>"; };
@@ -103,7 +103,7 @@
 		C028AC8025B0F2C5007799B6 /* Others */ = {
 			isa = PBXGroup;
 			children = (
-				C028AC6F25B0D8BF007799B6 /* UIColorExtensionForResizingImages.swift */,
+				C028AC6F25B0D8BF007799B6 /* UIImageExtensionForResizingImages.swift */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -335,7 +335,7 @@
 				C07E70DA25BB33F2001EE1AC /* SearchVC+SearchBarDelegate.swift in Sources */,
 				C07E70D225BB2EAC001EE1AC /* SearchViewController.swift in Sources */,
 				C0089F5925B2184D001647F2 /* SuggestionsVC+HelperFuncs.swift in Sources */,
-				C028AC7025B0D8BF007799B6 /* UIColorExtensionForResizingImages.swift in Sources */,
+				C028AC7025B0D8BF007799B6 /* UIImageExtensionForResizingImages.swift in Sources */,
 				C07E70D625BB3043001EE1AC /* SearchVC+TableViewDataSource.swift in Sources */,
 				C0D6AD532595F9D40000174A /* ApiKeyAndImageLink.swift in Sources */,
 				C060DAFD257BECA200C892DE /* SceneDelegate.swift in Sources */,

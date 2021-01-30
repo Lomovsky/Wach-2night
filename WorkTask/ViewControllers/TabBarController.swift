@@ -13,12 +13,12 @@ class TabBarController: UITabBarController {
         super.viewDidLoad()
         
         let suggestionsVC = SuggestionsViewController()
-        suggestionsVC.tabBarItem = UITabBarItem(title: "Рекомендации", image: UIImage(systemName: "star.fill"), tag: 0)
+        suggestionsVC.tabBarItem = UITabBarItem(title: "Рекомендации",
+                                                image: UIImage(systemName: "star.fill"), tag: 0)
         let searchVC = SearchViewController()
-        searchVC.tabBarItem = UITabBarItem(title: "Поиск по названию", image: UIImage(systemName: "magnifyingglass"), tag: 1)
-        
+        searchVC.tabBarItem = UITabBarItem(title: "Поиск по названию",
+                                           image: UIImage(systemName: "magnifyingglass"), tag: 1)
         let tabBarList = [suggestionsVC, searchVC]
-        
         viewControllers = tabBarList
     }
 }
