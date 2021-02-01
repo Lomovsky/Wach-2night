@@ -18,8 +18,6 @@ class CollectionViewCell: UICollectionViewCell {
     
     
     // MARK: Declarations
-
-    
     private let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -128,7 +126,6 @@ class CollectionViewCell: UICollectionViewCell {
         titleLabel.font = .systemFont(ofSize: 20)
         titleLabel.frame.size.height = 49
         titleLabel.numberOfLines = 3
-        
         
     }
     

@@ -22,6 +22,7 @@ extension SuggestionsViewController {
                     let imageURLString = imagePath + secondPath
                     guard let imageURL = URL(string: imageURLString) else { return }
                     guard let posterData = try? Data(contentsOf: imageURL) else { return }
+                    DispatchQueue.main.async {
                     coreDataManager.save(film.title, filmOriginalTitle: film.originalTitle, filmPoster: posterData, releaseDate: film.releaseDate, overview: film.overview, rating: film.rating, originalPoster: posterData)
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                         self.collectionView.reloadData()
@@ -30,8 +31,8 @@ extension SuggestionsViewController {
                         self.activityIndicator.isHidden = true
                         self.label.text = "Подборка лучших фильмов по рейтингу"
                     }
-                    
                 }
+            }
             case .failure(let error):
                 print(error)
             }

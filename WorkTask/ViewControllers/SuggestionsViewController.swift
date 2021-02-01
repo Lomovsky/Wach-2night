@@ -13,12 +13,10 @@ class SuggestionsViewController: UIViewController {
     static var films: [CurrentFilm] = []
     var film: Film? = nil
     
-    
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        let cv = UICollectionView(frame: .init(x: 0, y: 178, width: 0, height: 0),
-                                  collectionViewLayout: layout)
+        let cv = UICollectionView(frame: .init(x: 0, y: 178, width: 0, height: 0), collectionViewLayout: layout)
         cv.translatesAutoresizingMaskIntoConstraints = false
         cv.register(CollectionViewCell.self,
                     forCellWithReuseIdentifier: "CollectionViewCellReuseIdentifier")
