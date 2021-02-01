@@ -10,6 +10,7 @@ import UIKit
 extension SearchViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
+
     }
+    
 }

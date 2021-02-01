@@ -94,7 +94,9 @@ class SuggestionsViewController: UIViewController {
     
     
     private func setupNavigationController() {
-        navigationController?.navigationBar.isHidden = true
+        tabBarController?.navigationController?.navigationBar.isHidden = true
+        //idk rly. did this due to bug with NavBar apperiance
+        tabBarController?.navigationItem.searchController = nil
     }
     
     private func setupLabel() {
