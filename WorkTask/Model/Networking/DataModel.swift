@@ -12,7 +12,7 @@ import Foundation
  struct Film: Codable {
     var title: String
     var originalTitle: String
-    var posterPath: String
+    var posterPath: String?
     var releaseDate: String
     var overview: String
     var rating: Float
@@ -28,3 +28,11 @@ import Foundation
     
  }
  
+ struct SearchedFilm {
+    var title: String
+    var originalTitle: String
+    var poster: Data?
+    var releaseDate: String
+    var overview: String
+    var rating: Float
+ }

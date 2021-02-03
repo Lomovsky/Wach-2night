@@ -7,10 +7,33 @@
 
 import UIKit
 
-extension SearchViewController: UISearchBarDelegate {
+extension SearchViewController {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-
+        let searchURL = "https://api.themoviedb.org/3/search/movie?api_key=\(apiKey)&language=\(searchLanguage)&query=\(searchText)&page=1&include_adult=false"
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
+            NetworkManager.fetchCurrentData(withURL: searchURL) { [weak self] (result) in
+                guard let self = self else { return }
+                switch result {
+                case .failure(let error):
+                    print(error)
+                case .success(let filmResponse):
+                    self.films.removeAll()
+                    filmResponse.results.forEach { (film) in
+                        DispatchQueue.main.async {
+                            self.films.append(film)
+                            self.tableView.reloadData()
+                            print(self.films.count)
+                        }
+                    }
+//                    self.filmResponse = filmResponse
+//                    DispatchQueue.main.async {
+//                    self.tableView.reloadData()
+//                    print(filmResponse.results.count)
+//                    }
+                }
+            }
+        })
     }
-    
 }
