@@ -19,19 +19,13 @@ extension SearchViewController {
                 case .failure(let error):
                     print(error)
                 case .success(let filmResponse):
-                    self.films.removeAll()
-                    filmResponse.results.forEach { (film) in
-                        DispatchQueue.main.async {
-                            self.films.append(film)
-                            self.tableView.reloadData()
-                            print(self.films.count)
+                    DispatchQueue.main.async {
+                        
+                        filmResponse.results.forEach { (film) in
+                            SearchViewController.films.append(film)    
                         }
+                        self.tableView.reloadData()
                     }
-//                    self.filmResponse = filmResponse
-//                    DispatchQueue.main.async {
-//                    self.tableView.reloadData()
-//                    print(filmResponse.results.count)
-//                    }
                 }
             }
         })

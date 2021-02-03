@@ -17,7 +17,6 @@ extension SuggestionsViewController {
             switch result {
             case .success(let filmResponse):
                 filmResponse.results.forEach { (film) in
-                    self.film = film
                     DispatchQueue.global(qos: .utility).async {
                         let secondPath = film.posterPath
                         let imageURLString = imagePath + secondPath!

@@ -11,7 +11,6 @@ class SuggestionsViewController: UIViewController {
     //MARK: Declarations
     let urlString = "https://api.themoviedb.org/3/discover/movie?api_key=\(apiKey)&language=ru-RU&sort_by=popularity.desc&include_adult=true&include_video=false&page=1"
     static var films: [CurrentFilm] = []
-    var film: Film? = nil
     
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
