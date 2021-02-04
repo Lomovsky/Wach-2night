@@ -21,13 +21,11 @@ class SelectedFilmViewController: UIViewController {
     //MARK: viewDidLoad & viewWillAppear -
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(imageStack)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         setupView()
         setupNavigationController()
-//        setupImageStack()
     }
     //MARK: SetupFuncs -
     
@@ -36,10 +34,8 @@ class SelectedFilmViewController: UIViewController {
     }
     
     private func setupNavigationController() {
-        tabBarController?.navigationController?.navigationBar.isHidden = false
-        tabBarController?.navigationController?.navigationBar.prefersLargeTitles = true
-//        tabBarController?.navigationController?.navigationBar.setBackgroundImage(posterImage, for: UIBarMetrics.default)
-        tabBarController?.navigationItem.searchController = nil
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.largeContentImage = #imageLiteral(resourceName: "Image-1")
         
     }
     
