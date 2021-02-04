@@ -9,15 +9,8 @@ import UIKit
 
 class SelectedFilmViewController: UIViewController {
     //MARK: Declarations
-    let posterImage: UIImageView = {
-        let image = UIImageView()
-        image.translatesAutoresizingMaskIntoConstraints = false
-        image.clipsToBounds = true
-        image.layer.cornerRadius = 10
-        image.contentMode = .scaleAspectFit
-        return image
-    }()
-    
+    var posterImage = UIImage()
+
     let imageStack: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -34,7 +27,7 @@ class SelectedFilmViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         setupView()
         setupNavigationController()
-        setupImageStack()
+//        setupImageStack()
     }
     //MARK: SetupFuncs -
     
@@ -44,7 +37,10 @@ class SelectedFilmViewController: UIViewController {
     
     private func setupNavigationController() {
         tabBarController?.navigationController?.navigationBar.isHidden = false
+        tabBarController?.navigationController?.navigationBar.prefersLargeTitles = true
+//        tabBarController?.navigationController?.navigationBar.setBackgroundImage(posterImage, for: UIBarMetrics.default)
         tabBarController?.navigationItem.searchController = nil
+        
     }
     
     private func setupImageStack() {
@@ -61,6 +57,8 @@ class SelectedFilmViewController: UIViewController {
         imageStack.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         imageStack.frame.size.height = view.frame.height / 3
     }
+    
+
     
     
 }

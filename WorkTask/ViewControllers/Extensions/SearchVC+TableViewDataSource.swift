@@ -31,7 +31,16 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let film = self.filmResponse?.results[indexPath.row]
         let selectedFilmVC = SelectedFilmViewController()
+        let posterUrlString = imagePath + (film?.posterPath)!
+        guard let posterURL = URL(string: posterUrlString) else { return }
+        DispatchQueue.global(qos: .utility).async {
+            let imageData = try? Data(contentsOf: posterURL)
+            let poster = UIImage(data: imageData!)
+            selectedFilmVC.posterImage = poster!
+        }
+
         self.navigationController?.pushViewController(selectedFilmVC, animated: true)
     }
     
