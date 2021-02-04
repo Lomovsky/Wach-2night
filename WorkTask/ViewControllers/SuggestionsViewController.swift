@@ -72,24 +72,18 @@ class SuggestionsViewController: UIViewController {
     
     //MARK: ViewWillApear
     override func viewWillAppear(_ animated: Bool) {
+        setupView()
         setupCollectionView()
         setupNavigationController()
         setupActivityIndicator()
-        setGradientBackground()
         
     }
     
     //MARK:Set up funcs -
-    private func setGradientBackground() {
-        let colorTop =  UIColor(red: 0.95, green: 0.98, blue: 0.93, alpha: 1.00).cgColor
-        let colorBottom = UIColor(red: 0.68, green: 0.76, blue: 0.81, alpha: 1.00).cgColor
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [colorTop, colorBottom]
-        gradientLayer.locations = [0.0, 1.0]
-        gradientLayer.frame = self.view.bounds
-        self.view.layer.insertSublayer(gradientLayer, at: 0)
+    private func setupView() {
+    view.backgroundColor = UIColor(red: 0.98, green: 0.96, blue: 0.96, alpha: 1.00)
+
     }
-    
     
     private func setupNavigationController() {
         tabBarController?.navigationController?.navigationBar.isHidden = true

@@ -30,7 +30,7 @@ class SelectedFilmViewController: UIViewController {
     //MARK: SetupFuncs -
     
     private func setupView() {
-        view.backgroundColor = UIColor(red: 0.95, green: 0.98, blue: 0.93, alpha: 1.00)
+        view.backgroundColor = UIColor(red: 0.98, green: 0.96, blue: 0.96, alpha: 1.00)
     }
     
     private func setupNavigationController() {

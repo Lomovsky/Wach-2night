@@ -43,7 +43,6 @@ extension SuggestionsViewController {
     @objc func updateUI(notification: NSNotification) {
         let coreDataManager = CoreDataManager()
         coreDataManager.fetchData()
-        self.label.textColor = .red
         DispatchQueue.main.async {
             self.collectionView.reloadData()
             self.collectionView.isHidden = false
