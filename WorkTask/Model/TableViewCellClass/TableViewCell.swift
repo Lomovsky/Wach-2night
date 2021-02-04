@@ -9,7 +9,7 @@ import UIKit
 
 class TableViewCell: UITableViewCell {
     
-//MARK: Declarations
+    //MARK: Declarations
     let ratingLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -27,8 +27,8 @@ class TableViewCell: UITableViewCell {
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
-
-//MARK: Initializer
+    
+    //MARK: Initializer -
     override func awakeFromNib() {
         super.awakeFromNib()
         contentView.addSubview(ratingStackView)
@@ -36,14 +36,10 @@ class TableViewCell: UITableViewCell {
         
         setupRatingStackView()
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
     
-//MARK: SetupFuncs
+    
+    
+    //MARK: SetupFuncs -
     private func setupRatingStackView() {
         ratingStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         ratingStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true

@@ -8,7 +8,7 @@
 import UIKit
 
 class SelectedFilmViewController: UIViewController {
-//MARK: Declarations
+    //MARK: Declarations
     let posterImage: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -25,20 +25,18 @@ class SelectedFilmViewController: UIViewController {
     }()
     
     
-//MARK: viewDidLoad & viewWillAppear
+    //MARK: viewDidLoad & viewWillAppear -
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(imageStack)
-        
-        // Do any additional setup after loading the view.
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         setupView()
         setupNavigationController()
         setupImageStack()
     }
-//MARK: SetupFuncs
+    //MARK: SetupFuncs -
     
     private func setupView() {
         view.backgroundColor = UIColor(red: 0.95, green: 0.98, blue: 0.93, alpha: 1.00)

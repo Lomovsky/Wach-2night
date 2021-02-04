@@ -29,7 +29,7 @@ extension SuggestionsViewController {
                                 self.activityIndicator.stopAnimating()
                                 self.collectionView.isHidden = false
                                 self.activityIndicator.isHidden = true
-                                self.label.text = "Подборка лучших фильмов по рейтингу"
+                                self.label.text = "Рекомендуем к просмотру"
                             }
                         }
                     }

@@ -24,7 +24,7 @@ class NetworkManager {
                 
                 do {
                     let films = try JSONDecoder().decode(FilmResponse.self, from: JSONData)
-                        completion(.success(films))
+                    completion(.success(films))
                 } catch let error as NSError {
                     print(error)
                 }

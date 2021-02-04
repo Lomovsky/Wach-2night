@@ -55,26 +55,26 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
         previewVC.titleLabel.text = film.title
         previewVC.yearLabel.text = film.releaseDate
         previewVC.overviewText.text = film.overview
-       
+        
     }
     
-   func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         //настройка ползунка при прокручивании
-       if #available(iOS 13, *) {
-           (scrollView.subviews[(scrollView.subviews.count - 1)].subviews[0]).backgroundColor = UIColor.white
+        if #available(iOS 13, *) {
+            (scrollView.subviews[(scrollView.subviews.count - 1)].subviews[0]).backgroundColor = UIColor.white
             //verticalIndicator
             (scrollView.subviews[(scrollView.subviews.count - 2)].subviews[0]).isHidden = true
-        //horizontalIndicator
+            //horizontalIndicator
         } else {
             if let verticalIndicator: UIImageView = (scrollView.subviews[(scrollView.subviews.count - 1)] as? UIImageView) {
-               verticalIndicator.backgroundColor = UIColor.systemGray6
+                verticalIndicator.backgroundColor = UIColor.systemGray6
             }
-
+            
             if let horizontalIndicator: UIImageView = (scrollView.subviews[(scrollView.subviews.count - 2)] as? UIImageView) {
                 horizontalIndicator.isHidden = true
             }
         }
-
+        
     }
     
 }

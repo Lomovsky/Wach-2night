@@ -198,7 +198,7 @@ class PreviewViewController: UIViewController {
         
         
     }
-
+    
     
     deinit {
         print("Sec vc was dealocated")

@@ -74,10 +74,6 @@ class CollectionViewCell: UICollectionViewCell {
     //MARK: Initializer -
     override init(frame: CGRect) {
         super.init(frame: .zero)
-//        let blurEffect = UIBlurEffect(style: .extraLight)
-//        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-//        blurEffectView.frame = contentView.frame
-//        contentView.insertSubview(blurEffectView, at: 0)
         contentView.addSubview(imageView)
         contentView.addSubview(originalTitleLabel)
         contentView.addSubview(titleLabel)
@@ -95,14 +91,14 @@ class CollectionViewCell: UICollectionViewCell {
         
     }
     
-
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: Setup funcs -
-
+    
     
     
     private func setupImageView() {
@@ -131,7 +127,7 @@ class CollectionViewCell: UICollectionViewCell {
         
     }
     
-
+    
     
     private func setupRatingStack() {
         ratingStack.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20).isActive = true
@@ -159,7 +155,7 @@ class CollectionViewCell: UICollectionViewCell {
         
     }
     
-// MARK: Configuring the cell -
+    // MARK: Configuring the cell -
     func configureCell(image: UIImage, title: String, originalTitle: String, releaseDate: String, rating: Float) {
         self.imageView.image = image
         self.originalTitleLabel.text = originalTitle
@@ -167,7 +163,7 @@ class CollectionViewCell: UICollectionViewCell {
         //        self.releaseDateTitle.text = releaseDate
         self.ratingLabel.text = String(rating)
     }
- 
+    
 }
 
 

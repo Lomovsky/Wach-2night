@@ -12,6 +12,7 @@ class SuggestionsViewController: UIViewController {
     let urlString = "https://api.themoviedb.org/3/discover/movie?api_key=\(apiKey)&language=ru-RU&sort_by=popularity.desc&include_adult=true&include_video=false&page=1"
     static var films: [CurrentFilm] = []
     
+    //MARK: UIElements
     let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -20,7 +21,6 @@ class SuggestionsViewController: UIViewController {
         cv.register(CollectionViewCell.self,
                     forCellWithReuseIdentifier: "CollectionViewCellReuseIdentifier")
         return cv
-        
     }()
     
     let stackView: UIStackView = {
@@ -55,6 +55,7 @@ class SuggestionsViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         view.addSubview(label)
+        setupLabel()
         view.addSubview(collectionView)
         view.addSubview(activityIndicator)
         
@@ -64,7 +65,6 @@ class SuggestionsViewController: UIViewController {
         if Reachability.isConnectedToNetwork() {
             coreDataManager.deleteAllData()
             downloadFilms()
-            
         } else {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "update"), object: nil)
         }
@@ -72,7 +72,6 @@ class SuggestionsViewController: UIViewController {
     
     //MARK: ViewWillApear
     override func viewWillAppear(_ animated: Bool) {
-        setupLabel()
         setupCollectionView()
         setupNavigationController()
         setupActivityIndicator()
@@ -94,17 +93,15 @@ class SuggestionsViewController: UIViewController {
     
     private func setupNavigationController() {
         tabBarController?.navigationController?.navigationBar.isHidden = true
-        //idk rly. did this due to bug with NavBar apperiance
         tabBarController?.navigationItem.searchController = nil
     }
     
     private func setupLabel() {
-        
         label.text  = "Загрузка"
         label.textColor = .black
         label.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
         label.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        label.font = .systemFont(ofSize: 16, weight: .bold)
+        label.font = .systemFont(ofSize: 20, weight: .bold)
     }
     
     private func setupCollectionView() {
@@ -115,7 +112,6 @@ class SuggestionsViewController: UIViewController {
         collectionView.accessibilityScroll(.left)
         collectionView.backgroundColor = .clear
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 36, bottom: 0, right: 150)
-        
     }
     
     private func setupNetworkStatusLabel() {

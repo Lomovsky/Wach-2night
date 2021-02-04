@@ -13,7 +13,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     let searchController = UISearchController(searchResultsController: nil)
     let cellID = "Cell"
     var filmResponse: FilmResponse? = nil
-//    static var films: [Film] = []
     var timer: Timer?
     
     let tableView: UITableView = {
@@ -22,7 +21,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         return tableView
     }()
     
-    //MARK: viewDidLoad
+    //MARK: viewDidLoad -
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(tableView)
@@ -30,7 +29,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     }
     
     //MARK: viewWillAppear
-    
     override func viewWillAppear(_ animated: Bool) {
         setGradientBackground()
         setupNavigationController()
@@ -38,7 +36,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         setupTableView()
     }
     
-    //MARK: SetupFuncs
+    //MARK: SetupFuncs -
     private func setGradientBackground() {
         let colorTop =  UIColor(red: 0.95, green: 0.98, blue: 0.93, alpha: 1.00).cgColor
         let colorBottom = UIColor(red: 0.68, green: 0.76, blue: 0.81, alpha: 1.00).cgColor
@@ -51,9 +49,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     
     private func setupNavigationController() {
         tabBarController?.navigationController?.navigationBar.isHidden = false
-//        tabBarController?.navigationController?.navigationBar.prefersLargeTitles = true
-            //to set the title with TabBarController enabled
-//        navigationController?.visibleViewController?.title = "Поиск"
+        //to set the title with TabBarController enabled
+        //        navigationController?.visibleViewController?.title = "Поиск"
         
     }
     
@@ -61,6 +58,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         tabBarController?.navigationItem.searchController = searchController
         searchController.searchBar.delegate = self
         searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Введите название"
     }
     
     private func setupTableView() {
@@ -76,6 +74,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
             tableView.deselectRow(at: indexPath, animated: true)
         }
     }
-
- 
+    
+    
 }
