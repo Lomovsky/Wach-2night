@@ -11,34 +11,17 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     // MARK: - Table view data source    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return  SearchViewController.films.count
+        return  self.filmResponse?.results.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let film = self.filmResponse?.results[indexPath.row]
+        cell.textLabel?.text = film?.title
+        cell.backgroundColor = .clear
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
-        let film =  SearchViewController.films[indexPath.row]
-        if let posterPath = film.posterPath {
-            let posterPathString = imagePath + posterPath
-            let posterURL = URL(string: posterPathString)
-            DispatchQueue.global(qos: .userInitiated).async {
-                let posterData = try? Data(contentsOf: posterURL!)
-                let posterImage = UIImage(data: posterData!)
-                let newPosterImage = posterImage?.resizeImageUsingVImage(size: CGSize.init(width: 50.0, height: 50.0))
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5 , execute: {
-//                    cell.imageView?.image = newPosterImage
-                    cell.textLabel?.text = film.title
-                })
-            }
-        } else {
-            let defaultImage = #imageLiteral(resourceName: "1024px-No_image_available.svg")
-            cell.textLabel?.text = film.title
-//            cell.imageView?.image = defaultImage
-            
-        }
-        
-        cell.backgroundColor = .clear
-        cell.frame.size.height = 50
-        
         return cell
     }
     

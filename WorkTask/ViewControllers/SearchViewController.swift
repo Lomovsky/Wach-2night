@@ -12,8 +12,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     //MARK: Declarations
     let searchController = UISearchController(searchResultsController: nil)
     let cellID = "Cell"
-//    static var filmResponse: FilmResponse? = nil
-    static var films: [Film] = []
+    var filmResponse: FilmResponse? = nil
+//    static var films: [Film] = []
     var timer: Timer?
     
     let tableView: UITableView = {
