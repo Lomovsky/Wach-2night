@@ -102,6 +102,8 @@ class CollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: Setup funcs -
+
+    
     
     private func setupImageView() {
         imageView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true

@@ -178,8 +178,8 @@
 			children = (
 				C003674725824CB500226ED4 /* SuggestionsVC+CollectionViewDataSource.swift */,
 				C0089F5825B2184D001647F2 /* SuggestionsVC+HelperFuncs.swift */,
-				C07E70D925BB33F2001EE1AC /* SearchVC+SearchBarDelegate.swift */,
 				C0CE78BB25CAD38900A55990 /* SearchVC+TableViewDataSource.swift */,
+				C07E70D925BB33F2001EE1AC /* SearchVC+SearchBarDelegate.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";

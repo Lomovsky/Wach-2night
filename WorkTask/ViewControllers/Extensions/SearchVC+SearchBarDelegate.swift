@@ -11,11 +11,7 @@ import NaturalLanguage
 extension SearchViewController {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-//        var searchLanguage = ""
         var searchURL = ""
-        //nb - en
-        //ru - ru
-        
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
             if let language = NSLinguisticTagger.dominantLanguage(for: searchText) {
@@ -27,7 +23,6 @@ extension SearchViewController {
                     print("API LINK LOOKS LIKE:\(searchURL)")
                 }
             }
-            
             NetworkManager.fetchCurrentData(withURL: searchURL) { [weak self] (result) in
                 guard let self = self else { return }
                 switch result {

@@ -10,17 +10,30 @@ import UIKit
 class TableViewCell: UITableViewCell {
     
 //MARK: Declarations
-    let poster: UIImageView = {
-        let poster = UIImageView()
-        poster.translatesAutoresizingMaskIntoConstraints = false
-        return poster
+    let ratingLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
+    let starImage: UIImageView = {
+        let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        return image
+    }()
+    
+    let ratingStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+
+//MARK: Initializer
     override func awakeFromNib() {
         super.awakeFromNib()
-        contentView.addSubview(poster)
+        contentView.addSubview(ratingStackView)
         
-        setupImageView()
+        setupRatingStackView()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -28,12 +41,20 @@ class TableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
     
-    private func setupImageView() {
-        imageView?.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-        imageView?.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 3).isActive = true
-        imageView?.clipsToBounds = true
-        imageView?.layer.cornerRadius = 20
+//MARK: SetupFuncs
+    private func setupRatingStackView() {
+        ratingStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        ratingStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        ratingStackView.frame.size.width = 30
+        ratingStackView.addSubview(starImage)
+        
+    }
+    
+    private func setupStarImage() {
+        starImage.leadingAnchor.constraint(equalTo: ratingStackView.leadingAnchor).isActive = true
+        starImage.centerYAnchor.constraint(equalTo: ratingStackView.centerYAnchor).isActive = true
+        starImage.image = UIImage(systemName: "star.fill")
+        starImage.tintColor = .systemYellow
     }
 }
