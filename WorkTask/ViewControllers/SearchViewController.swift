@@ -26,8 +26,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(tableView)
-        setupTableView()
-
+        
     }
     
     //MARK: viewWillAppear
@@ -36,6 +35,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         setGradientBackground()
         setupNavigationController()
         setupSearchBar()
+        setupTableView()
     }
     
     //MARK: SetupFuncs
@@ -51,6 +51,10 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     
     private func setupNavigationController() {
         tabBarController?.navigationController?.navigationBar.isHidden = false
+//        tabBarController?.navigationController?.navigationBar.prefersLargeTitles = true
+            //to set the title with TabBarController enabled
+//        navigationController?.visibleViewController?.title = "Поиск"
+        
     }
     
     private func setupSearchBar() {
@@ -68,6 +72,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         tableView.backgroundColor = .clear
+        if let indexPath = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
     }
 
  

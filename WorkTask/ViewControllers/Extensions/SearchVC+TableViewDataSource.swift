@@ -17,6 +17,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let film = self.filmResponse?.results[indexPath.row]
         cell.textLabel?.text = film?.title
+        
         cell.backgroundColor = .clear
     }
     
@@ -25,14 +26,14 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return false
     }
-    */
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedFilmVC = SelectedFilmViewController()
+        self.navigationController?.pushViewController(selectedFilmVC, animated: true)
+    }
 
     /*
     // Override to support editing the table view.

@@ -11,6 +11,7 @@
 		C003674825824CB500226ED4 /* SuggestionsVC+CollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C003674725824CB500226ED4 /* SuggestionsVC+CollectionViewDataSource.swift */; };
 		C004193225B35D06009F5B39 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C004193125B35D06009F5B39 /* TabBarController.swift */; };
 		C0089F5925B2184D001647F2 /* SuggestionsVC+HelperFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0089F5825B2184D001647F2 /* SuggestionsVC+HelperFuncs.swift */; };
+		C008D31425CC4DDB00413490 /* SelectedFilmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C008D31325CC4DDB00413490 /* SelectedFilmViewController.swift */; };
 		C016B01D258C03F400F77CA6 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016B01C258C03F400F77CA6 /* PreviewViewController.swift */; };
 		C021DFFF25CBFD190028ACE0 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C021DFFE25CBFD190028ACE0 /* StringExtension.swift */; };
 		C028AC7025B0D8BF007799B6 /* UIImageExtensionForResizingImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = C028AC6F25B0D8BF007799B6 /* UIImageExtensionForResizingImages.swift */; };
@@ -40,6 +41,7 @@
 		C003674725824CB500226ED4 /* SuggestionsVC+CollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SuggestionsVC+CollectionViewDataSource.swift"; sourceTree = "<group>"; };
 		C004193125B35D06009F5B39 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		C0089F5825B2184D001647F2 /* SuggestionsVC+HelperFuncs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SuggestionsVC+HelperFuncs.swift"; sourceTree = "<group>"; };
+		C008D31325CC4DDB00413490 /* SelectedFilmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedFilmViewController.swift; sourceTree = "<group>"; };
 		C016B01C258C03F400F77CA6 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		C021DFFE25CBFD190028ACE0 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		C028AC6F25B0D8BF007799B6 /* UIImageExtensionForResizingImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtensionForResizingImages.swift; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 				C060DAFE257BECA200C892DE /* SuggestionsViewController.swift */,
 				C016B01C258C03F400F77CA6 /* PreviewViewController.swift */,
 				C0CE78B725CAD32900A55990 /* SearchViewController.swift */,
+				C008D31325CC4DDB00413490 /* SelectedFilmViewController.swift */,
 				C0D6AD5925960A000000174A /* Extensions */,
 			);
 			path = ViewControllers;
@@ -354,6 +357,7 @@
 				C028AC7025B0D8BF007799B6 /* UIImageExtensionForResizingImages.swift in Sources */,
 				C0D6AD532595F9D40000174A /* ApiKeyAndImageLink.swift in Sources */,
 				C060DAFD257BECA200C892DE /* SceneDelegate.swift in Sources */,
+				C008D31425CC4DDB00413490 /* SelectedFilmViewController.swift in Sources */,
 				C0CE78BC25CAD38900A55990 /* SearchVC+TableViewDataSource.swift in Sources */,
 				C0394FE325A8B33D00D7A7FB /* CoreDataManager.swift in Sources */,
 			);

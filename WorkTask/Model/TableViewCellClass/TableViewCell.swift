@@ -32,6 +32,7 @@ class TableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         contentView.addSubview(ratingStackView)
+        contentView.addSubview(starImage)
         
         setupRatingStackView()
     }
