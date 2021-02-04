@@ -22,8 +22,8 @@ class PreviewViewController: UIViewController {
         return view
     }()
     
-    let containerView: UIStackView = {
-        let stack = UIStackView()
+    let containerView: UIView = {
+        let stack = UIView()
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
@@ -143,14 +143,13 @@ class PreviewViewController: UIViewController {
         containerView.layer.shadowOpacity = 0.7
         containerView.layer.shadowOffset = CGSize.init(width: 2.5, height: 2.5)
         containerView.layer.shadowPath = cgPath
-        
     }
     
     private func setupImageView() {
         imageView.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
         imageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
         imageView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
-        imageView.frame.size.height = imageView.image!.accessibilityFrame.height
+        imageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.6).isActive = true
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 10

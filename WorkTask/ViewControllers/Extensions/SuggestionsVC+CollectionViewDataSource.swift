@@ -26,14 +26,13 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
         return 34
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CollectionViewCell.reuseIdentifier,for: indexPath) as? CollectionViewCell {
             let film = SuggestionsViewController.films[indexPath.row]
             let defaultImage = #imageLiteral(resourceName: "1024px-No_image_available.svg")
             let poster = UIImage(data: film.poster!)
-            let newPoster = poster?.resizeImageUsingVImage(size: CGSize.init(width: cell.frame.width,
-                                                                             height: cell.frame.height / 1.6))
+            let newPoster = poster?.resizeImageUsingVImage(size: CGSize.init(width: 200,
+                                                                             height: 200))
             DispatchQueue.main.async {
                 cell.configureCell(image: newPoster ?? defaultImage, title: film.title ?? "Неизвестно", originalTitle: film.originalTitle ?? "Неизвестно", releaseDate: film.releaseDate ?? "Неизвестно", rating: film.rating )
             }
@@ -44,7 +43,20 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath)
         let previewVC = PreviewViewController()
+        //Briefly fade the cell on selection
+        UIView.animate(withDuration: 0.2,
+                       animations: {
+                        //Fade-out
+                        cell?.alpha = 0.5
+        }) { (completed) in
+            UIView.animate(withDuration: 0.2,
+                           animations: {
+                            //Fade-out
+                            cell?.alpha = 1
+            })
+        }
         navigationController?.present(previewVC, animated: true)
         let film = SuggestionsViewController.films[indexPath.row]
         let poster = UIImage(data: film.poster!)

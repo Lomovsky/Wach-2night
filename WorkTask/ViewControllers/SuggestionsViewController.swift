@@ -23,6 +23,7 @@ class SuggestionsViewController: UIViewController {
         return cv
     }()
     
+    
     let stackView: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -55,10 +56,10 @@ class SuggestionsViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         view.addSubview(label)
-        setupLabel()
         view.addSubview(collectionView)
         view.addSubview(activityIndicator)
-        
+        setupActivityIndicator()
+        setupLabel()
         NotificationCenter.default.addObserver(self, selector: #selector(updateUI(notification:)), name:NSNotification.Name(rawValue: "update"), object: nil)
         
         let coreDataManager = CoreDataManager()
@@ -75,7 +76,7 @@ class SuggestionsViewController: UIViewController {
         setupView()
         setupCollectionView()
         setupNavigationController()
-        setupActivityIndicator()
+        
         
     }
     
@@ -100,9 +101,10 @@ class SuggestionsViewController: UIViewController {
     
     private func setupCollectionView() {
         collectionView.topAnchor.constraint(equalTo: label.bottomAnchor, constant: 10).isActive = true
-        collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+//        collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        collectionView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.3).isActive = true
         collectionView.accessibilityScroll(.left)
         collectionView.backgroundColor = .clear
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 36, bottom: 0, right: 150)
