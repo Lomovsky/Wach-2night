@@ -14,7 +14,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let winScene = (scene as? UIWindowScene) else { return }
-        let rootViewController = UINavigationController(rootViewController: TabBarController())
+        let rootViewController = UINavigationController(rootViewController: SuggestionsViewController())
         let win = UIWindow(windowScene: winScene)
         win.rootViewController = rootViewController
         win.makeKeyAndVisible()

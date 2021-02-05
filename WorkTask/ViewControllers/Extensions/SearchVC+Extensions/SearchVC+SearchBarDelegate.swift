@@ -11,12 +11,11 @@ import NaturalLanguage
 extension SearchViewController {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
         var searchURL = ""
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
-            if searchText == "" {
-                self.dismiss(animated: true, completion: nil)
-            }
+            
             if let language = NSLinguisticTagger.dominantLanguage(for: searchText) {
                 if language == "nb" {
                     searchURL = "https://api.themoviedb.org/3/search/movie?api_key=\(apiKey)&language=en-US&query=\(searchText)&page=1&include_adult=false"

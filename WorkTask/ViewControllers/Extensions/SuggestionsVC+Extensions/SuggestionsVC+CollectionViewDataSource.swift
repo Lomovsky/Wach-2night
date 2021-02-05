@@ -27,7 +27,7 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
             return CGSize(width: collectionView.frame.width * 0.3, height: collectionView.frame.height * 0.5)
             
         } else if collectionView == self.recommendationsCollectionView {
-            return CGSize(width: view.frame.width - 125, height: collectionView.frame.size.height * 0.8)
+            return CGSize(width: view.frame.width - 125, height: collectionView.frame.size.height)
         }
         return CGSize()
     }

@@ -11,7 +11,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     
     //MARK: Declarations
     let searchController = UISearchController(searchResultsController: nil)
-//
     let cellID = "Cell"
     var filmResponse: FilmResponse? = nil
     var timer: Timer?
@@ -90,23 +89,22 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     }
     
     private func setupNavigationController() {
-        tabBarController?.navigationController?.navigationBar.isHidden = false
-        tabBarController?.navigationController?.navigationBar.prefersLargeTitles = true
-        tabBarController?.navigationController?.navigationBar.barTintColor = UIColor(red: 0.96, green: 0.43, blue: 0.35, alpha: 1.00)
-//        tabBarController?.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.white]
-//        tabBarController?.navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.isHidden = false
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.barTintColor = UIColor(red: 0.96, green: 0.43, blue: 0.35, alpha: 1.00)
         navigationController?.visibleViewController?.title = "Поиск"
         
     }
     
     private func setupSearchBar() {
-        tabBarController?.navigationItem.searchController = searchController
+        navigationItem.searchController = searchController
         searchController.searchBar.delegate = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Введите название"
-        searchController.searchBar.tintColor = .white
-        searchController.searchBar.barTintColor = .white
-        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.searchBar.searchTextField.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        searchController.searchBar.searchTextField.tokenBackgroundColor = .white
+        searchController.searchBar.searchTextField.backgroundColor = UIColor(red: 0.98, green: 0.96, blue: 0.96, alpha: 1.00)
+        searchController.isActive = true
         
         
     }
@@ -125,5 +123,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         }
     }
     
+    deinit {
+        print("searchVC was dealloc")
+    }
     
 }

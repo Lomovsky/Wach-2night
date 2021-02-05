@@ -132,12 +132,13 @@ class SuggestionsViewController: UIViewController {
 
     
     private func setupNavigationController() {
-        tabBarController?.navigationController?.navigationBar.isHidden = false
-        tabBarController?.navigationController?.navigationBar.prefersLargeTitles = true
-        tabBarController?.navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-        tabBarController?.navigationController?.visibleViewController?.title = "Рекомендации"
-        tabBarController?.navigationItem.searchController = nil
-        tabBarController?.tabBar.tintColor = UIColor(red: 0.96, green: 0.43, blue: 0.35, alpha: 1.00)
+        navigationController?.navigationBar.isHidden = false
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        navigationController?.visibleViewController?.title = "Рекомендации"
+        navigationController?.navigationBar.tintColor = .white
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(showSearch))
+        navigationItem.searchController = nil
     }
     
     private func setupGenerCollectionView() {
@@ -151,10 +152,10 @@ class SuggestionsViewController: UIViewController {
     }
     
     private func setupCollectionView() {
-        recommendationsCollectionView.topAnchor.constraint(equalTo: subView.bottomAnchor, constant: 10).isActive = true
-        recommendationsCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        recommendationsCollectionView.topAnchor.constraint(equalTo: subView.bottomAnchor, constant: 20).isActive = true
         recommendationsCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         recommendationsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        recommendationsCollectionView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.4).isActive = true
         recommendationsCollectionView.accessibilityScroll(.left)
         recommendationsCollectionView.backgroundColor = .clear
         recommendationsCollectionView.contentInset = UIEdgeInsets(top: 0, left: 36, bottom: 0, right: 150)
@@ -166,5 +167,8 @@ class SuggestionsViewController: UIViewController {
         activityIndicator.startAnimating()
     }
     
-    
+    @objc func showSearch() {
+        let searchVC = SearchViewController()
+        navigationController?.pushViewController(searchVC, animated: true)
+    }
 }
