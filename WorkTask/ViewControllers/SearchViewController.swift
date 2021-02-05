@@ -15,6 +15,15 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     var filmResponse: FilmResponse? = nil
     var timer: Timer?
     
+    
+    //MARK: UIElements
+    let subview: UIView = {
+        let view = UIView()
+        view.layer.cornerRadius = 10
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     let tableView: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -24,31 +33,40 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     //MARK: viewDidLoad -
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubview(subview)
         view.addSubview(tableView)
+        
         
     }
     
     //MARK: viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
         setupView()
+        setupSubview()
         setupNavigationController()
         setupSearchBar()
         setupTableView()
+
     }
     
     //MARK: SetupFuncs -
 
-    
     private func setupView() {
         view.backgroundColor = UIColor(red: 0.98, green: 0.96, blue: 0.96, alpha: 1.00)
+    }
+    
+    private func setupSubview() {
+        subview.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        subview.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        subview.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        subview.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        subview.backgroundColor = UIColor(red: 0.96, green: 0.43, blue: 0.35, alpha: 1.00)
     }
     
     private func setupNavigationController() {
         tabBarController?.navigationController?.navigationBar.isHidden = false
         tabBarController?.navigationController?.navigationBar.prefersLargeTitles = false
-
-        //to set the title with TabBarController enabled
-        //        navigationController?.visibleViewController?.title = "Поиск"
+        navigationController?.visibleViewController?.title = "Поиск"
         
     }
     
@@ -57,6 +75,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         searchController.searchBar.delegate = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Введите название"
+        searchController.searchBar.tintColor = .white
     }
     
     private func setupTableView() {
