@@ -9,7 +9,6 @@ import UIKit
 
 class SuggestionsViewController: UIViewController {
     //MARK: Declarations
-    let urlString = "https://api.themoviedb.org/3/discover/movie?api_key=\(apiKey)&language=ru-RU&sort_by=popularity.desc&include_adult=true&include_video=false&page=1"
     static var films: [CurrentFilm] = []
     let genres = ["Фентези", "Триллер", "Ужасы", "Мелодрама"]
     
@@ -112,7 +111,7 @@ class SuggestionsViewController: UIViewController {
         shadowSubview.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         shadowSubview.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         shadowSubview.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        shadowSubview.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.35).isActive = true
+        shadowSubview.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.27).isActive = true
         shadowSubview.layer.shadowColor = UIColor.black.cgColor
         shadowSubview.layer.shadowRadius = 7
         shadowSubview.layer.shadowOpacity = 0.7
@@ -138,6 +137,7 @@ class SuggestionsViewController: UIViewController {
         tabBarController?.navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
         tabBarController?.navigationController?.visibleViewController?.title = "Рекомендации"
         tabBarController?.navigationItem.searchController = nil
+        tabBarController?.tabBar.tintColor = UIColor(red: 0.96, green: 0.43, blue: 0.35, alpha: 1.00)
     }
     
     private func setupGenerCollectionView() {

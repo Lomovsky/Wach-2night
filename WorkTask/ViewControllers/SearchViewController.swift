@@ -11,6 +11,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     
     //MARK: Declarations
     let searchController = UISearchController(searchResultsController: nil)
+//
     let cellID = "Cell"
     var filmResponse: FilmResponse? = nil
     var timer: Timer?
@@ -48,8 +49,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     
     //MARK: viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
-        setupShadowSubView()
         setupView()
+        setupShadowSubView()
         setupSubview()
         setupNavigationController()
         setupSearchBar()
@@ -57,7 +58,16 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
 
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+
+    }
+    
+    
     //MARK: SetupFuncs -
+    private func setupView() {
+        view.backgroundColor = UIColor(red: 0.98, green: 0.96, blue: 0.96, alpha: 1.00)
+    }
+    
     private func setupShadowSubView() {
         shadowSubView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         shadowSubView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
@@ -71,10 +81,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         shadowSubView.addSubview(subview)
     }
     
-    private func setupView() {
-        view.backgroundColor = UIColor(red: 0.98, green: 0.96, blue: 0.96, alpha: 1.00)
-    }
-    
     private func setupSubview() {
         subview.topAnchor.constraint(equalTo: shadowSubView.topAnchor).isActive = true
         subview.leadingAnchor.constraint(equalTo: shadowSubView.leadingAnchor).isActive = true
@@ -85,7 +91,10 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     
     private func setupNavigationController() {
         tabBarController?.navigationController?.navigationBar.isHidden = false
-        tabBarController?.navigationController?.navigationBar.prefersLargeTitles = false
+        tabBarController?.navigationController?.navigationBar.prefersLargeTitles = true
+        tabBarController?.navigationController?.navigationBar.barTintColor = UIColor(red: 0.96, green: 0.43, blue: 0.35, alpha: 1.00)
+//        tabBarController?.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor : UIColor.white]
+//        tabBarController?.navigationController?.navigationBar.tintColor = .white
         navigationController?.visibleViewController?.title = "Поиск"
         
     }
@@ -96,6 +105,10 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Введите название"
         searchController.searchBar.tintColor = .white
+        searchController.searchBar.barTintColor = .white
+        searchController.hidesNavigationBarDuringPresentation = false
+        
+        
     }
     
     private func setupTableView() {

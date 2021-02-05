@@ -11,6 +11,7 @@ class TabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        delegate = self
         
         let suggestionsVC = SuggestionsViewController()
         suggestionsVC.tabBarItem = UITabBarItem(title: "Рекомендации",
@@ -20,5 +21,22 @@ class TabBarController: UITabBarController {
                                            image: UIImage(systemName: "magnifyingglass"), tag: 1)
         let tabBarList = [suggestionsVC, searchVC]
         viewControllers = tabBarList
+    }
+    
+    
+}
+
+extension TabBarController: UITabBarControllerDelegate  {
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+
+        guard let fromView = selectedViewController?.view, let toView = viewController.view else {
+          return true // Make sure you want this as false
+        }
+
+        if fromView != toView {
+          UIView.transition(from: fromView, to: toView, duration: 0.3, options: [.transitionCrossDissolve], completion: nil)
+        }
+
+        return true
     }
 }

@@ -158,6 +158,24 @@
 			path = WorkTask;
 			sourceTree = "<group>";
 		};
+		C062A59225CDB4DE00C507ED /* SuggestionsVC+Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C003674725824CB500226ED4 /* SuggestionsVC+CollectionViewDataSource.swift */,
+				C0089F5825B2184D001647F2 /* SuggestionsVC+HelperFuncs.swift */,
+			);
+			path = "SuggestionsVC+Extensions";
+			sourceTree = "<group>";
+		};
+		C062A59425CDB4F700C507ED /* SearchVC+Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C0CE78BB25CAD38900A55990 /* SearchVC+TableViewDataSource.swift */,
+				C07E70D925BB33F2001EE1AC /* SearchVC+SearchBarDelegate.swift */,
+			);
+			path = "SearchVC+Extensions";
+			sourceTree = "<group>";
+		};
 		C0B6B08D2583E61F002F1F7D /* Networking */ = {
 			isa = PBXGroup;
 			children = (
@@ -180,10 +198,8 @@
 		C0D6AD5925960A000000174A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				C003674725824CB500226ED4 /* SuggestionsVC+CollectionViewDataSource.swift */,
-				C0089F5825B2184D001647F2 /* SuggestionsVC+HelperFuncs.swift */,
-				C0CE78BB25CAD38900A55990 /* SearchVC+TableViewDataSource.swift */,
-				C07E70D925BB33F2001EE1AC /* SearchVC+SearchBarDelegate.swift */,
+				C062A59225CDB4DE00C507ED /* SuggestionsVC+Extensions */,
+				C062A59425CDB4F700C507ED /* SearchVC+Extensions */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";

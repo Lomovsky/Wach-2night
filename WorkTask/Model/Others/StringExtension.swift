@@ -6,7 +6,9 @@
 //
 
 import UIKit
+//Provides encoding/decoding for cyryllic symbols
 extension String{
+    
     var encodeUrl : String
     {
         return self.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
