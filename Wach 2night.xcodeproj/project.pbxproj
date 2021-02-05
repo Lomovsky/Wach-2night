@@ -24,6 +24,7 @@
 		C060DB04257BECA400C892DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C060DB03257BECA400C892DE /* Assets.xcassets */; };
 		C060DB07257BECA400C892DE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C060DB05257BECA400C892DE /* LaunchScreen.storyboard */; };
 		C060DB14257BED7C00C892DE /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = C060DB13257BED7C00C892DE /* .gitignore */; };
+		C062A59025CDB03400C507ED /* GenreCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C062A58F25CDB03400C507ED /* GenreCollectionViewCell.swift */; };
 		C07E70DA25BB33F2001EE1AC /* SearchVC+SearchBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07E70D925BB33F2001EE1AC /* SearchVC+SearchBarDelegate.swift */; };
 		C0C0E7C02583C4A4006C460E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C0E7BF2583C4A4006C460E /* NetworkManager.swift */; };
 		C0C0E7C32583C74D006C460E /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C0E7C22583C74D006C460E /* DataModel.swift */; };
@@ -31,7 +32,7 @@
 		C0CE78BC25CAD38900A55990 /* SearchVC+TableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CE78BB25CAD38900A55990 /* SearchVC+TableViewDataSource.swift */; };
 		C0CE78C625CADF3700A55990 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CE78C525CADF3700A55990 /* TableViewCell.swift */; };
 		C0D6AD532595F9D40000174A /* ApiKeyAndImageLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D6AD522595F9D40000174A /* ApiKeyAndImageLink.swift */; };
-		C0F2F76C257D02C800A1DAF9 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F2F76A257D02C800A1DAF9 /* CollectionViewCell.swift */; };
+		C0F2F76C257D02C800A1DAF9 /* RecommendationsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F2F76A257D02C800A1DAF9 /* RecommendationsCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		C060DB06257BECA400C892DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C060DB08257BECA400C892DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = WorkTask/Info.plist; sourceTree = SOURCE_ROOT; };
 		C060DB13257BED7C00C892DE /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		C062A58F25CDB03400C507ED /* GenreCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreCollectionViewCell.swift; sourceTree = "<group>"; };
 		C07E70D925BB33F2001EE1AC /* SearchVC+SearchBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchVC+SearchBarDelegate.swift"; sourceTree = "<group>"; };
 		C0C0E7BF2583C4A4006C460E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		C0C0E7C22583C74D006C460E /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
@@ -63,7 +65,7 @@
 		C0CE78BB25CAD38900A55990 /* SearchVC+TableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchVC+TableViewDataSource.swift"; sourceTree = "<group>"; };
 		C0CE78C525CADF3700A55990 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		C0D6AD522595F9D40000174A /* ApiKeyAndImageLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeyAndImageLink.swift; sourceTree = "<group>"; };
-		C0F2F76A257D02C800A1DAF9 /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		C0F2F76A257D02C800A1DAF9 /* RecommendationsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,7 +100,7 @@
 		C003674A25824CBC00226ED4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C0F2F776257D454000A1DAF9 /* CollectionViewCellClass */,
+				C0F2F776257D454000A1DAF9 /* CollectionViewCellClasses */,
 				C0CE78C425CADF0000A55990 /* TableViewCellClass */,
 				C0B6B08D2583E61F002F1F7D /* Networking */,
 				C04D6E9725AB2E0900E4B151 /* CoreDataFiles */,
@@ -195,12 +197,13 @@
 			path = Delegates;
 			sourceTree = "<group>";
 		};
-		C0F2F776257D454000A1DAF9 /* CollectionViewCellClass */ = {
+		C0F2F776257D454000A1DAF9 /* CollectionViewCellClasses */ = {
 			isa = PBXGroup;
 			children = (
-				C0F2F76A257D02C800A1DAF9 /* CollectionViewCell.swift */,
+				C0F2F76A257D02C800A1DAF9 /* RecommendationsCollectionViewCell.swift */,
+				C062A58F25CDB03400C507ED /* GenreCollectionViewCell.swift */,
 			);
-			path = CollectionViewCellClass;
+			path = CollectionViewCellClasses;
 			sourceTree = "<group>";
 		};
 		C0F2F778257D455700A1DAF9 /* ViewControllers */ = {
@@ -341,6 +344,7 @@
 			files = (
 				C0C0E7C02583C4A4006C460E /* NetworkManager.swift in Sources */,
 				C04D6EA325AB405E00E4B151 /* ConnectionManager.swift in Sources */,
+				C062A59025CDB03400C507ED /* GenreCollectionViewCell.swift in Sources */,
 				C060DAFF257BECA200C892DE /* SuggestionsViewController.swift in Sources */,
 				C004193225B35D06009F5B39 /* TabBarController.swift in Sources */,
 				C0CE78C625CADF3700A55990 /* TableViewCell.swift in Sources */,
@@ -348,7 +352,7 @@
 				C060DAFB257BECA200C892DE /* AppDelegate.swift in Sources */,
 				C016B01D258C03F400F77CA6 /* PreviewViewController.swift in Sources */,
 				C04D6EA025AB391C00E4B151 /* Wach 2night.xcdatamodeld in Sources */,
-				C0F2F76C257D02C800A1DAF9 /* CollectionViewCell.swift in Sources */,
+				C0F2F76C257D02C800A1DAF9 /* RecommendationsCollectionViewCell.swift in Sources */,
 				C003674825824CB500226ED4 /* SuggestionsVC+CollectionViewDataSource.swift in Sources */,
 				C0C0E7C32583C74D006C460E /* DataModel.swift in Sources */,
 				C021DFFF25CBFD190028ACE0 /* StringExtension.swift in Sources */,

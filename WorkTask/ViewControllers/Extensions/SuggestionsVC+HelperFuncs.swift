@@ -25,9 +25,9 @@ extension SuggestionsViewController {
                         DispatchQueue.main.async {
                             coreDataManager.save(film.title, filmOriginalTitle: film.originalTitle, filmPoster: posterData, releaseDate: film.releaseDate, overview: film.overview, rating: film.rating, originalPoster: posterData)
                             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                self.collectionView.reloadData()
+                                self.recommendationsCollectionView.reloadData()
                                 self.activityIndicator.stopAnimating()
-                                self.collectionView.isHidden = false
+                                self.recommendationsCollectionView.isHidden = false
                                 self.activityIndicator.isHidden = true
 //                                self.label.text = "Рекомендуем к просмотру"
                             }
@@ -44,8 +44,8 @@ extension SuggestionsViewController {
         let coreDataManager = CoreDataManager()
         coreDataManager.fetchData()
         DispatchQueue.main.async {
-            self.collectionView.reloadData()
-            self.collectionView.isHidden = false
+            self.recommendationsCollectionView.reloadData()
+            self.recommendationsCollectionView.isHidden = false
             self.activityIndicator.stopAnimating()
             self.activityIndicator.isHidden = true
         }

@@ -11,7 +11,7 @@ class SuggestionsViewController: UIViewController {
     //MARK: Declarations
     let urlString = "https://api.themoviedb.org/3/discover/movie?api_key=\(apiKey)&language=ru-RU&sort_by=popularity.desc&include_adult=true&include_video=false&page=1"
     static var films: [CurrentFilm] = []
-    
+    let genres = ["Фентези", "Триллер", "Ужасы", "Мелодрама"]
     
     //MARK: UIElements
     let subView: UIView = {
@@ -27,13 +27,22 @@ class SuggestionsViewController: UIViewController {
         return view
     }()
     
-    let collectionView: UICollectionView = {
+    let genreCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let cv = UICollectionView(frame: CGRect.init(x: 0, y: 0, width: 0, height: 0), collectionViewLayout: layout)
+        cv.translatesAutoresizingMaskIntoConstraints = false
+        cv.register(GenreCollectionViewCell.self, forCellWithReuseIdentifier: GenreCollectionViewCell.reuseIdentifier)
+        return cv
+    }()
+    
+    let recommendationsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let cv = UICollectionView(frame: .init(x: 0, y: 178, width: 0, height: 0), collectionViewLayout: layout)
         cv.translatesAutoresizingMaskIntoConstraints = false
-        cv.register(CollectionViewCell.self,
-                    forCellWithReuseIdentifier: "CollectionViewCellReuseIdentifier")
+        cv.register(RecommendationsCollectionViewCell.self,
+                    forCellWithReuseIdentifier: RecommendationsCollectionViewCell.reuseIdentifier)
         return cv
     }()
     
@@ -59,11 +68,14 @@ class SuggestionsViewController: UIViewController {
     // MARK: ViewDidLoad -
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.delegate = self
-        collectionView.dataSource = self
+        recommendationsCollectionView.delegate = self
+        recommendationsCollectionView.dataSource = self
+        genreCollectionView.delegate = self
+        genreCollectionView.dataSource = self
         view.addSubview(subView)
         view.addSubview(shadowSubview)
-        view.addSubview(collectionView)
+        view.addSubview(genreCollectionView)
+        view.addSubview(recommendationsCollectionView)
         view.addSubview(activityIndicator)
         
         NotificationCenter.default.addObserver(self, selector: #selector(updateUI(notification:)), name:NSNotification.Name(rawValue: "update"), object: nil)
@@ -85,6 +97,7 @@ class SuggestionsViewController: UIViewController {
         setupSubview()
         setupShadowSubview()
         setupNavigationController()
+        setupGenerCollectionView()
         setupCollectionView()
     }
     
@@ -114,6 +127,7 @@ class SuggestionsViewController: UIViewController {
         subView.trailingAnchor.constraint(equalTo: shadowSubview.trailingAnchor).isActive = true
         subView.heightAnchor.constraint(equalTo: shadowSubview.heightAnchor).isActive = true
         subView.backgroundColor = UIColor(red: 0.96, green: 0.43, blue: 0.35, alpha: 1.00)
+        subView.addSubview(genreCollectionView)
     }
     
 
@@ -126,14 +140,24 @@ class SuggestionsViewController: UIViewController {
         tabBarController?.navigationItem.searchController = nil
     }
     
+    private func setupGenerCollectionView() {
+        genreCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        genreCollectionView.leadingAnchor.constraint(equalTo: subView.leadingAnchor).isActive = true
+        genreCollectionView.trailingAnchor.constraint(equalTo: subView.trailingAnchor).isActive = true
+        genreCollectionView.bottomAnchor.constraint(equalTo: subView.bottomAnchor).isActive = true
+        genreCollectionView.backgroundColor = .clear
+        genreCollectionView.accessibilityScroll(.left)
+        genreCollectionView.contentInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+    }
+    
     private func setupCollectionView() {
-        collectionView.topAnchor.constraint(equalTo: subView.bottomAnchor, constant: 10).isActive = true
-        collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        collectionView.accessibilityScroll(.left)
-        collectionView.backgroundColor = .clear
-        collectionView.contentInset = UIEdgeInsets(top: 0, left: 36, bottom: 0, right: 150)
+        recommendationsCollectionView.topAnchor.constraint(equalTo: subView.bottomAnchor, constant: 10).isActive = true
+        recommendationsCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        recommendationsCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        recommendationsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        recommendationsCollectionView.accessibilityScroll(.left)
+        recommendationsCollectionView.backgroundColor = .clear
+        recommendationsCollectionView.contentInset = UIEdgeInsets(top: 0, left: 36, bottom: 0, right: 150)
     }
 
         private func setupActivityIndicator() {

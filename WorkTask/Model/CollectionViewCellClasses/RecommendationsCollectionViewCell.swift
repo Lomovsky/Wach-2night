@@ -7,14 +7,12 @@
 
 import UIKit
 
-class CollectionViewCell: UICollectionViewCell {
+class RecommendationsCollectionViewCell: UICollectionViewCell {
     
     class var reuseIdentifier: String {
         return "CollectionViewCellReuseIdentifier"
     }
-    class var nibName: String {
-        return "CollectionViewCell"
-    }
+    
     
     
     // MARK: Declarations

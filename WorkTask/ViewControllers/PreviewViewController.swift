@@ -84,7 +84,6 @@ class PreviewViewController: UIViewController {
     //MARK: viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
         setupImageView()
-        setupNavigationController()
         setupViewController()
         setupInfoButton()
         setupYearLabel()
@@ -106,9 +105,6 @@ class PreviewViewController: UIViewController {
         view.backgroundColor = UIColor(red: 0.98, green: 0.96, blue: 0.96, alpha: 1.00)
     }
     
-    private func setupNavigationController() {
-        
-    }
     
     private func setupScrollView() {
         scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true

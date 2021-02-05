@@ -17,6 +17,12 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     
     
     //MARK: UIElements
+    let shadowSubView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     let subview: UIView = {
         let view = UIView()
         view.layer.cornerRadius = 10
@@ -33,6 +39,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     //MARK: viewDidLoad -
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubview(shadowSubView)
         view.addSubview(subview)
         view.addSubview(tableView)
         
@@ -41,6 +48,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     
     //MARK: viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
+        setupShadowSubView()
         setupView()
         setupSubview()
         setupNavigationController()
@@ -50,16 +58,28 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     }
     
     //MARK: SetupFuncs -
-
+    private func setupShadowSubView() {
+        shadowSubView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        shadowSubView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        shadowSubView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        shadowSubView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        shadowSubView.layer.shadowColor = UIColor.black.cgColor
+        shadowSubView.layer.shadowRadius = 7
+        shadowSubView.layer.shadowOpacity = 0.7
+        shadowSubView.layer.shadowOffset = CGSize.init(width: 2.5, height: 2.5)
+        shadowSubView.layer.masksToBounds = false
+        shadowSubView.addSubview(subview)
+    }
+    
     private func setupView() {
         view.backgroundColor = UIColor(red: 0.98, green: 0.96, blue: 0.96, alpha: 1.00)
     }
     
     private func setupSubview() {
-        subview.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        subview.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        subview.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        subview.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        subview.topAnchor.constraint(equalTo: shadowSubView.topAnchor).isActive = true
+        subview.leadingAnchor.constraint(equalTo: shadowSubView.leadingAnchor).isActive = true
+        subview.trailingAnchor.constraint(equalTo: shadowSubView.trailingAnchor).isActive = true
+        subview.bottomAnchor.constraint(equalTo: shadowSubView.bottomAnchor).isActive = true
         subview.backgroundColor = UIColor(red: 0.96, green: 0.43, blue: 0.35, alpha: 1.00)
     }
     
