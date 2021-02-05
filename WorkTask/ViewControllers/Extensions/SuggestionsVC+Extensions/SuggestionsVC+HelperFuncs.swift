@@ -39,6 +39,11 @@ extension SuggestionsViewController {
         }
     }
     
+    @objc func showSearch() {
+        let searchVC = SearchViewController()
+        navigationController?.pushViewController(searchVC, animated: true)
+    }
+    
     @objc func updateUI(notification: NSNotification) {
         let coreDataManager = CoreDataManager()
         coreDataManager.fetchData()
@@ -50,6 +55,7 @@ extension SuggestionsViewController {
         }
     }
     
+
     
 }
 

@@ -27,7 +27,7 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
             return CGSize(width: collectionView.frame.width * 0.3, height: collectionView.frame.height * 0.5)
             
         } else if collectionView == self.recommendationsCollectionView {
-            return CGSize(width: view.frame.width - 125, height: collectionView.frame.size.height)
+            return CGSize(width: view.frame.width - 125, height: collectionView.frame.size.height * 0.90)
         }
         return CGSize()
     }
@@ -53,11 +53,16 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
                 let film = SuggestionsViewController.films[indexPath.row]
                 let defaultImage = #imageLiteral(resourceName: "1024px-No_image_available.svg")
                 let poster = UIImage(data: film.poster!)
-                let newPoster = poster?.resizeImageUsingVImage(size: CGSize.init(width: 200,
-                                                                                 height: 200))
+                let newPoster = poster?.resizeImageUsingVImage(size: CGSize.init(width: cell.frame.size.width,
+                                                                                 height: cell.frame.size.height))
                 DispatchQueue.main.async {
                     cell.configureCell(image: newPoster ?? defaultImage, title: film.title ?? "Неизвестно", originalTitle: film.originalTitle ?? "Неизвестно", releaseDate: film.releaseDate ?? "Неизвестно", rating: film.rating )
                 }
+                cell.layer.shadowColor = UIColor.black.cgColor
+                cell.layer.shadowRadius = 7
+                cell.layer.shadowOpacity = 0.7
+                cell.layer.shadowOffset = CGSize.init(width: 2.5, height: 2.5)
+                cell.layer.masksToBounds = false
                 return cell
             }
             
@@ -123,5 +128,7 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
         }
         
     }
+    
+
     
 }

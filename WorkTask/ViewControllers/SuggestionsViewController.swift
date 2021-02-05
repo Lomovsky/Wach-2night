@@ -149,6 +149,7 @@ class SuggestionsViewController: UIViewController {
         genreCollectionView.backgroundColor = .clear
         genreCollectionView.accessibilityScroll(.left)
         genreCollectionView.contentInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+        
     }
     
     private func setupCollectionView() {
@@ -167,8 +168,4 @@ class SuggestionsViewController: UIViewController {
         activityIndicator.startAnimating()
     }
     
-    @objc func showSearch() {
-        let searchVC = SearchViewController()
-        navigationController?.pushViewController(searchVC, animated: true)
-    }
 }
