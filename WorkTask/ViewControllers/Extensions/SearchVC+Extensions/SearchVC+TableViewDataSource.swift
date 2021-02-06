@@ -38,10 +38,17 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         DispatchQueue.global(qos: .utility).async {
             let imageData = try? Data(contentsOf: posterURL)
             let poster = UIImage(data: imageData!)
-            selectedFilmVC.posterImage = poster!
+            
+            //TODO: work with GSD
+            DispatchQueue.main.async {
+                let resizedPoster = poster?.resizeImageUsingVImage(size: CGSize.init(width: selectedFilmVC.view.frame.width, height: selectedFilmVC.view.frame.height * 0.5))
+                selectedFilmVC.imageView.image = resizedPoster
+                self.navigationController?.pushViewController(selectedFilmVC, animated: true)
+            }
+         
         }
 
-        self.navigationController?.pushViewController(selectedFilmVC, animated: true)
+      
     }
     
 }

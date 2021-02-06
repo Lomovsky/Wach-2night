@@ -109,16 +109,24 @@ class RecommendationsCollectionViewCell: UICollectionViewCell {
     }
     
     // MARK: Setup funcs -
-    func setGradientBackground() {
-        let colorTop =  UIColor.clear.cgColor
-        let colorBottom = UIColor.white.cgColor
-            let gradientLayer = CAGradientLayer()
-            gradientLayer.colors = [colorTop, colorBottom]
-            gradientLayer.locations = [0.0, 1.0]
-            gradientLayer.frame = self.contentView.bounds
-            self.contentView.layer.insertSublayer(gradientLayer, at: 0)
-        }
-    
+//    func setGradientBackground() {
+//        let colorTop =  UIColor.clear.cgColor
+//        let colorBottom = UIColor.white.cgColor
+//            let gradientLayer = CAGradientLayer()
+//            gradientLayer.colors = [colorTop, colorBottom]
+//            gradientLayer.locations = [0.0, 1.0]
+//            gradientLayer.frame = self.contentView.bounds
+//            self.contentView.layer.insertSublayer(gradientLayer, at: 0)
+//        }
+//    
+//    func setupGradient() {
+//        let gradient: CAGradientLayer = CAGradientLayer()
+//         gradient.frame = self.imageSubviewShadow.bounds
+//        gradient.colors = [  UIColor.white.cgColor, UIColor.clear.cgColor  ]
+//         gradient.locations = [0.0, 0.75]
+//         gradient.cornerRadius = 5
+//        self.imageSubviewShadow.layer.insertSublayer(gradient, at: 0)
+//    }
     
     private func setupImageView() {
         imageView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
@@ -139,7 +147,6 @@ class RecommendationsCollectionViewCell: UICollectionViewCell {
 //        imageSubviewShadow.layer.shadowOpacity = 1
 //        imageSubviewShadow.layer.shadowOffset = CGSize.init(width: 2.5, height: 2.5)
 //        imageSubviewShadow.layer.masksToBounds = false
-        setGradientBackground()
         
     }
     

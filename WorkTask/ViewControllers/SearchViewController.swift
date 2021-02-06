@@ -105,6 +105,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         searchController.searchBar.searchTextField.tokenBackgroundColor = .white
         searchController.searchBar.searchTextField.backgroundColor = UIColor(red: 0.98, green: 0.96, blue: 0.96, alpha: 1.00)
         searchController.isActive = true
+        searchController.searchBar.tintColor = .white
         
         
     }

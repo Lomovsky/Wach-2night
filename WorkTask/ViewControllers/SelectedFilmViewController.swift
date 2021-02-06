@@ -9,23 +9,31 @@ import UIKit
 
 class SelectedFilmViewController: UIViewController {
     //MARK: Declarations
-    var posterImage = UIImage()
-
-    let imageStack: UIStackView = {
+    let shadowSubview: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
+    }()
+    
+    let imageView: UIImageView = {
+        let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        return image
     }()
     
     
     //MARK: viewDidLoad & viewWillAppear -
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubview(shadowSubview)
+        view.addSubview(imageView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         setupView()
         setupNavigationController()
+        setupShadowSubview()
+        setupImageView()
     }
     //MARK: SetupFuncs -
     
@@ -34,27 +42,38 @@ class SelectedFilmViewController: UIViewController {
     }
     
     private func setupNavigationController() {
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.largeContentImage = #imageLiteral(resourceName: "Image-1")
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationController?.navigationBar.tintColor = UIColor(red: 0.96, green: 0.43, blue: 0.35, alpha: 1.00)
+        navigationController?.navigationBar.barTintColor = UIColor(red: 0.98, green: 0.96, blue: 0.96, alpha: 1.00)
         
     }
     
-    private func setupImageStack() {
-        let cornerRadius: CGFloat = 10.0
-        let cgPath = UIBezierPath(roundedRect: imageStack.bounds, byRoundingCorners: [.allCorners], cornerRadii: CGSize.init(width: cornerRadius, height: cornerRadius)).cgPath
-        imageStack.layer.shadowColor = UIColor.black.cgColor
-        imageStack.layer.shadowRadius = 7
-        imageStack.layer.shadowOpacity = 0.7
-        imageStack.layer.shadowOffset = CGSize.init(width: 2.5, height: 2.5)
-        imageStack.layer.shadowPath = cgPath
-        
-        imageStack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        imageStack.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        imageStack.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        imageStack.frame.size.height = view.frame.height / 3
-    }
-    
+    private func setupShadowSubview() {
+        shadowSubview.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+        shadowSubview.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        shadowSubview.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        shadowSubview.frame.size.height = imageView.image!.accessibilityFrame.height
+        shadowSubview.layer.shadowRadius = 7
+        shadowSubview.layer.shadowOpacity = 0.7
+        shadowSubview.layer.shadowOffset = CGSize.init(width: 2.5, height: 2.5)
+        shadowSubview.layer.masksToBounds = false
+        shadowSubview.addSubview(imageView)
 
+    }
     
+    private func setupImageView() {
+        imageView.topAnchor.constraint(equalTo: shadowSubview.topAnchor).isActive = true
+        imageView.leadingAnchor.constraint(equalTo: shadowSubview.leadingAnchor).isActive = true
+        imageView.trailingAnchor.constraint(equalTo: shadowSubview.trailingAnchor).isActive = true
+        imageView.heightAnchor.constraint(equalTo: shadowSubview.heightAnchor).isActive = true
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 10
+        
+    }
+
+    deinit {
+        print("selectedFilmVC was dealocated")
+    }
     
 }
