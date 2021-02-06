@@ -16,34 +16,24 @@ class PreviewViewController: UIViewController {
         return scroll
     }()
     
-    let contentView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+    let stackView: UIStackView = {
+        let stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.axis = .vertical
+        stack.spacing = 10
+        return stack
     }()
-    
+
     let containerView: UIView = {
         let stack = UIView()
         stack.translatesAutoresizingMaskIntoConstraints = false
         return stack
     }()
-    
+
     let imageView: UIImageView = {
         let imageV = UIImageView()
         imageV.translatesAutoresizingMaskIntoConstraints = false
         return imageV
-    }()
-    
-    let yearPlaceHolderLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    let yearLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
     }()
     
     let titleLabel: UILabel = {
@@ -58,41 +48,35 @@ class PreviewViewController: UIViewController {
         tf.sizeToFit()
         return tf
     }()
-    
-    let infoButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
+
     
     
     //MARK: viewDidLoad -
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        view.addSubview(imageView)
-        view.addSubview(infoButton)
-        view.addSubview(titleLabel)
-        view.addSubview(yearLabel)
-        view.addSubview(yearPlaceHolderLabel)
-        view.addSubview(containerView)
         view.addSubview(scrollView)
+        view.addSubview(stackView)
+        view.addSubview(containerView)
+        view.addSubview(imageView)
+        view.addSubview(titleLabel)
         view.addSubview(overviewText)
         
+        
+        setupView()
+        setupScrollView()
+        setupStackView()
+        setupContainerView()
+        setupImageView()
+        setupTitleLabel()
+        setupOverviewLabel()
+
+
     }
     
     //MARK: viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
-        setupImageView()
-        setupViewController()
-        setupInfoButton()
-        setupYearLabel()
-        setupTitleLabel()
-        setupYearPlaceholderLabel()
-        setupContainerView()
-        setupScrollView()
-        setupOverviewLabel()
-        setupContentView()
+       
     }
     
     
@@ -101,35 +85,35 @@ class PreviewViewController: UIViewController {
         dismiss(animated: true)
     }
     
-    private func setupViewController() {
+    private func setupView() {
         view.backgroundColor = UIColor(red: 0.98, green: 0.96, blue: 0.96, alpha: 1.00)
     }
     
     
     private func setupScrollView() {
-        scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        scrollView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
         scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor,constant: 200).isActive = true
-        scrollView.addSubview(contentView)
+        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
+        scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        scrollView.addSubview(stackView)
         scrollView.showsVerticalScrollIndicator = false
     }
     
-    private func setupContentView() {
-        contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
-        contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-        contentView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
-        contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
-        scrollView.addSubview(containerView)
-        scrollView.addSubview(titleLabel)
-        scrollView.addSubview(infoButton)
-        scrollView.addSubview(overviewText)
+    private func setupStackView() {
+        stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
+        stackView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+        stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
+        stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+        stackView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
+        stackView.addArrangedSubview(containerView)
+        stackView.addArrangedSubview(titleLabel)
+        stackView.addArrangedSubview(overviewText)
     }
-    
+
     private func setupContainerView() {
-        containerView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        containerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        containerView.topAnchor.constraint(equalTo: stackView.topAnchor).isActive = true
+        containerView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor).isActive = true
+        containerView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor).isActive = true
         containerView.bottomAnchor.constraint(equalTo: imageView.bottomAnchor).isActive = true
         containerView.addSubview(imageView)
         containerView.layer.shadowColor = UIColor.black.cgColor
@@ -138,7 +122,7 @@ class PreviewViewController: UIViewController {
         containerView.layer.shadowOffset = CGSize.init(width: 2.5, height: 2.5)
         containerView.layer.masksToBounds = false
     }
-    
+
     private func setupImageView() {
         imageView.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
         imageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
@@ -147,54 +131,30 @@ class PreviewViewController: UIViewController {
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 10
-        
-    }
-    
-    private func setupInfoButton() {
-        infoButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10).isActive = true
-        infoButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
-        infoButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
-        infoButton.frame.size.height = 30
-        infoButton.backgroundColor = .systemBlue
-        infoButton.layer.cornerRadius = 10
-        infoButton.setTitle("Детальная информация", for: .normal)
-        infoButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
-    }
-    
-    private func setupYearLabel() {
-        yearLabel.topAnchor.constraint(equalTo: yearPlaceHolderLabel.bottomAnchor, constant: 5).isActive = true
-        yearLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 5).isActive = true
-        yearLabel.font = .systemFont(ofSize: 15)
-        yearLabel.textColor = .systemGray
+
     }
     
     private func setupTitleLabel() {
-        titleLabel.topAnchor.constraint(equalTo: containerView.bottomAnchor, constant: 10).isActive = true
-        titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 5).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10).isActive = true
+        titleLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 5).isActive = true
         titleLabel.font = .boldSystemFont(ofSize: 30)
-    }
-    
-    private func setupYearPlaceholderLabel() {
-        yearPlaceHolderLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 5).isActive = true
-        yearPlaceHolderLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 5).isActive = true
-        yearPlaceHolderLabel.font = .systemFont(ofSize: 18)
-        yearPlaceHolderLabel.textColor = .black
-        yearPlaceHolderLabel.text = "Дата релиза:"
+        titleLabel.numberOfLines = 0
+        titleLabel.frame.size.height = 49
     }
     
     private func setupOverviewLabel() {
-        overviewText.topAnchor.constraint(equalTo: infoButton.bottomAnchor, constant: 10).isActive = true
-        overviewText.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5).isActive = true
-        overviewText.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 5).isActive = true
-        overviewText.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        overviewText.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10).isActive = true
+        overviewText.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 5).isActive = true
+        overviewText.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: 5).isActive = true
+        overviewText.bottomAnchor.constraint(equalTo: stackView.bottomAnchor).isActive = true
         overviewText.numberOfLines = 0
         
         
     }
-    
+
     
     deinit {
-        print("Sec vc was dealocated")
+        print("PreviewVC was dealocated")
     }
     
 }

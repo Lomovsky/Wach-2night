@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		4141E9DC426233262DC0629A /* Pods_WorkTask.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65FAADEA3F9C8CA9669E7B67 /* Pods_WorkTask.framework */; };
 		C003674825824CB500226ED4 /* SuggestionsVC+CollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C003674725824CB500226ED4 /* SuggestionsVC+CollectionViewDataSource.swift */; };
-		C004193225B35D06009F5B39 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C004193125B35D06009F5B39 /* TabBarController.swift */; };
 		C0089F5925B2184D001647F2 /* SuggestionsVC+HelperFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0089F5825B2184D001647F2 /* SuggestionsVC+HelperFuncs.swift */; };
 		C008D31425CC4DDB00413490 /* SelectedFilmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C008D31325CC4DDB00413490 /* SelectedFilmViewController.swift */; };
 		C016B01D258C03F400F77CA6 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016B01C258C03F400F77CA6 /* PreviewViewController.swift */; };
@@ -40,7 +39,6 @@
 		65FAADEA3F9C8CA9669E7B67 /* Pods_WorkTask.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WorkTask.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9ACCE51585E5FCFB58E8D923 /* Pods-WorkTask.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WorkTask.release.xcconfig"; path = "Target Support Files/Pods-WorkTask/Pods-WorkTask.release.xcconfig"; sourceTree = "<group>"; };
 		C003674725824CB500226ED4 /* SuggestionsVC+CollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SuggestionsVC+CollectionViewDataSource.swift"; sourceTree = "<group>"; };
-		C004193125B35D06009F5B39 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		C0089F5825B2184D001647F2 /* SuggestionsVC+HelperFuncs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SuggestionsVC+HelperFuncs.swift"; sourceTree = "<group>"; };
 		C008D31325CC4DDB00413490 /* SelectedFilmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedFilmViewController.swift; sourceTree = "<group>"; };
 		C016B01C258C03F400F77CA6 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
@@ -225,7 +223,6 @@
 		C0F2F778257D455700A1DAF9 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				C004193125B35D06009F5B39 /* TabBarController.swift */,
 				C060DAFE257BECA200C892DE /* SuggestionsViewController.swift */,
 				C016B01C258C03F400F77CA6 /* PreviewViewController.swift */,
 				C0CE78B725CAD32900A55990 /* SearchViewController.swift */,
@@ -362,7 +359,6 @@
 				C04D6EA325AB405E00E4B151 /* ConnectionManager.swift in Sources */,
 				C062A59025CDB03400C507ED /* GenreCollectionViewCell.swift in Sources */,
 				C060DAFF257BECA200C892DE /* SuggestionsViewController.swift in Sources */,
-				C004193225B35D06009F5B39 /* TabBarController.swift in Sources */,
 				C0CE78C625CADF3700A55990 /* TableViewCell.swift in Sources */,
 				C0CE78B825CAD32900A55990 /* SearchViewController.swift in Sources */,
 				C060DAFB257BECA200C892DE /* AppDelegate.swift in Sources */,

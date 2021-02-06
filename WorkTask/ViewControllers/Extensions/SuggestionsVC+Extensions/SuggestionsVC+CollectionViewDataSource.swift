@@ -97,16 +97,18 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
                                    cell?.alpha = 1
                    })
                }
-               navigationController?.present(previewVC, animated: true)
-               let film = SuggestionsViewController.films[indexPath.row]
-               let poster = UIImage(data: film.poster!)
-               let resizedPoster = poster?.resizeImageUsingVImage(size: CGSize.init(width: view.frame.width,
-                                                                                    height: view.frame.height * 0.6))
-               
-               previewVC.imageView.image = resizedPoster
-               previewVC.titleLabel.text = film.title
-               previewVC.yearLabel.text = film.releaseDate
-               previewVC.overviewText.text = film.overview
+            let film = SuggestionsViewController.films[indexPath.row]
+            let poster = UIImage(data: film.poster!)
+            let resizedPoster = poster?.resizeImageUsingVImage(size: CGSize.init(width: view.frame.width,
+                                                                                 height: view.frame.height * 0.6))
+            
+            previewVC.imageView.image = resizedPoster
+            previewVC.titleLabel.text = film.title
+            previewVC.overviewText.text = film.overview
+            navigationController?.present(previewVC, animated: true)
+            
+//               previewVC.yearLabel.text = film.releaseDate
+
             }
     }
     
