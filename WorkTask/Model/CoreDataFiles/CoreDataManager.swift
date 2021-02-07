@@ -32,7 +32,7 @@ class CoreDataManager {
             print(error)
         }
     }
-
+    
     public func saveGenres (_ genreID: Int, genreName: String) {
         guard let entityDescription = NSEntityDescription.entity(forEntityName: "Genre", in: managedContext) else { return }
         

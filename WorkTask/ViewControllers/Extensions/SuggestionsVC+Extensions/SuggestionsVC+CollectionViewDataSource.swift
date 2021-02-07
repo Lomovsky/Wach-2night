@@ -59,8 +59,8 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
                     cell.configureCell(image: newPoster ?? defaultImage, title: film.title ?? "Неизвестно", originalTitle: film.originalTitle ?? "Неизвестно", releaseDate: film.releaseDate ?? "Неизвестно", rating: film.rating )
                 }
                 cell.layer.shadowColor = UIColor.black.cgColor
-                cell.layer.shadowRadius = 7
-                cell.layer.shadowOpacity = 0.7
+                cell.layer.shadowRadius = 5
+                cell.layer.shadowOpacity = 0.4
                 cell.layer.shadowOffset = CGSize.init(width: 2.5, height: 2.5)
                 cell.layer.masksToBounds = false
                 return cell
@@ -71,6 +71,11 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
                 let genre = SuggestionsViewController.genres[indexPath.row]
                 cell.backgroundColor = UIColor(red: 0.98, green: 0.96, blue: 0.96, alpha: 1.00)
                 cell.layer.cornerRadius = 10
+                cell.layer.shadowColor = UIColor.black.cgColor
+                cell.layer.shadowRadius = 7
+                cell.layer.shadowOpacity = 0.7
+                cell.layer.shadowOffset = CGSize.init(width: 2.5, height: 2.5)
+                cell.layer.masksToBounds = false
                 cell.configureTheCell(genreLabel: genre.name!)
                 return cell
             }

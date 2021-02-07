@@ -12,7 +12,8 @@ extension SuggestionsViewController {
     @objc func downloadFilms() {
         let urlString = "https://api.themoviedb.org/3/discover/movie?api_key=\(apiKey)&language=ru-RU&sort_by=popularity.desc&include_adult=true&include_video=false&page=1"
         let coreDataManager = CoreDataManager()
-        NetworkManager.fetchCurrentData(withURL: urlString, dataModel: FilmResponse.self) { (result) in
+        NetworkManager.fetchCurrentData(withURL: urlString, dataModel: FilmResponse.self) { [weak self] (result) in
+            guard let self = self else { return }
             switch result {
             case .success(let filmResponse):
                 filmResponse.results.forEach { (film) in
@@ -24,7 +25,10 @@ extension SuggestionsViewController {
                         DispatchQueue.main.async {
                             coreDataManager.saveFilms(film.title, filmOriginalTitle: film.originalTitle, filmPoster: posterData, releaseDate: film.releaseDate, overview: film.overview, rating: film.rating, originalPoster: posterData)
                             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "update"), object: nil)
+                                self.recommendationsCollectionView.reloadData()
+                                self.recommendationsCollectionView.isHidden = false
+                                self.activityIndicator.stopAnimating()
+                                self.activityIndicator.isHidden = true
                             }
                         }
                     }
@@ -39,14 +43,15 @@ extension SuggestionsViewController {
         let urlString = "https://api.themoviedb.org/3/genre/movie/list?api_key=\(apiKey)&language=ru-RU"
         let coreDataManager = CoreDataManager()
 
-        NetworkManager.fetchCurrentData(withURL: urlString, dataModel: Genres.self) { (result) in
+        NetworkManager.fetchCurrentData(withURL: urlString, dataModel: Genres.self) { [weak self] (result) in
+            guard let self = self else { return }
             switch result {
             case .failure(let error):
                 print(error)
             case .success(let genreResponse):
                 genreResponse.genres.forEach { (genre) in
                     coreDataManager.saveGenres(genre.id, genreName: genre.name)
-                    NotificationCenter.default.post(name: NSNotification.Name(rawValue: "update"), object: nil)
+                    self.genreCollectionView.reloadData()
                 }
             }
         }

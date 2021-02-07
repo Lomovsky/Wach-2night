@@ -72,11 +72,11 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         shadowSubView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         shadowSubView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         shadowSubView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        shadowSubView.layer.shadowColor = UIColor.black.cgColor
-        shadowSubView.layer.shadowRadius = 7
-        shadowSubView.layer.shadowOpacity = 0.7
-        shadowSubView.layer.shadowOffset = CGSize.init(width: 2.5, height: 2.5)
-        shadowSubView.layer.masksToBounds = false
+//        shadowSubView.layer.shadowColor = UIColor.black.cgColor
+//        shadowSubView.layer.shadowRadius = 7
+//        shadowSubView.layer.shadowOpacity = 0.7
+//        shadowSubView.layer.shadowOffset = CGSize.init(width: 2.5, height: 2.5)
+//        shadowSubView.layer.masksToBounds = false
         shadowSubView.addSubview(subview)
     }
     
