@@ -56,8 +56,7 @@ extension SuggestionsViewController {
             }
         }
     }
-    
-    
+
     
     @objc func showSearch() {
         let searchVC = SearchViewController()

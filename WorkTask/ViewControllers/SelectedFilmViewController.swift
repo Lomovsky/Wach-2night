@@ -38,13 +38,11 @@ class SelectedFilmViewController: UIViewController {
     //MARK: SetupFuncs -
     
     private func setupView() {
-        view.backgroundColor = UIColor(red: 0.98, green: 0.96, blue: 0.96, alpha: 1.00)
+        view.backgroundColor = .white
     }
     
     private func setupNavigationController() {
         navigationController?.navigationBar.prefersLargeTitles = false
-        navigationController?.navigationBar.tintColor = UIColor(red: 0.96, green: 0.43, blue: 0.35, alpha: 1.00)
-        navigationController?.navigationBar.barTintColor = UIColor(red: 0.98, green: 0.96, blue: 0.96, alpha: 1.00)
         
     }
     

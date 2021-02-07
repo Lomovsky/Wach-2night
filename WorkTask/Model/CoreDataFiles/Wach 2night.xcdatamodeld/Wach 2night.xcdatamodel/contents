@@ -9,6 +9,13 @@
         <attribute name="releaseDate" optional="YES" attributeType="String"/>
         <attribute name="title" optional="YES" attributeType="String"/>
     </entity>
+    <entity name="FavouriteFilm" representedClassName="FavouriteFilm" syncable="YES" codeGenerationType="class">
+        <attribute name="originalTitle" attributeType="String"/>
+        <attribute name="overview" attributeType="String"/>
+        <attribute name="poster" attributeType="Binary"/>
+        <attribute name="rating" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="title" attributeType="String"/>
+    </entity>
     <entity name="Genre" representedClassName="Genre" syncable="YES" codeGenerationType="class">
         <attribute name="id" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String"/>
@@ -16,5 +23,6 @@
     <elements>
         <element name="CurrentFilm" positionX="-63" positionY="-18" width="128" height="134"/>
         <element name="Genre" positionX="-63" positionY="36" width="128" height="59"/>
+        <element name="FavouriteFilm" positionX="-54" positionY="45" width="128" height="104"/>
     </elements>
 </model>

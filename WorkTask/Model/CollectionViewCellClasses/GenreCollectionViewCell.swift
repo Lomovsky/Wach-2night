@@ -40,10 +40,22 @@ class GenreCollectionViewCell: UICollectionViewCell {
     private func setupGenreLabel () {
         genreLabel.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
         genreLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
-        genreLabel.textColor = #colorLiteral(red: 0.9769931436, green: 0.51498878, blue: 0.4180260897, alpha: 1)
-        genreLabel.font = .systemFont(ofSize: 16)
-    
+        genreLabel.textColor = .systemGreen
+        genreLabel.font = .systemFont(ofSize: 16, weight: .medium)
+        
+        
     }
+    
+    
+    func setGradientBackground() {
+        let colorTop =  UIColor.systemGreen.cgColor
+        let colorBottom = UIColor.systemTeal.cgColor
+            let gradientLayer = CAGradientLayer()
+            gradientLayer.colors = [colorTop, colorBottom]
+            gradientLayer.locations = [0.0, 1.0]
+            gradientLayer.frame = self.contentView.bounds
+            self.contentView.layer.insertSublayer(gradientLayer, at: 0)
+        }
     
     func configureTheCell(genreLabel: String) {
         self.genreLabel.text = genreLabel

@@ -39,21 +39,16 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     //MARK: viewDidLoad -
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(shadowSubView)
-        view.addSubview(subview)
         view.addSubview(tableView)
         
-        
+        setupView()
+        setupSearchBar()
+        setupTableView()
     }
     
     //MARK: viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
-        setupView()
-        setupShadowSubView()
-        setupSubview()
         setupNavigationController()
-        setupSearchBar()
-        setupTableView()
 
     }
     
@@ -67,31 +62,10 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         view.backgroundColor = UIColor(red: 0.98, green: 0.96, blue: 0.96, alpha: 1.00)
     }
     
-    private func setupShadowSubView() {
-        shadowSubView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        shadowSubView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        shadowSubView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        shadowSubView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-//        shadowSubView.layer.shadowColor = UIColor.black.cgColor
-//        shadowSubView.layer.shadowRadius = 7
-//        shadowSubView.layer.shadowOpacity = 0.7
-//        shadowSubView.layer.shadowOffset = CGSize.init(width: 2.5, height: 2.5)
-//        shadowSubView.layer.masksToBounds = false
-        shadowSubView.addSubview(subview)
-    }
-    
-    private func setupSubview() {
-        subview.topAnchor.constraint(equalTo: shadowSubView.topAnchor).isActive = true
-        subview.leadingAnchor.constraint(equalTo: shadowSubView.leadingAnchor).isActive = true
-        subview.trailingAnchor.constraint(equalTo: shadowSubView.trailingAnchor).isActive = true
-        subview.bottomAnchor.constraint(equalTo: shadowSubView.bottomAnchor).isActive = true
-        subview.backgroundColor = UIColor(red: 0.96, green: 0.43, blue: 0.35, alpha: 1.00)
-    }
     
     private func setupNavigationController() {
         navigationController?.navigationBar.isHidden = false
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.barTintColor = UIColor(red: 0.96, green: 0.43, blue: 0.35, alpha: 1.00)
         navigationController?.visibleViewController?.title = "Поиск"
         
     }
@@ -101,11 +75,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         searchController.searchBar.delegate = self
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Введите название"
-        searchController.searchBar.searchTextField.textColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
-        searchController.searchBar.searchTextField.tokenBackgroundColor = .white
-        searchController.searchBar.searchTextField.backgroundColor = UIColor(red: 0.98, green: 0.96, blue: 0.96, alpha: 1.00)
-        searchController.isActive = true
-        searchController.searchBar.tintColor = .white
+//        searchController.isActive = true
         
         
     }

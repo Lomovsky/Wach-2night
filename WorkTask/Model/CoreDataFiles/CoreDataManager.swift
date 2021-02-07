@@ -33,7 +33,7 @@ class CoreDataManager {
         }
     }
     
-    public func saveGenres (_ genreID: Int, genreName: String) {
+    public func saveGenres(_ genreID: Int, genreName: String) {
         guard let entityDescription = NSEntityDescription.entity(forEntityName: "Genre", in: managedContext) else { return }
         
         let genre = NSManagedObject(entity: entityDescription, insertInto: managedContext) as! Genre
@@ -43,6 +43,23 @@ class CoreDataManager {
         do {
             try managedContext.save()
             SuggestionsViewController.genres.append(genre)
+        } catch let error as NSError {
+            print(error)
+        }
+    }
+    
+    public func saveFavouriteFilm (_ filmTitle: String, filmOriginalTitle: String, filmRating: Float, filmOverview: String, filmPoster: Data) {
+        guard let entityDescription = NSEntityDescription.entity(forEntityName: "FavouriteFilm", in: managedContext) else { return }
+        
+        let favouriteFilm = NSManagedObject(entity: entityDescription, insertInto: managedContext) as! FavouriteFilm
+        favouriteFilm.title = filmTitle
+        favouriteFilm.originalTitle = filmOriginalTitle
+        favouriteFilm.rating = filmRating
+        favouriteFilm.poster = filmPoster
+        
+        do {
+            try managedContext.save()
+            SuggestionsViewController.favouriteFilms.append(favouriteFilm)
         } catch let error as NSError {
             print(error)
         }
@@ -64,6 +81,16 @@ class CoreDataManager {
         
         do {
             try SuggestionsViewController.genres = managedContext.fetch(fetchRequest)
+        } catch let error as NSError {
+            print(error)
+        }
+    }
+    
+    public func fetchFavouriteFilms() {
+        let fetchRequest: NSFetchRequest<FavouriteFilm> = FavouriteFilm.fetchRequest()
+        
+        do {
+            try SuggestionsViewController.favouriteFilms = managedContext.fetch(fetchRequest)
         } catch let error as NSError {
             print(error)
         }
@@ -98,7 +125,20 @@ class CoreDataManager {
         }
     }
     
-    
+    public func deleteFromFavourites() {
+        let fetchRequest: NSFetchRequest<FavouriteFilm> = FavouriteFilm.fetchRequest()
+        fetchRequest.includesPropertyValues = false
+        
+        do {
+            let favFilms = try managedContext.fetch(fetchRequest) as [NSManagedObject]
+            for film in favFilms {
+                managedContext.delete(film)
+            }
+            try managedContext.save()
+        } catch let error as NSError {
+            print(error)
+        }
+    }
     
     deinit {
         print("CoreData manager was dealocated")

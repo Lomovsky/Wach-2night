@@ -10,21 +10,29 @@ class SuggestionsViewController: UIViewController {
     //MARK: Declarations
     static var films: [CurrentFilm] = []
     static var genres: [Genre] = []
+    static var favouriteFilms: [FavouriteFilm] = []
     
     //MARK: UIElements
-    let topSubviewShadow: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+    let scrollView: UIScrollView = {
+        let scroll = UIScrollView()
+        scroll.translatesAutoresizingMaskIntoConstraints = false
+        return scroll
     }()
     
-    let topSubView: UIView = {
-        let view = UIView()
-        view.layer.cornerRadius = 10
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
+    let stackView: UIStackView = {
+        let stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.axis = .vertical
+        stack.spacing = 10
+        return stack
     }()
-   
+    
+    let genreLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
     let genreCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -32,6 +40,12 @@ class SuggestionsViewController: UIViewController {
         cv.translatesAutoresizingMaskIntoConstraints = false
         cv.register(GenreCollectionViewCell.self, forCellWithReuseIdentifier: GenreCollectionViewCell.reuseIdentifier)
         return cv
+    }()
+    
+    let recommendationsLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     let recommendationsCollectionView: UICollectionView = {
@@ -50,6 +64,22 @@ class SuggestionsViewController: UIViewController {
         return act
     }()
     
+    let favouriteFilmsLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let favouriteFilmsCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let cv = UICollectionView(frame: .init(x: 0, y: 0, width: 0, height: 0), collectionViewLayout: layout)
+        cv.translatesAutoresizingMaskIntoConstraints = false
+        cv.register(RecommendationsCollectionViewCell.self,
+                    forCellWithReuseIdentifier: "favCell")
+        return cv
+    }()
+    
     
     // MARK: ViewDidLoad -
     override func viewDidLoad() {
@@ -58,18 +88,28 @@ class SuggestionsViewController: UIViewController {
         recommendationsCollectionView.dataSource = self
         genreCollectionView.delegate = self
         genreCollectionView.dataSource = self
-        view.addSubview(topSubView)
-        view.addSubview(topSubviewShadow)
+        favouriteFilmsCollectionView.delegate = self
+        favouriteFilmsCollectionView.dataSource = self
+        view.addSubview(scrollView)
+        view.addSubview(stackView)
+        view.addSubview(genreLabel)
         view.addSubview(genreCollectionView)
+        view.addSubview(recommendationsLabel)
         view.addSubview(recommendationsCollectionView)
         view.addSubview(activityIndicator)
+        view.addSubview(favouriteFilmsLabel)
+        view.addSubview(favouriteFilmsCollectionView)
 
         setupView()
-        setupTopSubview()
-        setupTopSubviewShadow()
+        setupScrollView()
+        setupStackView()
+        setupGenreLabel()
         setupGenerCollectionView()
+        setupRecommendationsLabel()
         setupRecommendationsCollectionView()
         setupActivityIndicator()
+        setupFavouriteFilmsLabel()
+        setupFavouritesCollectionView()
         
         let coreDataManager = CoreDataManager()
         NotificationCenter.default.addObserver(self, selector: #selector(updateUI(notification:)), name:NSNotification.Name(rawValue: "update"), object: nil)
@@ -90,67 +130,98 @@ class SuggestionsViewController: UIViewController {
     
     //MARK:Set up funcs -
     private func setupView() {
-    view.backgroundColor = UIColor(red: 0.98, green: 0.96, blue: 0.96, alpha: 1.00)
+        view.backgroundColor = .white
 
     }
     
     private func setupNavigationController() {
         navigationController?.navigationBar.isHidden = false
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-        navigationController?.visibleViewController?.title = "Рекомендации"
-        navigationController?.navigationBar.tintColor = .white
+        navigationController?.visibleViewController?.title = "Главная"
+        navigationController?.navigationBar.tintColor = .systemGreen
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(showSearch))
         navigationItem.searchController = nil
     }
     
-    private func setupTopSubviewShadow() {
-        topSubviewShadow.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        topSubviewShadow.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        topSubviewShadow.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        topSubviewShadow.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.27).isActive = true
-        topSubviewShadow.layer.shadowColor = UIColor.black.cgColor
-        topSubviewShadow.layer.shadowRadius = 7
-        topSubviewShadow.layer.shadowOpacity = 0.7
-        topSubviewShadow.layer.shadowOffset = CGSize.init(width: 2.5, height: 2.5)
-        topSubviewShadow.layer.masksToBounds = false
-        topSubviewShadow.addSubview(topSubView)
+    private func setupScrollView() {
+        scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
+        scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+//        scrollView.showsVerticalScrollIndicator = true
+        scrollView.addSubview(stackView)
     }
     
-    private func setupTopSubview() {
-        topSubView.topAnchor.constraint(equalTo: topSubviewShadow.topAnchor).isActive = true
-        topSubView.leadingAnchor.constraint(equalTo: topSubviewShadow.leadingAnchor).isActive = true
-        topSubView.trailingAnchor.constraint(equalTo: topSubviewShadow.trailingAnchor).isActive = true
-        topSubView.heightAnchor.constraint(equalTo: topSubviewShadow.heightAnchor).isActive = true
-        topSubView.backgroundColor = UIColor(red: 0.96, green: 0.43, blue: 0.35, alpha: 1.00)
-        topSubView.addSubview(genreCollectionView)
+    private func setupStackView() {
+        stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
+        stackView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+        stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
+        stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+        stackView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
+        stackView.addArrangedSubview(genreLabel)
+        stackView.addArrangedSubview(genreCollectionView)
+        stackView.addArrangedSubview(recommendationsLabel)
+        stackView.addArrangedSubview(recommendationsCollectionView)
+        stackView.addArrangedSubview(favouriteFilmsLabel)
+        stackView.addArrangedSubview(favouriteFilmsCollectionView)
     }
+    
+    private func setupGenreLabel() {
+        genreLabel.topAnchor.constraint(equalTo: stackView.topAnchor, constant: 5).isActive = true
+        genreLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 17).isActive = true
+        genreLabel.text = "Жанры"
+        genreLabel.font = .boldSystemFont(ofSize: 20)
+    }
+ 
        
     private func setupGenerCollectionView() {
-        genreCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        genreCollectionView.leadingAnchor.constraint(equalTo: topSubView.leadingAnchor).isActive = true
-        genreCollectionView.trailingAnchor.constraint(equalTo: topSubView.trailingAnchor).isActive = true
-        genreCollectionView.bottomAnchor.constraint(equalTo: topSubView.bottomAnchor).isActive = true
+        genreCollectionView.topAnchor.constraint(equalTo: genreLabel.bottomAnchor, constant: 5).isActive = true
+        genreCollectionView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor).isActive = true
+        genreCollectionView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor).isActive = true
+        genreCollectionView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1).isActive = true
         genreCollectionView.backgroundColor = .clear
         genreCollectionView.accessibilityScroll(.left)
         genreCollectionView.contentInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
         
     }
     
+    private func setupRecommendationsLabel() {
+        recommendationsLabel.topAnchor.constraint(equalTo: genreCollectionView.bottomAnchor, constant: 5).isActive = true
+        recommendationsLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 17).isActive = true
+        recommendationsLabel.text = "Рекомендуем к просмотру"
+        recommendationsLabel.font = .boldSystemFont(ofSize: 20)
+    }
+    
     private func setupRecommendationsCollectionView() {
-        recommendationsCollectionView.topAnchor.constraint(equalTo: topSubView.bottomAnchor, constant: 20).isActive = true
-        recommendationsCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        recommendationsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        recommendationsCollectionView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.4).isActive = true
+        recommendationsCollectionView.topAnchor.constraint(equalTo: recommendationsLabel.bottomAnchor, constant: 20).isActive = true
+        recommendationsCollectionView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor).isActive = true
+        recommendationsCollectionView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor).isActive = true
+        recommendationsCollectionView.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.4).isActive = true
         recommendationsCollectionView.accessibilityScroll(.left)
         recommendationsCollectionView.backgroundColor = .clear
         recommendationsCollectionView.contentInset = UIEdgeInsets(top: 0, left: 36, bottom: 0, right: 36)
     }
 
         private func setupActivityIndicator() {
-        activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: stackView.centerYAnchor).isActive = true
+        activityIndicator.centerXAnchor.constraint(equalTo: stackView.centerXAnchor).isActive = true
         activityIndicator.startAnimating()
     }
     
+    private func setupFavouriteFilmsLabel() {
+        favouriteFilmsLabel.topAnchor.constraint(equalTo: recommendationsCollectionView.bottomAnchor).isActive = true
+        favouriteFilmsLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 17).isActive = true
+        favouriteFilmsLabel.trailingAnchor.constraint(equalTo: stackView.trailingAnchor).isActive = true
+        favouriteFilmsLabel.text = "Избранное"
+        favouriteFilmsLabel.font = .boldSystemFont(ofSize: 20)
+    }
+    
+    private func setupFavouritesCollectionView() {
+        favouriteFilmsCollectionView.topAnchor.constraint(equalTo: favouriteFilmsLabel.bottomAnchor, constant: 5).isActive = true
+        favouriteFilmsCollectionView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor).isActive = true
+        favouriteFilmsCollectionView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor).isActive = true
+        favouriteFilmsLabel.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.4).isActive = true
+        favouriteFilmsCollectionView.backgroundColor = .clear
+        favouriteFilmsCollectionView.contentInset = UIEdgeInsets(top: 0, left: 36, bottom: 0, right: 36)
+    }
 }

@@ -15,6 +15,9 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
 
         } else if collectionView == self.genreCollectionView {
             return SuggestionsViewController.genres.count
+            
+        } else if collectionView == self.favouriteFilmsCollectionView {
+            return 3
         }
         return Int()
     }
@@ -27,6 +30,9 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
             return CGSize(width: collectionView.frame.width * 0.35, height: collectionView.frame.height * 0.5)
             
         } else if collectionView == self.recommendationsCollectionView {
+            return CGSize(width: view.frame.width - 125, height: collectionView.frame.size.height * 0.90)
+            
+        } else if collectionView == self.favouriteFilmsCollectionView {
             return CGSize(width: view.frame.width - 125, height: collectionView.frame.size.height * 0.90)
         }
         return CGSize()
@@ -41,6 +47,9 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
             
         } else if collectionView == self.genreCollectionView {
             return 10
+            
+        } else if collectionView == self.favouriteFilmsCollectionView {
+            return 34
             
         }
         return CGFloat()
@@ -65,18 +74,19 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
                 cell.layer.masksToBounds = false
                 return cell
             }
-            
+           
         } else if collectionView == self.genreCollectionView {
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GenreCollectionViewCell.reuseIdentifier, for: indexPath) as? GenreCollectionViewCell {
                 let genre = SuggestionsViewController.genres[indexPath.row]
-                cell.backgroundColor = UIColor(red: 0.98, green: 0.96, blue: 0.96, alpha: 1.00)
+                cell.backgroundColor = .systemGray6
+                cell.layer.cornerRadius = 12
+                cell.configureTheCell(genreLabel: genre.name!.capitalized)
+                return cell
+            }
+        } else if collectionView == self.favouriteFilmsCollectionView {
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "favCell", for: indexPath) as? UICollectionViewCell {
+                cell.backgroundColor = .systemGray6
                 cell.layer.cornerRadius = 10
-                cell.layer.shadowColor = UIColor.black.cgColor
-                cell.layer.shadowRadius = 7
-                cell.layer.shadowOpacity = 0.7
-                cell.layer.shadowOffset = CGSize.init(width: 2.5, height: 2.5)
-                cell.layer.masksToBounds = false
-                cell.configureTheCell(genreLabel: genre.name!)
                 return cell
             }
         }
@@ -111,8 +121,6 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
             previewVC.titleLabel.text = film.title
             previewVC.overviewText.text = film.overview
             navigationController?.present(previewVC, animated: true)
-            
-//               previewVC.yearLabel.text = film.releaseDate
 
             }
     }

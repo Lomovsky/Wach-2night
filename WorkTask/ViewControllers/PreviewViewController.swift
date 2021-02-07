@@ -84,7 +84,7 @@ class PreviewViewController: UIViewController {
     }
     
     private func setupView() {
-        view.backgroundColor = UIColor(red: 0.98, green: 0.96, blue: 0.96, alpha: 1.00)
+        view.backgroundColor = .white
     }
     
     
