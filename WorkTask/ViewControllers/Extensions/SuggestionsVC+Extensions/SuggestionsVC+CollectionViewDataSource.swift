@@ -9,6 +9,7 @@ import UIKit
 
 extension SuggestionsViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
+    //MARK: numberOfItemsInSection-
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == self.recommendationsCollectionView {
             return SuggestionsViewController.films.count
@@ -17,12 +18,16 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
             return SuggestionsViewController.genres.count
             
         } else if collectionView == self.favouriteFilmsCollectionView {
-            return 3
+            
+            if SuggestionsViewController.favouriteFilms.isEmpty {
+                return 3
+            }
+            return SuggestionsViewController.favouriteFilms.count
         }
         return Int()
     }
     
-    
+    //MARK: sizeForItemAt -
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -55,7 +60,7 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
         return CGFloat()
     }
   
-    
+    //MARK: cellForItemAt -
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == self.recommendationsCollectionView {
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecommendationsCollectionViewCell.reuseIdentifier,for: indexPath) as? RecommendationsCollectionViewCell {
@@ -84,16 +89,25 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
                 return cell
             }
         } else if collectionView == self.favouriteFilmsCollectionView {
-            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "favCell", for: indexPath) as? UICollectionViewCell {
-                cell.backgroundColor = .systemGray6
-                cell.layer.cornerRadius = 10
-                return cell
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FavouriteFilmsCollectionViewCell.reuseIdentifier, for: indexPath) as? FavouriteFilmsCollectionViewCell {
+                
+                if SuggestionsViewController.favouriteFilms.isEmpty {
+                    cell.backgroundColor = .systemGray6
+                    cell.layer.cornerRadius = 10
+                    cell.configurePlaceholder(placeholder: "Нет фильма")
+                    return cell
+                    
+                } else {
+                    let film = SuggestionsViewController.favouriteFilms.reversed()[indexPath.row]
+                    cell.configureTheCell(poster: film.poster!)
+                    return cell
+                }
             }
         }
         return UICollectionViewCell()
     }
     
-    
+    //MARK: didSelectItemAt-
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == self.genreCollectionView {
             
@@ -120,6 +134,7 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
             previewVC.imageView.image = resizedPoster
             previewVC.titleLabel.text = film.title
             previewVC.overviewText.text = film.overview
+            previewVC.film = film
             navigationController?.present(previewVC, animated: true)
 
             }

@@ -66,6 +66,8 @@ extension SuggestionsViewController {
     @objc func updateUI(notification: NSNotification) {
         let coreDataManager = CoreDataManager()
         coreDataManager.fetchFilmsData()
+        coreDataManager.fetchGenresData()
+        coreDataManager.fetchFavouriteFilms()
         DispatchQueue.main.async {
             self.recommendationsCollectionView.reloadData()
             self.recommendationsCollectionView.isHidden = false
@@ -75,6 +77,13 @@ extension SuggestionsViewController {
         }
     }
     
+    @objc func updateFavouriteCollectionView(notification: NSNotification) {
+        let coreDataManager = CoreDataManager()
+        coreDataManager.fetchFavouriteFilms()
+        DispatchQueue.main.async {
+            self.favouriteFilmsCollectionView.reloadData()
+        }
+    }
 
     
 }

@@ -54,6 +54,7 @@ class CoreDataManager {
         let favouriteFilm = NSManagedObject(entity: entityDescription, insertInto: managedContext) as! FavouriteFilm
         favouriteFilm.title = filmTitle
         favouriteFilm.originalTitle = filmOriginalTitle
+        favouriteFilm.overview = filmOverview
         favouriteFilm.rating = filmRating
         favouriteFilm.poster = filmPoster
         

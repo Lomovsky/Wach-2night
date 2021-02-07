@@ -8,6 +8,7 @@
 import UIKit
 
 class PreviewViewController: UIViewController {
+    var film: CurrentFilm? = nil
     
     //MARK: Declarations
     let scrollView: UIScrollView = {
@@ -36,6 +37,12 @@ class PreviewViewController: UIViewController {
         return imageV
     }()
     
+    let favoriteButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -57,8 +64,9 @@ class PreviewViewController: UIViewController {
         view.backgroundColor = .white
         view.addSubview(scrollView)
         view.addSubview(stackView)
-        view.addSubview(containerView)
+//        view.addSubview(containerView)
         view.addSubview(imageView)
+        view.addSubview(favoriteButton)
         view.addSubview(titleLabel)
         view.addSubview(overviewText)
         
@@ -66,8 +74,9 @@ class PreviewViewController: UIViewController {
         setupView()
         setupScrollView()
         setupStackView()
-        setupContainerView()
+//        setupContainerView()
         setupImageView()
+        setupFavoriteButton()
         setupTitleLabel()
         setupOverviewLabel()
     }
@@ -80,7 +89,9 @@ class PreviewViewController: UIViewController {
     
     //MARK: Setup Funcs
     @objc func buttonPressed() {
-        dismiss(animated: true)
+        let coreDataManager = CoreDataManager()
+        coreDataManager.saveFavouriteFilm(film!.title!, filmOriginalTitle: film!.originalTitle!, filmRating: film!.rating, filmOverview: film!.overview!, filmPoster: film!.poster!)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "update favourite collectionView"), object: nil)
     }
     
     private func setupView() {
@@ -103,28 +114,29 @@ class PreviewViewController: UIViewController {
         stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
         stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
         stackView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
-        stackView.addArrangedSubview(containerView)
+        stackView.addArrangedSubview(imageView)
+        stackView.addArrangedSubview(favoriteButton)
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(overviewText)
     }
 
-    private func setupContainerView() {
-        containerView.topAnchor.constraint(equalTo: stackView.topAnchor).isActive = true
-        containerView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor).isActive = true
-        containerView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor).isActive = true
-        containerView.bottomAnchor.constraint(equalTo: imageView.bottomAnchor).isActive = true
-        containerView.addSubview(imageView)
-        containerView.layer.shadowColor = UIColor.black.cgColor
-        containerView.layer.shadowRadius = 7
-        containerView.layer.shadowOpacity = 0.7
-        containerView.layer.shadowOffset = CGSize.init(width: 2.5, height: 2.5)
-        containerView.layer.masksToBounds = false
-    }
+//    private func setupContainerView() {
+//        containerView.topAnchor.constraint(equalTo: stackView.topAnchor).isActive = true
+//        containerView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor).isActive = true
+//        containerView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor).isActive = true
+//        containerView.bottomAnchor.constraint(equalTo: imageView.bottomAnchor).isActive = true
+//        containerView.addSubview(imageView)
+//        containerView.layer.shadowColor = UIColor.black.cgColor
+//        containerView.layer.shadowRadius = 7
+//        containerView.layer.shadowOpacity = 0.7
+//        containerView.layer.shadowOffset = CGSize.init(width: 2.5, height: 2.5)
+//        containerView.layer.masksToBounds = false
+//    }
 
     private func setupImageView() {
-        imageView.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
-        imageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
-        imageView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
+        imageView.topAnchor.constraint(equalTo: stackView.topAnchor).isActive = true
+        imageView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor).isActive = true
+        imageView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor).isActive = true
         imageView.frame.size.height = imageView.image!.accessibilityFrame.height
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
@@ -132,8 +144,20 @@ class PreviewViewController: UIViewController {
 
     }
     
+    private func setupFavoriteButton() {
+        favoriteButton.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 5).isActive = true
+        favoriteButton.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 5).isActive = true
+        favoriteButton.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -5).isActive = true
+        favoriteButton.setTitle("Добавить в избранное", for: .normal)
+        favoriteButton.backgroundColor = .systemGreen
+        favoriteButton.titleLabel?.textColor = .white
+        favoriteButton.layer.cornerRadius = 10
+        favoriteButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+        
+    }
+    
     private func setupTitleLabel() {
-        titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10).isActive = true
+        titleLabel.topAnchor.constraint(equalTo: favoriteButton.bottomAnchor, constant: 10).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 5).isActive = true
         titleLabel.font = .boldSystemFont(ofSize: 30)
         titleLabel.numberOfLines = 0

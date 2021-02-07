@@ -23,7 +23,7 @@ class SuggestionsViewController: UIViewController {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .vertical
-        stack.spacing = 10
+//        stack.spacing = 10
         return stack
     }()
     
@@ -75,8 +75,8 @@ class SuggestionsViewController: UIViewController {
         layout.scrollDirection = .horizontal
         let cv = UICollectionView(frame: .init(x: 0, y: 0, width: 0, height: 0), collectionViewLayout: layout)
         cv.translatesAutoresizingMaskIntoConstraints = false
-        cv.register(RecommendationsCollectionViewCell.self,
-                    forCellWithReuseIdentifier: "favCell")
+        cv.register(FavouriteFilmsCollectionViewCell.self,
+                    forCellWithReuseIdentifier: FavouriteFilmsCollectionViewCell.reuseIdentifier)
         return cv
     }()
     
@@ -113,10 +113,15 @@ class SuggestionsViewController: UIViewController {
         
         let coreDataManager = CoreDataManager()
         NotificationCenter.default.addObserver(self, selector: #selector(updateUI(notification:)), name:NSNotification.Name(rawValue: "update"), object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateFavouriteCollectionView(notification:)), name: NSNotification.Name(rawValue: "update favourite collectionView"), object: nil)
+        
         if Reachability.isConnectedToNetwork() {
             coreDataManager.deleteAllData()
+            coreDataManager.fetchFavouriteFilms()
             downloadFilms()
             downloadGenres()
+            
         } else {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "update"), object: nil)
         }
@@ -145,10 +150,9 @@ class SuggestionsViewController: UIViewController {
     
     private func setupScrollView() {
         scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-//        scrollView.showsVerticalScrollIndicator = true
         scrollView.addSubview(stackView)
     }
     
@@ -196,22 +200,23 @@ class SuggestionsViewController: UIViewController {
         recommendationsCollectionView.topAnchor.constraint(equalTo: recommendationsLabel.bottomAnchor, constant: 20).isActive = true
         recommendationsCollectionView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor).isActive = true
         recommendationsCollectionView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor).isActive = true
-        recommendationsCollectionView.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.4).isActive = true
+        recommendationsCollectionView.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.41).isActive = true
         recommendationsCollectionView.accessibilityScroll(.left)
         recommendationsCollectionView.backgroundColor = .clear
         recommendationsCollectionView.contentInset = UIEdgeInsets(top: 0, left: 36, bottom: 0, right: 36)
     }
 
         private func setupActivityIndicator() {
-        activityIndicator.centerYAnchor.constraint(equalTo: stackView.centerYAnchor).isActive = true
-        activityIndicator.centerXAnchor.constraint(equalTo: stackView.centerXAnchor).isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: recommendationsCollectionView.centerYAnchor).isActive = true
+        activityIndicator.centerXAnchor.constraint(equalTo: recommendationsCollectionView.centerXAnchor).isActive = true
         activityIndicator.startAnimating()
     }
     
     private func setupFavouriteFilmsLabel() {
-        favouriteFilmsLabel.topAnchor.constraint(equalTo: recommendationsCollectionView.bottomAnchor).isActive = true
+        favouriteFilmsLabel.topAnchor.constraint(equalTo: recommendationsCollectionView.bottomAnchor, constant: 5).isActive = true
         favouriteFilmsLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 17).isActive = true
         favouriteFilmsLabel.trailingAnchor.constraint(equalTo: stackView.trailingAnchor).isActive = true
+        favouriteFilmsLabel.frame.size.height = recommendationsLabel.frame.height
         favouriteFilmsLabel.text = "Избранное"
         favouriteFilmsLabel.font = .boldSystemFont(ofSize: 20)
     }
@@ -220,7 +225,7 @@ class SuggestionsViewController: UIViewController {
         favouriteFilmsCollectionView.topAnchor.constraint(equalTo: favouriteFilmsLabel.bottomAnchor, constant: 5).isActive = true
         favouriteFilmsCollectionView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor).isActive = true
         favouriteFilmsCollectionView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor).isActive = true
-        favouriteFilmsLabel.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.4).isActive = true
+        favouriteFilmsCollectionView.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.41).isActive = true
         favouriteFilmsCollectionView.backgroundColor = .clear
         favouriteFilmsCollectionView.contentInset = UIEdgeInsets(top: 0, left: 36, bottom: 0, right: 36)
     }
