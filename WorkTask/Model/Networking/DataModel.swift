@@ -28,16 +28,18 @@ import Foundation
     
  }
  
- struct SearchedFilm {
-    var title: String
-    var originalTitle: String
-    var poster: Data?
-    var releaseDate: String
-    var overview: String
-    var rating: Float
- }
- 
+ // MARK: - Genre
  struct Genres: Codable {
-    var id: Int
-    var name: String
+     let genres: [GenreElement]
+ }
+
+ // MARK: - GenreElement
+ struct GenreElement: Codable {
+     let id: Int
+     let name: String
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+    }
  }

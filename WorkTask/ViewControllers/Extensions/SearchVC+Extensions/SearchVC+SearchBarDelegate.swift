@@ -25,7 +25,7 @@ extension SearchViewController {
                     print("API LINK LOOKS LIKE:\(searchURL)")
                 }
             }
-            NetworkManager.fetchCurrentData(withURL: searchURL) { [weak self] (result) in
+            NetworkManager.fetchCurrentData(withURL: searchURL, dataModel: FilmResponse.self) { [weak self] (result) in
                 guard let self = self else { return }
                 switch result {
                 case .failure(let error):

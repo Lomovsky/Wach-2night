@@ -9,7 +9,7 @@ import UIKit
 class SuggestionsViewController: UIViewController {
     //MARK: Declarations
     static var films: [CurrentFilm] = []
-    let genres = ["Фентези", "Триллер", "Ужасы", "Мелодрама"]
+    static var genres: [Genre] = []
     
     //MARK: UIElements
     let topSubviewShadow: UIView = {
@@ -76,6 +76,7 @@ class SuggestionsViewController: UIViewController {
         if Reachability.isConnectedToNetwork() {
             coreDataManager.deleteAllData()
             downloadFilms()
+            downloadGenres()
         } else {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "update"), object: nil)
         }

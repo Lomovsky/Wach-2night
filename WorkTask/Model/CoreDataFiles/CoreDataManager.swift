@@ -9,11 +9,13 @@ import UIKit
 import CoreData
 
 class CoreDataManager {
+    
     let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    public func save(_ filmTitle: String, filmOriginalTitle: String, filmPoster: Data, releaseDate: String, overview: String, rating: Float, originalPoster: Data) {
-        
-        //создаем сущность в качестве проводника в экземпляр нашей сущности в хранилище
+    
+    //MARK: Saving funcs
+    public func saveFilms(_ filmTitle: String, filmOriginalTitle: String, filmPoster: Data, releaseDate: String, overview: String, rating: Float, originalPoster: Data) {
         guard let entityDescription = NSEntityDescription.entity(forEntityName: "CurrentFilm", in: managedContext) else { return }
+        
         let film = NSManagedObject(entity: entityDescription, insertInto: managedContext) as! CurrentFilm
         film.title = filmTitle
         film.originalTitle = filmOriginalTitle
@@ -23,7 +25,6 @@ class CoreDataManager {
         film.rating = rating
         film.originalSizedPoster = originalPoster
         
-        
         do {
             try managedContext.save()
             SuggestionsViewController.films.append(film)
@@ -31,8 +32,24 @@ class CoreDataManager {
             print(error)
         }
     }
+
+    public func saveGenres (_ genreID: Int, genreName: String) {
+        guard let entityDescription = NSEntityDescription.entity(forEntityName: "Genre", in: managedContext) else { return }
+        
+        let genre = NSManagedObject(entity: entityDescription, insertInto: managedContext) as! Genre
+        genre.id = Int32(genreID)
+        genre.name = genreName
+        
+        do {
+            try managedContext.save()
+            SuggestionsViewController.genres.append(genre)
+        } catch let error as NSError {
+            print(error)
+        }
+    }
     
-    public func fetchData() {
+    //MARK: Fetching funcs
+    public func fetchFilmsData() {
         let fetchRequest: NSFetchRequest<CurrentFilm> = CurrentFilm.fetchRequest()
         
         do {
@@ -42,9 +59,23 @@ class CoreDataManager {
         }
     }
     
+    public func fetchGenresData() {
+        let fetchRequest: NSFetchRequest<Genre> = Genre.fetchRequest()
+        
+        do {
+            try SuggestionsViewController.genres = managedContext.fetch(fetchRequest)
+        } catch let error as NSError {
+            print(error)
+        }
+    }
+    
+    //MARK: Deliting funcs
+    
     public func deleteAllData() {
         let fetchRequest: NSFetchRequest<CurrentFilm> = CurrentFilm.fetchRequest()
+        let genreFetchRequest: NSFetchRequest<Genre> = Genre.fetchRequest()
         fetchRequest.includesPropertyValues = false
+        
         do {
             let items = try managedContext.fetch(fetchRequest) as [NSManagedObject]
             for item in items {
@@ -52,11 +83,22 @@ class CoreDataManager {
             }
             try managedContext.save()
             
-        } catch let error as NSError{
+        } catch let error as NSError {
             print(error)
         }
         
+        do {
+            let genreItems = try managedContext.fetch(genreFetchRequest) as [NSManagedObject]
+            for genreItem in genreItems {
+                managedContext.delete(genreItem)
+            }
+            try managedContext.save()
+        } catch let error as NSError {
+            print(error)
+        }
     }
+    
+    
     
     deinit {
         print("CoreData manager was dealocated")

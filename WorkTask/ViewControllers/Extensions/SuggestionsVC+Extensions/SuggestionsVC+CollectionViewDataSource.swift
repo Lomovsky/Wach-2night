@@ -14,7 +14,7 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
             return SuggestionsViewController.films.count
 
         } else if collectionView == self.genreCollectionView {
-            return self.genres.count
+            return SuggestionsViewController.genres.count
         }
         return Int()
     }
@@ -24,7 +24,7 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == self.genreCollectionView {
-            return CGSize(width: collectionView.frame.width * 0.3, height: collectionView.frame.height * 0.5)
+            return CGSize(width: collectionView.frame.width * 0.35, height: collectionView.frame.height * 0.5)
             
         } else if collectionView == self.recommendationsCollectionView {
             return CGSize(width: view.frame.width - 125, height: collectionView.frame.size.height * 0.90)
@@ -68,10 +68,10 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
             
         } else if collectionView == self.genreCollectionView {
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GenreCollectionViewCell.reuseIdentifier, for: indexPath) as? GenreCollectionViewCell {
-                let genre = self.genres[indexPath.row]
+                let genre = SuggestionsViewController.genres[indexPath.row]
                 cell.backgroundColor = UIColor(red: 0.98, green: 0.96, blue: 0.96, alpha: 1.00)
                 cell.layer.cornerRadius = 10
-                cell.configureTheCell(genreLabel: genre)
+                cell.configureTheCell(genreLabel: genre.name!)
                 return cell
             }
         }
