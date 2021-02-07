@@ -6,7 +6,6 @@
 //
 
 import UIKit
-
 class SuggestionsViewController: UIViewController {
     //MARK: Declarations
     static var films: [CurrentFilm] = []

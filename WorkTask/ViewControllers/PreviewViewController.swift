@@ -70,8 +70,6 @@ class PreviewViewController: UIViewController {
         setupImageView()
         setupTitleLabel()
         setupOverviewLabel()
-
-
     }
     
     //MARK: viewWillAppear

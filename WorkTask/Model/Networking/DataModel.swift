@@ -36,3 +36,8 @@ import Foundation
     var overview: String
     var rating: Float
  }
+ 
+ struct Genres: Codable {
+    var id: Int
+    var name: String
+ }
