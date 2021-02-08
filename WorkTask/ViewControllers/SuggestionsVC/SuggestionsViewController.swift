@@ -130,6 +130,7 @@ class SuggestionsViewController: UIViewController {
     //MARK: ViewWillApear
     override func viewWillAppear(_ animated: Bool) {
         setupNavigationController()
+        
     }
 
 

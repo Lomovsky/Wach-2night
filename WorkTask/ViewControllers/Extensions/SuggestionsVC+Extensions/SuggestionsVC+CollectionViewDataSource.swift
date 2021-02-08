@@ -108,6 +108,7 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
                 
                 if SuggestionsViewController.favouriteFilms.isEmpty {
                     cell.backgroundColor = .systemGray6
+                    cell.imageView.isHidden = true
                     cell.layer.cornerRadius = 10
                     cell.imagePlaceholder.text = "Нет фильма"
                     cell.imagePlaceholder.isHidden = false
@@ -115,6 +116,7 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
                     
                 } else {
                     let film = SuggestionsViewController.favouriteFilms.reversed()[indexPath.row]
+                    cell.imageView.isHidden = false
                     if let poster = film.poster {
                         if let posterImage = UIImage(data: poster) {
                             let newPoster = posterImage.resizeImageUsingVImage(size: CGSize.init(width: cell.frame.size.width,
