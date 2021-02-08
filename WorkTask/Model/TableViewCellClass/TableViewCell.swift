@@ -10,6 +10,7 @@ import UIKit
 class TableViewCell: UITableViewCell {
     
     //MARK: Declarations
+    
     let ratingLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -31,15 +32,13 @@ class TableViewCell: UITableViewCell {
     //MARK: Initializer -
     override func awakeFromNib() {
         super.awakeFromNib()
-        contentView.addSubview(ratingStackView)
-        contentView.addSubview(starImage)
         
-        setupRatingStackView()
     }
     
     
     
     //MARK: SetupFuncs -
+
     private func setupRatingStackView() {
         ratingStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         ratingStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true

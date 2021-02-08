@@ -257,8 +257,8 @@
 			isa = PBXGroup;
 			children = (
 				C062A59225CDB4DE00C507ED /* SuggestionsVC+Extensions */,
-				C062A59425CDB4F700C507ED /* SearchVC+Extensions */,
 				C0A19ADF25D13CF500575196 /* PreviewVC+Extenstions */,
+				C062A59425CDB4F700C507ED /* SearchVC+Extensions */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
