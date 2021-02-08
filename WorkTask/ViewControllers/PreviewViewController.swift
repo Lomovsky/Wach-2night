@@ -8,6 +8,7 @@
 import UIKit
 
 class PreviewViewController: UIViewController {
+    let coreDataManager = CoreDataManager()
     var film: CurrentFilm? = nil
     
     //MARK: Declarations
@@ -64,7 +65,6 @@ class PreviewViewController: UIViewController {
         view.backgroundColor = .white
         view.addSubview(scrollView)
         view.addSubview(stackView)
-//        view.addSubview(containerView)
         view.addSubview(imageView)
         view.addSubview(favoriteButton)
         view.addSubview(titleLabel)
@@ -74,7 +74,6 @@ class PreviewViewController: UIViewController {
         setupView()
         setupScrollView()
         setupStackView()
-//        setupContainerView()
         setupImageView()
         setupFavoriteButton()
         setupTitleLabel()
@@ -85,13 +84,27 @@ class PreviewViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
        
     }
-    
-    
+       
     //MARK: Setup Funcs
-    @objc func buttonPressed() {
+    @objc func addToFavorites() {
         let coreDataManager = CoreDataManager()
         coreDataManager.saveFavouriteFilm(film!.title!, filmOriginalTitle: film!.originalTitle!, filmRating: film!.rating, filmOverview: film!.overview!, filmPoster: film!.poster!)
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "update favourite collectionView"), object: nil)
+    }
+    
+    @objc func deleteFromFavorites() {
+        guard let film = SuggestionsViewController.favouriteFilms.last as FavouriteFilm? else { return }
+        coreDataManager.managedContext.delete(film)
+        SuggestionsViewController.favouriteFilms.removeLast()
+        
+        do {
+            try coreDataManager.managedContext.save()
+            
+        } catch let error as NSError {
+            print(error)
+        }
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "update favourite collectionView"), object: nil)
+        dismiss(animated: true)
     }
     
     private func setupView() {
@@ -120,19 +133,6 @@ class PreviewViewController: UIViewController {
         stackView.addArrangedSubview(overviewText)
     }
 
-//    private func setupContainerView() {
-//        containerView.topAnchor.constraint(equalTo: stackView.topAnchor).isActive = true
-//        containerView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor).isActive = true
-//        containerView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor).isActive = true
-//        containerView.bottomAnchor.constraint(equalTo: imageView.bottomAnchor).isActive = true
-//        containerView.addSubview(imageView)
-//        containerView.layer.shadowColor = UIColor.black.cgColor
-//        containerView.layer.shadowRadius = 7
-//        containerView.layer.shadowOpacity = 0.7
-//        containerView.layer.shadowOffset = CGSize.init(width: 2.5, height: 2.5)
-//        containerView.layer.masksToBounds = false
-//    }
-
     private func setupImageView() {
         imageView.topAnchor.constraint(equalTo: stackView.topAnchor).isActive = true
         imageView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor).isActive = true
@@ -148,11 +148,11 @@ class PreviewViewController: UIViewController {
         favoriteButton.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 5).isActive = true
         favoriteButton.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 5).isActive = true
         favoriteButton.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -5).isActive = true
-        favoriteButton.setTitle("Добавить в избранное", for: .normal)
         favoriteButton.backgroundColor = .systemGreen
         favoriteButton.titleLabel?.textColor = .white
         favoriteButton.layer.cornerRadius = 10
-        favoriteButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+
+        
         
     }
     

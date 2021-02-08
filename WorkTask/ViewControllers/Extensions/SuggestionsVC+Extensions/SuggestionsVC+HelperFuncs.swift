@@ -85,6 +85,20 @@ extension SuggestionsViewController {
         }
     }
 
+    public func animateCell(cell: UICollectionViewCell) {
+        
+        UIView.animate(withDuration: 0.2,
+                       animations: {
+                        //Fade-out
+                        cell.alpha = 0.5
+        }) { (completed) in
+            UIView.animate(withDuration: 0.2,
+                           animations: {
+                            //Fade-out
+                            cell.alpha = 1
+            })
+        }
+    }
     
 }
 

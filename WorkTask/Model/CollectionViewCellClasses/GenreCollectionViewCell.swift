@@ -15,7 +15,7 @@ class GenreCollectionViewCell: UICollectionViewCell {
     
     //MARK: Declarations
     
-    private let genreLabel: UILabel = {
+    let genreLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.sizeToFit()
@@ -57,7 +57,5 @@ class GenreCollectionViewCell: UICollectionViewCell {
             self.contentView.layer.insertSublayer(gradientLayer, at: 0)
         }
     
-    func configureTheCell(genreLabel: String) {
-        self.genreLabel.text = genreLabel
-    }
+ 
 }

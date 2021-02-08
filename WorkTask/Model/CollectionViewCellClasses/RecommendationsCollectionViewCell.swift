@@ -14,7 +14,7 @@ class RecommendationsCollectionViewCell: UICollectionViewCell {
     }
 
     // MARK: Declarations
-    private let imageView: UIImageView = {
+    let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleToFill

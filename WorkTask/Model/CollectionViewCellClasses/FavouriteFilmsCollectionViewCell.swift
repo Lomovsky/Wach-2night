@@ -15,13 +15,13 @@ class FavouriteFilmsCollectionViewCell: UICollectionViewCell {
         return "FavouriteFilms cell indentifier"
     }
     
-    private let imagePlaceholder: UILabel = {
+    let imagePlaceholder: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
    
-    private let imageView: UIImageView = {
+    let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleToFill
@@ -64,14 +64,5 @@ class FavouriteFilmsCollectionViewCell: UICollectionViewCell {
         
     }
     
-    
-    func configureTheCell(poster: Data) {
-        self.imageView.image = UIImage(data: poster)
-    }
-    
-    func configurePlaceholder(placeholder: String) {
-        self.imagePlaceholder.text = placeholder
-        imagePlaceholder.isHidden = false
-    }
  
 }

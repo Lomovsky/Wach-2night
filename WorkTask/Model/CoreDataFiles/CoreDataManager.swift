@@ -126,7 +126,7 @@ class CoreDataManager {
         }
     }
     
-    public func deleteFromFavourites() {
+    public func deleteAllDataFromFavourites() {
         let fetchRequest: NSFetchRequest<FavouriteFilm> = FavouriteFilm.fetchRequest()
         fetchRequest.includesPropertyValues = false
         
