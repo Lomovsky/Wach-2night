@@ -13,7 +13,7 @@ class CoreDataManager {
     let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     //MARK: Saving funcs
-    public func saveFilms(_ filmTitle: String, filmOriginalTitle: String, filmPoster: Data, releaseDate: String, overview: String, rating: Float, originalPoster: Data) {
+    public func saveFilms(_ filmTitle: String, filmOriginalTitle: String, filmPoster: Data, releaseDate: String, overview: String, rating: Float) {
         guard let entityDescription = NSEntityDescription.entity(forEntityName: "CurrentFilm", in: managedContext) else { return }
         
         let film = NSManagedObject(entity: entityDescription, insertInto: managedContext) as! CurrentFilm
@@ -23,7 +23,6 @@ class CoreDataManager {
         film.releaseDate = releaseDate
         film.overview = overview
         film.rating = rating
-        film.originalSizedPoster = originalPoster
         
         do {
             try managedContext.save()

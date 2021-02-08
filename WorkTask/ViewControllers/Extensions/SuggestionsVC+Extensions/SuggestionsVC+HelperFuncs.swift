@@ -17,13 +17,26 @@ extension SuggestionsViewController {
             switch result {
             case .success(let filmResponse):
                 filmResponse.results.forEach { (film) in
-                    DispatchQueue.global(qos: .utility).async {
-                        let secondPath = film.posterPath
-                        let imageURLString = imagePath + secondPath!
-                        guard let imageURL = URL(string: imageURLString) else { return }
-                        guard let posterData = try? Data(contentsOf: imageURL) else { return }
+                    if let secondPath = film.posterPath {
+                        DispatchQueue.global(qos: .utility).async {
+                            let imageURLString = imagePath + secondPath
+                            guard let imageURL = URL(string: imageURLString) else { return }
+                            guard let posterData = try? Data(contentsOf: imageURL) else { return }
+                            DispatchQueue.main.async {
+                                coreDataManager.saveFilms(film.title, filmOriginalTitle: film.originalTitle, filmPoster: posterData, releaseDate: film.releaseDate, overview: film.overview, rating: film.rating)
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                    self.recommendationsCollectionView.reloadData()
+                                    self.recommendationsCollectionView.isHidden = false
+                                    self.activityIndicator.stopAnimating()
+                                    self.activityIndicator.isHidden = true
+                                }
+                            }
+                        }
+                    } else {
+                        let posterPlaceholder: UIImage = #imageLiteral(resourceName: "1024px-No_image_available.svg")
+                        guard let posterPlaceholderData = posterPlaceholder.pngData() else { return }
                         DispatchQueue.main.async {
-                            coreDataManager.saveFilms(film.title, filmOriginalTitle: film.originalTitle, filmPoster: posterData, releaseDate: film.releaseDate, overview: film.overview, rating: film.rating, originalPoster: posterData)
+                            coreDataManager.saveFilms(film.title, filmOriginalTitle: film.originalTitle, filmPoster: posterPlaceholderData, releaseDate: film.releaseDate, overview: film.overview, rating: film.rating)
                             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                                 self.recommendationsCollectionView.reloadData()
                                 self.recommendationsCollectionView.isHidden = false
@@ -32,6 +45,7 @@ extension SuggestionsViewController {
                             }
                         }
                     }
+
                 }
             case .failure(let error):
                 print(error)
