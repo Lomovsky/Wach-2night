@@ -74,6 +74,7 @@ extension SuggestionsViewController {
             self.activityIndicator.stopAnimating()
             self.activityIndicator.isHidden = true
             self.genreCollectionView.reloadData()
+            self.favouriteFilmsCollectionView.reloadData()
         }
     }
     

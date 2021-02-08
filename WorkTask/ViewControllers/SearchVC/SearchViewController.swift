@@ -74,9 +74,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         navigationItem.searchController = searchController
         searchController.searchBar.delegate = self
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Введите название"
-//        searchController.isActive = true
-        
+        searchController.searchBar.placeholder = "Введите название"        
         
     }
     
