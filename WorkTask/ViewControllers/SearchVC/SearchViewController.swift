@@ -10,6 +10,7 @@ import UIKit
 class SearchViewController: UIViewController, UISearchBarDelegate {
     
     //MARK: Declarations
+    let cache = NSCache<NSNumber, UIImage>()
     let searchController = UISearchController(searchResultsController: nil)
     let cellID = "Cell"
     var filmResponse: FilmResponse? = nil
@@ -53,7 +54,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-
+        cache.removeAllObjects()
     }
     
     
