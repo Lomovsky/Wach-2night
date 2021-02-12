@@ -162,6 +162,7 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
                     previewVC.overviewText.text = film.overview
                     previewVC.film = film
                     navigationController?.present(previewVC, animated: true, completion: {
+                        previewVC.film = film
                         previewVC.favoriteButton.setTitle("Добавить в избранное", for: .normal)
                         previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.addToFavorites), for: .touchUpInside)
                         

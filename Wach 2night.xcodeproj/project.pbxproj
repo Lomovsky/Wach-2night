@@ -197,6 +197,7 @@
 			children = (
 				C060DAFE257BECA200C892DE /* SuggestionsViewController.swift */,
 				C0A19AE225D13DE100575196 /* SuggestionsVC+UIFuncs.swift */,
+				C062A59225CDB4DE00C507ED /* SuggestionsVC+Extensions */,
 			);
 			path = SuggestionsVC;
 			sourceTree = "<group>";
@@ -214,6 +215,7 @@
 			children = (
 				C016B01C258C03F400F77CA6 /* PreviewViewController.swift */,
 				C0A19AED25D13F3500575196 /* PreviewVC+UIFuncs.swift */,
+				C0A19ADF25D13CF500575196 /* PreviewVC+Extenstions */,
 			);
 			path = PreviewVC;
 			sourceTree = "<group>";
@@ -222,6 +224,7 @@
 			isa = PBXGroup;
 			children = (
 				C0CE78B725CAD32900A55990 /* SearchViewController.swift */,
+				C062A59425CDB4F700C507ED /* SearchVC+Extensions */,
 			);
 			path = SearchVC;
 			sourceTree = "<group>";
@@ -253,16 +256,6 @@
 			path = TableViewCellClass;
 			sourceTree = "<group>";
 		};
-		C0D6AD5925960A000000174A /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				C062A59225CDB4DE00C507ED /* SuggestionsVC+Extensions */,
-				C0A19ADF25D13CF500575196 /* PreviewVC+Extenstions */,
-				C062A59425CDB4F700C507ED /* SearchVC+Extensions */,
-			);
-			path = Extensions;
-			sourceTree = "<group>";
-		};
 		C0F2F773257D452400A1DAF9 /* Delegates */ = {
 			isa = PBXGroup;
 			children = (
@@ -290,7 +283,6 @@
 				C0A19AE725D13EDE00575196 /* PreviewVC */,
 				C0A19AE825D13EEA00575196 /* SearchVC */,
 				C0A19AEA25D13EF200575196 /* SelectedFilmVC */,
-				C0D6AD5925960A000000174A /* Extensions */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
