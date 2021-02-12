@@ -77,6 +77,11 @@ extension SuggestionsViewController {
         navigationController?.pushViewController(searchVC, animated: true)
     }
     
+    @objc func showMore() {
+        let moreVC = MoreViewController()
+        navigationController?.pushViewController(moreVC, animated: true)
+    }
+    
     @objc func updateUI(notification: NSNotification) {
         let coreDataManager = CoreDataManager()
         coreDataManager.fetchFilmsData()
