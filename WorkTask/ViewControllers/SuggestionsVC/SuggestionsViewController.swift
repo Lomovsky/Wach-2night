@@ -23,7 +23,6 @@ class SuggestionsViewController: UIViewController {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .vertical
-//        stack.spacing = 10
         return stack
     }()
     
