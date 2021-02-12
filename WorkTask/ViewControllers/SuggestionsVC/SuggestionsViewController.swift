@@ -123,6 +123,7 @@ class SuggestionsViewController: UIViewController {
             
         } else {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "update"), object: nil)
+
         }
     }
     

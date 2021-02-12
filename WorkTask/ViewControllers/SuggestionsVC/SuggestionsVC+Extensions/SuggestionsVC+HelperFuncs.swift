@@ -89,6 +89,7 @@ extension SuggestionsViewController {
             self.activityIndicator.isHidden = true
             self.genreCollectionView.reloadData()
             self.favouriteFilmsCollectionView.reloadData()
+            self.recommendationsCollectionView.reloadData()
         }
     }
     

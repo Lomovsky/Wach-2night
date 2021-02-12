@@ -13,7 +13,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     let cache = NSCache<NSNumber, UIImage>()
     let searchController = UISearchController(searchResultsController: nil)
     let cellID = "Cell"
-    var filmResponse: FilmResponse? = nil
+    var films: [Film] = []
     var timer: Timer?
     
     
@@ -50,17 +50,17 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     //MARK: viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
         setupNavigationController()
-
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        cache.removeAllObjects()
+        
+        if let indexPath = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: indexPath, animated: true)
+        }
     }
     
     
     //MARK: SetupFuncs -
     private func setupView() {
-        view.backgroundColor = UIColor(red: 0.98, green: 0.96, blue: 0.96, alpha: 1.00)
+        view.backgroundColor = .white
+        
     }
     
     
@@ -94,7 +94,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     }
     
     deinit {
-        print("searchVC was dealloc")
+        cache.removeAllObjects()
+        films.removeAll()
+        print("search vc was dealocated")
     }
     
 }

@@ -8,6 +8,7 @@
 import UIKit
 
 class SelectedFilmViewController: UIViewController {
+    
     //MARK: Declarations
     let shadowSubview: UIStackView = {
         let stack = UIStackView()
@@ -25,16 +26,17 @@ class SelectedFilmViewController: UIViewController {
     //MARK: viewDidLoad & viewWillAppear -
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubview(shadowSubview)
-        view.addSubview(imageView)
+//        view.addSubview(shadowSubview)
+//        view.addSubview(imageView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         setupView()
         setupNavigationController()
-        setupShadowSubview()
-        setupImageView()
+//        setupShadowSubview()
+//        setupImageView()
     }
+    
     //MARK: SetupFuncs -
     
     private func setupView() {
@@ -44,10 +46,11 @@ class SelectedFilmViewController: UIViewController {
     private func setupNavigationController() {
         navigationController?.navigationBar.prefersLargeTitles = false
         
+        
     }
     
     private func setupShadowSubview() {
-        shadowSubview.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10).isActive = true
+        shadowSubview.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         shadowSubview.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         shadowSubview.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         shadowSubview.frame.size.height = imageView.image!.accessibilityFrame.height
@@ -65,9 +68,7 @@ class SelectedFilmViewController: UIViewController {
         imageView.trailingAnchor.constraint(equalTo: shadowSubview.trailingAnchor).isActive = true
         imageView.heightAnchor.constraint(equalTo: shadowSubview.heightAnchor).isActive = true
         imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 10
-        
+        imageView.clipsToBounds = true        
     }
 
     deinit {
