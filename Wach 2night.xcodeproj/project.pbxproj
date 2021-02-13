@@ -12,7 +12,7 @@
 		C0089F5925B2184D001647F2 /* SuggestionsVC+HelperFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0089F5825B2184D001647F2 /* SuggestionsVC+HelperFuncs.swift */; };
 		C008D31425CC4DDB00413490 /* SelectedFilmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C008D31325CC4DDB00413490 /* SelectedFilmViewController.swift */; };
 		C016B01D258C03F400F77CA6 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016B01C258C03F400F77CA6 /* PreviewViewController.swift */; };
-		C01AB0C325D6ECA200FA6129 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01AB0C225D6ECA200FA6129 /* MoreViewController.swift */; };
+		C01AB0C325D6ECA200FA6129 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01AB0C225D6ECA200FA6129 /* SettingsViewController.swift */; };
 		C021DFFF25CBFD190028ACE0 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C021DFFE25CBFD190028ACE0 /* StringExtension.swift */; };
 		C028AC7025B0D8BF007799B6 /* UIImageExtensionForResizingImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = C028AC6F25B0D8BF007799B6 /* UIImageExtensionForResizingImages.swift */; };
 		C0394FE325A8B33D00D7A7FB /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0394FE225A8B33D00D7A7FB /* CoreDataManager.swift */; };
@@ -48,7 +48,7 @@
 		C0089F5825B2184D001647F2 /* SuggestionsVC+HelperFuncs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SuggestionsVC+HelperFuncs.swift"; sourceTree = "<group>"; };
 		C008D31325CC4DDB00413490 /* SelectedFilmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedFilmViewController.swift; sourceTree = "<group>"; };
 		C016B01C258C03F400F77CA6 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
-		C01AB0C225D6ECA200FA6129 /* MoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
+		C01AB0C225D6ECA200FA6129 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		C021DFFE25CBFD190028ACE0 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		C028AC6F25B0D8BF007799B6 /* UIImageExtensionForResizingImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtensionForResizingImages.swift; sourceTree = "<group>"; };
 		C0394FE225A8B33D00D7A7FB /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -135,6 +135,14 @@
 				C04D6E9E25AB391C00E4B151 /* Wach 2night.xcdatamodeld */,
 			);
 			path = CoreDataFiles;
+			sourceTree = "<group>";
+		};
+		C05DC6A425D7F17A00676942 /* SettingsVC */ = {
+			isa = PBXGroup;
+			children = (
+				C01AB0C225D6ECA200FA6129 /* SettingsViewController.swift */,
+			);
+			path = SettingsVC;
 			sourceTree = "<group>";
 		};
 		C060DAEE257BECA100C892DE = {
@@ -280,12 +288,12 @@
 		C0F2F778257D455700A1DAF9 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				C05DC6A425D7F17A00676942 /* SettingsVC */,
 				C0A19AE525D13E7B00575196 /* SuggestionsVC */,
 				C0A19AE625D13ED600575196 /* GenreSuggestionsTableVC */,
 				C0A19AE725D13EDE00575196 /* PreviewVC */,
 				C0A19AE825D13EEA00575196 /* SearchVC */,
 				C0A19AEA25D13EF200575196 /* SelectedFilmVC */,
-				C01AB0C225D6ECA200FA6129 /* MoreViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -431,7 +439,7 @@
 				C0C0E7C32583C74D006C460E /* DataModel.swift in Sources */,
 				C021DFFF25CBFD190028ACE0 /* StringExtension.swift in Sources */,
 				C07E70DA25BB33F2001EE1AC /* SearchVC+SearchBarDelegate.swift in Sources */,
-				C01AB0C325D6ECA200FA6129 /* MoreViewController.swift in Sources */,
+				C01AB0C325D6ECA200FA6129 /* SettingsViewController.swift in Sources */,
 				C0089F5925B2184D001647F2 /* SuggestionsVC+HelperFuncs.swift in Sources */,
 				C028AC7025B0D8BF007799B6 /* UIImageExtensionForResizingImages.swift in Sources */,
 				C0D6AD532595F9D40000174A /* ApiKeyAndImageLink.swift in Sources */,

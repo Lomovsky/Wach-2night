@@ -10,6 +10,7 @@ import Foundation
  }
  
  struct Film: Codable {
+    var id: Int
     var title: String
     var originalTitle: String
     var posterPath: String?
@@ -18,6 +19,7 @@ import Foundation
     var rating: Float
     
     enum CodingKeys: String, CodingKey {
+        case id 
         case title
         case originalTitle = "original_title"
         case posterPath = "poster_path"

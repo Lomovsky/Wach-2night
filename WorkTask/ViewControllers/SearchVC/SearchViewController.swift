@@ -65,7 +65,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     
     
     private func setupNavigationController() {
-        navigationController?.navigationBar.isHidden = false
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.visibleViewController?.title = "Поиск"
         

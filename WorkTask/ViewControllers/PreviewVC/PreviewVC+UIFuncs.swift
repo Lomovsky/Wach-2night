@@ -19,8 +19,8 @@ extension PreviewViewController {
         scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
         scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        scrollView.addSubview(stackView)
         scrollView.showsVerticalScrollIndicator = false
+        scrollView.addSubview(stackView)
     }
     
     func setupStackView() {
@@ -39,7 +39,7 @@ extension PreviewViewController {
         imageView.topAnchor.constraint(equalTo: stackView.topAnchor).isActive = true
         imageView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor).isActive = true
         imageView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor).isActive = true
-        imageView.frame.size.height = imageView.image!.accessibilityFrame.height
+        imageView.frame.size.height = view.frame.height * 0.6
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 10

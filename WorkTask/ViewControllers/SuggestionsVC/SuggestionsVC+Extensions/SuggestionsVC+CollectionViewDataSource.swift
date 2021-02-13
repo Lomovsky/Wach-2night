@@ -150,6 +150,7 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
                     previewVC.imageView.image = resizedPoster
                     previewVC.titleLabel.text = film.title
                     previewVC.overviewText.text = film.overview
+                    print("ID IS:::\(film.id)")
                     previewVC.film = film
                     navigationController?.present(previewVC, animated: true, completion: {
                         previewVC.favoriteButton.setTitle("Добавить в избранное", for: .normal)

@@ -110,21 +110,13 @@ class SuggestionsViewController: UIViewController {
         setupFavouriteFilmsLabel()
         setupFavouritesCollectionView()
         
-        let coreDataManager = CoreDataManager()
         NotificationCenter.default.addObserver(self, selector: #selector(updateUI(notification:)), name:NSNotification.Name(rawValue: "update"), object: nil)
         
         NotificationCenter.default.addObserver(self, selector: #selector(updateFavouriteCollectionView(notification:)), name: NSNotification.Name(rawValue: "update favourite collectionView"), object: nil)
         
-        if Reachability.isConnectedToNetwork() {
-            coreDataManager.deleteAllData()
-            coreDataManager.fetchFavouriteFilms()
-            downloadFilms()
-            downloadGenres()
-            
-        } else {
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "update"), object: nil)
-
-        }
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshRecommendations(notification:)), name: NSNotification.Name(rawValue: "refresh recommendations"), object: nil)
+        
+        checkConnection()
     }
     
     //MARK: ViewWillApear

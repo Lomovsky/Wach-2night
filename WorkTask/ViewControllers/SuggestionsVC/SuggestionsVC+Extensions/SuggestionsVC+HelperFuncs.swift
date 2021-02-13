@@ -9,7 +9,39 @@ import UIKit
 
 extension SuggestionsViewController {
     
-    @objc func downloadFilms() {
+    func checkConnection() {
+        let coreDataManager = CoreDataManager()
+        if Reachability.isConnectedToNetwork() {
+            coreDataManager.deleteAllData()
+            coreDataManager.fetchFavouriteFilms()
+            downloadFilms()
+            downloadGenres()
+            
+        } else {
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "update"), object: nil)
+            
+        }
+    }
+    
+    func downloadGenres() {
+        let urlString = "https://api.themoviedb.org/3/genre/movie/list?api_key=\(apiKey)&language=ru-RU"
+        let coreDataManager = CoreDataManager()
+        
+        NetworkManager.fetchCurrentData(withURL: urlString, dataModel: Genres.self) { [weak self] (result) in
+            guard let self = self else { return }
+            switch result {
+            case .failure(let error):
+                print(error)
+            case .success(let genreResponse):
+                genreResponse.genres.forEach { (genre) in
+                    coreDataManager.saveGenres(genre.id, genreName: genre.name)
+                    self.genreCollectionView.reloadData()
+                }
+            }
+        }
+    }
+    
+    func downloadFilms() {
         let urlString = "https://api.themoviedb.org/3/discover/movie?api_key=\(apiKey)&language=ru-RU&sort_by=popularity.desc&include_adult=true&include_video=false&page=1"
         let coreDataManager = CoreDataManager()
         NetworkManager.fetchCurrentData(withURL: urlString, dataModel: FilmResponse.self) { [weak self] (result) in
@@ -45,7 +77,7 @@ extension SuggestionsViewController {
                             }
                         }
                     }
-
+                    
                 }
             case .failure(let error):
                 print(error)
@@ -53,33 +85,15 @@ extension SuggestionsViewController {
         }
     }
     
-    func downloadGenres() {
-        let urlString = "https://api.themoviedb.org/3/genre/movie/list?api_key=\(apiKey)&language=ru-RU"
-        let coreDataManager = CoreDataManager()
-
-        NetworkManager.fetchCurrentData(withURL: urlString, dataModel: Genres.self) { [weak self] (result) in
-            guard let self = self else { return }
-            switch result {
-            case .failure(let error):
-                print(error)
-            case .success(let genreResponse):
-                genreResponse.genres.forEach { (genre) in
-                    coreDataManager.saveGenres(genre.id, genreName: genre.name)
-                    self.genreCollectionView.reloadData()
-                }
-            }
-        }
-    }
-
     
     @objc func showSearch() {
         let searchVC = SearchViewController()
         navigationController?.pushViewController(searchVC, animated: true)
     }
     
-    @objc func showMore() {
-        let moreVC = MoreViewController()
-        navigationController?.pushViewController(moreVC, animated: true)
+    @objc func showSettingsVC() {
+        let settingsVC = SettingsViewController()
+        navigationController?.pushViewController(settingsVC, animated: true)
     }
     
     @objc func updateUI(notification: NSNotification) {
@@ -105,21 +119,29 @@ extension SuggestionsViewController {
             self.favouriteFilmsCollectionView.reloadData()
         }
     }
-
-    public func animateCell(cell: UICollectionViewCell) {
+    
+    @objc func refreshRecommendations(notification: NSNotification) {
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
+        downloadFilms()
+    }
+    
+    
+    func animateCell(cell: UICollectionViewCell) {
         
         UIView.animate(withDuration: 0.2,
                        animations: {
                         //Fade-out
                         cell.alpha = 0.5
-        }) { (completed) in
+                       }) { (completed) in
             UIView.animate(withDuration: 0.2,
                            animations: {
                             //Fade-out
                             cell.alpha = 1
-            })
+                           })
         }
     }
+    
     
 }
 
