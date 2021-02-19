@@ -56,12 +56,6 @@ class PreviewViewController: UIViewController {
         return label
     }()
     
-    let overviewBackground: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
     let overviewText: UILabel = {
         let tf = UILabel()
         tf.translatesAutoresizingMaskIntoConstraints = false
@@ -81,7 +75,6 @@ class PreviewViewController: UIViewController {
         view.addSubview(favoriteButton)
         view.addSubview(titleLabel)
         view.addSubview(overviewLabel)
-        view.addSubview(overviewBackground)
         view.addSubview(overviewText)
         
         setupView()
@@ -91,7 +84,6 @@ class PreviewViewController: UIViewController {
         setupFavoriteButton()
         setupTitleLabel()
         setupOverviewLabel()
-        setupOverviewBackground()
         setupOverviewText()
     }
     
