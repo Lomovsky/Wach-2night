@@ -44,7 +44,4 @@ extension SearchViewController {
             }
         })
     }
-    
-
-    
 }
