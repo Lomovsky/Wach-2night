@@ -93,7 +93,8 @@ extension SuggestionsViewController {
     
     @objc func showSettingsVC() {
         let settingsVC = SettingsViewController()
-        navigationController?.pushViewController(settingsVC, animated: true)
+        settingsVC.modalPresentationStyle = .overFullScreen
+        navigationController?.present(settingsVC, animated: true, completion: nil)
     }
     
     @objc func updateUI(notification: NSNotification) {
