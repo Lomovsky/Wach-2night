@@ -11,58 +11,67 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
     
     //MARK: numberOfItemsInSection-
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == self.recommendationsCollectionView {
+        switch collectionView {
+        case recommendationsCollectionView:
             return SuggestionsViewController.films.count
             
-        } else if collectionView == self.genreCollectionView {
+        case genreCollectionView:
             return SuggestionsViewController.genres.count
             
-        } else if collectionView == self.favouriteFilmsCollectionView {
-            
+        case favouriteFilmsCollectionView:
             if SuggestionsViewController.favouriteFilms.isEmpty {
                 return 3
             }
             return SuggestionsViewController.favouriteFilms.count
+            
+        default: return 0
+            
         }
-        return Int()
     }
     
     //MARK: sizeForItemAt -
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if collectionView == self.genreCollectionView {
+        switch collectionView {
+        case self.genreCollectionView:
             return CGSize(width: collectionView.frame.width * 0.35, height: collectionView.frame.height * 0.5)
             
-        } else if collectionView == self.recommendationsCollectionView {
+        case self.recommendationsCollectionView:
             return CGSize(width: view.frame.width - 125, height: collectionView.frame.size.height * 0.90)
             
-        } else if collectionView == self.favouriteFilmsCollectionView {
+        case self.favouriteFilmsCollectionView:
             return CGSize(width: view.frame.width - 125, height: collectionView.frame.size.height * 0.90)
+            
+        default:
+            return CGSize(width: 0, height: 0)
         }
-        return CGSize()
     }
     
     //    DistanceBetween Cells
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        if collectionView == self.recommendationsCollectionView {
+        switch collectionView {
+        case recommendationsCollectionView:
             return 34
             
-        } else if collectionView == self.genreCollectionView {
+        case genreCollectionView:
             return 10
             
-        } else if collectionView == self.favouriteFilmsCollectionView {
+        case favouriteFilmsCollectionView:
             return 34
             
+        default:
+            return 0
         }
-        return CGFloat()
     }
     
     //MARK: cellForItemAt -
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if collectionView == self.recommendationsCollectionView {
+        
+        switch collectionView {
+        case recommendationsCollectionView:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecommendationsCollectionViewCell.reuseIdentifier,for: indexPath) as? RecommendationsCollectionViewCell {
                 
                 let film = SuggestionsViewController.films[indexPath.row]
@@ -88,11 +97,9 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
                     cell.layer.masksToBounds = false
                     return cell
                 }
-                
-                
             }
             
-        } else if collectionView == self.genreCollectionView {
+        case genreCollectionView:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GenreCollectionViewCell.reuseIdentifier, for: indexPath) as? GenreCollectionViewCell {
                 
                 let genre = SuggestionsViewController.genres[indexPath.row]
@@ -103,7 +110,7 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
                 
             }
             
-        } else if collectionView == self.favouriteFilmsCollectionView {
+        case favouriteFilmsCollectionView:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FavouriteFilmsCollectionViewCell.reuseIdentifier, for: indexPath) as? FavouriteFilmsCollectionViewCell {
                 
                 if SuggestionsViewController.favouriteFilms.isEmpty {
@@ -130,15 +137,22 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
                     }
                 }
             }
+            
+        default:
+            return UICollectionViewCell()
         }
+        
         return UICollectionViewCell()
     }
     
     //MARK: didSelectItemAt-
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == self.genreCollectionView {
+        
+        switch collectionView {
+        case genreCollectionView:
+            break
             
-        } else if collectionView == self.recommendationsCollectionView {
+        case recommendationsCollectionView:
             guard let cell = collectionView.cellForItem(at: indexPath) else { return }
             let previewVC = PreviewViewController()
             let film = SuggestionsViewController.films[indexPath.row]
@@ -169,7 +183,8 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
                     })
                 }
             }
-        } else if collectionView == self.favouriteFilmsCollectionView {
+            
+        case favouriteFilmsCollectionView:
             if SuggestionsViewController.favouriteFilms.isEmpty {
                 
             } else {
@@ -179,7 +194,7 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
                 if let poster = film.poster {
                     guard let posterImage = UIImage(data: poster) else { return }
                     let resizedPoster = posterImage.resizeImageUsingVImage(size: CGSize.init(width: view.frame.width,
-                                                                                         height: view.frame.height * 0.6))
+                                                                                             height: view.frame.height * 0.6))
                     
                     animateCell(cell: cell)
                     previewVC.imageView.image = resizedPoster
@@ -200,8 +215,12 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
                         previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.deleteFromFavorites), for: .touchUpInside)
                     })
                 }
-
+                
             }
+            
+        default:
+            break
+            
         }
     }
     
@@ -222,8 +241,5 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
             }
         }
         
-    }
-    
-    
-    
+    }  
 }
