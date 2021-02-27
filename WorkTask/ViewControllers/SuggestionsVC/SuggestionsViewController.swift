@@ -125,5 +125,4 @@ class SuggestionsViewController: UIViewController {
         
     }
 
-
 }

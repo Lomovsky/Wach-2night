@@ -73,7 +73,6 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
         switch collectionView {
         case recommendationsCollectionView:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecommendationsCollectionViewCell.reuseIdentifier,for: indexPath) as? RecommendationsCollectionViewCell {
-                
                 let film = SuggestionsViewController.films[indexPath.row]
                 if let poster = film.poster {
                     if let posterImage = UIImage(data: poster) {

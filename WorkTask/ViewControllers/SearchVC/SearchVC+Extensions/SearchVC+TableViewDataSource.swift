@@ -8,7 +8,7 @@
 import UIKit
 
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
-
+    
     
     // MARK: - Table view data source    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -18,17 +18,17 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
-
+        
         let itemNumber = NSNumber(value: indexPath.item)
         let film = self.films[indexPath.row]
-
+        
         cell.imageView?.image = #imageLiteral(resourceName: "1024px-No_image_available.svg")
         cell.textLabel?.text = film.title
-
+        
         if let posterPath = film.posterPath {
             let posterUrlString = imagePath + posterPath
             let posterURL = URL(string: posterUrlString)
-
+            
             if let cashedImage = self.cache.object(forKey: itemNumber) {
                 cell.imageView?.image = cashedImage
                 cell.imageView?.clipsToBounds =  true
