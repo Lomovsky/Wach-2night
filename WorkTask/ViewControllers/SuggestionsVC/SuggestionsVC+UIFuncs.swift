@@ -27,7 +27,6 @@ extension SuggestionsViewController {
         navigationController?.visibleViewController?.title = "Главная"
         navigationController?.navigationBar.tintColor = .systemGreen
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(showSearch))
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape"), style: .plain, target: self, action: #selector(showSettingsVC))
         navigationItem.searchController = nil
     }
     
