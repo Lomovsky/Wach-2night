@@ -13,6 +13,8 @@ extension SuggestionsViewController {
         let coreDataManager = CoreDataManager()
         if Reachability.isConnectedToNetwork() {
             coreDataManager.deleteAllData()
+            SuggestionsViewController.films.removeAll()
+            SuggestionsViewController.genres.removeAll()
             coreDataManager.fetchFavouriteFilms()
             downloadFilms()
             downloadGenres()
@@ -26,7 +28,6 @@ extension SuggestionsViewController {
     func downloadGenres() {
         let urlString = "https://api.themoviedb.org/3/genre/movie/list?api_key=\(apiKey)&language=ru-RU"
         let coreDataManager = CoreDataManager()
-        
         NetworkManager.fetchCurrentData(withURL: urlString, dataModel: Genres.self) { [weak self] (result) in
             guard let self = self else { return }
             switch result {
@@ -61,6 +62,7 @@ extension SuggestionsViewController {
                                     self.recommendationsCollectionView.isHidden = false
                                     self.activityIndicator.stopAnimating()
                                     self.activityIndicator.isHidden = true
+                                    self.refreshControl.endRefreshing()
                                 }
                             }
                         }
@@ -74,6 +76,7 @@ extension SuggestionsViewController {
                                 self.recommendationsCollectionView.isHidden = false
                                 self.activityIndicator.stopAnimating()
                                 self.activityIndicator.isHidden = true
+                                self.refreshControl.endRefreshing()
                             }
                         }
                     }
@@ -127,6 +130,10 @@ extension SuggestionsViewController {
         downloadFilms()
     }
     
+    @objc func refresh(_ sender: AnyObject) {
+        checkConnection()
+        recommendationsCollectionView.reloadData()
+    }
     
     func animateCell(cell: UICollectionViewCell) {
         

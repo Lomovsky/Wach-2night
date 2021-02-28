@@ -9,6 +9,12 @@ import UIKit
 
 extension SuggestionsViewController {
     //MARK: UIFuncs -
+    func setupRefreshControll() {
+        refreshControl.attributedTitle = NSAttributedString(string: "Потяните для обновления")
+        refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
+        
+    }
+    
     
     func setupView() {
         view.backgroundColor = .white
@@ -30,6 +36,7 @@ extension SuggestionsViewController {
         scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        scrollView.refreshControl = refreshControl
         scrollView.addSubview(stackView)
     }
     

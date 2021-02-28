@@ -11,6 +11,7 @@ class SuggestionsViewController: UIViewController {
     static var films: [CurrentFilm] = []
     static var genres: [Genre] = []
     static var favouriteFilms: [FavouriteFilm] = []
+    var refreshControl = UIRefreshControl()
     
     //MARK: UIElements
     let scrollView: UIScrollView = {
@@ -109,6 +110,7 @@ class SuggestionsViewController: UIViewController {
         setupActivityIndicator()
         setupFavouriteFilmsLabel()
         setupFavouritesCollectionView()
+        setupRefreshControll()
         
         NotificationCenter.default.addObserver(self, selector: #selector(updateUI(notification:)), name:NSNotification.Name(rawValue: "update"), object: nil)
         
@@ -124,5 +126,6 @@ class SuggestionsViewController: UIViewController {
         setupNavigationController()
         
     }
+
 
 }
