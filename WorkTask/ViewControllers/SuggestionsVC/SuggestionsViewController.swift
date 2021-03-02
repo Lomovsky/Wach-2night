@@ -112,12 +112,6 @@ class SuggestionsViewController: UIViewController {
         setupFavouritesCollectionView()
         setupRefreshControll()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(updateUI(notification:)), name:NSNotification.Name(rawValue: "update"), object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(updateFavouriteCollectionView(notification:)), name: NSNotification.Name(rawValue: "update favourite collectionView"), object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(refreshRecommendations(notification:)), name: NSNotification.Name(rawValue: "refresh recommendations"), object: nil)
-        
         checkConnection()
     }
     
@@ -129,3 +123,5 @@ class SuggestionsViewController: UIViewController {
 
 
 }
+
+

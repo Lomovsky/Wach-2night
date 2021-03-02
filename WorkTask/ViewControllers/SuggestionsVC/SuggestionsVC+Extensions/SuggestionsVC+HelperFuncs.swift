@@ -20,7 +20,18 @@ extension SuggestionsViewController {
             downloadGenres()
             
         } else {
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "update"), object: nil)
+            coreDataManager.fetchFilmsData()
+            coreDataManager.fetchGenresData()
+            coreDataManager.fetchFavouriteFilms()
+            DispatchQueue.main.async {
+                self.recommendationsCollectionView.reloadData()
+                self.recommendationsCollectionView.isHidden = false
+                self.activityIndicator.stopAnimating()
+                self.activityIndicator.isHidden = true
+                self.genreCollectionView.reloadData()
+                self.favouriteFilmsCollectionView.reloadData()
+                self.recommendationsCollectionView.reloadData()
+            }
             
         }
     }
@@ -95,21 +106,21 @@ extension SuggestionsViewController {
     }
     
     
-    @objc func updateUI(notification: NSNotification) {
-        let coreDataManager = CoreDataManager()
-        coreDataManager.fetchFilmsData()
-        coreDataManager.fetchGenresData()
-        coreDataManager.fetchFavouriteFilms()
-        DispatchQueue.main.async {
-            self.recommendationsCollectionView.reloadData()
-            self.recommendationsCollectionView.isHidden = false
-            self.activityIndicator.stopAnimating()
-            self.activityIndicator.isHidden = true
-            self.genreCollectionView.reloadData()
-            self.favouriteFilmsCollectionView.reloadData()
-            self.recommendationsCollectionView.reloadData()
-        }
-    }
+//    @objc func updateUI(notification: NSNotification) {
+//        let coreDataManager = CoreDataManager()
+//        coreDataManager.fetchFilmsData()
+//        coreDataManager.fetchGenresData()
+//        coreDataManager.fetchFavouriteFilms()
+//        DispatchQueue.main.async {
+//            self.recommendationsCollectionView.reloadData()
+//            self.recommendationsCollectionView.isHidden = false
+//            self.activityIndicator.stopAnimating()
+//            self.activityIndicator.isHidden = true
+//            self.genreCollectionView.reloadData()
+//            self.favouriteFilmsCollectionView.reloadData()
+//            self.recommendationsCollectionView.reloadData()
+//        }
+//    }
     
     @objc func updateFavouriteCollectionView(notification: NSNotification) {
         let coreDataManager = CoreDataManager()
@@ -119,11 +130,6 @@ extension SuggestionsViewController {
         }
     }
     
-    @objc func refreshRecommendations(notification: NSNotification) {
-        activityIndicator.isHidden = false
-        activityIndicator.startAnimating()
-        downloadFilms()
-    }
     
     @objc func refresh(_ sender: AnyObject) {
         checkConnection()

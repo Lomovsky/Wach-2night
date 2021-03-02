@@ -10,6 +10,7 @@ import UIKit
 class PreviewViewController: UIViewController {
     let coreDataManager = CoreDataManager()
     var film: CurrentFilm? = nil
+    weak var suggestionsDelegate: SuggestionsDelegate?
     
     //MARK: Declarations
     let scrollView: UIScrollView = {
@@ -62,7 +63,6 @@ class PreviewViewController: UIViewController {
         tf.sizeToFit()
         return tf
     }()
-
     
     
     //MARK: viewDidLoad -

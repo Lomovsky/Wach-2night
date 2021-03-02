@@ -12,7 +12,6 @@
 		C0089F5925B2184D001647F2 /* SuggestionsVC+HelperFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0089F5825B2184D001647F2 /* SuggestionsVC+HelperFuncs.swift */; };
 		C008D31425CC4DDB00413490 /* SelectedFilmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C008D31325CC4DDB00413490 /* SelectedFilmViewController.swift */; };
 		C016B01D258C03F400F77CA6 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016B01C258C03F400F77CA6 /* PreviewViewController.swift */; };
-		C01AB0C325D6ECA200FA6129 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C01AB0C225D6ECA200FA6129 /* SettingsViewController.swift */; };
 		C021DFFF25CBFD190028ACE0 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C021DFFE25CBFD190028ACE0 /* StringExtension.swift */; };
 		C028AC7025B0D8BF007799B6 /* UIImageExtensionForResizingImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = C028AC6F25B0D8BF007799B6 /* UIImageExtensionForResizingImages.swift */; };
 		C0394FE325A8B33D00D7A7FB /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0394FE225A8B33D00D7A7FB /* CoreDataManager.swift */; };
@@ -24,6 +23,7 @@
 		C060DB04257BECA400C892DE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C060DB03257BECA400C892DE /* Assets.xcassets */; };
 		C060DB07257BECA400C892DE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C060DB05257BECA400C892DE /* LaunchScreen.storyboard */; };
 		C060DB14257BED7C00C892DE /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = C060DB13257BED7C00C892DE /* .gitignore */; };
+		C0624C7625EE758100B6AD5E /* SuggestionsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0624C7525EE758100B6AD5E /* SuggestionsDelegate.swift */; };
 		C062A59025CDB03400C507ED /* GenreCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C062A58F25CDB03400C507ED /* GenreCollectionViewCell.swift */; };
 		C07E70DA25BB33F2001EE1AC /* SearchVC+SearchBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07E70D925BB33F2001EE1AC /* SearchVC+SearchBarDelegate.swift */; };
 		C0A19ACA25D0245800575196 /* GenreSuggestionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A19AC925D0245800575196 /* GenreSuggestionsTableViewController.swift */; };
@@ -48,7 +48,6 @@
 		C0089F5825B2184D001647F2 /* SuggestionsVC+HelperFuncs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SuggestionsVC+HelperFuncs.swift"; sourceTree = "<group>"; };
 		C008D31325CC4DDB00413490 /* SelectedFilmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedFilmViewController.swift; sourceTree = "<group>"; };
 		C016B01C258C03F400F77CA6 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
-		C01AB0C225D6ECA200FA6129 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		C021DFFE25CBFD190028ACE0 /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		C028AC6F25B0D8BF007799B6 /* UIImageExtensionForResizingImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtensionForResizingImages.swift; sourceTree = "<group>"; };
 		C0394FE225A8B33D00D7A7FB /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
@@ -62,6 +61,7 @@
 		C060DB06257BECA400C892DE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C060DB08257BECA400C892DE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = WorkTask/Info.plist; sourceTree = SOURCE_ROOT; };
 		C060DB13257BED7C00C892DE /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		C0624C7525EE758100B6AD5E /* SuggestionsDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionsDelegate.swift; sourceTree = "<group>"; };
 		C062A58F25CDB03400C507ED /* GenreCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreCollectionViewCell.swift; sourceTree = "<group>"; };
 		C07E70D925BB33F2001EE1AC /* SearchVC+SearchBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchVC+SearchBarDelegate.swift"; sourceTree = "<group>"; };
 		C0A19AC925D0245800575196 /* GenreSuggestionsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreSuggestionsTableViewController.swift; sourceTree = "<group>"; };
@@ -137,14 +137,6 @@
 			path = CoreDataFiles;
 			sourceTree = "<group>";
 		};
-		C05DC6A425D7F17A00676942 /* SettingsVC */ = {
-			isa = PBXGroup;
-			children = (
-				C01AB0C225D6ECA200FA6129 /* SettingsViewController.swift */,
-			);
-			path = SettingsVC;
-			sourceTree = "<group>";
-		};
 		C060DAEE257BECA100C892DE = {
 			isa = PBXGroup;
 			children = (
@@ -181,6 +173,7 @@
 			children = (
 				C003674725824CB500226ED4 /* SuggestionsVC+CollectionViewDataSource.swift */,
 				C0089F5825B2184D001647F2 /* SuggestionsVC+HelperFuncs.swift */,
+				C0624C7525EE758100B6AD5E /* SuggestionsDelegate.swift */,
 			);
 			path = "SuggestionsVC+Extensions";
 			sourceTree = "<group>";
@@ -288,7 +281,6 @@
 		C0F2F778257D455700A1DAF9 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				C05DC6A425D7F17A00676942 /* SettingsVC */,
 				C0A19AE525D13E7B00575196 /* SuggestionsVC */,
 				C0A19AE625D13ED600575196 /* GenreSuggestionsTableVC */,
 				C0A19AE725D13EDE00575196 /* PreviewVC */,
@@ -430,6 +422,7 @@
 				C0CE78C625CADF3700A55990 /* TableViewCell.swift in Sources */,
 				C0A19AEE25D13F3500575196 /* PreviewVC+UIFuncs.swift in Sources */,
 				C0CE78B825CAD32900A55990 /* SearchViewController.swift in Sources */,
+				C0624C7625EE758100B6AD5E /* SuggestionsDelegate.swift in Sources */,
 				C060DAFB257BECA200C892DE /* AppDelegate.swift in Sources */,
 				C016B01D258C03F400F77CA6 /* PreviewViewController.swift in Sources */,
 				C04D6EA025AB391C00E4B151 /* Wach 2night.xcdatamodeld in Sources */,
@@ -439,7 +432,6 @@
 				C0C0E7C32583C74D006C460E /* DataModel.swift in Sources */,
 				C021DFFF25CBFD190028ACE0 /* StringExtension.swift in Sources */,
 				C07E70DA25BB33F2001EE1AC /* SearchVC+SearchBarDelegate.swift in Sources */,
-				C01AB0C325D6ECA200FA6129 /* SettingsViewController.swift in Sources */,
 				C0089F5925B2184D001647F2 /* SuggestionsVC+HelperFuncs.swift in Sources */,
 				C028AC7025B0D8BF007799B6 /* UIImageExtensionForResizingImages.swift in Sources */,
 				C0D6AD532595F9D40000174A /* ApiKeyAndImageLink.swift in Sources */,

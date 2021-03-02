@@ -167,6 +167,7 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
                     navigationController?.present(previewVC, animated: true, completion: {
                         previewVC.favoriteButton.setTitle("Добавить в избранное", for: .normal)
                         previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.addToFavorites), for: .touchUpInside)
+                        previewVC.suggestionsDelegate = self
                     })
                 } else {
                     
@@ -178,6 +179,7 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
                         previewVC.film = film
                         previewVC.favoriteButton.setTitle("Добавить в избранное", for: .normal)
                         previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.addToFavorites), for: .touchUpInside)
+                        previewVC.suggestionsDelegate = self
                         
                     })
                 }
@@ -202,6 +204,7 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
                     self.navigationController?.present(previewVC, animated: true, completion: {
                         previewVC.favoriteButton.setTitle("Удалить из избранного", for: .normal)
                         previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.deleteFromFavorites), for: .touchUpInside)
+                        previewVC.suggestionsDelegate = self
                     })
                     
                 } else {
@@ -212,6 +215,7 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
                     self.navigationController?.present(previewVC, animated: true, completion: {
                         previewVC.favoriteButton.setTitle("Удалить из избранного", for: .normal)
                         previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.deleteFromFavorites), for: .touchUpInside)
+                        previewVC.suggestionsDelegate = self
                     })
                 }
                 
