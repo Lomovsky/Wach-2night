@@ -61,13 +61,13 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let film = self.films[indexPath.row]
+        let film = self.films[indexPath.row] //проверить
         let selectedFilmVC = SelectedFilmViewController()
         let posterUrlString = imagePath + (film.posterPath)!
         guard let posterURL = URL(string: posterUrlString) else { return }
         DispatchQueue.global(qos: .utility).async {
             let imageData = try? Data(contentsOf: posterURL)
-            let poster = UIImage(data: imageData!)
+            let poster = UIImage(data: imageData!) //проверить
             
             //TODO: work with GSD
             DispatchQueue.main.async {

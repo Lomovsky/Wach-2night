@@ -15,7 +15,7 @@ extension PreviewViewController {
         self.favoriteButton.removeTarget(self, action: #selector(addToFavorites), for: .touchUpInside)
         self.favoriteButton.addTarget(self, action: #selector(deleteFromFavorites), for: .touchUpInside)
         coreDataManager.saveFavouriteFilm(film!.title!, filmOriginalTitle: film!.originalTitle!, filmRating: film!.rating, filmOverview: film!.overview!, filmPoster: film!.poster!)
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "update favourite collectionView"), object: nil)
+        suggestionsDelegate?.updateFavorites()
         print(SuggestionsViewController.favouriteFilms.count)
     }
     
@@ -33,7 +33,7 @@ extension PreviewViewController {
             print(error)
         }
 
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "update favourite collectionView"), object: nil)
+        suggestionsDelegate?.updateFavorites()
         dismiss(animated: true)
     }
     
