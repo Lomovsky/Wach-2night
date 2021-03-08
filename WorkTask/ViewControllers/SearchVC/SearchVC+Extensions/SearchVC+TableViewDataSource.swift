@@ -28,7 +28,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         if let posterPath = film.posterPath {
             let posterUrlString = imagePath + posterPath
             let posterURL = URL(string: posterUrlString)
-            
+             
             if let cashedImage = self.cache.object(forKey: itemNumber) {
                 cell.imageView?.image = cashedImage
                 cell.imageView?.clipsToBounds =  true
@@ -61,13 +61,14 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let film = self.films[indexPath.row] //проверить
+        let film = self.films[indexPath.row]
         let selectedFilmVC = SelectedFilmViewController()
-        let posterUrlString = imagePath + (film.posterPath)!
+        guard let posterPath = film.posterPath else { return }
+        let posterUrlString = imagePath + posterPath
         guard let posterURL = URL(string: posterUrlString) else { return }
         DispatchQueue.global(qos: .utility).async {
-            let imageData = try? Data(contentsOf: posterURL)
-            let poster = UIImage(data: imageData!) //проверить
+            guard let imageData = try? Data(contentsOf: posterURL) else { return }
+            let poster = UIImage(data: imageData)
             
             //TODO: work with GSD
             DispatchQueue.main.async {
