@@ -10,11 +10,11 @@ import UIKit
 extension PreviewViewController {
     //MARK: UIFuncs -
 
-    func setupView() {
+    final func setupView() {
         view.backgroundColor = .white
     }
       
-    func setupScrollView() {
+    final func setupScrollView() {
         scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
@@ -23,7 +23,7 @@ extension PreviewViewController {
         scrollView.addSubview(stackView)
     }
     
-    func setupStackView() {
+    final func setupStackView() {
         stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
         stackView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
         stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
@@ -36,7 +36,7 @@ extension PreviewViewController {
         stackView.addArrangedSubview(favoriteButton)
     }
     
-    func setupImageView() {
+    final func setupImageView() {
         imageView.topAnchor.constraint(equalTo: stackView.topAnchor).isActive = true
         imageView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor).isActive = true
         imageView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor).isActive = true
@@ -46,7 +46,7 @@ extension PreviewViewController {
         
     }
     
-    func setupTitleLabel() {
+    final func setupTitleLabel() {
         titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10).isActive = true
         titleLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 5).isActive = true
         titleLabel.font = .systemFont(ofSize: 22)
@@ -54,7 +54,7 @@ extension PreviewViewController {
         titleLabel.frame.size.height = 49
     }
     
-    func setupOverviewLabel() {
+    final func setupOverviewLabel() {
         overviewLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 15).isActive = true
         overviewLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 5).isActive = true
         overviewLabel.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: 5).isActive = true
@@ -63,7 +63,7 @@ extension PreviewViewController {
         overviewLabel.textColor = .black
     }
 
-    func setupOverviewText() {
+    final func setupOverviewText() {
         overviewText.topAnchor.constraint(equalTo: overviewLabel.bottomAnchor, constant: 3).isActive = true
         overviewText.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 5).isActive = true
         overviewText.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -5).isActive = true
@@ -72,7 +72,7 @@ extension PreviewViewController {
         overviewText.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.75)
         }
     
-    func setupFavoriteButton() {
+    final func setupFavoriteButton() {
         favoriteButton.topAnchor.constraint(equalTo: overviewText.bottomAnchor, constant: 10).isActive = true
         favoriteButton.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 5).isActive = true
         favoriteButton.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -5).isActive = true

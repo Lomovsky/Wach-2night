@@ -8,12 +8,12 @@
 import UIKit
 import CoreData
 
-class CoreDataManager {
+final public class CoreDataManager {
     
     let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     //MARK: Saving funcs
-    public func saveFilms(_ filmTitle: String, filmOriginalTitle: String, filmPoster: Data, releaseDate: String, overview: String, rating: Float) {
+    func saveFilms(_ filmTitle: String, filmOriginalTitle: String, filmPoster: Data, releaseDate: String, overview: String, rating: Float) {
         guard let entityDescription = NSEntityDescription.entity(forEntityName: "CurrentFilm", in: managedContext) else { return }
         
         let film = NSManagedObject(entity: entityDescription, insertInto: managedContext) as! CurrentFilm
@@ -32,7 +32,7 @@ class CoreDataManager {
         }
     }
     
-    public func saveGenres(_ genreID: Int, genreName: String) {
+    func saveGenres(_ genreID: Int, genreName: String) {
         guard let entityDescription = NSEntityDescription.entity(forEntityName: "Genre", in: managedContext) else { return }
         
         let genre = NSManagedObject(entity: entityDescription, insertInto: managedContext) as! Genre
@@ -47,7 +47,7 @@ class CoreDataManager {
         }
     }
     
-    public func saveFavouriteFilm (_ filmTitle: String, filmOriginalTitle: String, filmRating: Float, filmOverview: String, filmPoster: Data) {
+    func saveFavouriteFilm (_ filmTitle: String, filmOriginalTitle: String, filmRating: Float, filmOverview: String, filmPoster: Data) {
         guard let entityDescription = NSEntityDescription.entity(forEntityName: "FavouriteFilm", in: managedContext) else { return }
         
         let favouriteFilm = NSManagedObject(entity: entityDescription, insertInto: managedContext) as! FavouriteFilm
@@ -65,8 +65,8 @@ class CoreDataManager {
         }
     }
     
-    //MARK: Fetching funcs
-    public func fetchFilmsData() {
+    //MARK: Fetching methods -
+    func fetchFilmsData() {
         let fetchRequest: NSFetchRequest<CurrentFilm> = CurrentFilm.fetchRequest()
         
         do {
@@ -76,7 +76,7 @@ class CoreDataManager {
         }
     }
     
-    public func fetchGenresData() {
+    func fetchGenresData() {
         let fetchRequest: NSFetchRequest<Genre> = Genre.fetchRequest()
         
         do {
@@ -86,7 +86,7 @@ class CoreDataManager {
         }
     }
     
-    public func fetchFavouriteFilms() {
+    func fetchFavouriteFilms() {
         let fetchRequest: NSFetchRequest<FavouriteFilm> = FavouriteFilm.fetchRequest()
         
         do {
@@ -96,9 +96,9 @@ class CoreDataManager {
         }
     }
     
-    //MARK: Deliting funcs
+    //MARK: Deliting methods -
     
-    public func deleteAllData() {
+    func deleteAllData() {
         let fetchRequest: NSFetchRequest<CurrentFilm> = CurrentFilm.fetchRequest()
         let genreFetchRequest: NSFetchRequest<Genre> = Genre.fetchRequest()
         fetchRequest.includesPropertyValues = false
@@ -125,7 +125,7 @@ class CoreDataManager {
         }
     }
     
-    public func deleteAllDataFromFavourites() {
+    func deleteAllDataFromFavourites() {
         let fetchRequest: NSFetchRequest<FavouriteFilm> = FavouriteFilm.fetchRequest()
         fetchRequest.includesPropertyValues = false
         

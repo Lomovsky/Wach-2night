@@ -45,7 +45,8 @@ extension SuggestionsViewController {
             case .failure(let error):
                 print(error)
             case .success(let genreResponse):
-                genreResponse.genres.forEach { (genre) in
+                genreResponse.genres.forEach { [weak self] (genre) in
+                    guard let self = self else { return }
                     coreDataManager.saveGenres(genre.id, genreName: genre.name)
                     self.genreCollectionView.reloadData()
                 }
@@ -60,7 +61,8 @@ extension SuggestionsViewController {
             guard let self = self else { return }
             switch result {
             case .success(let filmResponse):
-                filmResponse.results.forEach { (film) in
+                filmResponse.results.forEach {  [weak self] (film) in
+                    guard let self = self else { return }
                     if let secondPath = film.posterPath {
                         DispatchQueue.global(qos: .utility).async {
                             let imageURLString = imagePath + secondPath
@@ -100,29 +102,13 @@ extension SuggestionsViewController {
     }
     
     
-    @objc func showSearch() {
+    @objc final func showSearch() {
         let searchVC = SearchViewController()
         navigationController?.pushViewController(searchVC, animated: true)
     }
     
     
-//    @objc func updateUI(notification: NSNotification) {
-//        let coreDataManager = CoreDataManager()
-//        coreDataManager.fetchFilmsData()
-//        coreDataManager.fetchGenresData()
-//        coreDataManager.fetchFavouriteFilms()
-//        DispatchQueue.main.async {
-//            self.recommendationsCollectionView.reloadData()
-//            self.recommendationsCollectionView.isHidden = false
-//            self.activityIndicator.stopAnimating()
-//            self.activityIndicator.isHidden = true
-//            self.genreCollectionView.reloadData()
-//            self.favouriteFilmsCollectionView.reloadData()
-//            self.recommendationsCollectionView.reloadData()
-//        }
-//    }
-    
-    @objc func updateFavouriteCollectionView(notification: NSNotification) {
+    @objc final func updateFavouriteCollectionView(notification: NSNotification) {
         let coreDataManager = CoreDataManager()
         coreDataManager.fetchFavouriteFilms()
         DispatchQueue.main.async {
@@ -131,7 +117,7 @@ extension SuggestionsViewController {
     }
     
     
-    @objc func refresh(_ sender: AnyObject) {
+    @objc final func refresh(_ sender: AnyObject) {
         checkConnection()
         recommendationsCollectionView.reloadData()
     }

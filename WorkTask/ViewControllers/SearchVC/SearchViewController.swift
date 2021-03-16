@@ -49,6 +49,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     
     //MARK: viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
         setupNavigationController()
         
         if let indexPath = tableView.indexPathForSelectedRow {

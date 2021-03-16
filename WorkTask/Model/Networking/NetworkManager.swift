@@ -31,6 +31,11 @@ class NetworkManager {
             }
         }
     }
+    
+    
+    deinit {
+        print("\(self) WAS Deallocated")
+    }
 }
 
 //MARK: URLSession way to download data

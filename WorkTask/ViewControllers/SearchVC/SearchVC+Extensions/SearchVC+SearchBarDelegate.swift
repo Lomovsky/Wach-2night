@@ -33,7 +33,8 @@ extension SearchViewController {
                     print(error)
                 case .success(let filmResponse):
                     DispatchQueue.main.async {
-                        filmResponse.results.enumerated().forEach { (film) in
+                        filmResponse.results.enumerated().forEach { [weak self] (film) in
+                            guard let self = self else { return }
                             self.films.insert(film.element, at: film.offset)
                             print(self.films.count)
                         }

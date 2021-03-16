@@ -33,7 +33,7 @@ class PreviewViewController: UIViewController {
         return stack
     }()
 
-    let imageView: UIImageView = {
+    final let imageView: UIImageView = {
         let imageV = UIImageView()
         imageV.translatesAutoresizingMaskIntoConstraints = false
         return imageV
@@ -89,6 +89,7 @@ class PreviewViewController: UIViewController {
     
     //MARK: viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
        
     }
 

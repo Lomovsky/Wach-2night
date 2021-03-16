@@ -73,7 +73,7 @@ class RecommendationsCollectionViewCell: UICollectionViewCell {
 
     
     // MARK: Configuring the cell -
-    func configureCell(image: UIImage, title: String, originalTitle: String, releaseDate: String, rating: Float) {
+    final func configureCell(image: UIImage, title: String, originalTitle: String, releaseDate: String, rating: Float) {
         self.imageView.image = image
 
     }

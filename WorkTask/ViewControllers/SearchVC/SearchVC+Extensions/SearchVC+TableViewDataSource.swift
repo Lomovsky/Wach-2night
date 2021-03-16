@@ -17,7 +17,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! TableViewCell
         
         let itemNumber = NSNumber(value: indexPath.item)
         let film = self.films[indexPath.row]
@@ -28,8 +28,8 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         if let posterPath = film.posterPath {
             let posterUrlString = imagePath + posterPath
             let posterURL = URL(string: posterUrlString)
-             
-            if let cashedImage = self.cache.object(forKey: itemNumber) {
+            
+            if let cashedImage = cache.object(forKey: itemNumber) {
                 cell.imageView?.image = cashedImage
                 cell.imageView?.clipsToBounds =  true
                 cell.imageView?.layer.cornerRadius = 20
