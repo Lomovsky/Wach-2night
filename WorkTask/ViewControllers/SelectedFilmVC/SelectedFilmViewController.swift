@@ -31,6 +31,7 @@ class SelectedFilmViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         setupView()
         setupNavigationController()
 //        setupShadowSubview()

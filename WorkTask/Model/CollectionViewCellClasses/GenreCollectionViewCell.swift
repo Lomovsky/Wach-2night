@@ -45,7 +45,7 @@ class GenreCollectionViewCell: UICollectionViewCell {
     }
     
     
-    func setGradientBackground() {
+    private func setGradientBackground() {
         let colorTop =  UIColor.systemGreen.cgColor
         let colorBottom = UIColor.systemTeal.cgColor
             let gradientLayer = CAGradientLayer()
