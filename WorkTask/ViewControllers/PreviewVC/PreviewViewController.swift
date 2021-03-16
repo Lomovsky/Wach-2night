@@ -7,8 +7,14 @@
 
 import UIKit
 
+struct FilmToDelete {
+    var film: FavouriteFilm
+    var index: Int
+}
+
 class PreviewViewController: UIViewController {
     let coreDataManager = CoreDataManager()
+    var filmToDelete: FilmToDelete? = nil
     var film: CurrentFilm? = nil
     weak var suggestionsDelegate: SuggestionsDelegate?
     

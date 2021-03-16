@@ -16,15 +16,24 @@ extension PreviewViewController {
         self.favoriteButton.addTarget(self, action: #selector(deleteFromFavorites), for: .touchUpInside)
         coreDataManager.saveFavouriteFilm(film!.title!, filmOriginalTitle: film!.originalTitle!, filmRating: film!.rating, filmOverview: film!.overview!, filmPoster: film!.poster!)
         suggestionsDelegate?.updateFavorites()
+        guard let film1 = SuggestionsViewController.favouriteFilms.last else { return }
+        let index = SuggestionsViewController.favouriteFilms.endIndex
+        let filmToRemove = FilmToDelete(film: film1, index: index)
+        
+        filmToDelete = filmToRemove
         print(SuggestionsViewController.favouriteFilms.count)
     }
     
     @objc func deleteFromFavorites() {
-        guard let film = SuggestionsViewController.favouriteFilms.last as FavouriteFilm? else { return }
-        SuggestionsViewController.favouriteFilms.removeLast()
-     
+        
+
+
+        
+        guard let filmToDelete = filmToDelete else { return }
+        SuggestionsViewController.favouriteFilms.remove(at: filmToDelete.index)
+        
         coreDataManager.fetchFavouriteFilms()
-        coreDataManager.managedContext.delete(film)
+        coreDataManager.managedContext.delete(filmToDelete.film)
         
         do {
             try coreDataManager.managedContext.save()

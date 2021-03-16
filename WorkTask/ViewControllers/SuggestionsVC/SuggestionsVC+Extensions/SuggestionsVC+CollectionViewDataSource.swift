@@ -192,6 +192,11 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
                 guard let cell = collectionView.cellForItem(at: indexPath) else { return }
                 let previewVC = PreviewViewController()
                 let film = SuggestionsViewController.favouriteFilms.reversed()[indexPath.row]
+//                let some = SuggestionsViewController.favouriteFilms.enumerated()
+                let filmIndex = indexPath.row
+//                let filmIndex2 = SuggestionsViewController.favouriteFilms[indexPath.index]
+                
+                
                 if let poster = film.poster {
                     guard let posterImage = UIImage(data: poster) else { return }
                     let resizedPoster = posterImage.resizeImageUsingVImage(size: CGSize.init(width: view.frame.width,
@@ -201,6 +206,8 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
                     previewVC.imageView.image = resizedPoster
                     previewVC.titleLabel.text = film.title
                     previewVC.overviewText.text = film.overview
+                    let filmToDelete = FilmToDelete(film: film, index: filmIndex)
+                    previewVC.filmToDelete = filmToDelete
                     self.navigationController?.present(previewVC, animated: true, completion: {
                         previewVC.favoriteButton.setTitle("Удалить из избранного", for: .normal)
                         previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.deleteFromFavorites), for: .touchUpInside)
@@ -212,6 +219,8 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
                     previewVC.imageView.image = #imageLiteral(resourceName: "1024px-No_image_available.svg")
                     previewVC.titleLabel.text = film.title
                     previewVC.overviewText.text = film.overview
+                    let filmToDelete = FilmToDelete(film: film, index: filmIndex)
+                    previewVC.filmToDelete = filmToDelete
                     self.navigationController?.present(previewVC, animated: true, completion: {
                         previewVC.favoriteButton.setTitle("Удалить из избранного", for: .normal)
                         previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.deleteFromFavorites), for: .touchUpInside)
