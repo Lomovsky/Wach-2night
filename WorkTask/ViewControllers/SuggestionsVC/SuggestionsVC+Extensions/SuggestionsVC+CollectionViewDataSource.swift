@@ -206,8 +206,9 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
                     previewVC.imageView.image = resizedPoster
                     previewVC.titleLabel.text = film.title
                     previewVC.overviewText.text = film.overview
-                    let filmToDelete = FilmToDelete(film: film, index: filmIndex)
-                    previewVC.filmToDelete = filmToDelete
+                    PreviewViewController.filmToDelete = film
+                    PreviewViewController.indexOfFilmToDelete = filmIndex
+//                    previewVC.filmToDelete = filmToDelete
                     self.navigationController?.present(previewVC, animated: true, completion: {
                         previewVC.favoriteButton.setTitle("Удалить из избранного", for: .normal)
                         previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.deleteFromFavorites), for: .touchUpInside)
@@ -219,8 +220,8 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
                     previewVC.imageView.image = #imageLiteral(resourceName: "1024px-No_image_available.svg")
                     previewVC.titleLabel.text = film.title
                     previewVC.overviewText.text = film.overview
-                    let filmToDelete = FilmToDelete(film: film, index: filmIndex)
-                    previewVC.filmToDelete = filmToDelete
+                    PreviewViewController.filmToDelete = film
+                    PreviewViewController.indexOfFilmToDelete = filmIndex
                     self.navigationController?.present(previewVC, animated: true, completion: {
                         previewVC.favoriteButton.setTitle("Удалить из избранного", for: .normal)
                         previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.deleteFromFavorites), for: .touchUpInside)
