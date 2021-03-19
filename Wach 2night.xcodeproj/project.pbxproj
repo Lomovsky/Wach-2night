@@ -38,6 +38,7 @@
 		C0CE78BC25CAD38900A55990 /* SearchVC+TableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CE78BB25CAD38900A55990 /* SearchVC+TableViewDataSource.swift */; };
 		C0CE78C625CADF3700A55990 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CE78C525CADF3700A55990 /* TableViewCell.swift */; };
 		C0D6AD532595F9D40000174A /* ApiKeyAndImageLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D6AD522595F9D40000174A /* ApiKeyAndImageLink.swift */; };
+		C0D7124726049911005BD6CC /* AbstractFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0D7124626049911005BD6CC /* AbstractFactory.swift */; };
 		C0F2F76C257D02C800A1DAF9 /* RecommendationsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0F2F76A257D02C800A1DAF9 /* RecommendationsCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -77,6 +78,7 @@
 		C0CE78BB25CAD38900A55990 /* SearchVC+TableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchVC+TableViewDataSource.swift"; sourceTree = "<group>"; };
 		C0CE78C525CADF3700A55990 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		C0D6AD522595F9D40000174A /* ApiKeyAndImageLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeyAndImageLink.swift; sourceTree = "<group>"; };
+		C0D7124626049911005BD6CC /* AbstractFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractFactory.swift; sourceTree = "<group>"; };
 		C0F2F76A257D02C800A1DAF9 /* RecommendationsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -297,6 +299,7 @@
 				C0A19AE725D13EDE00575196 /* PreviewVC */,
 				C0A19AE825D13EEA00575196 /* SearchVC */,
 				C0A19AEA25D13EF200575196 /* SelectedFilmVC */,
+				C0D7124626049911005BD6CC /* AbstractFactory.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -446,6 +449,7 @@
 				C07F14F125F65D9F007FF48A /* SuggestionsVC+SuggestionsDelegate.swift in Sources */,
 				C0089F5925B2184D001647F2 /* SuggestionsVC+HelperFuncs.swift in Sources */,
 				C028AC7025B0D8BF007799B6 /* UIImageExtensionForResizingImages.swift in Sources */,
+				C0D7124726049911005BD6CC /* AbstractFactory.swift in Sources */,
 				C0D6AD532595F9D40000174A /* ApiKeyAndImageLink.swift in Sources */,
 				C0A19ADD25D13CEF00575196 /* PreviewVC+HelperFuncs.swift in Sources */,
 				C060DAFD257BECA200C892DE /* SceneDelegate.swift in Sources */,

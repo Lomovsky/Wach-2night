@@ -26,21 +26,21 @@ extension SearchViewController {
                     print("API LINK LOOKS LIKE:\(searchURL)")
                 }
             }
+            
             NetworkManager.fetchCurrentData(withURL: searchURL, dataModel: FilmResponse.self) { [weak self] (result) in
                 guard let self = self else { return }
                 switch result {
                 case .failure(let error):
                     print(error)
                 case .success(let filmResponse):
-                    DispatchQueue.main.async {
-                        filmResponse.results.enumerated().forEach { [weak self] (film) in
+                    filmResponse.results.enumerated().forEach { [weak self] (film) in
                             guard let self = self else { return }
                             self.films.insert(film.element, at: film.offset)
                             print(self.films.count)
                         }
-                        self.tableView.reloadData()
-                        print("reloaded the data")
-                    }
+                            self.tableView.reloadData()
+                            print("reloaded the data")
+
                 }
             }
         })
