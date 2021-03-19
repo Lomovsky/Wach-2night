@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20E5172i" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20E5196f" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="CurrentFilm" representedClassName="CurrentFilm" syncable="YES" codeGenerationType="class">
         <attribute name="originalTitle" optional="YES" attributeType="String"/>
-        <attribute name="overview" optional="YES" attributeType="String"/>
+        <attribute name="overview" attributeType="String"/>
         <attribute name="poster" optional="YES" attributeType="Binary"/>
         <attribute name="rating" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="releaseDate" optional="YES" attributeType="String"/>
-        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="title" attributeType="String"/>
     </entity>
     <entity name="FavouriteFilm" representedClassName="FavouriteFilm" syncable="YES" codeGenerationType="class">
         <attribute name="originalTitle" attributeType="String"/>

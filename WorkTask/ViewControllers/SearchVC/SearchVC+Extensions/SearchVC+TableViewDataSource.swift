@@ -62,7 +62,6 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let film = self.films[indexPath.row]
-        let selectedFilmVC = SelectedFilmViewController()
         guard let posterPath = film.posterPath else { return }
         let posterUrlString = imagePath + posterPath
         guard let posterURL = URL(string: posterUrlString) else { return }
@@ -70,19 +69,16 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
             guard let imageData = try? Data(contentsOf: posterURL) else { return }
             let poster = UIImage(data: imageData)
             
-            let resizedPoster = poster?.resizeImageUsingVImage(size: CGSize.init(width: 200, height: 200))
-            
-       
-            
-            
             //TODO: work with GSD
             DispatchQueue.main.async {
-
-                let factory = PreviewViewControllerFactory(filmPoster: resizedPoster!, filmTitle: film.title, filmOverview: film.overview)
-                let vcByFactory = factory.setupViewController()
-//                selectedFilmVC.imageView.image = resizedPoster
-                self.navigationController?.pushViewController(vcByFactory, animated: true)
+                let resizedPoster = poster?.resizeImageUsingVImage(size: CGSize.init(width: self.view.frame.width,
+                                                                                     height: self.view.frame.height * 0.6))
                 
+                let previewVC = PreviewViewController(poster: resizedPoster ?? #imageLiteral(resourceName: "1024px-No_image_available.svg"), filmTitle: film.title, filmOverview: film.overview)
+                self.navigationController?.present(previewVC, animated: true, completion: {
+                    previewVC.favoriteButton.setTitle("Добавить в избранное", for: .normal)
+                    previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.addToFavorites), for: .touchUpInside)
+                })
             }
         }
     }

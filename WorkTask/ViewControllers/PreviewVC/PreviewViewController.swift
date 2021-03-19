@@ -40,7 +40,7 @@ final class PreviewViewController: UIViewController {
         return stack
     }()
 
-    final let imageView: UIImageView = {
+    let imageView: UIImageView = {
         let imageV = UIImageView()
         imageV.translatesAutoresizingMaskIntoConstraints = false
         return imageV

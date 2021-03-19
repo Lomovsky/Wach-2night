@@ -153,7 +153,6 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
             
         case recommendationsCollectionView:
             guard let cell = collectionView.cellForItem(at: indexPath) else { return }
-//            let previewVC = PreviewViewController()
             let film = SuggestionsViewController.films[indexPath.row]
             
            
@@ -162,32 +161,23 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
                     let resizedPoster = posterImage.resizeImageUsingVImage(size: CGSize.init(width: view.frame.width,
                                                                                              height: view.frame.height * 0.6))
                     animateCell(cell: cell)
-//                    previewVC.imageView.image = resizedPoster
-//                    previewVC.titleLabel.text = film.title
-//                    previewVC.overviewText.text = film.overview
-//                    previewVC.film = film
-//                    navigationController?.present(previewVC, animated: true, completion: {
-//                        previewVC.favoriteButton.setTitle("Добавить в избранное", for: .normal)
-//                        previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.addToFavorites), for: .touchUpInside)
-//                        previewVC.suggestionsDelegate = self
-//                    })
-                    let favtory = PreviewViewControllerFactory(filmPoster: resizedPoster!, filmTitle: film.title!, filmOverview: film.overview!)
-                    let previewVCByFactory = favtory.setupViewController()
-                    navigationController?.present(previewVCByFactory, animated: true, completion: nil)
-                    print("PRESENTED WOW")
-//                } else {
-//
-//                    previewVC.imageView.image = #imageLiteral(resourceName: "1024px-No_image_available.svg")
-//                    previewVC.titleLabel.text = film.title
-//                    previewVC.overviewText.text = film.overview
-//                    previewVC.film = film
-//                    navigationController?.present(previewVC, animated: true, completion: {
-//                        previewVC.film = film
-//                        previewVC.favoriteButton.setTitle("Добавить в избранное", for: .normal)
-//                        previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.addToFavorites), for: .touchUpInside)
-//                        previewVC.suggestionsDelegate = self
-//
-//                    })
+                    
+                    let previewVC = PreviewViewController(poster: resizedPoster ?? #imageLiteral(resourceName: "1024px-No_image_available.svg"), filmTitle: film.title ?? "Нет данных", filmOverview: film.overview ?? "Нет данных")
+                    previewVC.film = film
+                    navigationController?.present(previewVC, animated: true, completion: {
+                        previewVC.favoriteButton.setTitle("Добавить в избранное", for: .normal)
+                        previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.addToFavorites), for: .touchUpInside)
+                        previewVC.suggestionsDelegate = self
+                    })
+                } else {
+                    
+                    let previewVC = PreviewViewController(poster: #imageLiteral(resourceName: "1024px-No_image_available.svg"), filmTitle: film.title ?? "Нет данных", filmOverview: film.overview ?? "Нет данных")
+                    previewVC.film = film
+                    navigationController?.present(previewVC, animated: true, completion: {
+                        previewVC.favoriteButton.setTitle("Добавить в избранное", for: .normal)
+                        previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.addToFavorites), for: .touchUpInside)
+                        previewVC.suggestionsDelegate = self
+                    })
                 }
             }
             
@@ -209,32 +199,26 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
                                                                                              height: view.frame.height * 0.6))
                     
                     animateCell(cell: cell)
-//                    previewVC.imageView.image = resizedPoster
-//                    previewVC.titleLabel.text = film.title
-//                    previewVC.overviewText.text = film.overview
                     PreviewViewController.filmToDelete = film
                     PreviewViewController.indexOfFilmToDelete = filmIndex
-//                    previewVC.filmToDelete = filmToDelete
-//                    self.navigationController?.present(previewVC, animated: true, completion: {
-//                        previewVC.favoriteButton.setTitle("Удалить из избранного", for: .normal)
-//                        previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.deleteFromFavorites), for: .touchUpInside)
-//                        previewVC.suggestionsDelegate = self
-//                    })
+                    let previewVC = PreviewViewController(poster: resizedPoster ?? #imageLiteral(resourceName: "1024px-No_image_available.svg"), filmTitle: film.title ?? "Нет данных", filmOverview: film.overview ?? "Нети данных ")
+                    self.navigationController?.present(previewVC, animated: true, completion: {
+                        previewVC.favoriteButton.setTitle("Удалить из избранного", for: .normal)
+                        previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.deleteFromFavorites), for: .touchUpInside)
+                        previewVC.suggestionsDelegate = self
+                    })
                     
                     
                 } else {
                     animateCell(cell: cell)
-//                    previewVC.imageView.image = #imageLiteral(resourceName: "1024px-No_image_available.svg")
-//                    previewVC.titleLabel.text = film.title
-//                    previewVC.overviewText.text = film.overview
                     PreviewViewController.filmToDelete = film
                     PreviewViewController.indexOfFilmToDelete = filmIndex
-//                    self.navigationController?.present(previewVC, animated: true, completion: {
-//                        previewVC.favoriteButton.setTitle("Удалить из избранного", for: .normal)
-//                        previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.deleteFromFavorites), for: .touchUpInside)
-//                        previewVC.suggestionsDelegate = self
-//                    })
-                }
+                    let previewVC = PreviewViewController(poster: #imageLiteral(resourceName: "1024px-No_image_available.svg"), filmTitle: film.title ?? "Нет данных", filmOverview: film.overview ?? "Нети данных ")
+                    self.navigationController?.present(previewVC, animated: true, completion: {
+                        previewVC.favoriteButton.setTitle("Удалить из избранного", for: .normal)
+                        previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.deleteFromFavorites), for: .touchUpInside)
+                        previewVC.suggestionsDelegate = self
+                    })                }
                 
             }
             
