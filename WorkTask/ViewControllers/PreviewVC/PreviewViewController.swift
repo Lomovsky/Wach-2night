@@ -12,7 +12,7 @@ import UIKit
 //    var index: Int
 //}
 
-class PreviewViewController: UIViewController {
+final class PreviewViewController: UIViewController {
     let coreDataManager = CoreDataManager()
     static var filmToDelete: FavouriteFilm? = nil
     static var indexOfFilmToDelete: Int? = nil
@@ -99,7 +99,21 @@ class PreviewViewController: UIViewController {
         super.viewWillAppear(true)
        
     }
-
+    
+    init(poster: UIImage, filmTitle: String, filmOverview: String) {
+        self.imageView.image = poster
+        self.titleLabel.text = filmTitle
+        self.overviewText.text = filmOverview
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
 
     
     deinit {
