@@ -27,7 +27,7 @@ class NetworkManager {
                         let decodedData = try JSONDecoder().decode(dataModel, from: JSONData)
                         completion(.success(decodedData))
                     } catch let error as NSError {
-                        print(error)
+                        assertionFailure("NETWORK MANAGER FAILURE \(error), \(#line)")
                     }
                 }
             }

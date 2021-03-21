@@ -22,12 +22,6 @@ extension PreviewViewController {
         
         PreviewViewController.filmToDelete = filmToDelete
         PreviewViewController.indexOfFilmToDelete = index
-        
-//        guard let film1 = SuggestionsViewController.favouriteFilms.last else { return }
-//        let index = SuggestionsViewController.favouriteFilms.endIndex
-//        let filmToRemove = FilmToDelete(film: film1, index: index)
-        
-//        filmToDelete = filmToRemove
         print(SuggestionsViewController.favouriteFilms.count)
     }
     

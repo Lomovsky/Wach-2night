@@ -13,6 +13,7 @@ class SuggestionsViewController: UIViewController {
     static var favouriteFilms: [FavouriteFilm] = []
     var refreshControl = UIRefreshControl()
     
+    
     //MARK: UIElements
     let scrollView: UIScrollView = {
         let scroll = UIScrollView()
@@ -90,6 +91,8 @@ class SuggestionsViewController: UIViewController {
         genreCollectionView.dataSource = self
         favouriteFilmsCollectionView.delegate = self
         favouriteFilmsCollectionView.dataSource = self
+        DataManager.suggestionsDelegate = self
+        
         view.addSubview(scrollView)
         view.addSubview(stackView)
         view.addSubview(genreLabel)

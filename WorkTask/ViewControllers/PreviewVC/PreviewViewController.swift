@@ -30,7 +30,7 @@ final class PreviewViewController: UIViewController {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .vertical
-        stack.spacing = 10
+//        stack.spacing = 10
         return stack
     }()
 
