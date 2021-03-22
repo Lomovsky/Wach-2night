@@ -13,7 +13,7 @@ extension SuggestionsViewController {
         let coreDataManager = CoreDataManager()
         if Reachability.isConnectedToNetwork() {
             coreDataManager.deleteAllData()
-            SuggestionsViewController.films.removeAll()
+            SuggestionsCollectionViewViewModel.films.removeAll()
             SuggestionsViewController.genres.removeAll()
             coreDataManager.fetchFavouriteFilms()
             DataManager.downloadFilms()

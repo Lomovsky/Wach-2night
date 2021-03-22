@@ -77,18 +77,7 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
                 
                 cell.viewModel = cellViewModel
                 return cell
-
-                    }
-                    
-                } else {
-                    cell.imageView.image = #imageLiteral(resourceName: "1024px-No_image_available.svg")
-                    cell.layer.shadowColor = UIColor.black.cgColor
-                    cell.layer.shadowRadius = 5
-                    cell.layer.shadowOpacity = 0.4
-                    cell.layer.shadowOffset = CGSize.init(width: 2.5, height: 2.5)
-                    cell.layer.masksToBounds = false
-                    return cell
-                }
+                
             }
             
         case genreCollectionView:
@@ -137,6 +126,7 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
         return UICollectionViewCell()
     }
     
+    
     //MARK: didSelectItemAt-
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
@@ -146,9 +136,12 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
             
         case recommendationsCollectionView:
             guard let cell = collectionView.cellForItem(at: indexPath) else { return }
-            let film = SuggestionsViewController.films[indexPath.row]
             
-           
+            let cellViewModel = viewModel?.cellViewModel(forIndexPath: indexPath)
+            
+            let film = SuggestionsCollectionViewViewModel.films[indexPath.row]
+            
+            
             if let poster = film.poster {
                 if let posterImage = UIImage(data: poster) {
                     let resizedPoster = posterImage.resizeImageUsingVImage(size: CGSize.init(width: view.frame.width,
@@ -174,16 +167,17 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
                 }
             }
             
+            
         case favouriteFilmsCollectionView:
             if SuggestionsViewController.favouriteFilms.isEmpty {
                 
             } else {
                 guard let cell = collectionView.cellForItem(at: indexPath) else { return }
-//                let previewVC = PreviewViewController()
+                //                let previewVC = PreviewViewController()
                 let film = SuggestionsViewController.favouriteFilms.reversed()[indexPath.row]
-//                let some = SuggestionsViewController.favouriteFilms.enumerated()
+                //                let some = SuggestionsViewController.favouriteFilms.enumerated()
                 let filmIndex = indexPath.row
-//                let filmIndex2 = SuggestionsViewController.favouriteFilms[indexPath.index]
+                //                let filmIndex2 = SuggestionsViewController.favouriteFilms[indexPath.index]
                 
                 
                 if let poster = film.poster {
@@ -220,6 +214,7 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
             
         }
     }
+    
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         //настройка ползунка при прокручивании

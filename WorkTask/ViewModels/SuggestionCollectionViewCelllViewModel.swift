@@ -13,6 +13,7 @@ class SuggestionCollectionViewCellViewModel: SuggestionCollectionViewCellViewMod
     
     var poster: UIImage {
         let filmPoster = UIImage(data: _film.poster!)
+//        let resizedPoster = filmPoster?.resizeImageUsingVImage(size: .init(width: <#T##CGFloat#>, height: <#T##CGFloat#>))
         
         return  filmPoster!
     }
