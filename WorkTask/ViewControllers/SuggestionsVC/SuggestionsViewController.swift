@@ -8,7 +8,8 @@
 import UIKit
 class SuggestionsViewController: UIViewController {
     //MARK: Declarations
-    static var films: [CurrentFilm] = []
+    var viewModel: SuggestionCollectionViewViewModelType?
+    
     static var genres: [Genre] = []
     static var favouriteFilms: [FavouriteFilm] = []
     var refreshControl = UIRefreshControl()
@@ -92,6 +93,8 @@ class SuggestionsViewController: UIViewController {
         favouriteFilmsCollectionView.delegate = self
         favouriteFilmsCollectionView.dataSource = self
         DataManager.suggestionsDelegate = self
+        
+        viewModel = SuggestionsCollectionViewViewModel()
         
         view.addSubview(scrollView)
         view.addSubview(stackView)

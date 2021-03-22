@@ -13,7 +13,7 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView {
         case recommendationsCollectionView:
-            return SuggestionsViewController.films.count
+            return viewModel?.numberOfItems() ?? 0
             
         case genreCollectionView:
             return SuggestionsViewController.genres.count
@@ -73,18 +73,11 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
         switch collectionView {
         case recommendationsCollectionView:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecommendationsCollectionViewCell.reuseIdentifier,for: indexPath) as? RecommendationsCollectionViewCell {
-                let film = SuggestionsViewController.films[indexPath.row]
-                if let poster = film.poster {
-                    if let posterImage = UIImage(data: poster) {
-                        let newPoster = posterImage.resizeImageUsingVImage(size: CGSize.init(width: cell.frame.size.width,
-                                                                                             height: cell.frame.size.height))
-                        cell.imageView.image = newPoster
-                        cell.layer.shadowColor = UIColor.black.cgColor
-                        cell.layer.shadowRadius = 5
-                        cell.layer.shadowOpacity = 0.4
-                        cell.layer.shadowOffset = CGSize.init(width: 2.5, height: 2.5)
-                        cell.layer.masksToBounds = false
-                        return cell
+                let cellViewModel = viewModel?.cellViewModel(forIndexPath: indexPath)
+                
+                cell.viewModel = cellViewModel
+                return cell
+
                     }
                     
                 } else {

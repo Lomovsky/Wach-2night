@@ -34,6 +34,10 @@
 		C0A19AEE25D13F3500575196 /* PreviewVC+UIFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A19AED25D13F3500575196 /* PreviewVC+UIFuncs.swift */; };
 		C0C0E7C02583C4A4006C460E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C0E7BF2583C4A4006C460E /* NetworkManager.swift */; };
 		C0C0E7C32583C74D006C460E /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C0E7C22583C74D006C460E /* DataModel.swift */; };
+		C0CD0F3C2608A6B000A589F8 /* SuggestionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CD0F3B2608A6B000A589F8 /* SuggestionsViewModel.swift */; };
+		C0CD0F402608A6D100A589F8 /* SuggestionViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CD0F3F2608A6D100A589F8 /* SuggestionViewModelType.swift */; };
+		C0CD0F462608A83900A589F8 /* SuggestionCollectionViewCelllViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CD0F452608A83900A589F8 /* SuggestionCollectionViewCelllViewModel.swift */; };
+		C0CD0F492608A89400A589F8 /* SuggestionCollectionViewCellViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CD0F482608A89400A589F8 /* SuggestionCollectionViewCellViewModelType.swift */; };
 		C0CE78B825CAD32900A55990 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CE78B725CAD32900A55990 /* SearchViewController.swift */; };
 		C0CE78BC25CAD38900A55990 /* SearchVC+TableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CE78BB25CAD38900A55990 /* SearchVC+TableViewDataSource.swift */; };
 		C0CE78C625CADF3700A55990 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CE78C525CADF3700A55990 /* TableViewCell.swift */; };
@@ -74,6 +78,10 @@
 		C0A19AED25D13F3500575196 /* PreviewVC+UIFuncs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PreviewVC+UIFuncs.swift"; sourceTree = "<group>"; };
 		C0C0E7BF2583C4A4006C460E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		C0C0E7C22583C74D006C460E /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		C0CD0F3B2608A6B000A589F8 /* SuggestionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionsViewModel.swift; sourceTree = "<group>"; };
+		C0CD0F3F2608A6D100A589F8 /* SuggestionViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionViewModelType.swift; sourceTree = "<group>"; };
+		C0CD0F452608A83900A589F8 /* SuggestionCollectionViewCelllViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionCollectionViewCelllViewModel.swift; sourceTree = "<group>"; };
+		C0CD0F482608A89400A589F8 /* SuggestionCollectionViewCellViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionCollectionViewCellViewModelType.swift; sourceTree = "<group>"; };
 		C0CE78B725CAD32900A55990 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		C0CE78BB25CAD38900A55990 /* SearchVC+TableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchVC+TableViewDataSource.swift"; sourceTree = "<group>"; };
 		C0CE78C525CADF3700A55990 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
@@ -168,8 +176,9 @@
 				C060DB08257BECA400C892DE /* Info.plist */,
 				C0F2F773257D452400A1DAF9 /* Delegates */,
 				C0F2F778257D455700A1DAF9 /* ViewControllers */,
-				C07F14F325F65DFA007FF48A /* Protocols */,
+				C0CD0F392608A67E00A589F8 /* ViewModels */,
 				C003674A25824CBC00226ED4 /* Model */,
+				C07F14F325F65DFA007FF48A /* Protocols */,
 			);
 			path = WorkTask;
 			sourceTree = "<group>";
@@ -196,6 +205,7 @@
 		C07F14F325F65DFA007FF48A /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				C0CD0F422608A6D700A589F8 /* ViewModelTypes */,
 				C0624C7525EE758100B6AD5E /* SuggestionsDelegateProtocol.swift */,
 			);
 			path = Protocols;
@@ -263,6 +273,24 @@
 				C04D6EA225AB405E00E4B151 /* ConnectionManager.swift */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		C0CD0F392608A67E00A589F8 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				C0CD0F3B2608A6B000A589F8 /* SuggestionsViewModel.swift */,
+				C0CD0F452608A83900A589F8 /* SuggestionCollectionViewCelllViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		C0CD0F422608A6D700A589F8 /* ViewModelTypes */ = {
+			isa = PBXGroup;
+			children = (
+				C0CD0F3F2608A6D100A589F8 /* SuggestionViewModelType.swift */,
+				C0CD0F482608A89400A589F8 /* SuggestionCollectionViewCellViewModelType.swift */,
+			);
+			path = ViewModelTypes;
 			sourceTree = "<group>";
 		};
 		C0CE78C425CADF0000A55990 /* TableViewCellClass */ = {
@@ -435,10 +463,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C0CD0F402608A6D100A589F8 /* SuggestionViewModelType.swift in Sources */,
 				C0D7124B2607E210005BD6CC /* DataDownloadingManager.swift in Sources */,
 				C0A19AE325D13DE100575196 /* SuggestionsVC+UIFuncs.swift in Sources */,
 				C0A19ACA25D0245800575196 /* GenreSuggestionsTableViewController.swift in Sources */,
 				C0C0E7C02583C4A4006C460E /* NetworkManager.swift in Sources */,
+				C0CD0F492608A89400A589F8 /* SuggestionCollectionViewCellViewModelType.swift in Sources */,
 				C04D6EA325AB405E00E4B151 /* ConnectionManager.swift in Sources */,
 				C062A59025CDB03400C507ED /* GenreCollectionViewCell.swift in Sources */,
 				C060DAFF257BECA200C892DE /* SuggestionsViewController.swift in Sources */,
@@ -448,6 +478,7 @@
 				C0624C7625EE758100B6AD5E /* SuggestionsDelegateProtocol.swift in Sources */,
 				C060DAFB257BECA200C892DE /* AppDelegate.swift in Sources */,
 				C016B01D258C03F400F77CA6 /* PreviewViewController.swift in Sources */,
+				C0CD0F462608A83900A589F8 /* SuggestionCollectionViewCelllViewModel.swift in Sources */,
 				C04D6EA025AB391C00E4B151 /* Wach 2night.xcdatamodeld in Sources */,
 				C0F2F76C257D02C800A1DAF9 /* RecommendationsCollectionViewCell.swift in Sources */,
 				C0A19AD625D06FA700575196 /* FavouriteFilmsCollectionViewCell.swift in Sources */,
@@ -459,6 +490,7 @@
 				C0089F5925B2184D001647F2 /* SuggestionsVC+HelperFuncs.swift in Sources */,
 				C028AC7025B0D8BF007799B6 /* UIImageExtensionForResizingImages.swift in Sources */,
 				C0D6AD532595F9D40000174A /* ApiKeyAndImageLink.swift in Sources */,
+				C0CD0F3C2608A6B000A589F8 /* SuggestionsViewModel.swift in Sources */,
 				C0A19ADD25D13CEF00575196 /* PreviewVC+HelperFuncs.swift in Sources */,
 				C060DAFD257BECA200C892DE /* SceneDelegate.swift in Sources */,
 				C008D31425CC4DDB00413490 /* SelectedFilmViewController.swift in Sources */,
