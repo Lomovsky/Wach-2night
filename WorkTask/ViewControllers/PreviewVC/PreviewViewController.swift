@@ -6,11 +6,6 @@
 //
 
 import UIKit
-//
-//struct FilmToDelete {
-//    var film: FavouriteFilm
-//    var index: Int
-//}
 
 final class PreviewViewController: UIViewController {
     let coreDataManager = CoreDataManager()

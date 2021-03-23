@@ -6,12 +6,13 @@
 //
 
 import UIKit
-class SuggestionsViewController: UIViewController {
+
+final class SuggestionsViewController: UIViewController {
     //MARK: Declarations
-    var viewModel: SuggestionCollectionViewViewModelType?
-    
-    static var genres: [Genre] = []
-    static var favouriteFilms: [FavouriteFilm] = []
+    var viewModel: SuggestionsViewViewModelType = SuggestionsViewViewModel()
+    var genresCollectionViewViewModel: GenreCollectionViewViewModelType = GenreCollectionViewViewModel()
+    var suggestionsCollectionViewViewModel: SuggestionsCollectionViewViewModelType = SuggestionsCollectionViewViewModel()
+    var favoritesCollectionViewViewModel: FavoritesCollectionViewViewModelType = FavoritesCollectionViewViewModel()
     var refreshControl = UIRefreshControl()
     
     
@@ -92,9 +93,8 @@ class SuggestionsViewController: UIViewController {
         genreCollectionView.dataSource = self
         favouriteFilmsCollectionView.delegate = self
         favouriteFilmsCollectionView.dataSource = self
+        viewModel.suggestionsDelegate = self
         DataManager.suggestionsDelegate = self
-        
-        viewModel = SuggestionsCollectionViewViewModel()
         
         view.addSubview(scrollView)
         view.addSubview(stackView)
@@ -118,7 +118,7 @@ class SuggestionsViewController: UIViewController {
         setupFavouritesCollectionView()
         setupRefreshControll()
         
-        checkConnection()
+        viewModel.downloadFilms()
     }
     
     //MARK: ViewWillApear

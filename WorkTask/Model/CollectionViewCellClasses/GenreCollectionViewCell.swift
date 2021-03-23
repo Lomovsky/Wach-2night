@@ -23,6 +23,13 @@ class GenreCollectionViewCell: UICollectionViewCell {
     }()
     
     
+    weak var viewModel: GenreCollectionViewCellViewModelType? {
+        willSet(viewModel) {
+            guard let viewModel = viewModel else { return }
+            self.genreLabel.text = viewModel.title
+        }
+    }
+    
     //MARK: Initializer
     override init(frame: CGRect) {
         super.init(frame: .zero)
@@ -44,16 +51,6 @@ class GenreCollectionViewCell: UICollectionViewCell {
         genreLabel.font = .systemFont(ofSize: 16, weight: .medium)
     }
     
-    
-    private func setGradientBackground() {
-        let colorTop =  UIColor.systemGreen.cgColor
-        let colorBottom = UIColor.systemTeal.cgColor
-            let gradientLayer = CAGradientLayer()
-            gradientLayer.colors = [colorTop, colorBottom]
-            gradientLayer.locations = [0.0, 1.0]
-            gradientLayer.frame = self.contentView.bounds
-            self.contentView.layer.insertSublayer(gradientLayer, at: 0)
-        }
     
  
 }

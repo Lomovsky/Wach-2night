@@ -9,9 +9,9 @@ import UIKit
 
  final class DataManager {
     
-    static var suggestionsDelegate: SuggestionsDelegate?
+     static var suggestionsDelegate: SuggestionsDelegate?
     
-    static func downloadGenres() {
+     func downloadGenres() {
         let urlString = "https://api.themoviedb.org/3/genre/movie/list?api_key=\(apiKey)&language=ru-RU"
         let coreDataManager = CoreDataManager()
         NetworkManager.fetchCurrentData(withURL: urlString, dataModel: Genres.self) { (result) in
@@ -28,7 +28,7 @@ import UIKit
         }
     }
     
-    static func downloadFilms() {
+    func downloadFilms() {
         let urlString = "https://api.themoviedb.org/3/discover/movie?api_key=\(apiKey)&language=ru-RU&sort_by=popularity.desc&include_adult=true&include_video=false&page=1"
         let coreDataManager = CoreDataManager()
         NetworkManager.fetchCurrentData(withURL: urlString, dataModel: FilmResponse.self) { (result) in
@@ -44,6 +44,7 @@ import UIKit
                                 coreDataManager.saveFilms(film.title, filmOriginalTitle: film.originalTitle, filmPoster: posterData, releaseDate: film.releaseDate, overview: film.overview, rating: film.rating)
                                 DispatchQueue.main.async {
                                     DataManager.suggestionsDelegate?.uppateUIAfterDownloadingData()
+                                    print("FINISHED DOWNLOADING FILMS")  //PRINTING
                                 }
                             }
                         }

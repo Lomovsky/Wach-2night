@@ -10,6 +10,10 @@ import CoreData
 
 final public class CoreDataManager {
     
+    static var films: [CurrentFilm] = []
+    static var genres: [Genre] = []
+    static var favouriteFilms: [FavouriteFilm] = []
+    
     let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     //MARK: Saving funcs
@@ -26,7 +30,7 @@ final public class CoreDataManager {
         
         do {
             try managedContext.save()
-            SuggestionsCollectionViewViewModel.films.append(film)
+            CoreDataManager.films.append(film)
         } catch let error as NSError {
             print(error)
         }
@@ -41,7 +45,7 @@ final public class CoreDataManager {
         
         do {
             try managedContext.save()
-            SuggestionsViewController.genres.append(genre)
+            CoreDataManager.genres.append(genre)
         } catch let error as NSError {
             print(error)
         }
@@ -59,7 +63,7 @@ final public class CoreDataManager {
         
         do {
             try managedContext.save()
-            SuggestionsViewController.favouriteFilms.append(favouriteFilm)
+            CoreDataManager.favouriteFilms.append(favouriteFilm)
         } catch let error as NSError {
             print(error)
         }
@@ -67,20 +71,13 @@ final public class CoreDataManager {
     
     //MARK: Fetching methods -
     func fetchFilmsData() {
-        let fetchRequest: NSFetchRequest<CurrentFilm> = CurrentFilm.fetchRequest()
-        
-        do {
-            try SuggestionsCollectionViewViewModel.films = managedContext.fetch(fetchRequest)
-        } catch let error as NSError {
-            print(error)
-        }
     }
     
     func fetchGenresData() {
         let fetchRequest: NSFetchRequest<Genre> = Genre.fetchRequest()
         
         do {
-            try SuggestionsViewController.genres = managedContext.fetch(fetchRequest)
+            try CoreDataManager.genres = managedContext.fetch(fetchRequest)
         } catch let error as NSError {
             print(error)
         }
@@ -90,7 +87,7 @@ final public class CoreDataManager {
         let fetchRequest: NSFetchRequest<FavouriteFilm> = FavouriteFilm.fetchRequest()
         
         do {
-            try SuggestionsViewController.favouriteFilms = managedContext.fetch(fetchRequest)
+            try CoreDataManager.favouriteFilms = managedContext.fetch(fetchRequest)
         } catch let error as NSError {
             print(error)
         }
@@ -109,6 +106,8 @@ final public class CoreDataManager {
                 managedContext.delete(item)
             }
             try managedContext.save()
+            CoreDataManager.films.removeAll()
+            CoreDataManager.genres.removeAll()
             
         } catch let error as NSError {
             print(error)

@@ -24,7 +24,7 @@ class RecommendationsCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
-    weak var viewModel: SuggestionCollectionViewCellViewModelType? {
+    weak var viewModel: SuggestionsCollectionViewCellViewModelType? {
         willSet(viewModel) {
             guard let viewModel = viewModel else { return }
             self.imageView.image = viewModel.poster
@@ -38,8 +38,6 @@ class RecommendationsCollectionViewCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: .zero)
         contentView.addSubview(imageView)
-        
-        
         
         setupImageView()
    

@@ -30,6 +30,13 @@ class FavouriteFilmsCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
+    weak var viewModel: FavoritesCollectionViewCellViewModelType? {
+        willSet(viewModel) {
+            guard let viewModel = viewModel else { return }
+            self.imageView.image = viewModel.poster
+        }
+    }
+    
     
     
     //MARK: Initializer

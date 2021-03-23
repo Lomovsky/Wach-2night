@@ -7,10 +7,8 @@
 
 import UIKit
 
-protocol SuggestionCollectionViewCellViewModelType: class {
+protocol SuggestionsCollectionViewCellViewModelType: class {
     
     var poster: UIImage { get }
-    var title: String { get }
-    var overview: String { get }
     
 }
