@@ -13,7 +13,6 @@ final class SuggestionsViewViewModel: SuggestionsViewViewModelType {
     private let dataManager = DataManager()
     var suggestionsDelegate: SuggestionsDelegate?
     
-    
     func downloadFilms() {
         if Reachability.isConnectedToNetwork() {
             coreDataManager.deleteAllData()

@@ -14,6 +14,8 @@ final class PreviewViewController: UIViewController {
     var film: CurrentFilm? = nil
     weak var suggestionsDelegate: SuggestionsDelegate?
     
+    var viewModel: PreviewViewModelType?
+    
     //MARK: Declarations
     let scrollView: UIScrollView = {
         let scroll = UIScrollView()
@@ -94,22 +96,6 @@ final class PreviewViewController: UIViewController {
         super.viewWillAppear(true)
        
     }
-    
-    init(poster: UIImage, filmTitle: String, filmOverview: String) {
-        self.imageView.image = poster
-        self.titleLabel.text = filmTitle
-        self.overviewText.text = filmOverview
-        
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-
     
     deinit {
         print("PreviewVC was dealocated")

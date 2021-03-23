@@ -37,8 +37,6 @@ class FavouriteFilmsCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    
-    
     //MARK: Initializer
     override init(frame: CGRect) {
         super.init(frame: .zero)

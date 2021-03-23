@@ -11,6 +11,8 @@ import UIKit
     
      static var suggestionsDelegate: SuggestionsDelegate?
     
+    let downloadQueue = DispatchQueue(label: "networkQueue", qos: .utility, attributes: .concurrent)
+    
      func downloadGenres() {
         let urlString = "https://api.themoviedb.org/3/genre/movie/list?api_key=\(apiKey)&language=ru-RU"
         let coreDataManager = CoreDataManager()
@@ -21,8 +23,7 @@ import UIKit
             case .success(let genreResponse):
                 genreResponse.genres.forEach { (genre) in
                     coreDataManager.saveGenres(genre.id, genreName: genre.name)
-                    DataManager.suggestionsDelegate?.uppateUIAfterDownloadingData()
-                    
+                    DataManager.suggestionsDelegate?.updateGenresUI()
                 }
             }
         }
@@ -31,20 +32,20 @@ import UIKit
     func downloadFilms() {
         let urlString = "https://api.themoviedb.org/3/discover/movie?api_key=\(apiKey)&language=ru-RU&sort_by=popularity.desc&include_adult=true&include_video=false&page=1"
         let coreDataManager = CoreDataManager()
-        NetworkManager.fetchCurrentData(withURL: urlString, dataModel: FilmResponse.self) { (result) in
+        NetworkManager.fetchCurrentData(withURL: urlString, dataModel: FilmResponse.self) { [weak self] (result) in
+            guard let self = self else { return }
             switch result {
             case .success(let filmResponse):
                 filmResponse.results.forEach { (film) in
                     if let secondPath = film.posterPath {
-                        DispatchQueue.global(qos: .utility).async {
+                        self.downloadQueue.async {
                             let imageURLString = imagePath + secondPath
                             guard let imageURL = URL(string: imageURLString) else { return }
                             guard let posterData = try? Data(contentsOf: imageURL) else { return }
                             DispatchQueue.main.async {
                                 coreDataManager.saveFilms(film.title, filmOriginalTitle: film.originalTitle, filmPoster: posterData, releaseDate: film.releaseDate, overview: film.overview, rating: film.rating)
-                                DispatchQueue.main.async {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                                     DataManager.suggestionsDelegate?.uppateUIAfterDownloadingData()
-                                    print("FINISHED DOWNLOADING FILMS")  //PRINTING
                                 }
                             }
                         }
@@ -58,7 +59,6 @@ import UIKit
                             }
                         }
                     }
-                    
                 }
             case .failure(let error):
                 print(error)

@@ -43,6 +43,8 @@ extension PreviewViewController {
         imageView.frame.size.height = view.frame.height * 0.6
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
+        let resizedPoster = viewModel?.poster.resizeImageUsingVImage(size: .init(width: view.frame.width, height: view.frame.height * 0.6))
+        imageView.image = resizedPoster
         
     }
     
@@ -52,6 +54,7 @@ extension PreviewViewController {
         titleLabel.font = .systemFont(ofSize: 22)
         titleLabel.numberOfLines = 0
         titleLabel.frame.size.height = 49
+        titleLabel.text = viewModel?.title
     }
     
     final func setupOverviewLabel() {
@@ -70,6 +73,7 @@ extension PreviewViewController {
         overviewText.numberOfLines = 0
         overviewText.font = .systemFont(ofSize: 16, weight: .light)
         overviewText.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.75)
+        overviewText.text = viewModel?.overview
         }
     
     final func setupFavoriteButton() {

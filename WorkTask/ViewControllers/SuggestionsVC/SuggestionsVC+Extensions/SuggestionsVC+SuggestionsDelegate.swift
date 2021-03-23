@@ -19,9 +19,12 @@ extension SuggestionsViewController: SuggestionsDelegate {
         activityIndicator.stopAnimating()
         activityIndicator.isHidden = true
         refreshControl.endRefreshing()
-        print("FINISHED UPDATING")
-        //PRINTING
 
+    }
+    
+    func updateGenresUI() {
+        genreCollectionView.reloadData()
+        genreCollectionView.isHidden = false
     }
     
     

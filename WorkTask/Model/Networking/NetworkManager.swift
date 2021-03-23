@@ -13,8 +13,11 @@ class NetworkManager {
     
     static func fetchCurrentData<DataModel: Codable>(withURL url: String, dataModel: DataModel.Type, completion: @escaping (Result<DataModel, Error>) -> Void) {
         
+        let downloadQueue = DispatchQueue(label: "networkManagerQueue", qos: .utility, attributes: .concurrent)
+
+        
         guard let url = URL(string: url) else { return }
-        DispatchQueue.global(qos: .utility).async {
+        downloadQueue.async {
             let request = AF.request(url)
             request.responseJSON { (response) in
                 if let error = response.error {

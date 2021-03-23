@@ -11,5 +11,6 @@ protocol SuggestionsCollectionViewViewModelType {
     
     func numberOfItems() -> Int
     func cellViewModel(forIndexPath indexPath: IndexPath) -> SuggestionsCollectionViewCellViewModelType?
-    
+    func viewModelForSelectedRow() -> PreviewViewModelType?
+    func selectRow(atIndexPath indexPath: IndexPath)
 }

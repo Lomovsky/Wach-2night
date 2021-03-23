@@ -74,11 +74,11 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
                 let resizedPoster = poster?.resizeImageUsingVImage(size: CGSize.init(width: self.view.frame.width,
                                                                                      height: self.view.frame.height * 0.6))
                 
-                let previewVC = PreviewViewController(poster: resizedPoster ?? #imageLiteral(resourceName: "1024px-No_image_available.svg"), filmTitle: film.title, filmOverview: film.overview)
-                self.navigationController?.present(previewVC, animated: true, completion: {
-                    previewVC.favoriteButton.setTitle("Добавить в избранное", for: .normal)
-                    previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.addToFavorites), for: .touchUpInside)
-                })
+//                let previewVC = PreviewViewController(poster: resizedPoster ?? #imageLiteral(resourceName: "1024px-No_image_available.svg"), filmTitle: film.title, filmOverview: film.overview)
+//                self.navigationController?.present(previewVC, animated: true, completion: {
+//                    previewVC.favoriteButton.setTitle("Добавить в избранное", for: .normal)
+//                    previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.addToFavorites), for: .touchUpInside)
+//                })
             }
         }
     }

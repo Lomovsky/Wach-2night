@@ -8,8 +8,8 @@
 import UIKit
 
 class SuggestionsCollectionViewViewModel: SuggestionsCollectionViewViewModelType {
-    
-    private let coreDataManager = CoreDataManager()
+
+    private var _selectedIndexPath: IndexPath?
     
     func numberOfItems() -> Int {
         return CoreDataManager.films.count
@@ -20,5 +20,13 @@ class SuggestionsCollectionViewViewModel: SuggestionsCollectionViewViewModelType
         return SuggestionsCollectionViewCellViewModel(film: film)
     }
     
+    func viewModelForSelectedRow() -> PreviewViewModelType? {
+        guard let selectedIndexPath = _selectedIndexPath else { return nil }
+        return PreviewViewModel(currentFilm: CoreDataManager.films[selectedIndexPath.row], favFilm: nil)
+    }
+    
+    func selectRow(atIndexPath indexPath: IndexPath) {
+        _selectedIndexPath = indexPath
+    }
     
 }

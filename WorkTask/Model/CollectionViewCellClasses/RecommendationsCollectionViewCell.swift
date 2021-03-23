@@ -8,13 +8,12 @@
 import UIKit
 
 class RecommendationsCollectionViewCell: UICollectionViewCell {
+    // MARK: Declarations
     
     class var reuseIdentifier: String {
         return "CollectionViewCellReuseIdentifier"
     }
-    
 
-    // MARK: Declarations
     let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -31,20 +30,15 @@ class RecommendationsCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    
 
-    
     //MARK: Initializer -
     override init(frame: CGRect) {
         super.init(frame: .zero)
         contentView.addSubview(imageView)
         
         setupImageView()
-   
     }
-    
-    
-    
+     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -57,14 +51,6 @@ class RecommendationsCollectionViewCell: UICollectionViewCell {
         imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         
-    }
-  
-
-
-    // MARK: Configuring the cell -
-    final func configureCell(image: UIImage, title: String, originalTitle: String, releaseDate: String, rating: Float) {
-        self.imageView.image = image
-
     }
     
 }

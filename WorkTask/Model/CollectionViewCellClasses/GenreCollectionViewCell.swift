@@ -8,12 +8,10 @@
 import UIKit
 
 class GenreCollectionViewCell: UICollectionViewCell {
-    
+    //MARK: Declarations
     class var reuseIdentifier: String {
         return "GenreCellReuseIdentifier"
     }
-    
-    //MARK: Declarations
     
     let genreLabel: UILabel = {
         let label = UILabel()
@@ -21,7 +19,6 @@ class GenreCollectionViewCell: UICollectionViewCell {
         label.sizeToFit()
         return label
     }()
-    
     
     weak var viewModel: GenreCollectionViewCellViewModelType? {
         willSet(viewModel) {
@@ -50,7 +47,4 @@ class GenreCollectionViewCell: UICollectionViewCell {
         genreLabel.textColor = .systemGreen
         genreLabel.font = .systemFont(ofSize: 16, weight: .medium)
     }
-    
-    
- 
 }

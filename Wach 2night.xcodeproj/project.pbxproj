@@ -43,6 +43,8 @@
 		C0B1CFF4260A036A00456168 /* FavoritesCollectionViewCellViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B1CFF3260A036A00456168 /* FavoritesCollectionViewCellViewModelType.swift */; };
 		C0B1CFF7260A040C00456168 /* FavoritesCollectionViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B1CFF6260A040C00456168 /* FavoritesCollectionViewViewModel.swift */; };
 		C0B1CFFB260A041D00456168 /* FavoritesCollectionViewCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B1CFFA260A041D00456168 /* FavoritesCollectionViewCellViewModel.swift */; };
+		C0B1D002260A1BF400456168 /* PreviewViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B1D001260A1BF400456168 /* PreviewViewModelType.swift */; };
+		C0B1D006260A1C0100456168 /* PreviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0B1D005260A1C0100456168 /* PreviewViewModel.swift */; };
 		C0C0E7C02583C4A4006C460E /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C0E7BF2583C4A4006C460E /* NetworkManager.swift */; };
 		C0C0E7C32583C74D006C460E /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C0E7C22583C74D006C460E /* DataModel.swift */; };
 		C0CD0F3C2608A6B000A589F8 /* SuggestionsCollectionViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0CD0F3B2608A6B000A589F8 /* SuggestionsCollectionViewViewModel.swift */; };
@@ -97,6 +99,8 @@
 		C0B1CFF3260A036A00456168 /* FavoritesCollectionViewCellViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCollectionViewCellViewModelType.swift; sourceTree = "<group>"; };
 		C0B1CFF6260A040C00456168 /* FavoritesCollectionViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCollectionViewViewModel.swift; sourceTree = "<group>"; };
 		C0B1CFFA260A041D00456168 /* FavoritesCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
+		C0B1D001260A1BF400456168 /* PreviewViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewModelType.swift; sourceTree = "<group>"; };
+		C0B1D005260A1C0100456168 /* PreviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PreviewViewModel.swift; path = WorkTask/Protocols/ViewModelTypes/PreviewViewViewModelType/PreviewViewModel.swift; sourceTree = SOURCE_ROOT; };
 		C0C0E7BF2583C4A4006C460E /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		C0C0E7C22583C74D006C460E /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		C0CD0F3B2608A6B000A589F8 /* SuggestionsCollectionViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionsCollectionViewViewModel.swift; sourceTree = "<group>"; };
@@ -320,6 +324,22 @@
 			path = SuggestionViewViewsModels;
 			sourceTree = "<group>";
 		};
+		C0B1CFFF260A1B9400456168 /* PreviewViewViewModelType */ = {
+			isa = PBXGroup;
+			children = (
+				C0B1D001260A1BF400456168 /* PreviewViewModelType.swift */,
+			);
+			path = PreviewViewViewModelType;
+			sourceTree = "<group>";
+		};
+		C0B1D000260A1BD000456168 /* PreviewViewViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C0B1D005260A1C0100456168 /* PreviewViewModel.swift */,
+			);
+			path = PreviewViewViewModel;
+			sourceTree = "<group>";
+		};
 		C0B6B08D2583E61F002F1F7D /* Networking */ = {
 			isa = PBXGroup;
 			children = (
@@ -335,6 +355,7 @@
 			isa = PBXGroup;
 			children = (
 				C0B1CFE72609FEC900456168 /* SuggestionViewViewsModels */,
+				C0B1D000260A1BD000456168 /* PreviewViewViewModel */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -343,6 +364,7 @@
 			isa = PBXGroup;
 			children = (
 				C0B1CFE32609FBB300456168 /* SuggestionViewViewsModelTypes */,
+				C0B1CFFF260A1B9400456168 /* PreviewViewViewModelType */,
 			);
 			path = ViewModelTypes;
 			sourceTree = "<group>";
@@ -526,6 +548,7 @@
 				C0B1CFE02609FAF000456168 /* GenreCollectionViewCellViewModelType.swift in Sources */,
 				C04D6EA325AB405E00E4B151 /* ConnectionManager.swift in Sources */,
 				C0B1CFEA2609FF0300456168 /* GenreCollectionViewViewModel.swift in Sources */,
+				C0B1D002260A1BF400456168 /* PreviewViewModelType.swift in Sources */,
 				C062A59025CDB03400C507ED /* GenreCollectionViewCell.swift in Sources */,
 				C060DAFF257BECA200C892DE /* SuggestionsViewController.swift in Sources */,
 				C0CE78C625CADF3700A55990 /* TableViewCell.swift in Sources */,
@@ -549,6 +572,7 @@
 				C028AC7025B0D8BF007799B6 /* UIImageExtensionForResizingImages.swift in Sources */,
 				C0D6AD532595F9D40000174A /* ApiKeyAndImageLink.swift in Sources */,
 				C0CD0F3C2608A6B000A589F8 /* SuggestionsCollectionViewViewModel.swift in Sources */,
+				C0B1D006260A1C0100456168 /* PreviewViewModel.swift in Sources */,
 				C0A19ADD25D13CEF00575196 /* PreviewVC+HelperFuncs.swift in Sources */,
 				C060DAFD257BECA200C892DE /* SceneDelegate.swift in Sources */,
 				C0B1CFED2609FF1300456168 /* GenreCollectionViewCellViewModel.swift in Sources */,
