@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class PreviewViewController: UIViewController {    
+final class PreviewViewController: UIViewController {
     var viewModel: PreviewViewModelType?
     
     //MARK: Declarations
@@ -21,7 +21,7 @@ final class PreviewViewController: UIViewController {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .vertical
-//        stack.spacing = 10
+        stack.spacing = 10
         return stack
     }()
 
