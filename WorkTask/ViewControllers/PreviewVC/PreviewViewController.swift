@@ -7,13 +7,7 @@
 
 import UIKit
 
-final class PreviewViewController: UIViewController {
-    let coreDataManager = CoreDataManager()
-    static var filmToDelete: FavouriteFilm? = nil
-    static var indexOfFilmToDelete: Int? = nil
-    var film: CurrentFilm? = nil
-    weak var suggestionsDelegate: SuggestionsDelegate?
-    
+final class PreviewViewController: UIViewController {    
     var viewModel: PreviewViewModelType?
     
     //MARK: Declarations
