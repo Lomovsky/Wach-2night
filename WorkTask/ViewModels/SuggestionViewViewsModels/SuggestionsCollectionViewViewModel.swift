@@ -29,4 +29,16 @@ class SuggestionsCollectionViewViewModel: SuggestionsCollectionViewViewModelType
         _selectedIndexPath = indexPath
     }
     
+    func filmToSave(indexPath: IndexPath) -> CurrentFilm {
+        guard let indexPath = _selectedIndexPath else { return CurrentFilm() }
+        let film = CoreDataManager.films[indexPath.row]
+        return film
+    }
+    
+    func filmToDelete(indexPath: IndexPath) -> FavouriteFilm {
+        guard let indexPath = _selectedIndexPath else { return FavouriteFilm() }
+        let film = CoreDataManager.favouriteFilms[indexPath.row]
+        return film
+    }
+    
 }

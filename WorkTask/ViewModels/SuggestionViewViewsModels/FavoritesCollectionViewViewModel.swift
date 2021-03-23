@@ -16,7 +16,7 @@ class FavoritesCollectionViewViewModel: FavoritesCollectionViewViewModelType {
     }
     
     func cellViewModel(forIndexPath indexPath: IndexPath) -> FavoritesCollectionViewCellViewModelType? {
-        let film = CoreDataManager.favouriteFilms[indexPath.row]
+        let film = CoreDataManager.favouriteFilms.reversed()[indexPath.row]
         return FavoritesCollectionViewCellViewModel(film: film)
     }
     

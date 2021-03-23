@@ -132,52 +132,29 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
             guard let cell = collectionView.cellForItem(at: indexPath) else { return }
             animateCell(cell: cell)
             suggestionsCollectionViewViewModel.selectRow(atIndexPath: indexPath)
-            let viewController = PreviewViewController()
-            viewController.viewModel = suggestionsCollectionViewViewModel.viewModelForSelectedRow()
-            navigationController?.present(viewController, animated: true, completion: nil)
-            viewController.viewModel?.suggestionsDelegate = self
+            let previewVC = PreviewViewController()
+            previewVC.viewModel = suggestionsCollectionViewViewModel.viewModelForSelectedRow()
+            previewVC.viewModel?.suggestionsDelegate = self
+            previewVC.viewModel?.filmToAdd = suggestionsCollectionViewViewModel.filmToSave(indexPath: indexPath)
+            navigationController?.present(previewVC, animated: true, completion: {
+                previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.addToFavorites),
+                                                   for: .touchUpInside)
+                previewVC.favoriteButton.setTitle("Добавить в избранное", for: .normal)
+            })
+
             
         case favouriteFilmsCollectionView:
-            break
-        //            if SuggestionsViewController.favouriteFilms.isEmpty {
-        //
-        //            } else {
-        //                guard let cell = collectionView.cellForItem(at: indexPath) else { return }
-        //                //                let previewVC = PreviewViewController()
-        //                let film = SuggestionsViewController.favouriteFilms.reversed()[indexPath.row]
-        //                //                let some = SuggestionsViewController.favouriteFilms.enumerated()
-        //                let filmIndex = indexPath.row
-        //                //                let filmIndex2 = SuggestionsViewController.favouriteFilms[indexPath.index]
-        //
-        //
-        //                if let poster = film.poster {
-        //                    guard let posterImage = UIImage(data: poster) else { return }
-        //                    let resizedPoster = posterImage.resizeImageUsingVImage(size: CGSize.init(width: view.frame.width,
-        //                                                                                             height: view.frame.height * 0.6))
-        //
-        //                    animateCell(cell: cell)
-        //                    PreviewViewController.filmToDelete = film
-        //                    PreviewViewController.indexOfFilmToDelete = filmIndex
-        //                    let previewVC = PreviewViewController(poster: resizedPoster ?? #imageLiteral(resourceName: "1024px-No_image_available.svg"), filmTitle: film.title ?? "Нет данных", filmOverview: film.overview ?? "Нети данных ")
-        //                    self.navigationController?.present(previewVC, animated: true, completion: {
-        //                        previewVC.favoriteButton.setTitle("Удалить из избранного", for: .normal)
-        //                        previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.deleteFromFavorites), for: .touchUpInside)
-        //                        previewVC.suggestionsDelegate = self
-        //                    })
-        //
-        //
-        //                } else {
-        //                    animateCell(cell: cell)
-        //                    PreviewViewController.filmToDelete = film
-        //                    PreviewViewController.indexOfFilmToDelete = filmIndex
-        //                    let previewVC = PreviewViewController(poster: #imageLiteral(resourceName: "1024px-No_image_available.svg"), filmTitle: film.title ?? "Нет данных", filmOverview: film.overview ?? "Нети данных ")
-        //                    self.navigationController?.present(previewVC, animated: true, completion: {
-        //                        previewVC.favoriteButton.setTitle("Удалить из избранного", for: .normal)
-        //                        previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.deleteFromFavorites), for: .touchUpInside)
-        //                        previewVC.suggestionsDelegate = self
-        //                    })                }
-        //
-        //            }
+            guard let cell = collectionView.cellForItem(at: indexPath) else { return }
+            animateCell(cell: cell)
+            suggestionsCollectionViewViewModel.selectRow(atIndexPath: indexPath)
+            let previewVC = PreviewViewController()
+            previewVC.viewModel = suggestionsCollectionViewViewModel.viewModelForSelectedRow()
+            previewVC.viewModel?.suggestionsDelegate = self
+            previewVC.viewModel?.filmToDelete = suggestionsCollectionViewViewModel.filmToDelete(indexPath: indexPath)
+            navigationController?.present(previewVC, animated: true, completion: {
+                previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.deleteFromFavorites), for: .touchUpInside)
+                previewVC.favoriteButton.setTitle("Удалить из избранного", for: .normal)
+            })
         
         default:
             break

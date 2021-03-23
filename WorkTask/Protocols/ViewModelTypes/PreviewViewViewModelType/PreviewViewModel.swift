@@ -52,22 +52,25 @@ class PreviewViewModel: PreviewViewModelType {
     
   
     func addToFavorites() {
-        
-                coreDataManager.saveFavouriteFilm(filmToAdd.title ?? "", filmOriginalTitle: filmToAdd.originalTitle ?? "", filmRating: filmToAdd.rating, filmOverview: filmToAdd.overview ?? "", filmPoster: filmToAdd.poster!)
-                suggestionsDelegate?.updateFavorites()
-                
-
-  
-        //
-        //        guard let filmToDelete = SuggestionsViewController.favouriteFilms.last else { return }
-        //        guard let index = SuggestionsViewController.favouriteFilms.lastIndex(of: filmToDelete) else { return }
-        //
-        //        PreviewViewController.filmToDelete = filmToDelete
-        //        PreviewViewController.indexOfFilmToDelete = index
+        guard let filmToAdd = filmToAdd else { return }
+        coreDataManager.saveFavouriteFilm(filmToAdd.title ?? "", filmOriginalTitle: filmToAdd.originalTitle ?? "", filmRating: filmToAdd.rating, filmOverview: filmToAdd.overview ?? "", filmPoster: filmToAdd.poster!)
+        suggestionsDelegate?.updateFavorites()
     }
     
     func removeFromFavorites() {
+        guard let filmToDelete = CoreDataManager.favouriteFilms.last,
+              let index = CoreDataManager.favouriteFilms.lastIndex(of: filmToDelete) else { return }
+                CoreDataManager.favouriteFilms.remove(at: index)
+                coreDataManager.fetchFavouriteFilms()
+                coreDataManager.managedContext.delete(filmToDelete)
         
+                do {
+                    try coreDataManager.managedContext.save()
+        
+                } catch let error as NSError {
+                    print(error)
+                }
+                suggestionsDelegate?.updateFavorites()
     }
     
 }

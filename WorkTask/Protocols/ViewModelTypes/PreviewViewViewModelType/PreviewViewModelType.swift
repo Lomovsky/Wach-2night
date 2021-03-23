@@ -9,7 +9,7 @@ import UIKit
 
 protocol PreviewViewModelType {
     
-    var filmToAdd: CurrentFilm { get set }
+    var filmToAdd: CurrentFilm? { get set }
     var film: CurrentFilm? { get set }
     var favFilm: FavouriteFilm? { get set }
     var poster: UIImage { get }
