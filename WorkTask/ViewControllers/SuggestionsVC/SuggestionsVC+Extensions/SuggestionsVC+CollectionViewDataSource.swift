@@ -21,8 +21,9 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
         case favouriteFilmsCollectionView:
             if favoritesCollectionViewViewModel.numberOfItems() == 0 {
                 return 3
+            } else {
+                return favoritesCollectionViewViewModel.numberOfItems()
             }
-            return favoritesCollectionViewViewModel.numberOfItems()
             
         default: return 0
             
@@ -73,8 +74,8 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
         switch collectionView {
         case recommendationsCollectionView:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecommendationsCollectionViewCell.reuseIdentifier,for: indexPath) as? RecommendationsCollectionViewCell {
-                let cellViewModel = suggestionsCollectionViewViewModel.cellViewModel(forIndexPath: indexPath)
                 
+                let cellViewModel = suggestionsCollectionViewViewModel.cellViewModel(forIndexPath: indexPath)
                 cell.viewModel = cellViewModel
                 cell.layer.shadowColor = UIColor.black.cgColor
                 cell.layer.shadowRadius = 5
@@ -82,17 +83,16 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
                 cell.layer.shadowOffset = CGSize.init(width: 2.5, height: 2.5)
                 cell.layer.masksToBounds = false
                 return cell
-                
             }
             
         case genreCollectionView:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GenreCollectionViewCell.reuseIdentifier, for: indexPath) as? GenreCollectionViewCell {
+                
                 let cellViewModel = genresCollectionViewViewModel.cellViewModel(forIndexPath: indexPath)
                 cell.backgroundColor = .systemGray6
                 cell.layer.cornerRadius = 12
                 cell.viewModel = cellViewModel
                 return cell
-                
             }
             
         case favouriteFilmsCollectionView:
@@ -123,11 +123,11 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
     
     //MARK: didSelectItemAt-
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
+        
         switch collectionView {
         case genreCollectionView:
             break
-
+            
         case recommendationsCollectionView:
             guard let cell = collectionView.cellForItem(at: indexPath) else { return }
             animateCell(cell: cell)
@@ -135,58 +135,56 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
             let viewController = PreviewViewController()
             viewController.viewModel = suggestionsCollectionViewViewModel.viewModelForSelectedRow()
             navigationController?.present(viewController, animated: true, completion: nil)
-
+            viewController.viewModel?.suggestionsDelegate = self
             
-
-
         case favouriteFilmsCollectionView:
             break
-//            if SuggestionsViewController.favouriteFilms.isEmpty {
-//
-//            } else {
-//                guard let cell = collectionView.cellForItem(at: indexPath) else { return }
-//                //                let previewVC = PreviewViewController()
-//                let film = SuggestionsViewController.favouriteFilms.reversed()[indexPath.row]
-//                //                let some = SuggestionsViewController.favouriteFilms.enumerated()
-//                let filmIndex = indexPath.row
-//                //                let filmIndex2 = SuggestionsViewController.favouriteFilms[indexPath.index]
-//
-//
-//                if let poster = film.poster {
-//                    guard let posterImage = UIImage(data: poster) else { return }
-//                    let resizedPoster = posterImage.resizeImageUsingVImage(size: CGSize.init(width: view.frame.width,
-//                                                                                             height: view.frame.height * 0.6))
-//
-//                    animateCell(cell: cell)
-//                    PreviewViewController.filmToDelete = film
-//                    PreviewViewController.indexOfFilmToDelete = filmIndex
-//                    let previewVC = PreviewViewController(poster: resizedPoster ?? #imageLiteral(resourceName: "1024px-No_image_available.svg"), filmTitle: film.title ?? "Нет данных", filmOverview: film.overview ?? "Нети данных ")
-//                    self.navigationController?.present(previewVC, animated: true, completion: {
-//                        previewVC.favoriteButton.setTitle("Удалить из избранного", for: .normal)
-//                        previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.deleteFromFavorites), for: .touchUpInside)
-//                        previewVC.suggestionsDelegate = self
-//                    })
-//
-//
-//                } else {
-//                    animateCell(cell: cell)
-//                    PreviewViewController.filmToDelete = film
-//                    PreviewViewController.indexOfFilmToDelete = filmIndex
-//                    let previewVC = PreviewViewController(poster: #imageLiteral(resourceName: "1024px-No_image_available.svg"), filmTitle: film.title ?? "Нет данных", filmOverview: film.overview ?? "Нети данных ")
-//                    self.navigationController?.present(previewVC, animated: true, completion: {
-//                        previewVC.favoriteButton.setTitle("Удалить из избранного", for: .normal)
-//                        previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.deleteFromFavorites), for: .touchUpInside)
-//                        previewVC.suggestionsDelegate = self
-//                    })                }
-//
-//            }
-
+        //            if SuggestionsViewController.favouriteFilms.isEmpty {
+        //
+        //            } else {
+        //                guard let cell = collectionView.cellForItem(at: indexPath) else { return }
+        //                //                let previewVC = PreviewViewController()
+        //                let film = SuggestionsViewController.favouriteFilms.reversed()[indexPath.row]
+        //                //                let some = SuggestionsViewController.favouriteFilms.enumerated()
+        //                let filmIndex = indexPath.row
+        //                //                let filmIndex2 = SuggestionsViewController.favouriteFilms[indexPath.index]
+        //
+        //
+        //                if let poster = film.poster {
+        //                    guard let posterImage = UIImage(data: poster) else { return }
+        //                    let resizedPoster = posterImage.resizeImageUsingVImage(size: CGSize.init(width: view.frame.width,
+        //                                                                                             height: view.frame.height * 0.6))
+        //
+        //                    animateCell(cell: cell)
+        //                    PreviewViewController.filmToDelete = film
+        //                    PreviewViewController.indexOfFilmToDelete = filmIndex
+        //                    let previewVC = PreviewViewController(poster: resizedPoster ?? #imageLiteral(resourceName: "1024px-No_image_available.svg"), filmTitle: film.title ?? "Нет данных", filmOverview: film.overview ?? "Нети данных ")
+        //                    self.navigationController?.present(previewVC, animated: true, completion: {
+        //                        previewVC.favoriteButton.setTitle("Удалить из избранного", for: .normal)
+        //                        previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.deleteFromFavorites), for: .touchUpInside)
+        //                        previewVC.suggestionsDelegate = self
+        //                    })
+        //
+        //
+        //                } else {
+        //                    animateCell(cell: cell)
+        //                    PreviewViewController.filmToDelete = film
+        //                    PreviewViewController.indexOfFilmToDelete = filmIndex
+        //                    let previewVC = PreviewViewController(poster: #imageLiteral(resourceName: "1024px-No_image_available.svg"), filmTitle: film.title ?? "Нет данных", filmOverview: film.overview ?? "Нети данных ")
+        //                    self.navigationController?.present(previewVC, animated: true, completion: {
+        //                        previewVC.favoriteButton.setTitle("Удалить из избранного", for: .normal)
+        //                        previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.deleteFromFavorites), for: .touchUpInside)
+        //                        previewVC.suggestionsDelegate = self
+        //                    })                }
+        //
+        //            }
+        
         default:
             break
-
+            
         }
     }
-
+    
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         //настройка ползунка при прокручивании

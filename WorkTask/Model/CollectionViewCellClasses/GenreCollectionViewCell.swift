@@ -46,5 +46,6 @@ class GenreCollectionViewCell: UICollectionViewCell {
         genreLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor).isActive = true
         genreLabel.textColor = .systemGreen
         genreLabel.font = .systemFont(ofSize: 16, weight: .medium)
+        
     }
 }

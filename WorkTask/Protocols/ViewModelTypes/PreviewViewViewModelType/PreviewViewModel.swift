@@ -8,9 +8,15 @@
 import UIKit
 
 class PreviewViewModel: PreviewViewModelType {
-    
+
+    private var coreDataManager = CoreDataManager()
+    var suggestionsDelegate: SuggestionsDelegate?
     var film: CurrentFilm?
     var favFilm: FavouriteFilm?
+    var filmToDelete: FavouriteFilm?
+    var indexToRemove: Int?
+    var filmToAdd: CurrentFilm?
+    
     
     var poster: UIImage {
         if film != nil {
@@ -42,6 +48,26 @@ class PreviewViewModel: PreviewViewModelType {
     init(currentFilm: CurrentFilm?, favFilm: FavouriteFilm?) {
         self.film = currentFilm
         self.favFilm = favFilm
+    }
+    
+  
+    func addToFavorites() {
+        
+                coreDataManager.saveFavouriteFilm(filmToAdd.title ?? "", filmOriginalTitle: filmToAdd.originalTitle ?? "", filmRating: filmToAdd.rating, filmOverview: filmToAdd.overview ?? "", filmPoster: filmToAdd.poster!)
+                suggestionsDelegate?.updateFavorites()
+                
+
+  
+        //
+        //        guard let filmToDelete = SuggestionsViewController.favouriteFilms.last else { return }
+        //        guard let index = SuggestionsViewController.favouriteFilms.lastIndex(of: filmToDelete) else { return }
+        //
+        //        PreviewViewController.filmToDelete = filmToDelete
+        //        PreviewViewController.indexOfFilmToDelete = index
+    }
+    
+    func removeFromFavorites() {
+        
     }
     
 }
