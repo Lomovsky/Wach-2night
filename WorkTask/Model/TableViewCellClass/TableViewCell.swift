@@ -29,6 +29,14 @@ class TableViewCell: UITableViewCell {
         return stack
     }()
     
+    weak var viewModel: SearchViewTableViewCellViewModelType? {
+        willSet(viewModel) {
+            guard let viewModel = viewModel else { return }
+            self.textLabel?.text = viewModel.title
+            self.imageView?.image = viewModel.poster
+        }
+    }
+    
     //MARK: Initializer -
     override func awakeFromNib() {
         super.awakeFromNib()

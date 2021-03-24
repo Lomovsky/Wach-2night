@@ -13,7 +13,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     // MARK: - Table view data source    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return self.films.count
+        return tableViewViewModel.numberOfItems()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

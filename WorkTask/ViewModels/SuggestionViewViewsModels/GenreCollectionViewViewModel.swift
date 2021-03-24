@@ -19,4 +19,5 @@ class GenreCollectionViewViewModel: GenreCollectionViewViewModelType {
         let genre = CoreDataManager.genres[indexPath.row]
         return GenreCollectionViewCellViewModel(genre: genre)
     }
+    
 }

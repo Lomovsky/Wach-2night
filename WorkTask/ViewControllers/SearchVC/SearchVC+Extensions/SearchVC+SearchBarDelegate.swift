@@ -14,7 +14,8 @@ extension SearchViewController {
         
         var searchURL = ""
         timer?.invalidate()
-        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { (_) in
+        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { [weak self] (_) in
+            guard let self = self else { return }
             self.cache.removeAllObjects()
             self.films.removeAll()
             if let language = NSLinguisticTagger.dominantLanguage(for: searchText) {
@@ -26,23 +27,7 @@ extension SearchViewController {
                     print("API LINK LOOKS LIKE:\(searchURL)")
                 }
             }
-            
-            NetworkManager.fetchCurrentData(withURL: searchURL, dataModel: FilmResponse.self) { [weak self] (result) in
-                guard let self = self else { return }
-                switch result {
-                case .failure(let error):
-                    print(error)
-                case .success(let filmResponse):
-                    filmResponse.results.enumerated().forEach { [weak self] (film) in
-                            guard let self = self else { return }
-                            self.films.insert(film.element, at: film.offset)
-                            print(self.films.count)
-                        }
-                            self.tableView.reloadData()
-                            print("reloaded the data")
-
-                }
-            }
+            self.viewModel.search(url: searchURL)
         })
     }
 }

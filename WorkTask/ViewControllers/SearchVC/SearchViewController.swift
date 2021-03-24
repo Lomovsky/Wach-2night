@@ -16,6 +16,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     var films: [Film] = []
     var timer: Timer?
     
+    var viewModel: SearchViewViewModelType = SearchViewViewModel()
+    var tableViewViewModel: SearchViewTableViewViewModelType = SearchViewTableViewViewModel()
     
     //MARK: UIElements
     let shadowSubView: UIView = {
@@ -41,6 +43,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(tableView)
+        viewModel.searchDelegate = self
         
         setupView()
         setupSearchBar()

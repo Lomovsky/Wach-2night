@@ -136,6 +136,7 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
             previewVC.viewModel = suggestionsCollectionViewViewModel.viewModelForSelectedRow()
             previewVC.viewModel?.suggestionsDelegate = self
             previewVC.viewModel?.filmToAdd = suggestionsCollectionViewViewModel.filmToSave(indexPath: indexPath)
+//            previewVC.viewModel?.filmToDelete = suggestionsCollectionViewViewModel.filmToDelete(indexPath: indexPath)
             navigationController?.present(previewVC, animated: true, completion: {
                 previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.addToFavorites),
                                                    for: .touchUpInside)
@@ -144,17 +145,22 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
 
             
         case favouriteFilmsCollectionView:
-            guard let cell = collectionView.cellForItem(at: indexPath) else { return }
-            animateCell(cell: cell)
-            suggestionsCollectionViewViewModel.selectRow(atIndexPath: indexPath)
-            let previewVC = PreviewViewController()
-            previewVC.viewModel = suggestionsCollectionViewViewModel.viewModelForSelectedRow()
-            previewVC.viewModel?.suggestionsDelegate = self
-            previewVC.viewModel?.filmToDelete = suggestionsCollectionViewViewModel.filmToDelete(indexPath: indexPath)
-            navigationController?.present(previewVC, animated: true, completion: {
-                previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.deleteFromFavorites), for: .touchUpInside)
-                previewVC.favoriteButton.setTitle("Удалить из избранного", for: .normal)
-            })
+            if suggestionsCollectionViewViewModel.numberOfItems() == 0 {
+                
+            } else {
+                
+                guard let cell = collectionView.cellForItem(at: indexPath) else { return }
+                animateCell(cell: cell)
+                suggestionsCollectionViewViewModel.selectRow(atIndexPath: indexPath)
+                let previewVC = PreviewViewController()
+                previewVC.viewModel = suggestionsCollectionViewViewModel.viewModelForSelectedRow()
+                previewVC.viewModel?.suggestionsDelegate = self
+                previewVC.viewModel?.filmToDelete = suggestionsCollectionViewViewModel.filmToDelete(indexPath: indexPath)
+                navigationController?.present(previewVC, animated: true, completion: {
+                    previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.deleteFromFavorites), for: .touchUpInside)
+                    previewVC.favoriteButton.setTitle("Удалить из избранного", for: .normal)
+                })
+            }
         
         default:
             break
