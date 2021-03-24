@@ -11,7 +11,7 @@ import UIKit
     
      static var suggestionsDelegate: SuggestionsDelegate?
     
-    let downloadQueue = DispatchQueue(label: "networkQueue", qos: .utility, attributes: .concurrent)
+    let downloadQueue = DispatchQueue(label: "networkQueue", qos: .utility)
     
      func downloadGenres() {
         let urlString = "https://api.themoviedb.org/3/genre/movie/list?api_key=\(apiKey)&language=ru-RU"

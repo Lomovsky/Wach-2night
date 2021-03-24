@@ -11,4 +11,6 @@ protocol SuggestionsViewViewModelType {
     
     func downloadFilms()
     var suggestionsDelegate: SuggestionsDelegate? { get set }
+    var favoriteFilmsArrayIsEmpty: Bool { get set }
+
 }

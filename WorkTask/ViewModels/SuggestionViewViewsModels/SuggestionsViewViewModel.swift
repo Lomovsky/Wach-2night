@@ -12,6 +12,8 @@ final class SuggestionsViewViewModel: SuggestionsViewViewModelType {
     private let coreDataManager = CoreDataManager()
     private let dataManager = DataManager()
     var suggestionsDelegate: SuggestionsDelegate?
+    var favoriteFilmsArrayIsEmpty: Bool = true
+
     
     func downloadFilms() {
         if Reachability.isConnectedToNetwork() {

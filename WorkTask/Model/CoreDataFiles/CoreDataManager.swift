@@ -12,28 +12,44 @@ final public class CoreDataManager {
     
     static var films: [CurrentFilm] = []
     static var genres: [Genre] = []
-    static var favouriteFilms: [FavouriteFilm] = []
+    static var favouriteFilms: [FavouriteFilm] = [] {
+        didSet {
+            let viewModel = SuggestionsViewViewModel()
+            if favouriteFilms.isEmpty {
+                viewModel.favoriteFilmsArrayIsEmpty = true
+            } else {
+                viewModel.favoriteFilmsArrayIsEmpty = false
+            }
+        }
+    }
     
     let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     //MARK: Saving funcs
     func saveFilms(_ filmTitle: String, filmOriginalTitle: String, filmPoster: Data, releaseDate: String, overview: String, rating: Float) {
-        guard let entityDescription = NSEntityDescription.entity(forEntityName: "CurrentFilm", in: managedContext) else { return }
         
-        let film = NSManagedObject(entity: entityDescription, insertInto: managedContext) as! CurrentFilm
-        film.title = filmTitle
-        film.originalTitle = filmOriginalTitle
-        film.poster = filmPoster
-        film.releaseDate = releaseDate
-        film.overview = overview
-        film.rating = rating
+            self.managedContext.perform { [weak self] in
+                guard let self = self else { return }
+                
+                guard let entityDescription = NSEntityDescription.entity(forEntityName: "CurrentFilm", in: self.managedContext) else { return }
+                
+                let film = NSManagedObject(entity: entityDescription, insertInto: self.managedContext) as! CurrentFilm
+                film.title = filmTitle
+                film.originalTitle = filmOriginalTitle
+                film.poster = filmPoster
+                film.releaseDate = releaseDate
+                film.overview = overview
+                film.rating = rating
+                
+                do {
+                    try self.managedContext.save()
+                    CoreDataManager.films.append(film)
+                } catch let error as NSError {
+                    print(error)
+                }
+            }
         
-        do {
-            try managedContext.save()
-            CoreDataManager.films.append(film)
-        } catch let error as NSError {
-            print(error)
-        }
+
     }
     
     func saveGenres(_ genreID: Int, genreName: String) {

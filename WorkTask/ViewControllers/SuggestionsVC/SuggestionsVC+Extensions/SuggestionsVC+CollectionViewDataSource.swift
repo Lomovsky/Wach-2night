@@ -145,7 +145,7 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
 
             
         case favouriteFilmsCollectionView:
-            if suggestionsCollectionViewViewModel.numberOfItems() == 0 {
+            if viewModel.favoriteFilmsArrayIsEmpty == true {
                 
             } else {
                 

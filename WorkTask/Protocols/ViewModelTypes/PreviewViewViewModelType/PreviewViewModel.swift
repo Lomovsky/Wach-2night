@@ -8,7 +8,7 @@
 import UIKit
 
 class PreviewViewModel: PreviewViewModelType {
-
+    
     private var coreDataManager = CoreDataManager()
     var suggestionsDelegate: SuggestionsDelegate?
     var film: CurrentFilm?

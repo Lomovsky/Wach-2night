@@ -13,7 +13,7 @@ class NetworkManager {
     
     static func fetchCurrentData<DataModel: Codable>(withURL url: String, dataModel: DataModel.Type, completion: @escaping (Result<DataModel, Error>) -> Void) {
         
-        let downloadQueue = DispatchQueue(label: "networkManagerQueue", qos: .utility, attributes: .concurrent)
+        let downloadQueue = DispatchQueue(label: "networkManagerQueue", qos: .utility)
 
         
         guard let url = URL(string: url) else { return }
