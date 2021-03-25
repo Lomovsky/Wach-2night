@@ -67,9 +67,9 @@ final public class CoreDataManager {
     
     func saveFavouriteFilm (_ filmTitle: String, filmOriginalTitle: String, filmRating: Float, filmOverview: String, filmPoster: Data) {
         
-        guard let entityDescription = NSEntityDescription.entity(forEntityName: "FavouriteFilm", in: privateMOC) else { return }
+        guard let entityDescription = NSEntityDescription.entity(forEntityName: "FavouriteFilm", in: mainMOC) else { return }
         
-        let favouriteFilm = NSManagedObject(entity: entityDescription, insertInto: privateMOC) as! FavouriteFilm
+        let favouriteFilm = NSManagedObject(entity: entityDescription, insertInto: mainMOC) as! FavouriteFilm
         favouriteFilm.title = filmTitle
         favouriteFilm.originalTitle = filmOriginalTitle
         favouriteFilm.overview = filmOverview
@@ -77,19 +77,11 @@ final public class CoreDataManager {
         favouriteFilm.poster = filmPoster
         
         do {
-            try privateMOC.save()
-            mainMOC.performAndWait {
-                
-                do {
-                    try mainMOC.save()
-                    
-                } catch let error as NSError {
-                    assertionFailure("\(error)")
-                }
-            }
+            try mainMOC.save()
         } catch let error as NSError {
             assertionFailure("\(error)")
         }
+        
         
     }
     

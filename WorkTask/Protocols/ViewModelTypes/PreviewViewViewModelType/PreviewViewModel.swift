@@ -54,6 +54,7 @@ class PreviewViewModel: PreviewViewModelType {
     func addToFavorites() {
         guard let filmToAdd = filmToAdd else { return }
         coreDataManager.saveFavouriteFilm(filmToAdd.title ?? "", filmOriginalTitle: filmToAdd.originalTitle ?? "", filmRating: filmToAdd.rating, filmOverview: filmToAdd.overview ?? "", filmPoster: filmToAdd.poster!)
+        suggestionsDelegate?.updateFavorites()
     }
     
     func removeFromFavorites() {
