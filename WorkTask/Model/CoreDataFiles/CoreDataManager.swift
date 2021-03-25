@@ -133,27 +133,11 @@ final public class CoreDataManager {
         fetchRequest.resultType = .dictionaryResultType
         fetchRequest.propertiesToFetch = ["id"]
         
-//        do {
-//            let results = try mainMOC.execute(fetchRequest)
-//
-//        } catch let error as NSError {
-//            print(error)
-//        }
-//
-        
-//        do {
-//            if let results = try mainMOC.execute(fetchRequest) as? [[String:Any]] {
-//                let idSet = Set<Int32>(results.compactMap({ (dict) -> Int32? in
-//                    return dict["id"] as? Int32
-//                     }))
-//                return idSet
-//            }
-//
-//        } catch let error as NSError {
-//
-//            assertionFailure("\(error)")
-//        }
-//        return nil
+        do {
+            let results = try mainMOC.execute(fetchRequest)
+        } catch let error as NSError {
+            print(error)
+        }
     }
     
     //MARK: Deliting methods -
