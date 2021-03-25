@@ -9,7 +9,7 @@ import UIKit
 import CoreData
 
 final public class CoreDataManager {
-    
+    var favoriteFilms = [FavouriteFilm]()
     let mainMOC = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     let privateMOC = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.newBackgroundContext()
     
@@ -78,6 +78,7 @@ final public class CoreDataManager {
         
         do {
             try mainMOC.save()
+            favoriteFilms.append(favouriteFilm)
         } catch let error as NSError {
             assertionFailure("\(error)")
         }
@@ -115,18 +116,15 @@ final public class CoreDataManager {
         
     }
     
-    func fetchFavouriteFilms() -> [FavouriteFilm]? {
+    func fetchFavouriteFilms() {
         
         let fetchRequest: NSFetchRequest<FavouriteFilm> = FavouriteFilm.fetchRequest()
         
         do {
-            let favFilms = try mainMOC.fetch(fetchRequest)
-            return favFilms
-            
+            favoriteFilms = try mainMOC.fetch(fetchRequest)
         } catch let error as NSError {
             print(error)
         }
-        return nil
     }
     
     //MARK: Deliting methods -

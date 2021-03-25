@@ -9,7 +9,7 @@ import UIKit
 
 class PreviewViewModel: PreviewViewModelType {
     
-    private var coreDataManager = CoreDataManager()
+    private var _coreDataManager = CoreDataManager()
     var suggestionsDelegate: SuggestionsDelegate?
     var film: CurrentFilm?
     var favFilm: FavouriteFilm?
@@ -53,13 +53,16 @@ class PreviewViewModel: PreviewViewModelType {
   
     func addToFavorites() {
         guard let filmToAdd = filmToAdd else { return }
-        coreDataManager.saveFavouriteFilm(filmToAdd.title ?? "", filmOriginalTitle: filmToAdd.originalTitle ?? "", filmRating: filmToAdd.rating, filmOverview: filmToAdd.overview ?? "", filmPoster: filmToAdd.poster!)
-        suggestionsDelegate?.updateFavorites()
+        _coreDataManager.saveFavouriteFilm(filmToAdd.title ?? "", filmOriginalTitle: filmToAdd.originalTitle ?? "", filmRating: filmToAdd.rating, filmOverview: filmToAdd.overview ?? "", filmPoster: filmToAdd.poster!)
+        DispatchQueue.main.async {
+            self._coreDataManager.fetchFavouriteFilms()
+            self.suggestionsDelegate?.updateFavorites()
+        }
     }
     
     func removeFromFavorites() {
         guard let filmToDelete = filmToDelete else { return }
-        coreDataManager.removeFromFavorites(film: filmToDelete)
+        _coreDataManager.removeFromFavorites(film: filmToDelete)
         suggestionsDelegate?.updateFavorites()
     }
     

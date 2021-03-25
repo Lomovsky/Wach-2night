@@ -9,18 +9,19 @@ import Foundation
 
 final class SuggestionsViewViewModel: SuggestionsViewViewModelType {
     
-    private let coreDataManager = CoreDataManager()
-    private let dataManager = DataManager()
+    private let _coreDataManager = CoreDataManager()
+    private let _dataManager = DataManager()
     var suggestionsDelegate: SuggestionsDelegate?
     var favoriteFilmsArrayIsEmpty: Bool = true
 
     
     func downloadFilms() {
         if Reachability.isConnectedToNetwork() {
-            coreDataManager.deleteAllData()
-            dataManager.downloadFilms()
-            dataManager.downloadGenres()
-            coreDataManager.deleteAllDataFromFavourites()
+            _coreDataManager.deleteAllData()
+            _dataManager.downloadFilms()
+            _dataManager.downloadGenres()
+            _coreDataManager.fetchFavouriteFilms()
+//            coreDataManager.deleteAllDataFromFavourites()
             
         } else {
             DispatchQueue.main.async {
