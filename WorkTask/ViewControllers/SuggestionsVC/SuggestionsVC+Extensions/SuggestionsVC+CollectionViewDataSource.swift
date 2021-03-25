@@ -133,6 +133,13 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
             animateCell(cell: cell)
             suggestionsCollectionViewViewModel.selectRow(atIndexPath: indexPath)
             let previewVC = PreviewViewController()
+            
+            
+            let coreDataManager = CoreDataManager()
+            let d = coreDataManager.fetchUpSert()
+            print(d)
+            
+            
             previewVC.viewModel = suggestionsCollectionViewViewModel.viewModelForSelectedRow()
             previewVC.viewModel?.suggestionsDelegate = self
             navigationController?.present(previewVC, animated: true, completion: { [unowned self] in

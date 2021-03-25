@@ -12,8 +12,9 @@ class FavoritesCollectionViewCellViewModel: FavoritesCollectionViewCellViewModel
     private var _film: FavouriteFilm
     
     var poster: UIImage {
-        let poster = UIImage(data: _film.poster!)
-        return poster!
+        guard let data = _film.poster else { return #imageLiteral(resourceName: "1024px-No_image_available.svg") }
+        guard let poster = UIImage(data: data) else { return #imageLiteral(resourceName: "1024px-No_image_available.svg")}
+        return poster
     }
     
     init(film: FavouriteFilm) {

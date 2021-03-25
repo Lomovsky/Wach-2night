@@ -21,7 +21,7 @@ final class SuggestionsViewViewModel: SuggestionsViewViewModelType {
             _dataManager.downloadFilms()
             _dataManager.downloadGenres()
             _coreDataManager.fetchFavouriteFilms()
-//            coreDataManager.deleteAllDataFromFavourites()
+            _coreDataManager.deleteAllDataFromFavourites()
             
         } else {
             DispatchQueue.main.async {

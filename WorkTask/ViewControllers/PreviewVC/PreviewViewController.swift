@@ -24,6 +24,12 @@ final class PreviewViewController: UIViewController {
         stack.spacing = 10
         return stack
     }()
+    
+    let contentView: UIView = {
+        let contentView = UIView()
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        return contentView
+    }()
 
     let containerView: UIView = {
         let stack = UIView()
@@ -68,7 +74,7 @@ final class PreviewViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         view.addSubview(scrollView)
-        view.addSubview(stackView)
+        view.addSubview(contentView)
         view.addSubview(imageView)
         view.addSubview(favoriteButton)
         view.addSubview(titleLabel)
@@ -77,7 +83,7 @@ final class PreviewViewController: UIViewController {
         
         setupView()
         setupScrollView()
-        setupStackView()
+        setupContentView()
         setupImageView()
         setupFavoriteButton()
         setupTitleLabel()

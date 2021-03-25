@@ -9,12 +9,12 @@ import UIKit
 import CoreData
 
 final public class CoreDataManager {
-    var favoriteFilms = [FavouriteFilm]()
+    static var favoriteFilms = [FavouriteFilm]()
     let mainMOC = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     let privateMOC = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.newBackgroundContext()
     
     //MARK: Saving funcs
-    func saveFilms(_ filmTitle: String, filmOriginalTitle: String, filmPoster: Data, releaseDate: String, overview: String, rating: Float) {
+    func saveFilms(_ filmTitle: String, filmOriginalTitle: String, filmPoster: Data, releaseDate: String, overview: String, rating: Float, id: Int) {
         guard let entityDescription = NSEntityDescription.entity(forEntityName: "CurrentFilm", in: privateMOC) else { return }
         
         let film = NSManagedObject(entity: entityDescription, insertInto: privateMOC) as! CurrentFilm
@@ -24,6 +24,7 @@ final public class CoreDataManager {
         film.releaseDate = releaseDate
         film.overview = overview
         film.rating = rating
+        film.id = Int32(id)
         
         do {
             try privateMOC.save()
@@ -78,7 +79,7 @@ final public class CoreDataManager {
         
         do {
             try mainMOC.save()
-            favoriteFilms.append(favouriteFilm)
+            CoreDataManager.favoriteFilms.append(favouriteFilm)
         } catch let error as NSError {
             assertionFailure("\(error)")
         }
@@ -121,10 +122,38 @@ final public class CoreDataManager {
         let fetchRequest: NSFetchRequest<FavouriteFilm> = FavouriteFilm.fetchRequest()
         
         do {
-            favoriteFilms = try mainMOC.fetch(fetchRequest)
+            CoreDataManager.favoriteFilms = try mainMOC.fetch(fetchRequest)
         } catch let error as NSError {
             print(error)
         }
+    }
+    
+    func fetchUpSert() {
+        let fetchRequest: NSFetchRequest<CurrentFilm> = CurrentFilm.fetchRequest()
+        fetchRequest.resultType = .dictionaryResultType
+        fetchRequest.propertiesToFetch = ["id"]
+        
+//        do {
+//            let results = try mainMOC.execute(fetchRequest)
+//
+//        } catch let error as NSError {
+//            print(error)
+//        }
+//
+        
+//        do {
+//            if let results = try mainMOC.execute(fetchRequest) as? [[String:Any]] {
+//                let idSet = Set<Int32>(results.compactMap({ (dict) -> Int32? in
+//                    return dict["id"] as? Int32
+//                     }))
+//                return idSet
+//            }
+//
+//        } catch let error as NSError {
+//
+//            assertionFailure("\(error)")
+//        }
+//        return nil
     }
     
     //MARK: Deliting methods -

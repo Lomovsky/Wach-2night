@@ -49,7 +49,7 @@ import UIKit
                             guard let posterData = try? Data(contentsOf: imageURL) else { return }
                             self.savingQueue.async {
                                 print("THREAD : \(Thread.current)")
-                                coreDataManager.saveFilms(film.title, filmOriginalTitle: film.originalTitle, filmPoster: posterData, releaseDate: film.releaseDate, overview: film.overview, rating: film.rating)
+                                coreDataManager.saveFilms(film.title, filmOriginalTitle: film.originalTitle, filmPoster: posterData, releaseDate: film.releaseDate, overview: film.overview, rating: film.rating, id: film.id)
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                                     DataManager.suggestionsDelegate?.uppateUIAfterDownloadingData()
                                 }
@@ -59,7 +59,7 @@ import UIKit
                         let posterPlaceholder: UIImage = #imageLiteral(resourceName: "1024px-No_image_available.svg")
                         guard let posterPlaceholderData = posterPlaceholder.pngData() else { return }
                         self.savingQueue.async {
-                            coreDataManager.saveFilms(film.title, filmOriginalTitle: film.originalTitle, filmPoster: posterPlaceholderData, releaseDate: film.releaseDate, overview: film.overview, rating: film.rating)
+                            coreDataManager.saveFilms(film.title, filmOriginalTitle: film.originalTitle, filmPoster: posterPlaceholderData, releaseDate: film.releaseDate, overview: film.overview, rating: film.rating, id: film.id)
                             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                                 DataManager.suggestionsDelegate?.uppateUIAfterDownloadingData()
                             }

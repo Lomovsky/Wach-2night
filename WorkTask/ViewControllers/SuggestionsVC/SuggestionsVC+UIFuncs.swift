@@ -31,31 +31,34 @@ extension SuggestionsViewController {
     }
     
     func setupScrollView() {
-        scrollView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        scrollView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        scrollView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
         scrollView.refreshControl = refreshControl
-        scrollView.addSubview(stackView)
+        scrollView.addSubview(contentView)
     }
     
-    func setupStackView() {
-        stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
-        stackView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
-        stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
-        stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
-        stackView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
-        stackView.addArrangedSubview(genreLabel)
-        stackView.addArrangedSubview(genreCollectionView)
-        stackView.addArrangedSubview(recommendationsLabel)
-        stackView.addArrangedSubview(recommendationsStack)
-        stackView.addArrangedSubview(favouriteFilmsLabel)
-        stackView.addArrangedSubview(favouriteFilmsCollectionView)
+    func setupContentView() {
+        contentView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+        contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
+        contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+        contentView.widthAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.widthAnchor).isActive = true
+        let heightConstraint = contentView.heightAnchor.constraint(equalTo: scrollView.safeAreaLayoutGuide.heightAnchor)
+        heightConstraint.priority = UILayoutPriority(rawValue: 250)
+        heightConstraint.isActive = true
+        contentView.addSubview(genreLabel)
+        contentView.addSubview(genreCollectionView)
+        contentView.addSubview(recommendationsLabel)
+        contentView.addSubview(recommendationsStack)
+        contentView.addSubview(favouriteFilmsLabel)
+        contentView.addSubview(favouriteFilmsCollectionView)
     }
-    
+
     func setupGenreLabel() {
-        genreLabel.topAnchor.constraint(equalTo: stackView.topAnchor, constant: 5).isActive = true
-        genreLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 17).isActive = true
+        genreLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5).isActive = true
+        genreLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 17).isActive = true
         genreLabel.text = "Жанры"
         genreLabel.font = .boldSystemFont(ofSize: 20)
     }
@@ -63,8 +66,8 @@ extension SuggestionsViewController {
     
     func setupGenerCollectionView() {
         genreCollectionView.topAnchor.constraint(equalTo: genreLabel.bottomAnchor, constant: 5).isActive = true
-        genreCollectionView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor).isActive = true
-        genreCollectionView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor).isActive = true
+        genreCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        genreCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         genreCollectionView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1).isActive = true
         genreCollectionView.backgroundColor = .clear
         genreCollectionView.accessibilityScroll(.left)
@@ -74,16 +77,16 @@ extension SuggestionsViewController {
     
     func setupRecommendationsLabel() {
         recommendationsLabel.topAnchor.constraint(equalTo: genreCollectionView.bottomAnchor, constant: 5).isActive = true
-        recommendationsLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 17).isActive = true
+        recommendationsLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 17).isActive = true
         recommendationsLabel.text = "Рекомендуем к просмотру"
         recommendationsLabel.font = .boldSystemFont(ofSize: 20)
     }
     
     func setupRecommendationsStack() {
-        recommendationsStack.topAnchor.constraint(equalTo: recommendationsLabel.bottomAnchor, constant: 20).isActive = true
-        recommendationsStack.leadingAnchor.constraint(equalTo: stackView.leadingAnchor).isActive = true
-        recommendationsStack.trailingAnchor.constraint(equalTo: stackView.trailingAnchor).isActive = true
-        recommendationsStack.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.41).isActive = true
+        recommendationsStack.topAnchor.constraint(equalTo: recommendationsLabel.bottomAnchor, constant: 5).isActive = true
+        recommendationsStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        recommendationsStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        recommendationsStack.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.41).isActive = true
         recommendationsStack.addSubview(recommendationsCollectionView)
         recommendationsStack.addSubview(activityIndicator)
         
@@ -107,8 +110,8 @@ extension SuggestionsViewController {
     
     func setupFavouriteFilmsLabel() {
         favouriteFilmsLabel.topAnchor.constraint(equalTo: recommendationsStack.bottomAnchor, constant: 5).isActive = true
-        favouriteFilmsLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 17).isActive = true
-        favouriteFilmsLabel.trailingAnchor.constraint(equalTo: stackView.trailingAnchor).isActive = true
+        favouriteFilmsLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 17).isActive = true
+        favouriteFilmsLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         favouriteFilmsLabel.frame.size.height = recommendationsLabel.frame.height
         favouriteFilmsLabel.text = "Избранное"
         favouriteFilmsLabel.font = .boldSystemFont(ofSize: 20)
@@ -116,9 +119,10 @@ extension SuggestionsViewController {
     
     func setupFavouritesCollectionView() {
         favouriteFilmsCollectionView.topAnchor.constraint(equalTo: favouriteFilmsLabel.bottomAnchor, constant: 5).isActive = true
-        favouriteFilmsCollectionView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor).isActive = true
-        favouriteFilmsCollectionView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor).isActive = true
-        favouriteFilmsCollectionView.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.41).isActive = true
+        favouriteFilmsCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+        favouriteFilmsCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+        favouriteFilmsCollectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        favouriteFilmsCollectionView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.41).isActive = true
         favouriteFilmsCollectionView.backgroundColor = .clear
         favouriteFilmsCollectionView.contentInset = UIEdgeInsets(top: 0, left: 36, bottom: 0, right: 36)
     }

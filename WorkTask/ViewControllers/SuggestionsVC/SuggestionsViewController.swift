@@ -23,11 +23,10 @@ final class SuggestionsViewController: UIViewController {
         return scroll
     }()
     
-    let stackView: UIStackView = {
-        let stack = UIStackView()
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.axis = .vertical
-        return stack
+    let contentView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     let genreLabel: UILabel = {
@@ -104,19 +103,10 @@ final class SuggestionsViewController: UIViewController {
         DataManager.suggestionsDelegate = self
         
         view.addSubview(scrollView)
-        view.addSubview(stackView)
-        view.addSubview(genreLabel)
-        view.addSubview(genreCollectionView)
-        view.addSubview(recommendationsLabel)
-        view.addSubview(recommendationsStack)
-        view.addSubview(recommendationsCollectionView)
-        view.addSubview(activityIndicator)
-        view.addSubview(favouriteFilmsLabel)
-        view.addSubview(favouriteFilmsCollectionView)
-
+        
         setupView()
         setupScrollView()
-        setupStackView()
+        setupContentView()
         setupGenreLabel()
         setupGenerCollectionView()
         setupRecommendationsLabel()
