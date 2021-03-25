@@ -8,21 +8,22 @@
 import UIKit
 
 class SuggestionsCollectionViewViewModel: SuggestionsCollectionViewViewModelType {
-
+    
     private var _selectedIndexPath: IndexPath?
+    private let coreDataManager = CoreDataManager()
     
     func numberOfItems() -> Int {
-        return CoreDataManager.films.count
+        return coreDataManager.fetchFilmsData()?.count ?? 0
     }
     
     func cellViewModel(forIndexPath indexPath: IndexPath) -> SuggestionsCollectionViewCellViewModelType? {
-        let film = CoreDataManager.films[indexPath.row]
+        guard let film = coreDataManager.fetchFilmsData()?[indexPath.row] else { return nil }
         return SuggestionsCollectionViewCellViewModel(film: film)
     }
     
     func viewModelForSelectedRow() -> PreviewViewModelType? {
         guard let selectedIndexPath = _selectedIndexPath else { return nil }
-        return PreviewViewModel(currentFilm: CoreDataManager.films[selectedIndexPath.row], favFilm: nil)
+        return PreviewViewModel(currentFilm: coreDataManager.fetchFilmsData()?[selectedIndexPath.row], favFilm: nil)
     }
     
     func selectRow(atIndexPath indexPath: IndexPath) {
@@ -31,14 +32,14 @@ class SuggestionsCollectionViewViewModel: SuggestionsCollectionViewViewModelType
     
     func filmToSave(indexPath: IndexPath) -> CurrentFilm {
         guard let indexPath = _selectedIndexPath else { return CurrentFilm() }
-        let film = CoreDataManager.films[indexPath.row]
+        let film = (coreDataManager.fetchFilmsData()?[indexPath.row])! // TODO
         return film
     }
     
     func filmToDelete(indexPath: IndexPath) -> FavouriteFilm {
         guard let indexPath = _selectedIndexPath else { return FavouriteFilm() }
-        let film = CoreDataManager.favouriteFilms[indexPath.row]
-        return film
+        let film = coreDataManager.fetchFavouriteFilms()?[indexPath.row]
+        return film! //TODO
     }
     
 }

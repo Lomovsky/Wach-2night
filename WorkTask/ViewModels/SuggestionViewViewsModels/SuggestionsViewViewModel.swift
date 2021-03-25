@@ -18,14 +18,11 @@ final class SuggestionsViewViewModel: SuggestionsViewViewModelType {
     func downloadFilms() {
         if Reachability.isConnectedToNetwork() {
             coreDataManager.deleteAllData()
-            coreDataManager.fetchFavouriteFilms()
             dataManager.downloadFilms()
             dataManager.downloadGenres()
+            coreDataManager.deleteAllDataFromFavourites()
             
         } else {
-            coreDataManager.fetchFilmsData()
-            coreDataManager.fetchGenresData()
-            coreDataManager.fetchFavouriteFilms()
             DispatchQueue.main.async {
                 self.suggestionsDelegate?.updateUIOffline()
             }

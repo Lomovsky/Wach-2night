@@ -12,11 +12,11 @@ class GenreCollectionViewViewModel: GenreCollectionViewViewModelType {
     private let coreDataManager = CoreDataManager()
     
     func numberOfItems() -> Int {
-        return CoreDataManager.genres.count
+        return coreDataManager.fetchGenresData()?.count ?? 0
     }
     
     func cellViewModel(forIndexPath indexPath: IndexPath) -> GenreCollectionViewCellViewModelType? {
-        let genre = CoreDataManager.genres[indexPath.row]
+        guard let genre = coreDataManager.fetchGenresData()?[indexPath.row] else { return nil }
         return GenreCollectionViewCellViewModel(genre: genre)
     }
     

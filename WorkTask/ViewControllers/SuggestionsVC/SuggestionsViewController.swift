@@ -51,6 +51,13 @@ final class SuggestionsViewController: UIViewController {
         return label
     }()
     
+    let recommendationsStack: UIStackView = {
+        let stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.axis = .vertical
+        return stack
+    }()
+    
     let recommendationsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -101,6 +108,7 @@ final class SuggestionsViewController: UIViewController {
         view.addSubview(genreLabel)
         view.addSubview(genreCollectionView)
         view.addSubview(recommendationsLabel)
+        view.addSubview(recommendationsStack)
         view.addSubview(recommendationsCollectionView)
         view.addSubview(activityIndicator)
         view.addSubview(favouriteFilmsLabel)
@@ -112,6 +120,7 @@ final class SuggestionsViewController: UIViewController {
         setupGenreLabel()
         setupGenerCollectionView()
         setupRecommendationsLabel()
+        setupRecommendationsStack()
         setupRecommendationsCollectionView()
         setupActivityIndicator()
         setupFavouriteFilmsLabel()

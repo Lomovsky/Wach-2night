@@ -11,10 +11,10 @@ extension PreviewViewController {
     
     @objc func addToFavorites() {
         viewModel?.addToFavorites()
-        self.favoriteButton.setTitle("Удалить из избранного", for: .normal)
-        self.favoriteButton.removeTarget(self, action: #selector(addToFavorites), for: .touchUpInside)
-        self.favoriteButton.addTarget(self, action: #selector(deleteFromFavorites), for: .touchUpInside)
         viewModel?.suggestionsDelegate?.updateFavorites()
+        favoriteButton.setTitle("Удалить из избранного", for: .normal)
+        favoriteButton.removeTarget(self, action: #selector(addToFavorites), for: .touchUpInside)
+        favoriteButton.addTarget(self, action: #selector(deleteFromFavorites), for: .touchUpInside)
         
     }
 

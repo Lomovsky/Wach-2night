@@ -48,7 +48,7 @@ extension SuggestionsViewController {
         stackView.addArrangedSubview(genreLabel)
         stackView.addArrangedSubview(genreCollectionView)
         stackView.addArrangedSubview(recommendationsLabel)
-        stackView.addArrangedSubview(recommendationsCollectionView)
+        stackView.addArrangedSubview(recommendationsStack)
         stackView.addArrangedSubview(favouriteFilmsLabel)
         stackView.addArrangedSubview(favouriteFilmsCollectionView)
     }
@@ -79,24 +79,34 @@ extension SuggestionsViewController {
         recommendationsLabel.font = .boldSystemFont(ofSize: 20)
     }
     
+    func setupRecommendationsStack() {
+        recommendationsStack.topAnchor.constraint(equalTo: recommendationsLabel.bottomAnchor, constant: 20).isActive = true
+        recommendationsStack.leadingAnchor.constraint(equalTo: stackView.leadingAnchor).isActive = true
+        recommendationsStack.trailingAnchor.constraint(equalTo: stackView.trailingAnchor).isActive = true
+        recommendationsStack.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.41).isActive = true
+        recommendationsStack.addSubview(recommendationsCollectionView)
+        recommendationsStack.addSubview(activityIndicator)
+        
+    }
+
     func setupRecommendationsCollectionView() {
-        recommendationsCollectionView.topAnchor.constraint(equalTo: recommendationsLabel.bottomAnchor, constant: 20).isActive = true
-        recommendationsCollectionView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor).isActive = true
-        recommendationsCollectionView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor).isActive = true
-        recommendationsCollectionView.heightAnchor.constraint(equalTo: stackView.heightAnchor, multiplier: 0.41).isActive = true
+        recommendationsCollectionView.topAnchor.constraint(equalTo: recommendationsStack.topAnchor).isActive = true
+        recommendationsCollectionView.leadingAnchor.constraint(equalTo: recommendationsStack.leadingAnchor).isActive = true
+        recommendationsCollectionView.trailingAnchor.constraint(equalTo: recommendationsStack.trailingAnchor).isActive = true
+        recommendationsCollectionView.bottomAnchor.constraint(equalTo: recommendationsStack.bottomAnchor).isActive = true
         recommendationsCollectionView.accessibilityScroll(.left)
         recommendationsCollectionView.backgroundColor = .clear
         recommendationsCollectionView.contentInset = UIEdgeInsets(top: 0, left: 36, bottom: 0, right: 36)
     }
     
     func setupActivityIndicator() {
-        activityIndicator.centerYAnchor.constraint(equalTo: recommendationsCollectionView.centerYAnchor).isActive = true
-        activityIndicator.centerXAnchor.constraint(equalTo: recommendationsCollectionView.centerXAnchor).isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: recommendationsStack.centerYAnchor).isActive = true
+        activityIndicator.centerXAnchor.constraint(equalTo: recommendationsStack.centerXAnchor).isActive = true
         activityIndicator.startAnimating()
     }
     
     func setupFavouriteFilmsLabel() {
-        favouriteFilmsLabel.topAnchor.constraint(equalTo: recommendationsCollectionView.bottomAnchor, constant: 5).isActive = true
+        favouriteFilmsLabel.topAnchor.constraint(equalTo: recommendationsStack.bottomAnchor, constant: 5).isActive = true
         favouriteFilmsLabel.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 17).isActive = true
         favouriteFilmsLabel.trailingAnchor.constraint(equalTo: stackView.trailingAnchor).isActive = true
         favouriteFilmsLabel.frame.size.height = recommendationsLabel.frame.height

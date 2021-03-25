@@ -15,6 +15,9 @@ extension SuggestionsViewController {
     }
     
     @objc final func refresh(_ sender: AnyObject) {
+        recommendationsCollectionView.isHidden = true
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
         viewModel.downloadFilms()
         
     }

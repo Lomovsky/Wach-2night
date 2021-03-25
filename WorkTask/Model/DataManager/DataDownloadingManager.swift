@@ -9,9 +9,10 @@ import UIKit
 
  final class DataManager {
     
-     static var suggestionsDelegate: SuggestionsDelegate?
+    static var suggestionsDelegate: SuggestionsDelegate?
     
     let downloadQueue = DispatchQueue(label: "networkQueue", qos: .utility)
+    let savingQueue = DispatchQueue(label: "savingQueue", qos: .userInitiated)
     
      func downloadGenres() {
         let urlString = "https://api.themoviedb.org/3/genre/movie/list?api_key=\(apiKey)&language=ru-RU"
@@ -21,9 +22,13 @@ import UIKit
             case .failure(let error):
                 print(error)
             case .success(let genreResponse):
-                genreResponse.genres.forEach { (genre) in
-                    coreDataManager.saveGenres(genre.id, genreName: genre.name)
-                    DataManager.suggestionsDelegate?.updateGenresUI()
+                genreResponse.genres.forEach { [unowned self] (genre) in
+                    self.savingQueue.async {
+                        coreDataManager.saveGenres(genre.id, genreName: genre.name)
+                        DispatchQueue.main.async {
+                            DataManager.suggestionsDelegate?.updateGenresUI()
+                        }
+                    }
                 }
             }
         }
@@ -38,11 +43,12 @@ import UIKit
             case .success(let filmResponse):
                 filmResponse.results.forEach { (film) in
                     if let secondPath = film.posterPath {
-                        self.downloadQueue.async {
+                        self.downloadQueue.async { [unowned self] in
                             let imageURLString = imagePath + secondPath
                             guard let imageURL = URL(string: imageURLString) else { return }
                             guard let posterData = try? Data(contentsOf: imageURL) else { return }
-                            DispatchQueue.main.async {
+                            self.savingQueue.async {
+                                print("THREAD : \(Thread.current)")
                                 coreDataManager.saveFilms(film.title, filmOriginalTitle: film.originalTitle, filmPoster: posterData, releaseDate: film.releaseDate, overview: film.overview, rating: film.rating)
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                                     DataManager.suggestionsDelegate?.uppateUIAfterDownloadingData()
@@ -52,7 +58,7 @@ import UIKit
                     } else {
                         let posterPlaceholder: UIImage = #imageLiteral(resourceName: "1024px-No_image_available.svg")
                         guard let posterPlaceholderData = posterPlaceholder.pngData() else { return }
-                        DispatchQueue.main.async {
+                        self.savingQueue.async {
                             coreDataManager.saveFilms(film.title, filmOriginalTitle: film.originalTitle, filmPoster: posterPlaceholderData, releaseDate: film.releaseDate, overview: film.overview, rating: film.rating)
                             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                                 DataManager.suggestionsDelegate?.uppateUIAfterDownloadingData()

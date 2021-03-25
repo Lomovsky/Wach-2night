@@ -29,9 +29,7 @@ extension SuggestionsViewController: SuggestionsDelegate {
     
     
     func updateFavorites() {
-        let coreDataManager = CoreDataManager()
-        coreDataManager.fetchFavouriteFilms()
-        self.favouriteFilmsCollectionView.reloadData()
+        favouriteFilmsCollectionView.reloadData()
     }
     
     func updateUIOffline() {

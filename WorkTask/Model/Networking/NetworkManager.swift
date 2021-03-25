@@ -15,7 +15,6 @@ class NetworkManager {
         
         let downloadQueue = DispatchQueue(label: "networkManagerQueue", qos: .utility)
 
-        
         guard let url = URL(string: url) else { return }
         downloadQueue.async {
             let request = AF.request(url)
@@ -44,7 +43,7 @@ class NetworkManager {
 }
 
 //MARK: URLSession way to download data
-
+//
 ///       guard let url = URL(string: url) else {return}
 ///       let session = URLSession(configuration: .default)
 ///        let task = session.dataTask(with: url) {data, response, error in

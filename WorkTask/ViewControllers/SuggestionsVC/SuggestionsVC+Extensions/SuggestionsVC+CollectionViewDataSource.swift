@@ -98,17 +98,17 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
         case favouriteFilmsCollectionView:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FavouriteFilmsCollectionViewCell.reuseIdentifier, for: indexPath) as? FavouriteFilmsCollectionViewCell {
                 
-                if favoritesCollectionViewViewModel.numberOfItems() == 0 {
+                if favoritesCollectionViewViewModel.numberOfItems() != 0 {
+                    let cellViewModel = favoritesCollectionViewViewModel.cellViewModel(forIndexPath: indexPath)
+                    cell.viewModel = cellViewModel
+                    return cell
+                    
+                } else {
                     cell.backgroundColor = .systemGray6
                     cell.imageView.isHidden = true
                     cell.layer.cornerRadius = 10
                     cell.imagePlaceholder.text = "Нет фильма"
                     cell.imagePlaceholder.isHidden = false
-                    return cell
-                    
-                } else {
-                    let cellViewModel = favoritesCollectionViewViewModel.cellViewModel(forIndexPath: indexPath)
-                    cell.viewModel = cellViewModel
                     return cell
                 }
             }
@@ -135,9 +135,9 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
             let previewVC = PreviewViewController()
             previewVC.viewModel = suggestionsCollectionViewViewModel.viewModelForSelectedRow()
             previewVC.viewModel?.suggestionsDelegate = self
-            previewVC.viewModel?.filmToAdd = suggestionsCollectionViewViewModel.filmToSave(indexPath: indexPath)
-//            previewVC.viewModel?.filmToDelete = suggestionsCollectionViewViewModel.filmToDelete(indexPath: indexPath)
-            navigationController?.present(previewVC, animated: true, completion: {
+            navigationController?.present(previewVC, animated: true, completion: { [unowned self] in
+                
+                previewVC.viewModel?.filmToAdd = self.suggestionsCollectionViewViewModel.filmToSave(indexPath: indexPath)
                 previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.addToFavorites),
                                                    for: .touchUpInside)
                 previewVC.favoriteButton.setTitle("Добавить в избранное", for: .normal)
@@ -145,7 +145,7 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
 
             
         case favouriteFilmsCollectionView:
-            if viewModel.favoriteFilmsArrayIsEmpty == true {
+            if favoritesCollectionViewViewModel.numberOfItems() == 0 {
                 
             } else {
                 
