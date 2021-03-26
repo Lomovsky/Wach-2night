@@ -24,8 +24,7 @@ class SearchViewViewModel: SearchViewViewModelType {
             case .failure(let error):
                 print(error)
             case .success(let filmResponse):
-                filmResponse.results.enumerated().forEach { [weak self] (film) in
-                        guard let self = self else { return }
+                filmResponse.results.enumerated().forEach { (film) in
                     SearchViewViewModel.films.insert(film.element, at: film.offset)
                         print(SearchViewViewModel.films.count)
                     }

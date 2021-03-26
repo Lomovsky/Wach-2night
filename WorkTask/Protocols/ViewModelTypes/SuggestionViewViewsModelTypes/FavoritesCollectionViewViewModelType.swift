@@ -9,6 +9,7 @@ import Foundation
 
 protocol FavoritesCollectionViewViewModelType {
     
+    static var favoriteFilms: [FavouriteFilm] { get set }
     func numberOfItems() -> Int
     func cellViewModel(forIndexPath indexPath: IndexPath) -> FavoritesCollectionViewCellViewModelType?
     func viewModelForSelectedRow() -> PreviewViewModelType?

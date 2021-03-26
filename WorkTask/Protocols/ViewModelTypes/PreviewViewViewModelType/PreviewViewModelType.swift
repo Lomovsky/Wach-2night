@@ -9,7 +9,6 @@ import UIKit
 
 protocol PreviewViewModelType {
     
-    var filmToAdd: CurrentFilm? { get set }
     var film: CurrentFilm? { get set }
     var favFilm: FavouriteFilm? { get set }
     var poster: UIImage { get }
@@ -20,4 +19,6 @@ protocol PreviewViewModelType {
     var indexToRemove: Int? { get set }
     func addToFavorites()
     func removeFromFavorites()
+    func filmToSave(film: CurrentFilm)
+    func filmToDelete(film: FavouriteFilm)
 }

@@ -29,7 +29,6 @@ extension SuggestionsViewController: SuggestionsDelegate {
     
     func updateFavorites() {
         favouriteFilmsCollectionView.reloadData()
-        favouriteFilmsCollectionView.reloadData()
         print(favouriteFilmsCollectionView.numberOfItems(inSection: 0))
     }
     

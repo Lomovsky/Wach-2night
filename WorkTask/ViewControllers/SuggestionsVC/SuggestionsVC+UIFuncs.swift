@@ -55,7 +55,7 @@ extension SuggestionsViewController {
         contentView.addSubview(favouriteFilmsLabel)
         contentView.addSubview(favouriteFilmsCollectionView)
     }
-
+    
     func setupGenreLabel() {
         genreLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5).isActive = true
         genreLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 17).isActive = true
@@ -91,7 +91,7 @@ extension SuggestionsViewController {
         recommendationsStack.addSubview(activityIndicator)
         
     }
-
+    
     func setupRecommendationsCollectionView() {
         recommendationsCollectionView.topAnchor.constraint(equalTo: recommendationsStack.topAnchor).isActive = true
         recommendationsCollectionView.leadingAnchor.constraint(equalTo: recommendationsStack.leadingAnchor).isActive = true

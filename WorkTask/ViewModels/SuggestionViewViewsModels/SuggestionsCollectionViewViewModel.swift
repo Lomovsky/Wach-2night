@@ -7,23 +7,24 @@
 
 import UIKit
 
-class SuggestionsCollectionViewViewModel: SuggestionsCollectionViewViewModelType {
+class SuggestionsCollectionViewViewModel: SuggestionsCollectionViewViewModelType {    
     
     private var _selectedIndexPath: IndexPath?
-    private let coreDataManager = CoreDataManager()
+    private let _coreDataManager = CoreDataManager()
+
     
     func numberOfItems() -> Int {
-        return coreDataManager.fetchFilmsData()?.count ?? 0
+        return _coreDataManager.fetchFilmsData()?.count ?? 0
     }
     
     func cellViewModel(forIndexPath indexPath: IndexPath) -> SuggestionsCollectionViewCellViewModelType? {
-        guard let film = coreDataManager.fetchFilmsData()?[indexPath.row] else { return nil }
+        guard let film = _coreDataManager.fetchFilmsData()?[indexPath.row] else { return nil }
         return SuggestionsCollectionViewCellViewModel(film: film)
     }
     
     func viewModelForSelectedRow() -> PreviewViewModelType? {
         guard let selectedIndexPath = _selectedIndexPath else { return nil }
-        return PreviewViewModel(currentFilm: coreDataManager.fetchFilmsData()?[selectedIndexPath.row], favFilm: nil)
+        return PreviewViewModel(currentFilm: _coreDataManager.fetchFilmsData()?[selectedIndexPath.row], favFilm: nil)
     }
     
     func selectRow(atIndexPath indexPath: IndexPath) {
@@ -32,14 +33,14 @@ class SuggestionsCollectionViewViewModel: SuggestionsCollectionViewViewModelType
     
     func filmToSave(indexPath: IndexPath) -> CurrentFilm {
         guard let indexPath = _selectedIndexPath else { return CurrentFilm() }
-        let film = (coreDataManager.fetchFilmsData()?[indexPath.row])! // TODO
+        let film = (_coreDataManager.fetchFilmsData()?[indexPath.row])! // TODO
         return film
     }
     
     func filmToDelete(indexPath: IndexPath) -> FavouriteFilm {
         guard let indexPath = _selectedIndexPath else { return FavouriteFilm() }
-        let film = CoreDataManager.favoriteFilms[indexPath.row]
-        return film //TODO
+        let film = _coreDataManager.fetchFavouriteFilms()?[indexPath.row]
+        return film! //TODO
     }
     
 }

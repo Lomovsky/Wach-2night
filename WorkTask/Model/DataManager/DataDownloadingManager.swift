@@ -14,7 +14,7 @@ final class DataManager {
     let downloadQueue = DispatchQueue(label: "networkQueue", qos: .utility)
     let savingQueue = DispatchQueue(label: "savingQueue", qos: .userInitiated)
     
-    func downloadGenres() {
+    func downloadGenres(condition: Conditions) {
         let urlString = "https://api.themoviedb.org/3/genre/movie/list?api_key=\(apiKey)&language=ru-RU"
         let coreDataManager = CoreDataManager()
         NetworkManager.fetchCurrentData(withURL: urlString, dataModel: Genres.self) { (result) in
@@ -24,7 +24,14 @@ final class DataManager {
             case .success(let genreResponse):
                 genreResponse.genres.forEach { [unowned self] (genre) in
                     self.savingQueue.async {
-                        coreDataManager.saveGenres(genre.id, genreName: genre.name)
+                        switch condition {
+                        case .download:
+                            coreDataManager.saveGenres(genre.id, genreName: genre.name)
+                            
+                        default:
+                            coreDataManager.checkForGenreExistance(genreID: genre.id, genreName: genre.name)
+                            
+                        }
                         DispatchQueue.main.async {
                             DataManager.suggestionsDelegate?.updateGenresUI()
                         }
@@ -58,7 +65,7 @@ final class DataManager {
                                     coreDataManager.checkForExistance(filmTitle: film.title, filmOriginalTitle: film.originalTitle, filmPoster: posterData, releaseDate: film.releaseDate, overview: film.overview, rating: film.rating, id: film.id)
                                 }
                                 if coreDataManager.fetchFilmsData()!.count >= 20 {
-                                    DispatchQueue.main.async {
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                                         DataManager.suggestionsDelegate?.uppateUIAfterDownloadingData()
                                     }
                                 }
@@ -77,7 +84,7 @@ final class DataManager {
                                 
                             }
                             if coreDataManager.fetchFilmsData()!.count >= 20 {
-                                DispatchQueue.main.async {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5)  {
                                     DataManager.suggestionsDelegate?.uppateUIAfterDownloadingData()
                                 }
                             }

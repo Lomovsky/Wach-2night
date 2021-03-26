@@ -15,8 +15,6 @@ class PreviewViewModel: PreviewViewModelType {
     var favFilm: FavouriteFilm?
     var filmToDelete: FavouriteFilm?
     var indexToRemove: Int?
-    var filmToAdd: CurrentFilm?
-    
     
     var poster: UIImage {
         if film != nil {
@@ -50,12 +48,12 @@ class PreviewViewModel: PreviewViewModelType {
         self.favFilm = favFilm
     }
     
-  
+    
     func addToFavorites() {
-        guard let filmToAdd = filmToAdd else { return }
-        _coreDataManager.saveFavouriteFilm(filmToAdd.title ?? "", filmOriginalTitle: filmToAdd.originalTitle ?? "", filmRating: filmToAdd.rating, filmOverview: filmToAdd.overview ?? "", filmPoster: filmToAdd.poster!)
+        guard let filmToAdd = film else { return }
+        _coreDataManager.saveFavouriteFilm(filmToAdd.title ?? "", filmOriginalTitle: filmToAdd.originalTitle ?? "", filmRating: filmToAdd.rating, filmOverview: filmToAdd.overview ?? "", filmPoster: filmToAdd.poster!, id: filmToAdd.id)
         DispatchQueue.main.async {
-            self._coreDataManager.fetchFavouriteFilms()
+//            self._coreDataManager.fetchFavouriteFilms()
             self.suggestionsDelegate?.updateFavorites()
         }
     }
@@ -66,5 +64,12 @@ class PreviewViewModel: PreviewViewModelType {
         suggestionsDelegate?.updateFavorites()
     }
     
+    func filmToSave(film: CurrentFilm) {
+        self.film = film
+    }
+    
+    func filmToDelete(film: FavouriteFilm) {
+        self.filmToDelete = film
+    }
 }
 
