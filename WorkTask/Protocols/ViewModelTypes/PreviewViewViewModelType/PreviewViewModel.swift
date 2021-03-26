@@ -52,8 +52,9 @@ class PreviewViewModel: PreviewViewModelType {
     func addToFavorites() {
         guard let filmToAdd = film else { return }
         _coreDataManager.saveFavouriteFilm(filmToAdd.title ?? "", filmOriginalTitle: filmToAdd.originalTitle ?? "", filmRating: filmToAdd.rating, filmOverview: filmToAdd.overview ?? "", filmPoster: filmToAdd.poster!, id: filmToAdd.id)
+        print(filmToAdd.title)
         DispatchQueue.main.async {
-//            self._coreDataManager.fetchFavouriteFilms()
+            self._coreDataManager.fetchFavouriteFilms()
             self.suggestionsDelegate?.updateFavorites()
         }
     }
