@@ -163,8 +163,8 @@
 			isa = PBXGroup;
 			children = (
 				C0F2F776257D454000A1DAF9 /* CollectionViewCellClasses */,
-				C0D7124D2607E21B005BD6CC /* DataManager */,
 				C0CE78C425CADF0000A55990 /* TableViewCellClass */,
+				C0D7124D2607E21B005BD6CC /* DataManager */,
 				C0B6B08D2583E61F002F1F7D /* Networking */,
 				C04D6E9725AB2E0900E4B151 /* CoreDataFiles */,
 				C028AC8025B0F2C5007799B6 /* Others */,

@@ -22,10 +22,12 @@ final class SuggestionsViewViewModel: SuggestionsViewViewModelType {
             _dataManager.downloadGenres()
             _coreDataManager.fetchFavouriteFilms()
             _coreDataManager.deleteAllDataFromFavourites()
+            suggestionsDelegate?.stopRefreshing()
             
         } else {
             DispatchQueue.main.async {
                 self.suggestionsDelegate?.updateUIOffline()
+                self.suggestionsDelegate?.stopRefreshing()
             }
         }
     }

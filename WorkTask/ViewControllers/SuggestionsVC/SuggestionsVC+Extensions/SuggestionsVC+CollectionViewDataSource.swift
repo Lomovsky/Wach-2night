@@ -133,13 +133,6 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
             animateCell(cell: cell)
             suggestionsCollectionViewViewModel.selectRow(atIndexPath: indexPath)
             let previewVC = PreviewViewController()
-            
-            
-            let coreDataManager = CoreDataManager()
-            let d = coreDataManager.fetchUpSert()
-            print(d)
-            
-            
             previewVC.viewModel = suggestionsCollectionViewViewModel.viewModelForSelectedRow()
             previewVC.viewModel?.suggestionsDelegate = self
             navigationController?.present(previewVC, animated: true, completion: { [unowned self] in
@@ -149,7 +142,7 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
                                                    for: .touchUpInside)
                 previewVC.favoriteButton.setTitle("Добавить в избранное", for: .normal)
             })
-
+            
             
         case favouriteFilmsCollectionView:
             if favoritesCollectionViewViewModel.numberOfItems() == 0 {
@@ -168,7 +161,7 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
                     previewVC.favoriteButton.setTitle("Удалить из избранного", for: .normal)
                 })
             }
-        
+            
         default:
             break
             

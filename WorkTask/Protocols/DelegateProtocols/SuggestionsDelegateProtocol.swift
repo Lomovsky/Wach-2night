@@ -13,6 +13,6 @@ protocol SuggestionsDelegate: class {
     func uppateUIAfterDownloadingData()
     func updateUIOffline()
     func updateGenresUI()
-    
+    func stopRefreshing()
 }
 

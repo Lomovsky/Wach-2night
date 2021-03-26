@@ -18,7 +18,6 @@ extension SuggestionsViewController: SuggestionsDelegate {
         favouriteFilmsCollectionView.isHidden = false
         activityIndicator.stopAnimating()
         activityIndicator.isHidden = true
-        refreshControl.endRefreshing()
 
     }
     
@@ -42,5 +41,10 @@ extension SuggestionsViewController: SuggestionsDelegate {
         genreCollectionView.reloadData()
         favouriteFilmsCollectionView.reloadData()
         recommendationsCollectionView.reloadData()
+    }
+    
+    func stopRefreshing() {
+        refreshControl.endRefreshing()
+        view.layoutSubviews()
     }
 }

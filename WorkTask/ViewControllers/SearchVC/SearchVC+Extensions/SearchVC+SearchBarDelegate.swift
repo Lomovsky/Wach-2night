@@ -13,11 +13,11 @@ extension SearchViewController {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
         var searchURL = ""
-        timer?.invalidate()
-        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { [weak self] (_) in
+        viewModel.timer?.invalidate()
+        viewModel.timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { [weak self] (_) in
             guard let self = self else { return }
-            self.cache.removeAllObjects()
-            self.films.removeAll()
+            self.viewModel.cache.removeAllObjects()
+            SearchViewViewModel.films.removeAll()
             if let language = NSLinguisticTagger.dominantLanguage(for: searchText) {
                 if language == "nb" {
                     searchURL = "https://api.themoviedb.org/3/search/movie?api_key=\(apiKey)&language=en-US&query=\(searchText)&page=1&include_adult=false"
