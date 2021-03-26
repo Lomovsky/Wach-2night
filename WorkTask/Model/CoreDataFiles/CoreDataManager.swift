@@ -94,7 +94,7 @@ final public class CoreDataManager {
         }
     }
     
-    func saveFavouriteFilm (_ filmTitle: String, filmOriginalTitle: String, filmRating: Float, filmOverview: String, filmPoster: Data, id: Int32) {
+    func saveFavouriteFilm(_ filmTitle: String, filmOriginalTitle: String, filmRating: Float, filmOverview: String, filmPoster: Data, id: Int32) {
         
         guard let entityDescription = NSEntityDescription.entity(forEntityName: "FavouriteFilm", in: mainMOC) else { return }
         let favouriteFilm = NSManagedObject(entity: entityDescription, insertInto: mainMOC) as! FavouriteFilm
@@ -274,6 +274,7 @@ final public class CoreDataManager {
                 mainMOC.delete(film)
             }
             try mainMOC.save()
+            FavoritesCollectionViewViewModel.favoriteFilms.removeAll()
         } catch let error as NSError {
             print(error)
         }

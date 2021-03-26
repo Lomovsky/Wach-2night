@@ -16,7 +16,6 @@ final class SuggestionsViewViewModel: SuggestionsViewViewModelType {
     
     
     func downloadFilms(condition: Conditions) {
-//        startTimer()
         if Reachability.isConnectedToNetwork() {
             switch condition {
             case .download:
