@@ -16,15 +16,24 @@ final class SuggestionsViewViewModel: SuggestionsViewViewModelType {
 
     
     func downloadFilms(condition: Conditions) {
-        switch condition {
-        case .download:
             if Reachability.isConnectedToNetwork() {
-                _coreDataManager.deleteAllData()
-                _dataManager.downloadFilms(conditions: condition)
-                _dataManager.downloadGenres()
-                _coreDataManager.fetchFavouriteFilms()
-                _coreDataManager.deleteAllDataFromFavourites()
-                suggestionsDelegate?.stopRefreshing()
+                switch condition {
+                case .download:
+                    _coreDataManager.deleteAllData()
+                    _dataManager.downloadFilms(conditions: condition)
+                    _dataManager.downloadGenres()
+                    _coreDataManager.fetchFavouriteFilms()
+                    _coreDataManager.deleteAllDataFromFavourites()
+                    suggestionsDelegate?.stopRefreshing()
+                    
+                default:
+                    _dataManager.downloadFilms(conditions: condition)
+                    _dataManager.downloadGenres()
+                    _coreDataManager.fetchFavouriteFilms()
+                    _coreDataManager.deleteAllDataFromFavourites()
+                    suggestionsDelegate?.stopRefreshing()
+                }
+
                 
             } else {
                 DispatchQueue.main.async {
@@ -32,22 +41,6 @@ final class SuggestionsViewViewModel: SuggestionsViewViewModelType {
                     self.suggestionsDelegate?.stopRefreshing()
                 }
             }
-            
-        default:
-            if Reachability.isConnectedToNetwork() {
-                _dataManager.downloadFilms(conditions: condition)
-                _dataManager.downloadGenres()
-                _coreDataManager.fetchFavouriteFilms()
-                _coreDataManager.deleteAllDataFromFavourites()
-                suggestionsDelegate?.stopRefreshing()
-                
-            } else {
-                DispatchQueue.main.async {
-                    self.suggestionsDelegate?.updateUIOffline()
-                    self.suggestionsDelegate?.stopRefreshing()
-                }
-            }
-        }
 
     }
     

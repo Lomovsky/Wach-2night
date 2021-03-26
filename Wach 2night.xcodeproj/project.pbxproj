@@ -25,6 +25,7 @@
 		C060DB14257BED7C00C892DE /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = C060DB13257BED7C00C892DE /* .gitignore */; };
 		C0624C7625EE758100B6AD5E /* SuggestionsDelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0624C7525EE758100B6AD5E /* SuggestionsDelegateProtocol.swift */; };
 		C062A59025CDB03400C507ED /* GenreCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C062A58F25CDB03400C507ED /* GenreCollectionViewCell.swift */; };
+		C06E75CD260DEAA6003619F8 /* DownloadingConditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C06E75CC260DEAA6003619F8 /* DownloadingConditions.swift */; };
 		C07E70DA25BB33F2001EE1AC /* SearchVC+SearchBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07E70D925BB33F2001EE1AC /* SearchVC+SearchBarDelegate.swift */; };
 		C07F14F125F65D9F007FF48A /* SuggestionsVC+SuggestionsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C07F14F025F65D9F007FF48A /* SuggestionsVC+SuggestionsDelegate.swift */; };
 		C0A19ACA25D0245800575196 /* GenreSuggestionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0A19AC925D0245800575196 /* GenreSuggestionsTableViewController.swift */; };
@@ -89,6 +90,7 @@
 		C060DB13257BED7C00C892DE /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		C0624C7525EE758100B6AD5E /* SuggestionsDelegateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuggestionsDelegateProtocol.swift; sourceTree = "<group>"; };
 		C062A58F25CDB03400C507ED /* GenreCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreCollectionViewCell.swift; sourceTree = "<group>"; };
+		C06E75CC260DEAA6003619F8 /* DownloadingConditions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadingConditions.swift; sourceTree = "<group>"; };
 		C07E70D925BB33F2001EE1AC /* SearchVC+SearchBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchVC+SearchBarDelegate.swift"; sourceTree = "<group>"; };
 		C07F14F025F65D9F007FF48A /* SuggestionsVC+SuggestionsDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SuggestionsVC+SuggestionsDelegate.swift"; sourceTree = "<group>"; };
 		C0A19AC925D0245800575196 /* GenreSuggestionsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreSuggestionsTableViewController.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 			children = (
 				C028AC6F25B0D8BF007799B6 /* UIImageExtensionForResizingImages.swift */,
 				C021DFFE25CBFD190028ACE0 /* StringExtension.swift */,
+				C06E75CC260DEAA6003619F8 /* DownloadingConditions.swift */,
 			);
 			path = Others;
 			sourceTree = "<group>";
@@ -623,6 +626,7 @@
 				C060DAFD257BECA200C892DE /* SceneDelegate.swift in Sources */,
 				C0B1D011260A41FA00456168 /* SearchViewViewModel.swift in Sources */,
 				C0B1CFED2609FF1300456168 /* GenreCollectionViewCellViewModel.swift in Sources */,
+				C06E75CD260DEAA6003619F8 /* DownloadingConditions.swift in Sources */,
 				C0B1CFD72609F9A200456168 /* SuggestionCollectionViewViewModelType.swift in Sources */,
 				C008D31425CC4DDB00413490 /* SelectedFilmViewController.swift in Sources */,
 				C0B1D018260A427B00456168 /* SearchViewTableViewViewModel.swift in Sources */,
