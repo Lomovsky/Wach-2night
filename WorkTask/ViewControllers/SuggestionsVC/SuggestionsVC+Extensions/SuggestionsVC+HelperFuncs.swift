@@ -18,7 +18,7 @@ extension SuggestionsViewController {
         recommendationsCollectionView.isHidden = true
         activityIndicator.isHidden = false
         activityIndicator.startAnimating()
-        viewModel.downloadFilms()
+        viewModel.downloadFilms(condition: .update)
         
     }
     

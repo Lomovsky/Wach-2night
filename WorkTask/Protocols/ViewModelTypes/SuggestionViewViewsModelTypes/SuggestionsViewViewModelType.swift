@@ -9,7 +9,7 @@ import Foundation
 
 protocol SuggestionsViewViewModelType {
     
-    func downloadFilms()
+    func downloadFilms(condition: Conditions)
     var suggestionsDelegate: SuggestionsDelegate? { get set }
     var favoriteFilmsArrayIsEmpty: Bool { get set }
 

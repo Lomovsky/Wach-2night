@@ -12,34 +12,48 @@ final public class CoreDataManager {
     static var favoriteFilms = [FavouriteFilm]()
     let mainMOC = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     let privateMOC = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.newBackgroundContext()
+    var setOfIDs = Set<Int32>()
     
     //MARK: Saving funcs
+    func checkForExistance(filmTitle: String, filmOriginalTitle: String, filmPoster: Data, releaseDate: String, overview: String, rating: Float, id: Int) {
+        fetchUpSert()
+        
+        if setOfIDs.contains(Int32(id)) {
+            print("IT IS EXIST")
+        } else {
+            saveFilms(filmTitle, filmOriginalTitle: filmOriginalTitle, filmPoster: filmPoster, releaseDate: releaseDate, overview: overview, rating: rating, id: id)
+        }
+        
+    }
+    
+    
     func saveFilms(_ filmTitle: String, filmOriginalTitle: String, filmPoster: Data, releaseDate: String, overview: String, rating: Float, id: Int) {
         guard let entityDescription = NSEntityDescription.entity(forEntityName: "CurrentFilm", in: privateMOC) else { return }
-        
-        let film = NSManagedObject(entity: entityDescription, insertInto: privateMOC) as! CurrentFilm
-        film.title = filmTitle
-        film.originalTitle = filmOriginalTitle
-        film.poster = filmPoster
-        film.releaseDate = releaseDate
-        film.overview = overview
-        film.rating = rating
-        film.id = Int32(id)
-        
-        do {
-            try privateMOC.save()
-            mainMOC.performAndWait {
-                
-                do {
-                    try mainMOC.save()
+            let film = NSManagedObject(entity: entityDescription, insertInto: privateMOC) as! CurrentFilm
+            film.title = filmTitle
+            film.originalTitle = filmOriginalTitle
+            film.poster = filmPoster
+            film.releaseDate = releaseDate
+            film.overview = overview
+            film.rating = rating
+            film.id = Int32(id)
+            
+            do {
+                try privateMOC.save()
+                mainMOC.performAndWait {
                     
-                } catch let error as NSError {
-                    assertionFailure("\(error)")
+                    do {
+                        try mainMOC.save()
+                        
+                    } catch let error as NSError {
+                        assertionFailure("\(error)")
+                    }
                 }
+            } catch let error as NSError {
+                assertionFailure("\(error)")
             }
-        } catch let error as NSError {
-            assertionFailure("\(error)")
-        }    
+            
+        
     }
     
     func saveGenres(_ genreID: Int, genreName: String) {
@@ -130,11 +144,12 @@ final public class CoreDataManager {
     
     func fetchUpSert() {
         let fetchRequest: NSFetchRequest<CurrentFilm> = CurrentFilm.fetchRequest()
-        fetchRequest.resultType = .dictionaryResultType
-        fetchRequest.propertiesToFetch = ["id"]
         
         do {
-            let results = try mainMOC.execute(fetchRequest)
+            let results = try mainMOC.fetch(fetchRequest)
+            for film in results {
+                setOfIDs.insert(Int32(film.id))
+            }
         } catch let error as NSError {
             print(error)
         }

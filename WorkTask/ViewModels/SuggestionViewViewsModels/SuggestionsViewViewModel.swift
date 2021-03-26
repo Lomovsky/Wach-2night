@@ -15,21 +15,40 @@ final class SuggestionsViewViewModel: SuggestionsViewViewModelType {
     var favoriteFilmsArrayIsEmpty: Bool = true
 
     
-    func downloadFilms() {
-        if Reachability.isConnectedToNetwork() {
-            _coreDataManager.deleteAllData()
-            _dataManager.downloadFilms()
-            _dataManager.downloadGenres()
-            _coreDataManager.fetchFavouriteFilms()
-            _coreDataManager.deleteAllDataFromFavourites()
-            suggestionsDelegate?.stopRefreshing()
+    func downloadFilms(condition: Conditions) {
+        switch condition {
+        case .download:
+            if Reachability.isConnectedToNetwork() {
+                _coreDataManager.deleteAllData()
+                _dataManager.downloadFilms(conditions: condition)
+                _dataManager.downloadGenres()
+                _coreDataManager.fetchFavouriteFilms()
+                _coreDataManager.deleteAllDataFromFavourites()
+                suggestionsDelegate?.stopRefreshing()
+                
+            } else {
+                DispatchQueue.main.async {
+                    self.suggestionsDelegate?.updateUIOffline()
+                    self.suggestionsDelegate?.stopRefreshing()
+                }
+            }
             
-        } else {
-            DispatchQueue.main.async {
-                self.suggestionsDelegate?.updateUIOffline()
-                self.suggestionsDelegate?.stopRefreshing()
+        default:
+            if Reachability.isConnectedToNetwork() {
+                _dataManager.downloadFilms(conditions: condition)
+                _dataManager.downloadGenres()
+                _coreDataManager.fetchFavouriteFilms()
+                _coreDataManager.deleteAllDataFromFavourites()
+                suggestionsDelegate?.stopRefreshing()
+                
+            } else {
+                DispatchQueue.main.async {
+                    self.suggestionsDelegate?.updateUIOffline()
+                    self.suggestionsDelegate?.stopRefreshing()
+                }
             }
         }
+
     }
     
 }

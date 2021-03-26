@@ -117,7 +117,7 @@ final class SuggestionsViewController: UIViewController {
         setupFavouritesCollectionView()
         setupRefreshControll()
         
-        viewModel.downloadFilms()
+        viewModel.downloadFilms(condition: .download)
     }
     
     //MARK: ViewWillApear
