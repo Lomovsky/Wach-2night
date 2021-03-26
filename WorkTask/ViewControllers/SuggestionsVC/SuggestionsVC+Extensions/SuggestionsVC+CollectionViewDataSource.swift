@@ -135,8 +135,8 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
             let previewVC = PreviewViewController()
             previewVC.viewModel = suggestionsCollectionViewViewModel.viewModelForSelectedRow()
             previewVC.viewModel?.suggestionsDelegate = self
-            navigationController?.present(previewVC, animated: true, completion: { [unowned self] in
-                previewVC.viewModel?.filmToSave(film: self.suggestionsCollectionViewViewModel.filmToSave(indexPath: indexPath))
+            previewVC.viewModel?.filmToSave(film: self.suggestionsCollectionViewViewModel.filmToSave(indexPath: indexPath))
+            navigationController?.present(previewVC, animated: true, completion: {
                 previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.addToFavorites),
                                                    for: .touchUpInside)
                 previewVC.favoriteButton.setTitle("Добавить в избранное", for: .normal)

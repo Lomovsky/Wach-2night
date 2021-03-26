@@ -9,12 +9,14 @@ import Foundation
 
 class FavoritesCollectionViewViewModel: FavoritesCollectionViewViewModelType {
     
-    static var favoriteFilms: [FavouriteFilm] = []
-    private var _selectedIndexPath: IndexPath?
     private let _coreDataManager = CoreDataManager()
+    private var _selectedIndexPath: IndexPath?
+    static var favoriteFilms: [FavouriteFilm] = []
+    
+
     
     func numberOfItems() -> Int {
-        return _coreDataManager.fetchFavouriteFilms()?.count ?? 0
+        return FavoritesCollectionViewViewModel.favoriteFilms.count
     }
     
     func cellViewModel(forIndexPath indexPath: IndexPath) -> FavoritesCollectionViewCellViewModelType? {

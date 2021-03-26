@@ -43,16 +43,16 @@ final class SuggestionsViewViewModel: SuggestionsViewViewModelType {
             }
         }
     }
-    
-    func startTimer() {
-        
-        let timer =  Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.scrollAutomatically), userInfo: nil, repeats: true)
-    }
-    
-    
-    @objc func scrollAutomatically(_ timer1: Timer) {
-     
-        
-  }
+//    
+//    func startTimer() {
+//
+//        let timer =  Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.scrollAutomatically), userInfo: nil, repeats: true)
+//    }
+//
+//
+//    @objc func scrollAutomatically(_ timer1: Timer) {
+//
+//
+//  }
 
 }

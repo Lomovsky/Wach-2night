@@ -145,17 +145,16 @@ final public class CoreDataManager {
         
     }
     
-    func fetchFavouriteFilms() -> [FavouriteFilm]? {
+    func fetchFavouriteFilms() {
         
         let fetchRequest: NSFetchRequest<FavouriteFilm> = FavouriteFilm.fetchRequest()
         
         do {
-            let favFilms = try mainMOC.fetch(fetchRequest)
-            return favFilms
+            FavoritesCollectionViewViewModel.favoriteFilms = try mainMOC.fetch(fetchRequest)
+            
         } catch let error as NSError {
             print(error)
         }
-        return nil
     }
     
     func fetchIDs(id: ID) {

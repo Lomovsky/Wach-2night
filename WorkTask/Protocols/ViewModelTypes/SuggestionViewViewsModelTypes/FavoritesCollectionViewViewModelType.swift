@@ -14,4 +14,5 @@ protocol FavoritesCollectionViewViewModelType {
     func cellViewModel(forIndexPath indexPath: IndexPath) -> FavoritesCollectionViewCellViewModelType?
     func viewModelForSelectedRow() -> PreviewViewModelType?
     func selectRow(atIndexPath indexPath: IndexPath)
+    
 }

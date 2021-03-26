@@ -39,8 +39,8 @@ class SuggestionsCollectionViewViewModel: SuggestionsCollectionViewViewModelType
     
     func filmToDelete(indexPath: IndexPath) -> FavouriteFilm {
         guard let indexPath = _selectedIndexPath else { return FavouriteFilm() }
-        let film = _coreDataManager.fetchFavouriteFilms()?[indexPath.row]
-        return film! //TODO
+        let film = FavoritesCollectionViewViewModel.favoriteFilms[indexPath.row]
+        return film
     }
     
 }

@@ -10,8 +10,6 @@ import UIKit
 class SearchViewController: UIViewController, UISearchBarDelegate {
     
     //MARK: Declarations
-
-    
     var viewModel: SearchViewViewModelType = SearchViewViewModel()
     var tableViewViewModel: SearchViewTableViewViewModelType = SearchViewTableViewViewModel()
     
@@ -52,9 +50,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         
         setupNavigationController()
         
-        if let indexPath = tableView.indexPathForSelectedRow {
-            tableView.deselectRow(at: indexPath, animated: true)
-        }
     }
     
     

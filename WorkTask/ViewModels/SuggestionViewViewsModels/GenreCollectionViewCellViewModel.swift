@@ -12,7 +12,7 @@ class GenreCollectionViewCellViewModel: GenreCollectionViewCellViewModelType {
     private var genre: Genre
     
     var title: String {
-        return genre.name ?? ""
+        return genre.name?.capitalized ?? ""
     }
     
     init(genre: Genre) {
