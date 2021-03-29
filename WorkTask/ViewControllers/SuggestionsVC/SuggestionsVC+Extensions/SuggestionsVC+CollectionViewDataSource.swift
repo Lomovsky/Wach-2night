@@ -19,10 +19,10 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
             return genresCollectionViewViewModel.numberOfItems()
             
         case favouriteFilmsCollectionView:
-            if FavoritesCollectionViewViewModel.favoriteFilms.count == 0 {
+            if favoritesCollectionViewViewModel.numberOfItems() == 0 {
                 return 3
             } else {
-                return FavoritesCollectionViewViewModel.favoriteFilms.count
+                return favoritesCollectionViewViewModel.numberOfItems()
             }
             
         default: return 0
@@ -82,6 +82,7 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
                 cell.layer.shadowOpacity = 0.4
                 cell.layer.shadowOffset = CGSize.init(width: 2.5, height: 2.5)
                 cell.layer.masksToBounds = false
+                cell.layer.shadowPath = UIBezierPath(rect: cell.bounds).cgPath
                 return cell
             }
             
@@ -91,6 +92,7 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
                 let cellViewModel = genresCollectionViewViewModel.cellViewModel(forIndexPath: indexPath)
                 cell.backgroundColor = .systemGray6
                 cell.layer.cornerRadius = 12
+                cell.layer.shadowPath = UIBezierPath(rect: cell.bounds).cgPath
                 cell.viewModel = cellViewModel
                 return cell
             }
@@ -98,9 +100,11 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
         case favouriteFilmsCollectionView:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FavouriteFilmsCollectionViewCell.reuseIdentifier, for: indexPath) as? FavouriteFilmsCollectionViewCell {
                 
-                if FavoritesCollectionViewViewModel.favoriteFilms.count != 0 {
+                if favoritesCollectionViewViewModel.numberOfItems() != 0 {
                     let cellViewModel = favoritesCollectionViewViewModel.cellViewModel(forIndexPath: indexPath)
                     cell.viewModel = cellViewModel
+                    cell.imageView.isHidden = false
+                    cell.imagePlaceholder.isHidden = true
                     return cell
                     
                 } else {
@@ -135,26 +139,22 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
             let previewVC = PreviewViewController()
             previewVC.viewModel = suggestionsCollectionViewViewModel.viewModelForSelectedRow()
             previewVC.viewModel?.suggestionsDelegate = self
-            previewVC.viewModel?.filmToSave(film: self.suggestionsCollectionViewViewModel.filmToSave(indexPath: indexPath))
             navigationController?.present(previewVC, animated: true, completion: {
                 previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.addToFavorites),
                                                    for: .touchUpInside)
                 previewVC.favoriteButton.setTitle("Добавить в избранное", for: .normal)
             })
             
-            
         case favouriteFilmsCollectionView:
-            if FavoritesCollectionViewViewModel.favoriteFilms.count == 0 {
+            if favoritesCollectionViewViewModel.numberOfItems() == 0 {
                 
             } else {
-                
                 guard let cell = collectionView.cellForItem(at: indexPath) else { return }
                 animateCell(cell: cell)
-                suggestionsCollectionViewViewModel.selectRow(atIndexPath: indexPath)
+                favoritesCollectionViewViewModel.selectRow(atIndexPath: indexPath)
                 let previewVC = PreviewViewController()
-                previewVC.viewModel = suggestionsCollectionViewViewModel.viewModelForSelectedRow()
+                previewVC.viewModel = favoritesCollectionViewViewModel.viewModelForSelectedRow()
                 previewVC.viewModel?.suggestionsDelegate = self
-                previewVC.viewModel?.filmToDelete(film: suggestionsCollectionViewViewModel.filmToDelete(indexPath: indexPath))
                 navigationController?.present(previewVC, animated: true, completion: {
                     previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.deleteFromFavorites), for: .touchUpInside)
                     previewVC.favoriteButton.setTitle("Удалить из избранного", for: .normal)
@@ -184,6 +184,5 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
                 horizontalIndicator.isHidden = true
             }
         }
-        
     }  
 }

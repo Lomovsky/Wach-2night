@@ -59,10 +59,10 @@ final class DataManager {
                             self.savingQueue.async {
                                 switch conditions {
                                 case .download:
-                                    coreDataManager.saveFilms(film.title, filmOriginalTitle: film.originalTitle, filmPoster: posterData, releaseDate: film.releaseDate, overview: film.overview, rating: film.rating, id: film.id)
+                                    coreDataManager.saveFilms(film.title, filmOriginalTitle: film.originalTitle, filmPoster: posterData, releaseDate: film.releaseDate, overview: film.overview, rating: film.rating, id: film.id, isFav: false)
                                     
                                 default:
-                                    coreDataManager.checkForExistance(filmTitle: film.title, filmOriginalTitle: film.originalTitle, filmPoster: posterData, releaseDate: film.releaseDate, overview: film.overview, rating: film.rating, id: film.id)
+                                    coreDataManager.checkForExistance(filmTitle: film.title, filmOriginalTitle: film.originalTitle, filmPoster: posterData, releaseDate: film.releaseDate, overview: film.overview, rating: film.rating, id: film.id, isFav: false)
                                 }
                                 if coreDataManager.fetchFilmsData()!.count >= 20 {
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
@@ -72,15 +72,15 @@ final class DataManager {
                             }
                         }
                     } else {
-                        let posterPlaceholder: UIImage = #imageLiteral(resourceName: "1024px-No_image_available.svg")
+                        guard let posterPlaceholder = UIImage(named: "1024px-No_image_available.svg") else { return }
                         guard let posterPlaceholderData = posterPlaceholder.pngData() else { return }
                         self.savingQueue.async {
                             switch conditions {
                             case .download:
-                                coreDataManager.saveFilms(film.title, filmOriginalTitle: film.originalTitle, filmPoster: posterPlaceholderData, releaseDate: film.releaseDate, overview: film.overview, rating: film.rating, id: film.id)
+                                coreDataManager.saveFilms(film.title, filmOriginalTitle: film.originalTitle, filmPoster: posterPlaceholderData, releaseDate: film.releaseDate, overview: film.overview, rating: film.rating, id: film.id, isFav: false)
                                 
                             default:
-                                coreDataManager.checkForExistance(filmTitle: film.title, filmOriginalTitle: film.originalTitle, filmPoster: posterPlaceholderData, releaseDate: film.releaseDate, overview: film.overview, rating: film.rating, id: film.id)
+                                coreDataManager.checkForExistance(filmTitle: film.title, filmOriginalTitle: film.originalTitle, filmPoster: posterPlaceholderData, releaseDate: film.releaseDate, overview: film.overview, rating: film.rating, id: film.id, isFav: false)
                                 
                             }
                             if coreDataManager.fetchFilmsData()!.count >= 20 {

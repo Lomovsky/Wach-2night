@@ -24,7 +24,7 @@ class SuggestionsCollectionViewViewModel: SuggestionsCollectionViewViewModelType
     
     func viewModelForSelectedRow() -> PreviewViewModelType? {
         guard let selectedIndexPath = _selectedIndexPath else { return nil }
-        return PreviewViewModel(currentFilm: _coreDataManager.fetchFilmsData()?[selectedIndexPath.row], favFilm: nil)
+        return PreviewViewModel(currentFilm: (_coreDataManager.fetchFilmsData()?[selectedIndexPath.row])!)
     }
     
     func selectRow(atIndexPath indexPath: IndexPath) {
@@ -37,9 +37,9 @@ class SuggestionsCollectionViewViewModel: SuggestionsCollectionViewViewModelType
         return film
     }
     
-    func filmToDelete(indexPath: IndexPath) -> FavouriteFilm {
-        guard let indexPath = _selectedIndexPath else { return FavouriteFilm() }
-        let film = FavoritesCollectionViewViewModel.favoriteFilms[indexPath.row]
+    func filmToDelete(indexPath: IndexPath) -> CurrentFilm {
+        guard let indexPath = _selectedIndexPath else { return CurrentFilm() }
+        let film = _coreDataManager.fetchFavouriteFilms()[indexPath.row]
         return film
     }
     

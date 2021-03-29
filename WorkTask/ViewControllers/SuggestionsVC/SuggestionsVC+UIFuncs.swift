@@ -12,7 +12,6 @@ extension SuggestionsViewController {
     func setupRefreshControll() {
         refreshControl.attributedTitle = NSAttributedString(string: "Потяните для обновления")
         refreshControl.addTarget(self, action: #selector(self.refresh(_:)), for: .valueChanged)
-        
     }
     
     

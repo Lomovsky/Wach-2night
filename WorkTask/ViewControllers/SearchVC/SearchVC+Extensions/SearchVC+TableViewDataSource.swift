@@ -19,7 +19,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: viewModel.cellID, for: indexPath) as! TableViewCell
         
-        let cellViewModel = tableViewViewModel.cellViewModel(forIndexPath: indexPath)
+        let cellViewModel = tableViewViewModel.cellViewModel(forIndexPath: indexPath, cell: cell)
         cell.viewModel = cellViewModel
         
         return cell

@@ -10,7 +10,7 @@ import UIKit
 extension PreviewViewController {
     
     @objc func addToFavorites() {
-        viewModel?.addToFavorites()
+        viewModel?.addToFavorites(film: (viewModel?.film)!)
         viewModel?.suggestionsDelegate?.updateFavorites()
         favoriteButton.setTitle("Удалить из избранного", for: .normal)
         favoriteButton.removeTarget(self, action: #selector(addToFavorites), for: .touchUpInside)

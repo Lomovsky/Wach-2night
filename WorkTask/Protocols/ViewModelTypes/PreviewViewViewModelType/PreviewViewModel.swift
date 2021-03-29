@@ -9,68 +9,45 @@ import UIKit
 
 class PreviewViewModel: PreviewViewModelType {
     
-    private var _coreDataManager = CoreDataManager()
     var suggestionsDelegate: SuggestionsDelegate?
     var film: CurrentFilm?
-    var favFilm: FavouriteFilm?
-    var filmToDelete: FavouriteFilm?
-    var indexToRemove: Int?
+    private var _coreDataManager = CoreDataManager()
+    
     
     var poster: UIImage {
-        if film != nil {
-            let posterImage = UIImage(data: (film?.poster)!)
-            return posterImage!
-        } else {
-            
-            let posterImage = UIImage(data: (favFilm?.poster)!)
-            return posterImage!
+        if let defaultPoster = UIImage(named: "1024px-No_image_available.svg") {
+            guard let filmPoster = film?.poster else { return defaultPoster }
+            guard let poster = UIImage(data: filmPoster) else { return defaultPoster }
+            return  poster
         }
+        return UIImage()
     }
     
     var title: String {
-        if film != nil {
-            return (film?.title)!
-        } else {
-            return (favFilm?.title)!
-        }
+        return (film?.title) ?? ""
+        
     }
     
     var overview: String {
-        if film != nil {
-            return (film?.overview)!
-        } else {
-            return (favFilm?.overview)!
-        }
+        return (film?.overview) ?? ""
     }
     
-    init(currentFilm: CurrentFilm?, favFilm: FavouriteFilm?) {
+    init(currentFilm: CurrentFilm) {
         self.film = currentFilm
-        self.favFilm = favFilm
     }
     
     
-    func addToFavorites() {
-        guard let filmToAdd = film else { return }
-        _coreDataManager.saveFavouriteFilm(filmToAdd.title ?? "", filmOriginalTitle: filmToAdd.originalTitle ?? "", filmRating: filmToAdd.rating, filmOverview: filmToAdd.overview ?? "", filmPoster: filmToAdd.poster!, id: filmToAdd.id)
-        print(filmToAdd.title)
+    func addToFavorites(film: CurrentFilm) {
         DispatchQueue.main.async {
-            self._coreDataManager.fetchFavouriteFilms()
+            self._coreDataManager.saveFavouriteFilm(film: film)
             self.suggestionsDelegate?.updateFavorites()
         }
     }
     
     func removeFromFavorites() {
-        guard let filmToDelete = filmToDelete else { return }
+        guard let filmToDelete = film else { return }
         _coreDataManager.removeFromFavorites(film: filmToDelete)
         suggestionsDelegate?.updateFavorites()
-    }
-    
-    func filmToSave(film: CurrentFilm) {
-        self.film = film
-    }
-    
-    func filmToDelete(film: FavouriteFilm) {
-        self.filmToDelete = film
     }
 }
 

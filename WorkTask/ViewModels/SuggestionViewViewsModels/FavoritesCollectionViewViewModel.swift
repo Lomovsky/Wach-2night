@@ -10,23 +10,21 @@ import Foundation
 class FavoritesCollectionViewViewModel: FavoritesCollectionViewViewModelType {
     
     private let _coreDataManager = CoreDataManager()
-    private var _selectedIndexPath: IndexPath?
-    static var favoriteFilms: [FavouriteFilm] = []
-    
+    private var _selectedIndexPath: IndexPath?    
 
     
     func numberOfItems() -> Int {
-        return FavoritesCollectionViewViewModel.favoriteFilms.count
+        return _coreDataManager.fetchFavouriteFilms().count
     }
     
     func cellViewModel(forIndexPath indexPath: IndexPath) -> FavoritesCollectionViewCellViewModelType? {
-        let film = FavoritesCollectionViewViewModel.favoriteFilms.reversed()[indexPath.row]
+        let film = _coreDataManager.fetchFavouriteFilms().reversed()[indexPath.row]
         return FavoritesCollectionViewCellViewModel(film: film)
     }
     
     func viewModelForSelectedRow() -> PreviewViewModelType? {
         guard let selectedIndexPath = _selectedIndexPath else { return nil }
-        return PreviewViewModel(currentFilm: nil, favFilm: FavoritesCollectionViewViewModel.favoriteFilms.reversed()[selectedIndexPath.row])
+        return PreviewViewModel(currentFilm: _coreDataManager.fetchFavouriteFilms().reversed()[selectedIndexPath.row])
     }
     
     func selectRow(atIndexPath indexPath: IndexPath) {

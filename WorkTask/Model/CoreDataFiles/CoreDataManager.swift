@@ -20,13 +20,13 @@ final public class CoreDataManager {
     var setOfGenres = Set<Int32>()
     
     //MARK: Saving funcs
-    func checkForExistance(filmTitle: String, filmOriginalTitle: String, filmPoster: Data, releaseDate: String, overview: String, rating: Float, id: Int) {
+    func checkForExistance(filmTitle: String, filmOriginalTitle: String, filmPoster: Data, releaseDate: String, overview: String, rating: Float, id: Int, isFav: Bool) {
         fetchIDs(id: .film)
         
         if setOfIDs.contains(Int32(id)) {
             print("Already exists")
         } else {
-            saveFilms(filmTitle, filmOriginalTitle: filmOriginalTitle, filmPoster: filmPoster, releaseDate: releaseDate, overview: overview, rating: rating, id: id)
+            saveFilms(filmTitle, filmOriginalTitle: filmOriginalTitle, filmPoster: filmPoster, releaseDate: releaseDate, overview: overview, rating: rating, id: id, isFav: isFav)
         }
     }
     
@@ -42,9 +42,10 @@ final public class CoreDataManager {
     }
     
     
-    func saveFilms(_ filmTitle: String, filmOriginalTitle: String, filmPoster: Data, releaseDate: String, overview: String, rating: Float, id: Int) {
+    func saveFilms(_ filmTitle: String, filmOriginalTitle: String, filmPoster: Data, releaseDate: String, overview: String, rating: Float, id: Int, isFav: Bool) {
         guard let entityDescription = NSEntityDescription.entity(forEntityName: "CurrentFilm", in: privateMOC) else { return }
         let film = NSManagedObject(entity: entityDescription, insertInto: privateMOC) as! CurrentFilm
+        
         film.title = filmTitle
         film.originalTitle = filmOriginalTitle
         film.poster = filmPoster
@@ -52,6 +53,7 @@ final public class CoreDataManager {
         film.overview = overview
         film.rating = rating
         film.id = Int32(id)
+        film.isFavorite = isFav
         
         do {
             try privateMOC.save()
@@ -94,24 +96,21 @@ final public class CoreDataManager {
         }
     }
     
-    func saveFavouriteFilm(_ filmTitle: String, filmOriginalTitle: String, filmRating: Float, filmOverview: String, filmPoster: Data, id: Int32) {
+    func saveFavouriteFilm(film: CurrentFilm) {
         
-        guard let entityDescription = NSEntityDescription.entity(forEntityName: "FavouriteFilm", in: mainMOC) else { return }
-        let favouriteFilm = NSManagedObject(entity: entityDescription, insertInto: mainMOC) as! FavouriteFilm
-        favouriteFilm.title = filmTitle
-        favouriteFilm.originalTitle = filmOriginalTitle
-        favouriteFilm.overview = filmOverview
-        favouriteFilm.rating = filmRating
-        favouriteFilm.poster = filmPoster
-        favouriteFilm.id = id
+        let fetchRequest: NSFetchRequest<CurrentFilm> = CurrentFilm.fetchRequest()
         
         do {
+            let results = try mainMOC.fetch(fetchRequest)
+            for item in results {
+                if item.id == film.id {
+                    item.isFavorite = true
+                }
+            }
             try mainMOC.save()
-            FavoritesCollectionViewViewModel.favoriteFilms.append(favouriteFilm)
         } catch let error as NSError {
-            assertionFailure("\(error)")
+            print(error)
         }
-        
         
     }
     
@@ -145,17 +144,23 @@ final public class CoreDataManager {
         
     }
     
-    func fetchFavouriteFilms() {
-        
-        let fetchRequest: NSFetchRequest<FavouriteFilm> = FavouriteFilm.fetchRequest()
+    func fetchFavouriteFilms() -> [CurrentFilm] {
+        let fetchRequest: NSFetchRequest<CurrentFilm> = CurrentFilm.fetchRequest()
+        var array: [CurrentFilm] = []
         
         do {
-            FavoritesCollectionViewViewModel.favoriteFilms = try mainMOC.fetch(fetchRequest)
-            
+            let results = try mainMOC.fetch(fetchRequest)
+            for item in results {
+                if item.isFavorite == true {
+                    array.append(item)
+                }
+            }
         } catch let error as NSError {
             print(error)
         }
+        return array
     }
+    
     
     func fetchIDs(id: ID) {
         switch id {
@@ -179,6 +184,8 @@ final public class CoreDataManager {
                     setOfGenres.insert(Int32(genre.id))
                     
                 }
+                try mainMOC.save()
+                
             } catch let error as NSError {
                 assertionFailure("\(error)")
             }
@@ -188,36 +195,21 @@ final public class CoreDataManager {
         
     }
     
-    func fetchGenresID() {
-        
-    }
-    
     
     //MARK: Deliting methods -
-    func removeFromFavorites(film: FavouriteFilm) {
-        let id = film.id
-        let fetchRequest: NSFetchRequest<FavouriteFilm> = FavouriteFilm.fetchRequest()
-        let predicate = NSPredicate(format: "id == %@", "\(String(describing: id))")
-        fetchRequest.predicate = predicate
+    func removeFromFavorites(film: CurrentFilm) {
+        let fetchRequest: NSFetchRequest<CurrentFilm> = CurrentFilm.fetchRequest()
         
         do {
-            let favFilms = try privateMOC.fetch(fetchRequest) as [NSManagedObject]
-            print(favFilms.count)
-            for item in favFilms {
-                
-                privateMOC.delete(item)
-            }
-            try privateMOC.save()
-            mainMOC.performAndWait {
-                do {
-                    try mainMOC.save()
-                } catch let error as NSError {
-                    assertionFailure("\(error)")
+            let results = try mainMOC.fetch(fetchRequest)
+            for item in results {
+                if item.id == film.id {
+                    item.isFavorite = false
                 }
             }
+            try mainMOC.save()
         } catch let error as NSError {
-            
-            assertionFailure("\(error)")
+            print(error)
         }
     }
     
@@ -265,16 +257,15 @@ final public class CoreDataManager {
     
     func deleteAllDataFromFavourites() {
         
-        let fetchRequest: NSFetchRequest<FavouriteFilm> = FavouriteFilm.fetchRequest()
-        fetchRequest.includesPropertyValues = false
+        let fetchRequest: NSFetchRequest<CurrentFilm> = CurrentFilm.fetchRequest()
         
         do {
-            let favFilms = try mainMOC.fetch(fetchRequest) as [NSManagedObject]
+            let favFilms = try mainMOC.fetch(fetchRequest)
             for film in favFilms {
-                mainMOC.delete(film)
+                film.isFavorite = false
             }
+            
             try mainMOC.save()
-            FavoritesCollectionViewViewModel.favoriteFilms.removeAll()
         } catch let error as NSError {
             print(error)
         }
