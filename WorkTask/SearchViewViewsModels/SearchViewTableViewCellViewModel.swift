@@ -13,7 +13,14 @@ class SearchTableViewCellViewModel: SearchViewTableViewCellViewModelType {
     
     var title: String
     
-    var poster: UIImage?
+    var poster: UIImage? {
+        
+        
+        willSet {
+            poster?.setValue(newValue, forKey: "image")
+        }
+//        return UIImage(named: "1024px-No_image_available.svg")
+    }
     
     init(title: String, poster: UIImage) {
         self.title = title

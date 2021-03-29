@@ -41,6 +41,10 @@ class TableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+     
+        imageView?.clipsToBounds = true
+        imageView?.layer.cornerRadius = 20
+        
     }
     
     

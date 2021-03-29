@@ -35,6 +35,7 @@ class SearchViewTableViewViewModel: SearchViewTableViewViewModelType {
         } else {
             return UIImage(named: "1024px-No_image_available.svg")!
         }
+        return UIImage()
     }
 
     
@@ -50,7 +51,8 @@ class SearchViewTableViewViewModel: SearchViewTableViewViewModelType {
     
     func cellViewModel(forIndexPath indexPath: IndexPath, cell: UITableViewCell) -> SearchViewTableViewCellViewModelType? {
         let film = SearchViewViewModel.films[indexPath.row]
-        return SearchTableViewCellViewModel(title: film.title, poster: <#T##UIImage#>)
+        let poster = configureTheCell(cell: cell, itemNumber: NSNumber(value: indexPath.item), film: film, indexPath: indexPath)
+        return SearchTableViewCellViewModel(title: film.title, poster: poster)
     }
     
     
