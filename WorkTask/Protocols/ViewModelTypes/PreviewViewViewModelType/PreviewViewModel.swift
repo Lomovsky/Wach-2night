@@ -7,33 +7,53 @@
 
 import UIKit
 
+
+
 class PreviewViewModel: PreviewViewModelType {
     
     var suggestionsDelegate: SuggestionsDelegate?
     var film: CurrentFilm?
+    var searchedFilm: Film?
     private var _coreDataManager = CoreDataManager()
     
     
+    
     var poster: UIImage {
-        if let defaultPoster = UIImage(named: "1024px-No_image_available.svg") {
-            guard let filmPoster = film?.poster else { return defaultPoster }
-            guard let poster = UIImage(data: filmPoster) else { return defaultPoster }
-            return  poster
+        if film != nil {
+            if let defaultPoster = UIImage(named: "1024px-No_image_available.svg") {
+                guard let filmPoster = film?.poster else { return defaultPoster }
+                guard let poster = UIImage(data: filmPoster) else { return defaultPoster }
+                return  poster
+            }
+        } else {
+            return #imageLiteral(resourceName: "1024px-No_image_available.svg")
         }
+
         return UIImage()
     }
     
     var title: String {
-        return (film?.title) ?? ""
+        if film != nil {
+            return (film?.title) ?? "Нет данных"
+        } else {
+            return searchedFilm?.title ?? "Нет данных"
+        }
         
     }
     
     var overview: String {
-        return (film?.overview) ?? ""
+        if film != nil {
+            return (film?.overview) ?? "Нет данных"
+
+        } else {
+            return searchedFilm?.overview ?? "Нет данных"
+        }
     }
     
-    init(currentFilm: CurrentFilm) {
+    init(currentFilm: CurrentFilm?, searchedFilm: Film?) {
         self.film = currentFilm
+        self.searchedFilm = searchedFilm
+        
     }
     
     

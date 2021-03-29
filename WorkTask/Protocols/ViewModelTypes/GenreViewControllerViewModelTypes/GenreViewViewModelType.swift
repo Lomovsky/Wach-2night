@@ -10,4 +10,5 @@ import Foundation
 protocol GenreViewViewModelType {
     
     func downloadFilms(condition: Conditions)
+
 }

@@ -10,6 +10,7 @@ import UIKit
 protocol PreviewViewModelType {
     
     var film: CurrentFilm? { get set }
+    var searchedFilm: Film? { get set }
     var poster: UIImage { get }
     var title: String { get }
     var overview: String { get }

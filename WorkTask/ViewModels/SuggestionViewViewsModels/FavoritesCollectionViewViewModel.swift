@@ -24,7 +24,7 @@ class FavoritesCollectionViewViewModel: FavoritesCollectionViewViewModelType {
     
     func viewModelForSelectedRow() -> PreviewViewModelType? {
         guard let selectedIndexPath = _selectedIndexPath else { return nil }
-        return PreviewViewModel(currentFilm: _coreDataManager.fetchFavouriteFilms().reversed()[selectedIndexPath.row])
+        return PreviewViewModel(currentFilm: _coreDataManager.fetchFavouriteFilms().reversed()[selectedIndexPath.row], searchedFilm: nil)
     }
     
     func selectRow(atIndexPath indexPath: IndexPath) {

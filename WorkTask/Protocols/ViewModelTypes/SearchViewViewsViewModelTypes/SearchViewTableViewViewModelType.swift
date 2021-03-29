@@ -12,5 +12,7 @@ protocol SearchViewTableViewViewModelType {
     
     func numberOfItems() -> Int
     func cellViewModel(forIndexPath indexPath: IndexPath, cell: UITableViewCell) -> SearchViewTableViewCellViewModelType?
-
+    func viewModelForSelectedRow() -> PreviewViewModelType?
+    func selectRow(atIndexPath indexPath: IndexPath)
+    
 }

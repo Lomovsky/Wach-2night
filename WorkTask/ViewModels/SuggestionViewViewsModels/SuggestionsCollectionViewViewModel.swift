@@ -24,7 +24,7 @@ class SuggestionsCollectionViewViewModel: SuggestionsCollectionViewViewModelType
     
     func viewModelForSelectedRow() -> PreviewViewModelType? {
         guard let selectedIndexPath = _selectedIndexPath else { return nil }
-        return PreviewViewModel(currentFilm: (_coreDataManager.fetchFilmsData()?[selectedIndexPath.row])!)
+        return PreviewViewModel(currentFilm: (_coreDataManager.fetchFilmsData()?[selectedIndexPath.row])!, searchedFilm: nil)
     }
     
     func selectRow(atIndexPath indexPath: IndexPath) {

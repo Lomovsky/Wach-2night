@@ -8,9 +8,11 @@
 import UIKit
 
 class SearchViewTableViewViewModel: SearchViewTableViewViewModelType {
+
     
     let queue = DispatchQueue(label: "images", qos: .utility)
     private var viewModel = SearchViewViewModel()
+    private var _selectedIndexPath: IndexPath?
 
     func downloadPosters(itemNumber: NSNumber, film: Film, indexPath: IndexPath) {
          
@@ -54,6 +56,13 @@ class SearchViewTableViewViewModel: SearchViewTableViewViewModelType {
         return SearchTableViewCellViewModel(title: film.title, poster: _poster)
     }
     
+    func selectRow(atIndexPath indexPath: IndexPath) {
+        _selectedIndexPath = indexPath
+    }
     
+    func viewModelForSelectedRow() -> PreviewViewModelType? {
+        guard let selectedIndexPath = _selectedIndexPath else { return nil }
+        return PreviewViewModel(currentFilm: nil, searchedFilm: SearchViewViewModel.films[selectedIndexPath.row])
+    }
     
 }
