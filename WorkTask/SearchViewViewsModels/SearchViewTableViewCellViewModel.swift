@@ -9,18 +9,10 @@ import UIKit
 
 class SearchTableViewCellViewModel: SearchViewTableViewCellViewModelType {
     
-//    private var _film: Film 
     
     var title: String
     
-    var poster: UIImage? {
-        
-        
-        willSet {
-            poster?.setValue(newValue, forKey: "image")
-        }
-//        return UIImage(named: "1024px-No_image_available.svg")
-    }
+    var poster: UIImage?
     
     init(title: String, poster: UIImage) {
         self.title = title
