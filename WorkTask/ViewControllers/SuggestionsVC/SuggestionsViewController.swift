@@ -6,12 +6,15 @@
 //
 
 import UIKit
-class SuggestionsViewController: UIViewController {
+
+final class SuggestionsViewController: UIViewController {
     //MARK: Declarations
-    static var films: [CurrentFilm] = []
-    static var genres: [Genre] = []
-    static var favouriteFilms: [FavouriteFilm] = []
+    var viewModel: SuggestionsViewViewModelType = SuggestionsViewViewModel()
+    var genresCollectionViewViewModel: GenreCollectionViewViewModelType = GenreCollectionViewViewModel()
+    var suggestionsCollectionViewViewModel: SuggestionsCollectionViewViewModelType = SuggestionsCollectionViewViewModel()
+    var favoritesCollectionViewViewModel: FavoritesCollectionViewViewModelType = FavoritesCollectionViewViewModel()
     var refreshControl = UIRefreshControl()
+    
     
     //MARK: UIElements
     let scrollView: UIScrollView = {
@@ -20,11 +23,10 @@ class SuggestionsViewController: UIViewController {
         return scroll
     }()
     
-    let stackView: UIStackView = {
-        let stack = UIStackView()
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.axis = .vertical
-        return stack
+    let contentView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     let genreLabel: UILabel = {
@@ -46,6 +48,13 @@ class SuggestionsViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
+    }()
+    
+    let recommendationsStack: UIStackView = {
+        let stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.axis = .vertical
+        return stack
     }()
     
     let recommendationsCollectionView: UICollectionView = {
@@ -90,29 +99,25 @@ class SuggestionsViewController: UIViewController {
         genreCollectionView.dataSource = self
         favouriteFilmsCollectionView.delegate = self
         favouriteFilmsCollectionView.dataSource = self
+        viewModel.suggestionsDelegate = self
+        DataManager.suggestionsDelegate = self
+        
         view.addSubview(scrollView)
-        view.addSubview(stackView)
-        view.addSubview(genreLabel)
-        view.addSubview(genreCollectionView)
-        view.addSubview(recommendationsLabel)
-        view.addSubview(recommendationsCollectionView)
-        view.addSubview(activityIndicator)
-        view.addSubview(favouriteFilmsLabel)
-        view.addSubview(favouriteFilmsCollectionView)
-
+        
         setupView()
         setupScrollView()
-        setupStackView()
+        setupContentView()
         setupGenreLabel()
         setupGenerCollectionView()
         setupRecommendationsLabel()
+        setupRecommendationsStack()
         setupRecommendationsCollectionView()
         setupActivityIndicator()
         setupFavouriteFilmsLabel()
         setupFavouritesCollectionView()
         setupRefreshControll()
         
-        checkConnection()
+        viewModel.downloadFilms(condition: .download)
     }
     
     //MARK: ViewWillApear
@@ -121,8 +126,7 @@ class SuggestionsViewController: UIViewController {
         setupNavigationController()
         
     }
-
-
+    
 }
 
 

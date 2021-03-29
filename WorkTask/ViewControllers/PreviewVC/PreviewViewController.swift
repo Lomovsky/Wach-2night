@@ -7,10 +7,8 @@
 
 import UIKit
 
-class PreviewViewController: UIViewController {
-    let coreDataManager = CoreDataManager()
-    var film: CurrentFilm? = nil
-    weak var suggestionsDelegate: SuggestionsDelegate?
+final class PreviewViewController: UIViewController {
+    var viewModel: PreviewViewModelType?
     
     //MARK: Declarations
     let scrollView: UIScrollView = {
@@ -26,6 +24,12 @@ class PreviewViewController: UIViewController {
         stack.spacing = 10
         return stack
     }()
+    
+    let contentView: UIView = {
+        let contentView = UIView()
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        return contentView
+    }()
 
     let containerView: UIView = {
         let stack = UIView()
@@ -33,7 +37,7 @@ class PreviewViewController: UIViewController {
         return stack
     }()
 
-    final let imageView: UIImageView = {
+    let imageView: UIImageView = {
         let imageV = UIImageView()
         imageV.translatesAutoresizingMaskIntoConstraints = false
         return imageV
@@ -70,7 +74,7 @@ class PreviewViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         view.addSubview(scrollView)
-        view.addSubview(stackView)
+        view.addSubview(contentView)
         view.addSubview(imageView)
         view.addSubview(favoriteButton)
         view.addSubview(titleLabel)
@@ -79,7 +83,7 @@ class PreviewViewController: UIViewController {
         
         setupView()
         setupScrollView()
-        setupStackView()
+        setupContentView()
         setupImageView()
         setupFavoriteButton()
         setupTitleLabel()
@@ -92,8 +96,6 @@ class PreviewViewController: UIViewController {
         super.viewWillAppear(true)
        
     }
-
-
     
     deinit {
         print("PreviewVC was dealocated")

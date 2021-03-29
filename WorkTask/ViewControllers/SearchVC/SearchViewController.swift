@@ -10,12 +10,8 @@ import UIKit
 class SearchViewController: UIViewController, UISearchBarDelegate {
     
     //MARK: Declarations
-    let cache = NSCache<NSNumber, UIImage>()
-    let searchController = UISearchController(searchResultsController: nil)
-    let cellID = "Cell"
-    var films: [Film] = []
-    var timer: Timer?
-    
+    var viewModel: SearchViewViewModelType = SearchViewViewModel()
+    var tableViewViewModel: SearchViewTableViewViewModelType = SearchViewTableViewViewModel()
     
     //MARK: UIElements
     let shadowSubView: UIView = {
@@ -41,6 +37,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(tableView)
+        viewModel.searchDelegate = self
         
         setupView()
         setupSearchBar()
@@ -53,9 +50,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         
         setupNavigationController()
         
-        if let indexPath = tableView.indexPathForSelectedRow {
-            tableView.deselectRow(at: indexPath, animated: true)
-        }
     }
     
     
@@ -73,17 +67,17 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     }
     
     private func setupSearchBar() {
-        navigationItem.searchController = searchController
-        searchController.searchBar.delegate = self
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Введите название"        
+        navigationItem.searchController = viewModel.searchController
+        viewModel.searchController.searchBar.delegate = self
+        viewModel.searchController.obscuresBackgroundDuringPresentation = false
+        viewModel.searchController.searchBar.placeholder = "Введите название"
         
     }
     
     private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(TableViewCell.self, forCellReuseIdentifier: cellID)
+        tableView.register(TableViewCell.self, forCellReuseIdentifier: viewModel.cellID)
         tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
@@ -95,8 +89,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     }
     
     deinit {
-        cache.removeAllObjects()
-        films.removeAll()
+        viewModel.cache.removeAllObjects()
+        SearchViewViewModel.films.removeAll()
         print("search vc was dealocated")
     }
     

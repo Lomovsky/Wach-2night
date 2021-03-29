@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20E5172i" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20E5217a" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="CurrentFilm" representedClassName="CurrentFilm" syncable="YES" codeGenerationType="class">
+        <attribute name="id" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="isFavorite" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="originalTitle" optional="YES" attributeType="String"/>
-        <attribute name="overview" optional="YES" attributeType="String"/>
+        <attribute name="overview" attributeType="String"/>
         <attribute name="poster" optional="YES" attributeType="Binary"/>
         <attribute name="rating" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="releaseDate" optional="YES" attributeType="String"/>
-        <attribute name="title" optional="YES" attributeType="String"/>
-    </entity>
-    <entity name="FavouriteFilm" representedClassName="FavouriteFilm" syncable="YES" codeGenerationType="class">
-        <attribute name="originalTitle" attributeType="String"/>
-        <attribute name="overview" attributeType="String"/>
-        <attribute name="poster" attributeType="Binary"/>
-        <attribute name="rating" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="title" attributeType="String"/>
     </entity>
     <entity name="Genre" representedClassName="Genre" syncable="YES" codeGenerationType="class">
@@ -20,8 +15,7 @@
         <attribute name="name" attributeType="String"/>
     </entity>
     <elements>
-        <element name="CurrentFilm" positionX="-63" positionY="-18" width="128" height="119"/>
-        <element name="FavouriteFilm" positionX="-54" positionY="45" width="128" height="104"/>
+        <element name="CurrentFilm" positionX="-63" positionY="-18" width="128" height="149"/>
         <element name="Genre" positionX="-63" positionY="36" width="128" height="59"/>
     </elements>
 </model>

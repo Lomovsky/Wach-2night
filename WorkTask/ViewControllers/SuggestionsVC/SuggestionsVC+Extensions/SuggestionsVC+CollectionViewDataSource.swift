@@ -13,16 +13,17 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch collectionView {
         case recommendationsCollectionView:
-            return SuggestionsViewController.films.count
+            return suggestionsCollectionViewViewModel.numberOfItems()
             
         case genreCollectionView:
-            return SuggestionsViewController.genres.count
+            return genresCollectionViewViewModel.numberOfItems()
             
         case favouriteFilmsCollectionView:
-            if SuggestionsViewController.favouriteFilms.isEmpty {
+            if favoritesCollectionViewViewModel.numberOfItems() == 0 {
                 return 3
+            } else {
+                return favoritesCollectionViewViewModel.numberOfItems()
             }
-            return SuggestionsViewController.favouriteFilms.count
             
         default: return 0
             
@@ -73,67 +74,46 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
         switch collectionView {
         case recommendationsCollectionView:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecommendationsCollectionViewCell.reuseIdentifier,for: indexPath) as? RecommendationsCollectionViewCell {
-                let film = SuggestionsViewController.films[indexPath.row]
-                if let poster = film.poster {
-                    if let posterImage = UIImage(data: poster) {
-                        let newPoster = posterImage.resizeImageUsingVImage(size: CGSize.init(width: cell.frame.size.width,
-                                                                                             height: cell.frame.size.height))
-                        cell.imageView.image = newPoster
-                        cell.layer.shadowColor = UIColor.black.cgColor
-                        cell.layer.shadowRadius = 5
-                        cell.layer.shadowOpacity = 0.4
-                        cell.layer.shadowOffset = CGSize.init(width: 2.5, height: 2.5)
-                        cell.layer.masksToBounds = false
-                        return cell
-                    }
-                    
-                } else {
-                    cell.imageView.image = #imageLiteral(resourceName: "1024px-No_image_available.svg")
-                    cell.layer.shadowColor = UIColor.black.cgColor
-                    cell.layer.shadowRadius = 5
-                    cell.layer.shadowOpacity = 0.4
-                    cell.layer.shadowOffset = CGSize.init(width: 2.5, height: 2.5)
-                    cell.layer.masksToBounds = false
-                    return cell
-                }
+                
+                let cellViewModel = suggestionsCollectionViewViewModel.cellViewModel(forIndexPath: indexPath)
+                cell.viewModel = cellViewModel
+                cell.layer.shadowColor = UIColor.black.cgColor
+                cell.layer.shadowRadius = 5
+                cell.layer.shadowOpacity = 0.4
+                cell.layer.shadowOffset = CGSize.init(width: 2.5, height: 2.5)
+                cell.layer.masksToBounds = false
+                cell.layer.shadowPath = UIBezierPath(rect: cell.bounds).cgPath
+                return cell
             }
             
         case genreCollectionView:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GenreCollectionViewCell.reuseIdentifier, for: indexPath) as? GenreCollectionViewCell {
                 
-                let genre = SuggestionsViewController.genres[indexPath.row]
+                let cellViewModel = genresCollectionViewViewModel.cellViewModel(forIndexPath: indexPath)
                 cell.backgroundColor = .systemGray6
                 cell.layer.cornerRadius = 12
-                cell.genreLabel.text = genre.name?.capitalized
+                cell.layer.shadowPath = UIBezierPath(rect: cell.bounds).cgPath
+                cell.viewModel = cellViewModel
                 return cell
-                
             }
             
         case favouriteFilmsCollectionView:
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FavouriteFilmsCollectionViewCell.reuseIdentifier, for: indexPath) as? FavouriteFilmsCollectionViewCell {
                 
-                if SuggestionsViewController.favouriteFilms.isEmpty {
+                if favoritesCollectionViewViewModel.numberOfItems() != 0 {
+                    let cellViewModel = favoritesCollectionViewViewModel.cellViewModel(forIndexPath: indexPath)
+                    cell.viewModel = cellViewModel
+                    cell.imageView.isHidden = false
+                    cell.imagePlaceholder.isHidden = true
+                    return cell
+                    
+                } else {
                     cell.backgroundColor = .systemGray6
                     cell.imageView.isHidden = true
                     cell.layer.cornerRadius = 10
                     cell.imagePlaceholder.text = "Нет фильма"
                     cell.imagePlaceholder.isHidden = false
                     return cell
-                    
-                } else {
-                    let film = SuggestionsViewController.favouriteFilms.reversed()[indexPath.row]
-                    cell.imageView.isHidden = false
-                    if let poster = film.poster {
-                        if let posterImage = UIImage(data: poster) {
-                            let newPoster = posterImage.resizeImageUsingVImage(size: CGSize.init(width: cell.frame.size.width,
-                                                                                                 height: cell.frame.size.height))
-                            cell.imageView.image = newPoster
-                            return cell
-                        }
-                    } else {
-                        cell.imageView.image = #imageLiteral(resourceName: "1024px-No_image_available.svg")
-                        return cell
-                    }
                 }
             }
             
@@ -144,81 +124,46 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
         return UICollectionViewCell()
     }
     
+    
     //MARK: didSelectItemAt-
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         switch collectionView {
         case genreCollectionView:
-            break
-            
+            guard let cell = collectionView.cellForItem(at: indexPath) else { return }
+            animateCell(cell: cell)
+            let genreVC = GenreViewController()
+            let genre = genresCollectionViewViewModel.fetchGenres(indexPath: indexPath)
+            navigationController?.pushViewController(genreVC, animated: true)
+            genreVC.navigationController?.visibleViewController?.title = genre.name?.capitalized
+                        
         case recommendationsCollectionView:
             guard let cell = collectionView.cellForItem(at: indexPath) else { return }
+            animateCell(cell: cell)
+            suggestionsCollectionViewViewModel.selectRow(atIndexPath: indexPath)
             let previewVC = PreviewViewController()
-            let film = SuggestionsViewController.films[indexPath.row]
-            if let poster = film.poster {
-                if let posterImage = UIImage(data: poster) {
-                    let resizedPoster = posterImage.resizeImageUsingVImage(size: CGSize.init(width: view.frame.width,
-                                                                                             height: view.frame.height * 0.6))
-                    animateCell(cell: cell)
-                    previewVC.imageView.image = resizedPoster
-                    previewVC.titleLabel.text = film.title
-                    previewVC.overviewText.text = film.overview
-                    previewVC.film = film
-                    navigationController?.present(previewVC, animated: true, completion: {
-                        previewVC.favoriteButton.setTitle("Добавить в избранное", for: .normal)
-                        previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.addToFavorites), for: .touchUpInside)
-                        previewVC.suggestionsDelegate = self
-                    })
-                } else {
-                    
-                    previewVC.imageView.image = #imageLiteral(resourceName: "1024px-No_image_available.svg")
-                    previewVC.titleLabel.text = film.title
-                    previewVC.overviewText.text = film.overview
-                    previewVC.film = film
-                    navigationController?.present(previewVC, animated: true, completion: {
-                        previewVC.film = film
-                        previewVC.favoriteButton.setTitle("Добавить в избранное", for: .normal)
-                        previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.addToFavorites), for: .touchUpInside)
-                        previewVC.suggestionsDelegate = self
-                        
-                    })
-                }
-            }
+            previewVC.viewModel = suggestionsCollectionViewViewModel.viewModelForSelectedRow()
+            previewVC.viewModel?.suggestionsDelegate = self
+            navigationController?.present(previewVC, animated: true, completion: {
+                previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.addToFavorites),
+                                                   for: .touchUpInside)
+                previewVC.favoriteButton.setTitle("Добавить в избранное", for: .normal)
+            })
             
         case favouriteFilmsCollectionView:
-            if SuggestionsViewController.favouriteFilms.isEmpty {
+            if favoritesCollectionViewViewModel.numberOfItems() == 0 {
                 
             } else {
                 guard let cell = collectionView.cellForItem(at: indexPath) else { return }
+                animateCell(cell: cell)
+                favoritesCollectionViewViewModel.selectRow(atIndexPath: indexPath)
                 let previewVC = PreviewViewController()
-                let film = SuggestionsViewController.favouriteFilms.reversed()[indexPath.row]
-                if let poster = film.poster {
-                    guard let posterImage = UIImage(data: poster) else { return }
-                    let resizedPoster = posterImage.resizeImageUsingVImage(size: CGSize.init(width: view.frame.width,
-                                                                                             height: view.frame.height * 0.6))
-                    
-                    animateCell(cell: cell)
-                    previewVC.imageView.image = resizedPoster
-                    previewVC.titleLabel.text = film.title
-                    previewVC.overviewText.text = film.overview
-                    self.navigationController?.present(previewVC, animated: true, completion: {
-                        previewVC.favoriteButton.setTitle("Удалить из избранного", for: .normal)
-                        previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.deleteFromFavorites), for: .touchUpInside)
-                        previewVC.suggestionsDelegate = self
-                    })
-                    
-                } else {
-                    animateCell(cell: cell)
-                    previewVC.imageView.image = #imageLiteral(resourceName: "1024px-No_image_available.svg")
-                    previewVC.titleLabel.text = film.title
-                    previewVC.overviewText.text = film.overview
-                    self.navigationController?.present(previewVC, animated: true, completion: {
-                        previewVC.favoriteButton.setTitle("Удалить из избранного", for: .normal)
-                        previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.deleteFromFavorites), for: .touchUpInside)
-                        previewVC.suggestionsDelegate = self
-                    })
-                }
-                
+                previewVC.viewModel = favoritesCollectionViewViewModel.viewModelForSelectedRow()
+                previewVC.viewModel?.suggestionsDelegate = self
+                navigationController?.present(previewVC, animated: true, completion: {
+                    previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.deleteFromFavorites), for: .touchUpInside)
+                    previewVC.favoriteButton.setTitle("Удалить из избранного", for: .normal)
+                })
             }
             
         default:
@@ -226,6 +171,7 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
             
         }
     }
+    
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         //настройка ползунка при прокручивании
@@ -243,6 +189,5 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
                 horizontalIndicator.isHidden = true
             }
         }
-        
     }  
 }

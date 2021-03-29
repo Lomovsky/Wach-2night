@@ -8,49 +8,44 @@
 import UIKit
 
 class TableViewCell: UITableViewCell {
-    
+    private var _viewModel = SearchViewViewModel()
     //MARK: Declarations
     
-    let ratingLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    var activityIndicator: UIActivityIndicatorView = {
+        let acrivityIndicator = UIActivityIndicatorView()
+        acrivityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        return acrivityIndicator
     }()
     
-    let starImage: UIImageView = {
-        let image = UIImageView()
-        image.translatesAutoresizingMaskIntoConstraints = false
-        return image
-    }()
     
-    let ratingStackView: UIStackView = {
-        let stack = UIStackView()
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        return stack
-    }()
+    weak var viewModel: SearchViewTableViewCellViewModelType? {
+        willSet(viewModel) {
+            guard let viewModel = viewModel else { return }
+            self.textLabel?.text = viewModel.title
+            self.imageView?.image = viewModel.poster
+        }
+    }
     
     //MARK: Initializer -
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
-    }
-    
-    
-    
-    //MARK: SetupFuncs -
 
-    private func setupRatingStackView() {
-        ratingStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        ratingStackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
-        ratingStackView.frame.size.width = 30
-        ratingStackView.addSubview(starImage)
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: .default, reuseIdentifier: _viewModel.cellID)
+
         
     }
     
-    private func setupStarImage() {
-        starImage.leadingAnchor.constraint(equalTo: ratingStackView.leadingAnchor).isActive = true
-        starImage.centerYAnchor.constraint(equalTo: ratingStackView.centerYAnchor).isActive = true
-        starImage.image = UIImage(systemName: "star.fill")
-        starImage.tintColor = .systemYellow
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
+    
+    private func setupActivityIndicator() {
+        activityIndicator.topAnchor.constraint(equalTo: imageView?.topAnchor ?? contentView.topAnchor).isActive = true
+        activityIndicator.leadingAnchor.constraint(equalTo: imageView?.leadingAnchor ?? contentView.leadingAnchor).isActive = true
+        activityIndicator.trailingAnchor.constraint(equalTo: imageView?.trailingAnchor ?? textLabel!.leadingAnchor).isActive = true
+        activityIndicator.bottomAnchor.constraint(equalTo: imageView?.bottomAnchor ?? contentView.bottomAnchor).isActive = true
+        activityIndicator.startAnimating()
+    }
+    
 }
+

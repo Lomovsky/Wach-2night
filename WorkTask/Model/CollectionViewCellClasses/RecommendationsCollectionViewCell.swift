@@ -8,12 +8,12 @@
 import UIKit
 
 class RecommendationsCollectionViewCell: UICollectionViewCell {
+    // MARK: Declarations
     
     class var reuseIdentifier: String {
         return "CollectionViewCellReuseIdentifier"
     }
 
-    // MARK: Declarations
     let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -23,44 +23,27 @@ class RecommendationsCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
-
+    weak var viewModel: SuggestionsCollectionViewCellViewModelType? {
+        willSet(viewModel) {
+            guard let viewModel = viewModel else { return }
+            self.imageView.image = viewModel.poster
+        }
+    }
     
+
     //MARK: Initializer -
     override init(frame: CGRect) {
         super.init(frame: .zero)
         contentView.addSubview(imageView)
         
-        
-        
         setupImageView()
-   
     }
-    
-    
-    
+     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     // MARK: Setup funcs -
-//    func setGradientBackground() {
-//        let colorTop =  UIColor.clear.cgColor
-//        let colorBottom = UIColor.white.cgColor
-//            let gradientLayer = CAGradientLayer()
-//            gradientLayer.colors = [colorTop, colorBottom]
-//            gradientLayer.locations = [0.0, 1.0]
-//            gradientLayer.frame = self.contentView.bounds
-//            self.contentView.layer.insertSublayer(gradientLayer, at: 0)
-//        }
-//    
-//    func setupGradient() {
-//        let gradient: CAGradientLayer = CAGradientLayer()
-//         gradient.frame = self.imageSubviewShadow.bounds
-//        gradient.colors = [  UIColor.white.cgColor, UIColor.clear.cgColor  ]
-//         gradient.locations = [0.0, 0.75]
-//         gradient.cornerRadius = 5
-//        self.imageSubviewShadow.layer.insertSublayer(gradient, at: 0)
-//    }
     
     private func setupImageView() {
         imageView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
@@ -68,14 +51,6 @@ class RecommendationsCollectionViewCell: UICollectionViewCell {
         imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
         imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         
-    }
-  
-
-    
-    // MARK: Configuring the cell -
-    final func configureCell(image: UIImage, title: String, originalTitle: String, releaseDate: String, rating: Float) {
-        self.imageView.image = image
-
     }
     
 }

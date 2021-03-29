@@ -10,6 +10,9 @@ import UIKit
 protocol SuggestionsDelegate: class {
     
     func updateFavorites()
-    
+    func uppateUIAfterDownloadingData()
+    func updateUIOffline()
+    func updateGenresUI()
+    func stopRefreshing()
 }
 

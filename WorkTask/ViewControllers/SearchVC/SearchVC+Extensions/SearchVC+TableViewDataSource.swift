@@ -13,45 +13,16 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     // MARK: - Table view data source    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return self.films.count
+        return tableViewViewModel.numberOfItems()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! TableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: viewModel.cellID, for: indexPath) as! TableViewCell
         
-        let itemNumber = NSNumber(value: indexPath.item)
-        let film = self.films[indexPath.row]
-        
-        cell.imageView?.image = #imageLiteral(resourceName: "1024px-No_image_available.svg")
-        cell.textLabel?.text = film.title
-        
-        if let posterPath = film.posterPath {
-            let posterUrlString = imagePath + posterPath
-            let posterURL = URL(string: posterUrlString)
-            
-            if let cashedImage = cache.object(forKey: itemNumber) {
-                cell.imageView?.image = cashedImage
-                cell.imageView?.clipsToBounds =  true
-                cell.imageView?.layer.cornerRadius = 20
-            } else {
-                DispatchQueue.global(qos: .utility).async {
-                    let imageData = try? Data(contentsOf: posterURL!)
-                    let poster = UIImage(data: imageData!)
-                    let resizedPoster = poster?.resizeImageUsingVImage(size: CGSize.init(width: 50, height: 50))
-                    DispatchQueue.main.async {
-                        cell.imageView?.image = resizedPoster
-                        cell.imageView?.clipsToBounds =  true
-                        cell.imageView?.layer.cornerRadius = 20
-                        self.cache.setObject(resizedPoster!, forKey: itemNumber)
-                    }
-                }
-            }
-        } else {
-            cell.imageView?.image = #imageLiteral(resourceName: "1024px-No_image_available.svg")
-            cell.textLabel?.text = film.title
-            cell.imageView?.clipsToBounds =  true
-            cell.imageView?.layer.cornerRadius = 20
-        }
+        let cellViewModel = tableViewViewModel.cellViewModel(forIndexPath: indexPath, cell: cell)
+        cell.viewModel = cellViewModel
+        cell.imageView?.clipsToBounds = true
+        cell.imageView?.layer.cornerRadius = 20
         
         return cell
     }
@@ -61,22 +32,12 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let film = self.films[indexPath.row]
-        let selectedFilmVC = SelectedFilmViewController()
-        guard let posterPath = film.posterPath else { return }
-        let posterUrlString = imagePath + posterPath
-        guard let posterURL = URL(string: posterUrlString) else { return }
-        DispatchQueue.global(qos: .utility).async {
-            guard let imageData = try? Data(contentsOf: posterURL) else { return }
-            let poster = UIImage(data: imageData)
-            
-            //TODO: work with GSD
-            DispatchQueue.main.async {
-                let resizedPoster = poster?.resizeImageUsingVImage(size: CGSize.init(width: 200, height: 200))
-                selectedFilmVC.imageView.image = resizedPoster
-                self.navigationController?.pushViewController(selectedFilmVC, animated: true)
-                
-            }
+        
+        let previewVC = PreviewViewController()
+        tableViewViewModel.selectRow(atIndexPath: indexPath)
+        let model = tableViewViewModel.viewModelForSelectedRow()
+        previewVC.viewModel = model
+        navigationController?.present(previewVC, animated: true, completion: nil)
+        
         }
-    }
 }
