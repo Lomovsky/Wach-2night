@@ -20,4 +20,9 @@ class GenreCollectionViewViewModel: GenreCollectionViewViewModelType {
         return GenreCollectionViewCellViewModel(genre: genre)
     }
     
+    func fetchGenres(indexPath: IndexPath) -> Genre {
+        let genre = coreDataManager.fetchGenresData()?[indexPath.row]
+        return genre!
+    }
+    
 }
