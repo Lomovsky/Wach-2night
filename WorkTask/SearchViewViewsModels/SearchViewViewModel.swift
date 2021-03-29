@@ -9,11 +9,11 @@ import UIKit
 
 class SearchViewViewModel: SearchViewViewModelType {
     
+    public let cellID = "Cell"
     static var films: [Film] = []
+    let searchController = UISearchController(searchResultsController: nil)
     var searchDelegate: SearchDelegate?
     var cache = NSCache<NSNumber, UIImage>()
-    let searchController = UISearchController(searchResultsController: nil)
-    let cellID = "Cell"
     var timer: Timer?
     
     

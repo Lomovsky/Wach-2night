@@ -12,5 +12,5 @@ protocol SearchViewTableViewViewModelType {
     
     func numberOfItems() -> Int
     func cellViewModel(forIndexPath indexPath: IndexPath, cell: UITableViewCell) -> SearchViewTableViewCellViewModelType?
-//    func configureTheCell(cell: UITableViewCell, itemNumber: NSNumber, film: Film, indexPath: IndexPath) -> UITableViewCell
+
 }

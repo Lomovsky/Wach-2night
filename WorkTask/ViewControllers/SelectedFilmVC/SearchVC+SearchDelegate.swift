@@ -11,6 +11,7 @@ extension SearchViewController: SearchDelegate {
     
     func updateUI() {
         tableView.reloadData()
+        print("UPDATED")
     }
     
 }

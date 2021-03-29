@@ -21,6 +21,8 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         
         let cellViewModel = tableViewViewModel.cellViewModel(forIndexPath: indexPath, cell: cell)
         cell.viewModel = cellViewModel
+        cell.imageView?.clipsToBounds = true
+        cell.imageView?.layer.cornerRadius = 20
         
         return cell
     }
