@@ -13,11 +13,11 @@ extension SearchViewController {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
         var searchURL = ""
-        viewModel.timer?.invalidate()
-        viewModel.timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { [weak self] (_) in
+        viewModel?.timer?.invalidate()
+        viewModel?.timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { [weak self] (_) in
             guard let self = self else { return }
-            self.viewModel.cache.removeAllObjects()
-            SearchViewViewModel.films.removeAll()
+            self.viewModel?.cache.removeAllObjects()
+            self.viewModel?.films.removeAll()
             if let language = NSLinguisticTagger.dominantLanguage(for: searchText) {
                 if language == "nb" {
                     searchURL = "https://api.themoviedb.org/3/search/movie?api_key=\(apiKey)&language=en-US&query=\(searchText)&page=1&include_adult=false"
@@ -27,7 +27,7 @@ extension SearchViewController {
                     print("API LINK LOOKS LIKE:\(searchURL)")
                 }
             }
-            self.viewModel.search(url: searchURL)
+            self.viewModel?.search(url: searchURL)
         })
     }
 }

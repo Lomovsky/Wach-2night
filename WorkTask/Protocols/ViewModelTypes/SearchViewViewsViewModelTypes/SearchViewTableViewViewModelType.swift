@@ -9,7 +9,7 @@ import UIKit
 
 protocol SearchViewTableViewViewModelType {
     
-    
+    var searchDelegate: SearchDelegate? { get set }
     func numberOfItems() -> Int
     func cellViewModel(forIndexPath indexPath: IndexPath, cell: UITableViewCell) -> SearchViewTableViewCellViewModelType?
     func viewModelForSelectedRow() -> PreviewViewModelType?

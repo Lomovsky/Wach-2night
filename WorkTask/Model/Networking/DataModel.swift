@@ -30,6 +30,7 @@ import Foundation
     
  }
  
+ 
  // MARK: - Genre
  struct Genres: Codable {
      let genres: [GenreElement]

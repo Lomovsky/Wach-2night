@@ -266,6 +266,7 @@
 			children = (
 				C0CE78BB25CAD38900A55990 /* SearchVC+TableViewDataSource.swift */,
 				C07E70D925BB33F2001EE1AC /* SearchVC+SearchBarDelegate.swift */,
+				C0B1D023260A489600456168 /* SearchVC+SearchDelegate.swift */,
 			);
 			path = "SearchVC+Extensions";
 			sourceTree = "<group>";
@@ -327,7 +328,6 @@
 		C0A19AEA25D13EF200575196 /* SelectedFilmVC */ = {
 			isa = PBXGroup;
 			children = (
-				C0B1D023260A489600456168 /* SearchVC+SearchDelegate.swift */,
 				C008D31325CC4DDB00413490 /* SelectedFilmViewController.swift */,
 			);
 			path = SelectedFilmVC;

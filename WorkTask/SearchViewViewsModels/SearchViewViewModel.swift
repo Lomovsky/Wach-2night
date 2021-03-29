@@ -10,7 +10,7 @@ import UIKit
 class SearchViewViewModel: SearchViewViewModelType {
     
     public let cellID = "Cell"
-    static var films: [Film] = []
+    var films: [Film] = []
     let searchController = UISearchController(searchResultsController: nil)
     var searchDelegate: SearchDelegate?
     var cache = NSCache<NSNumber, UIImage>()
@@ -25,8 +25,8 @@ class SearchViewViewModel: SearchViewViewModelType {
                 print(error)
             case .success(let filmResponse):
                 filmResponse.results.enumerated().forEach { (film) in
-                    SearchViewViewModel.films.insert(film.element, at: film.offset)
-                        print(SearchViewViewModel.films.count)
+                    self.films.insert(film.element, at: film.offset)
+                    print(self.films.count)
                     }
                 self.searchDelegate?.updateUI()
                         print("reloaded the data")

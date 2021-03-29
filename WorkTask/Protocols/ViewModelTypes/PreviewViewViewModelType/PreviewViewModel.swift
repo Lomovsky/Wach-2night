@@ -15,6 +15,7 @@ class PreviewViewModel: PreviewViewModelType {
     var film: CurrentFilm?
     var searchedFilm: Film?
     private var _coreDataManager = CoreDataManager()
+    let queue = DispatchQueue(label: "imageQueue", qos: .utility)
     
     
     
@@ -26,9 +27,9 @@ class PreviewViewModel: PreviewViewModelType {
                 return  poster
             }
         } else {
-            return #imageLiteral(resourceName: "1024px-No_image_available.svg")
+            return UIImage(named: "1024px-No_image_available.svg")!
         }
-
+        
         return UIImage()
     }
     
@@ -44,7 +45,7 @@ class PreviewViewModel: PreviewViewModelType {
     var overview: String {
         if film != nil {
             return (film?.overview) ?? "Нет данных"
-
+            
         } else {
             return searchedFilm?.overview ?? "Нет данных"
         }
@@ -69,5 +70,25 @@ class PreviewViewModel: PreviewViewModelType {
         _coreDataManager.removeFromFavorites(film: filmToDelete)
         suggestionsDelegate?.updateFavorites()
     }
+    
+//    func downloadImage(film: Film) -> UIImage {
+//        var poster = UIImage()
+//
+//        if let posterPath = film.posterPath {
+//            let posterURL = imagePath + posterPath
+//            DispatchQueue.main.async {
+//                guard let url = URL(string: posterURL) else { return }
+//                do {
+//                    let posterData = try Data(contentsOf: url)
+//                    let image = UIImage(data: posterData)
+//                    poster = image!
+//                } catch let error as NSError {
+//                    assertionFailure("\(error)")
+//                }
+//            }
+//        }
+//        return poster
+//    }
+//
 }
 
