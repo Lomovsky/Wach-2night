@@ -36,6 +36,12 @@ extension SuggestionsViewController {
         }
     }
     
+    @objc final func showMore() {
+        let vc = GenreViewController()
+        vc.navigationController?.visibleViewController?.title = "Рекомендации"
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
 }
 
 

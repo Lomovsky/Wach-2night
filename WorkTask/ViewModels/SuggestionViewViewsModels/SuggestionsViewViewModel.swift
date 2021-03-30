@@ -5,7 +5,7 @@
 //  Created by Алекс Ломовской on 23.03.2021.
 //
 
-import Foundation
+import UIKit
 
 final class SuggestionsViewViewModel: SuggestionsViewViewModelType {
     
@@ -13,6 +13,8 @@ final class SuggestionsViewViewModel: SuggestionsViewViewModelType {
     private let _dataManager = DataManager()
     var suggestionsDelegate: SuggestionsDelegate?
     var favoriteFilmsArrayIsEmpty: Bool = true
+    
+  
     
     func downloadFilms(condition: Conditions) {
         if Reachability.isConnectedToNetwork() {
@@ -35,6 +37,22 @@ final class SuggestionsViewViewModel: SuggestionsViewViewModelType {
                 self.suggestionsDelegate?.stopRefreshing()
             }
         }
+        
     }
     
+    
+    
+    
 }
+//
+//enum Y {
+//    case upload
+//    case download
+//}
+//
+//
+//extension String {
+//
+//    static var some: [Y : String] = [.upload: "upload", .download:"Download"]
+//
+//}

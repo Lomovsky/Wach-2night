@@ -136,7 +136,7 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
             let genre = genresCollectionViewViewModel.fetchGenres(indexPath: indexPath)
             navigationController?.pushViewController(genreVC, animated: true)
             genreVC.navigationController?.visibleViewController?.title = genre.name?.capitalized
-                        
+            
         case recommendationsCollectionView:
             guard let cell = collectionView.cellForItem(at: indexPath) else { return }
             animateCell(cell: cell)

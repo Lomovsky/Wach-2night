@@ -15,7 +15,7 @@ enum ID {
 
 final public class CoreDataManager {
     let mainMOC = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    let privateMOC = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.newBackgroundContext()
+//    let privateMOC = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.newBackgroundContext()
     var setOfIDs = Set<Int32>()
     var setOfGenres = Set<Int32>()
     
@@ -43,8 +43,8 @@ final public class CoreDataManager {
     
     
     func saveFilms(_ filmTitle: String, filmOriginalTitle: String, filmPoster: Data, releaseDate: String, overview: String, rating: Float, id: Int, isFav: Bool) {
-        guard let entityDescription = NSEntityDescription.entity(forEntityName: "CurrentFilm", in: privateMOC) else { return }
-        let film = NSManagedObject(entity: entityDescription, insertInto: privateMOC) as! CurrentFilm
+        guard let entityDescription = NSEntityDescription.entity(forEntityName: "CurrentFilm", in: mainMOC) else { return }
+        let film = NSManagedObject(entity: entityDescription, insertInto: mainMOC) as! CurrentFilm
         
         film.title = filmTitle
         film.originalTitle = filmOriginalTitle
@@ -56,16 +56,16 @@ final public class CoreDataManager {
         film.isFavorite = isFav
         
         do {
-            try privateMOC.save()
-            mainMOC.performAndWait {
-                
-                do {
-                    try mainMOC.save()
-                    
-                } catch let error as NSError {
-                    assertionFailure("\(error)")
-                }
-            }
+            try mainMOC.save()
+//            mainMOC.performAndWait {
+//
+//                do {
+//                    try mainMOC.save()
+//
+//                } catch let error as NSError {
+//                    assertionFailure("\(error)")
+//                }
+//            }
         } catch let error as NSError {
             assertionFailure("\(error)")
         }
@@ -75,22 +75,22 @@ final public class CoreDataManager {
     
     func saveGenres(_ genreID: Int, genreName: String) {
         
-        guard let entityDescription = NSEntityDescription.entity(forEntityName: "Genre", in: privateMOC) else { return }
-        let genre = NSManagedObject(entity: entityDescription, insertInto: privateMOC) as! Genre
+        guard let entityDescription = NSEntityDescription.entity(forEntityName: "Genre", in: mainMOC) else { return }
+        let genre = NSManagedObject(entity: entityDescription, insertInto: mainMOC) as! Genre
         genre.id = Int32(genreID)
         genre.name = genreName
         
         do {
-            try privateMOC.save()
-            mainMOC.performAndWait {
-                
-                do {
-                    try mainMOC.save()
-                    
-                } catch let error as NSError {
-                    assertionFailure("\(error)")
-                }
-            }
+            try mainMOC.save()
+//            mainMOC.performAndWait {
+//
+//                do {
+//                    try mainMOC.save()
+//
+//                } catch let error as NSError {
+//                    assertionFailure("\(error)")
+//                }
+//            }
         } catch let error as NSError {
             assertionFailure("\(error)")
         }
@@ -115,7 +115,7 @@ final public class CoreDataManager {
     }
     
     //MARK: Fetching methods -
-    func fetchFilmsData() -> [CurrentFilm]? {
+    func fetchFilmsData() -> [CurrentFilm] {
         
         let fetchRequest: NSFetchRequest<CurrentFilm> = CurrentFilm.fetchRequest()
         
@@ -126,10 +126,10 @@ final public class CoreDataManager {
         } catch let error as NSError {
             print(error)
         }
-        return nil
+        return []
     }
     
-    func fetchGenresData() -> [Genre]? {
+    func fetchGenresData() -> [Genre] {
         
         let fetchRequest: NSFetchRequest<Genre> = Genre.fetchRequest()
         
@@ -140,7 +140,7 @@ final public class CoreDataManager {
         } catch let error as NSError {
             print(error)
         }
-        return nil
+        return []
         
     }
     
@@ -220,36 +220,36 @@ final public class CoreDataManager {
         fetchRequest.includesPropertyValues = false
         
         do {
-            let items = try privateMOC.fetch(fetchRequest) as [NSManagedObject]
+            let items = try mainMOC.fetch(fetchRequest) as [NSManagedObject]
             for item in items {
-                privateMOC.delete(item)
+                mainMOC.delete(item)
             }
-            try privateMOC.save()
-            mainMOC.performAndWait {
-                do {
-                    try mainMOC.save()
-                } catch let error as NSError {
-                    assertionFailure("\(error)")
-                }
-            }
+            try mainMOC.save()
+//            mainMOC.performAndWait {
+//                do {
+//                    try mainMOC.save()
+//                } catch let error as NSError {
+//                    assertionFailure("\(error)")
+//                }
+//            }
         } catch let error as NSError {
             assertionFailure("\(error)")
         }
         
         do {
-            let items = try privateMOC.fetch(genreFetchRequest) as [NSManagedObject]
+            let items = try mainMOC.fetch(genreFetchRequest) as [NSManagedObject]
             for item in items {
-                privateMOC.delete(item)
+                mainMOC.delete(item)
             }
-            try privateMOC.save()
-            mainMOC.performAndWait {
-                do {
-                    try mainMOC.save()
-                    
-                } catch let error as NSError {
-                    assertionFailure("\(error)")
-                }
-            }
+            try mainMOC.save()
+//            mainMOC.performAndWait {
+//                do {
+//                    try mainMOC.save()
+//
+//                } catch let error as NSError {
+//                    assertionFailure("\(error)")
+//                }
+//            }
         } catch let error as NSError {
             assertionFailure("\(error)")
         }

@@ -50,6 +50,7 @@ extension SuggestionsViewController {
         contentView.addSubview(genreLabel)
         contentView.addSubview(genreCollectionView)
         contentView.addSubview(recommendationsLabel)
+        contentView.addSubview(showMoreButton)
         contentView.addSubview(recommendationsStack)
         contentView.addSubview(favouriteFilmsLabel)
         contentView.addSubview(favouriteFilmsCollectionView)
@@ -81,6 +82,17 @@ extension SuggestionsViewController {
         recommendationsLabel.font = .boldSystemFont(ofSize: 20)
     }
     
+    func setupMoreButton() {
+        showMoreButton.centerYAnchor.constraint(equalTo: recommendationsLabel.centerYAnchor).isActive = true
+        showMoreButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10).isActive = true
+        showMoreButton.setTitle("Еще", for: .normal)
+        showMoreButton.setTitleColor(.systemGreen, for: .normal)
+        showMoreButton.setTitleColor(.systemGray, for: .focused)
+        showMoreButton.addTarget(self, action: #selector(showMore), for: .touchUpInside)
+        
+    }
+
+    
     func setupRecommendationsStack() {
         recommendationsStack.topAnchor.constraint(equalTo: recommendationsLabel.bottomAnchor, constant: 5).isActive = true
         recommendationsStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
@@ -99,6 +111,7 @@ extension SuggestionsViewController {
         recommendationsCollectionView.accessibilityScroll(.left)
         recommendationsCollectionView.backgroundColor = .clear
         recommendationsCollectionView.contentInset = UIEdgeInsets(top: 0, left: 36, bottom: 0, right: 36)
+        
     }
     
     func setupActivityIndicator() {
@@ -125,5 +138,5 @@ extension SuggestionsViewController {
         favouriteFilmsCollectionView.backgroundColor = .clear
         favouriteFilmsCollectionView.contentInset = UIEdgeInsets(top: 0, left: 36, bottom: 0, right: 36)
     }
-    
+
 }

@@ -31,13 +31,14 @@ class SearchViewTableViewViewModel: SearchViewTableViewViewModelType {
                     let resizedPoster = poster?.resizeImageUsingVImage(size: CGSize.init(width: 50, height: 50))
                     DispatchQueue.main.async {
                         self._viewModel.cache.setObject(resizedPoster!, forKey: itemNumber)
-//                        self.searchDelegate?.updateUI()
+                        self._poster = resizedPoster!
+                        self.searchDelegate?.updateUI()
                     }
                 }
             }
         } else {
             _poster = #imageLiteral(resourceName: "1024px-No_image_available.svg")
-            searchDelegate?.updateUI()
+//            searchDelegate?.updateUI()
         }
     }
     
@@ -54,7 +55,7 @@ class SearchViewTableViewViewModel: SearchViewTableViewViewModelType {
     
     func cellViewModel(forIndexPath indexPath: IndexPath, cell: UITableViewCell) -> SearchViewTableViewCellViewModelType? {
         let film = _viewModel.films[indexPath.row]
-//        downloadPosters(itemNumber: NSNumber(value: indexPath.item), film: film, indexPath: indexPath)
+        downloadPosters(itemNumber: NSNumber(value: indexPath.item), film: film, indexPath: indexPath)
 //        searchDelegate?.updateUI()
         return SearchTableViewCellViewModel(title: film.title, poster: _poster)
     }

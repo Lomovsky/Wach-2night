@@ -26,7 +26,6 @@ final class GenreViewController: UIViewController {
         collectionView.dataSource = self
         view.addSubview(collectionView)
         
-        
         setupView()
         setupCollectionView()
     }
@@ -46,13 +45,14 @@ final class GenreViewController: UIViewController {
         collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor).isActive = true
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
-
         collectionView.backgroundColor = .clear
         
     }
-
 }
 
+
+
+//MARK: Extensions -
 extension GenreViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

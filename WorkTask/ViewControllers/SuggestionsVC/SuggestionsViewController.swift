@@ -50,6 +50,12 @@ final class SuggestionsViewController: UIViewController {
         return label
     }()
     
+    let showMoreButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     let recommendationsStack: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -110,6 +116,7 @@ final class SuggestionsViewController: UIViewController {
         setupGenreLabel()
         setupGenerCollectionView()
         setupRecommendationsLabel()
+        setupMoreButton()
         setupRecommendationsStack()
         setupRecommendationsCollectionView()
         setupActivityIndicator()
