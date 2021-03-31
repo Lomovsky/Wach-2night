@@ -17,7 +17,8 @@ final class SearchViewViewModel: SearchViewViewModelType {
     
     
     func search(url: String) {
-        NetworkManager.fetchCurrentData(withURL: url, dataModel: FilmResponse.self) { [weak self] (result) in
+        let networkManager = NetworkManager()
+        networkManager.fetchCurrentData(withURL: url, dataModel: FilmResponse.self) { [weak self] (result) in
             guard let self = self else { return }
             switch result {
             case .failure(let error):

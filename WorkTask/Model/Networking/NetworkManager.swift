@@ -9,9 +9,9 @@ import Foundation
 import Alamofire
 
 
-class NetworkManager {
+final class NetworkManager {
     
-    static func fetchCurrentData<DataModel: Codable>(withURL url: String, dataModel: DataModel.Type, completion: @escaping (Result<DataModel, Error>) -> Void) {
+     func fetchCurrentData<DataModel: Codable>(withURL url: String, dataModel: DataModel.Type, completion: @escaping (Result<DataModel, Error>) -> Void) {
         
         let downloadQueue = DispatchQueue(label: "networkManagerQueue", qos: .utility)
 
@@ -38,6 +38,6 @@ class NetworkManager {
     
     
     deinit {
-        print("\(self) WAS Deallocated")
+        print("\(self) was deallocated")
     }
 }

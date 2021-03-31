@@ -92,7 +92,7 @@ final class SearchViewController: UIViewController, UISearchBarDelegate {
     
     deinit {
         viewModel?.removeAllObjects()
-        print("search vc was dealocated")
+        print("\(self) was deallocated")
     }
     
 }

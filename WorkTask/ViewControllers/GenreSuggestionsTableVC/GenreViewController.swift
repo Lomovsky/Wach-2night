@@ -23,11 +23,7 @@ final class GenreViewController: UIViewController {
     
     let viewModel: GenreViewViewModelType = GenreViewViewModel()
     let collectionViewModel: GenreViewCollectionViewViewModelType = GenreViewCollectionViewViewModel()
-    
-    
-    
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.delegate = self

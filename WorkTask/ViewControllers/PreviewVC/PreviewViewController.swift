@@ -100,7 +100,7 @@ final class PreviewViewController: UIViewController {
     }
     
     deinit {
-        print("PreviewVC was dealocated")
+        print("\(self) was deallocated")
     }
     
 }

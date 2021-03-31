@@ -247,6 +247,6 @@ final public class CoreDataManager {
     }
     
     deinit {
-        print("CoreData manager was dealocated")
+        print("\(self) was deallocated")
     }
 }
