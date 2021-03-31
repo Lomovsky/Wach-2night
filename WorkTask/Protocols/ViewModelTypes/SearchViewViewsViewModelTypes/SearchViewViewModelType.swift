@@ -9,7 +9,7 @@ import UIKit
 
 protocol SearchViewViewModelType: class {
     
-    var films: [Film] { get set }
+    static var films: [Film] { get set }
     var searchDelegate: SearchDelegate? { get set }
     var cache: NSCache<NSNumber, UIImage> { get set }
     var searchController: UISearchController { get }

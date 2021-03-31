@@ -248,7 +248,6 @@
 				C0F2F778257D455700A1DAF9 /* ViewControllers */,
 				C07F14F325F65DFA007FF48A /* Protocols */,
 				C0CD0F392608A67E00A589F8 /* ViewModels */,
-				C0B1D00B260A418600456168 /* SearchViewViewsModels */,
 				C003674A25824CBC00226ED4 /* Model */,
 			);
 			path = WorkTask;
@@ -428,6 +427,7 @@
 				C0B1CFE72609FEC900456168 /* SuggestionViewViewsModels */,
 				C0A210DC2611FF4B0073649A /* GenreViewViewModels */,
 				C0B1D000260A1BD000456168 /* PreviewViewViewModel */,
+				C0B1D00B260A418600456168 /* SearchViewViewsModels */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";

@@ -9,7 +9,7 @@ import UIKit
 
 final class SearchViewViewModel: SearchViewViewModelType {
     
-    var films: [Film] = []
+    static var films: [Film] = []
     let searchController = UISearchController(searchResultsController: nil)
     weak var searchDelegate: SearchDelegate?
     var cache = NSCache<NSNumber, UIImage>()
@@ -24,9 +24,9 @@ final class SearchViewViewModel: SearchViewViewModelType {
             case .failure(let error):
                 print(error)
             case .success(let filmResponse):
-                filmResponse.results.forEach { [unowned self] (film) in
-                    self.films.append(film)
-                    print(self.films.count)
+                filmResponse.results.forEach { (film) in
+                    SearchViewViewModel.films.append(film)
+                    print(SearchViewViewModel.films.count)
                     }
                 self.searchDelegate?.updateUI()
                         print("reloaded the data")
@@ -36,6 +36,6 @@ final class SearchViewViewModel: SearchViewViewModelType {
     
     func removeAllObjects() {
         cache.removeAllObjects()
-        films.removeAll()
+        SearchViewViewModel.films.removeAll()
     }
 }

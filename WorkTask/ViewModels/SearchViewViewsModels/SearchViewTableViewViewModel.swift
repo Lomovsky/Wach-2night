@@ -49,11 +49,11 @@ class SearchViewTableViewViewModel: SearchViewTableViewViewModelType {
     
     
     func numberOfItems() -> Int {
-        return _viewModel.films.count
+        return SearchViewViewModel.films.count
     }
     
     func cellViewModel(forIndexPath indexPath: IndexPath, cell: UITableViewCell) -> SearchViewTableViewCellViewModelType? {
-        let film = _viewModel.films[indexPath.row]
+        let film = SearchViewViewModel.films[indexPath.row]
 //        downloadPosters(itemNumber: NSNumber(value: indexPath.item), film: film, indexPath: indexPath)
 //        searchDelegate?.updateUI()
         return SearchTableViewCellViewModel(title: film.title, poster: _poster)
@@ -65,7 +65,7 @@ class SearchViewTableViewViewModel: SearchViewTableViewViewModelType {
     
     func viewModelForSelectedRow() -> PreviewViewModelType? {
         guard let selectedIndexPath = _selectedIndexPath else { return nil }
-        return PreviewViewModel(currentFilm: nil, searchedFilm: _viewModel.films[selectedIndexPath.row])
+        return PreviewViewModel(currentFilm: nil, searchedFilm: SearchViewViewModel.films[selectedIndexPath.row])
     }
     
 }
