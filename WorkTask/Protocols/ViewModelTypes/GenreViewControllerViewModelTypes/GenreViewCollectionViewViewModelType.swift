@@ -11,6 +11,5 @@ protocol GenreViewCollectionViewViewModelType {
     
     func numberOfItems() -> Int
     func cellViewModel(forIndexPath indexPath: IndexPath) -> GenreViewCollectionViewCellViewModelType?
-//    func fetchGenres(indexPath: IndexPath) -> Genre
     
 }

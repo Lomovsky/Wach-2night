@@ -15,7 +15,6 @@ enum ID {
 
 final public class CoreDataManager {
     let mainMOC = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-//    let privateMOC = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.newBackgroundContext()
     var setOfIDs = Set<Int32>()
     var setOfGenres = Set<Int32>()
     
@@ -57,15 +56,15 @@ final public class CoreDataManager {
         
         do {
             try mainMOC.save()
-//            mainMOC.performAndWait {
-//
-//                do {
-//                    try mainMOC.save()
-//
-//                } catch let error as NSError {
-//                    assertionFailure("\(error)")
-//                }
-//            }
+            //            mainMOC.performAndWait {
+            //
+            //                do {
+            //                    try mainMOC.save()
+            //
+            //                } catch let error as NSError {
+            //                    assertionFailure("\(error)")
+            //                }
+            //            }
         } catch let error as NSError {
             assertionFailure("\(error)")
         }
@@ -82,15 +81,6 @@ final public class CoreDataManager {
         
         do {
             try mainMOC.save()
-//            mainMOC.performAndWait {
-//
-//                do {
-//                    try mainMOC.save()
-//
-//                } catch let error as NSError {
-//                    assertionFailure("\(error)")
-//                }
-//            }
         } catch let error as NSError {
             assertionFailure("\(error)")
         }
@@ -225,13 +215,6 @@ final public class CoreDataManager {
                 mainMOC.delete(item)
             }
             try mainMOC.save()
-//            mainMOC.performAndWait {
-//                do {
-//                    try mainMOC.save()
-//                } catch let error as NSError {
-//                    assertionFailure("\(error)")
-//                }
-//            }
         } catch let error as NSError {
             assertionFailure("\(error)")
         }
@@ -242,14 +225,6 @@ final public class CoreDataManager {
                 mainMOC.delete(item)
             }
             try mainMOC.save()
-//            mainMOC.performAndWait {
-//                do {
-//                    try mainMOC.save()
-//
-//                } catch let error as NSError {
-//                    assertionFailure("\(error)")
-//                }
-//            }
         } catch let error as NSError {
             assertionFailure("\(error)")
         }

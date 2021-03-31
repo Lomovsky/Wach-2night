@@ -7,13 +7,13 @@
 
 import UIKit
 
-class SearchViewController: UIViewController, UISearchBarDelegate {
+final class SearchViewController: UIViewController, UISearchBarDelegate {
     
     //MARK: Declarations
     var viewModel: SearchViewViewModelType? = SearchViewViewModel()
     var tableViewViewModel: SearchViewTableViewViewModelType? = SearchViewTableViewViewModel()
     weak var coordinator: MainCoordinator?
-
+    
     //MARK: UIElements
     let shadowSubView: UIView = {
         let view = UIView()

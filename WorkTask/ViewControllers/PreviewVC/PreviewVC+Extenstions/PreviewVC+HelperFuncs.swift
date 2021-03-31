@@ -17,13 +17,11 @@ extension PreviewViewController {
         favoriteButton.addTarget(self, action: #selector(deleteFromFavorites), for: .touchUpInside)
         
     }
-
+    
     @objc func deleteFromFavorites() {
-        
         viewModel?.removeFromFavorites()
         viewModel?.suggestionsDelegate?.updateFavorites()
         dismiss(animated: true)
     }
-    
     
 }

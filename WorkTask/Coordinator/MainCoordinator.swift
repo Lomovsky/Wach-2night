@@ -7,12 +7,7 @@
 
 import UIKit
 
-enum Action {
-    case save
-    case delete
-}
-
-class MainCoordinator: Coordinator {
+final class MainCoordinator: Coordinator {
     
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
@@ -38,8 +33,6 @@ class MainCoordinator: Coordinator {
         
         let vc = SuggestionsViewController()
         let previewVC = PreviewViewController()
-
-        
         vc.coordinator = self
         previewVC.coordinator = self
         
@@ -48,7 +41,7 @@ class MainCoordinator: Coordinator {
             previewVC.viewModel = suggestionsCollectionViewViewModel?.viewModelForSelectedRow()
             navigationController.present(previewVC, animated: true) {
                 previewVC.viewModel?.suggestionsDelegate = selfDelegate
-
+                
                 previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.addToFavorites),
                                                    for: .touchUpInside)
                 previewVC.favoriteButton.setTitle("Добавить в избранное", for: .normal)
@@ -59,13 +52,10 @@ class MainCoordinator: Coordinator {
             previewVC.viewModel = favoriteCollectionViewViewModel?.viewModelForSelectedRow()
             navigationController.present(previewVC, animated: true) {
                 previewVC.viewModel?.suggestionsDelegate = selfDelegate
-
+                
                 previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.deleteFromFavorites), for: .touchUpInside)
                 previewVC.favoriteButton.setTitle("Удалить из избранного", for: .normal)
             }
         }
-
     }
-    
-    
 }

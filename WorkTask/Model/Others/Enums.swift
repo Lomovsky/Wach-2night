@@ -11,3 +11,9 @@ enum Conditions {
     case update
     case download
 }
+
+enum Action {
+    case save
+    case delete
+}
+

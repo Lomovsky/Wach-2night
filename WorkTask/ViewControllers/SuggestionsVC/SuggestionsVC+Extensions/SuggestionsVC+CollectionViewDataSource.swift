@@ -130,12 +130,7 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
         
         switch collectionView {
         case genreCollectionView:
-            guard let cell = collectionView.cellForItem(at: indexPath) else { return }
-            animateCell(cell: cell)
-            let genreVC = GenreViewController()
-            let genre = genresCollectionViewViewModel.fetchGenres(indexPath: indexPath)
-            navigationController?.pushViewController(genreVC, animated: true)
-            genreVC.navigationController?.visibleViewController?.title = genre.name?.capitalized
+           break
             
         case recommendationsCollectionView:
             guard let cell = collectionView.cellForItem(at: indexPath) else { return }
@@ -151,15 +146,6 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
                 animateCell(cell: cell)
                 favoritesCollectionViewViewModel.selectRow(atIndexPath: indexPath)
                 coordinator?.showPreview(suggestionsCollectionViewViewModel: nil, favoriteCollectionViewViewModel: favoritesCollectionViewViewModel, selfDelegate: self, action: .delete)
-                
-                
-//                let previewVC = PreviewViewController()
-//                previewVC.viewModel = favoritesCollectionViewViewModel.viewModelForSelectedRow()
-//                previewVC.viewModel?.suggestionsDelegate = self
-//                navigationController?.present(previewVC, animated: true, completion: {
-//                    previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.deleteFromFavorites), for: .touchUpInside)
-//                    previewVC.favoriteButton.setTitle("Удалить из избранного", for: .normal)
-//                })
             }
             
         default:

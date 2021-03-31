@@ -9,11 +9,11 @@ import UIKit
 
 extension PreviewViewController {
     //MARK: UIFuncs -
-
+    
     final func setupView() {
         view.backgroundColor = .white
     }
-      
+    
     final func setupScrollView() {
         scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
@@ -23,19 +23,6 @@ extension PreviewViewController {
         scrollView.addSubview(contentView)
     }
     
-//    final func setupStackView() {
-//        stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
-//        stackView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
-//        stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
-//        stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
-//        stackView.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
-//        stackView.addArrangedSubview(imageView)
-//        stackView.addArrangedSubview(titleLabel)
-//        stackView.addArrangedSubview(overviewLabel)
-//        stackView.addArrangedSubview(overviewText)
-//        stackView.addArrangedSubview(favoriteButton)
-//    }
-//
     func setupContentView() {
         contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
         contentView.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
@@ -51,9 +38,8 @@ extension PreviewViewController {
         contentView.addSubview(overviewLabel)
         contentView.addSubview(overviewText)
         contentView.addSubview(favoriteButton)
-
+        
     }
-
     
     final func setupImageView() {
         imageView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
@@ -84,7 +70,7 @@ extension PreviewViewController {
         overviewLabel.font = .boldSystemFont(ofSize: 12)
         overviewLabel.textColor = .black
     }
-
+    
     final func setupOverviewText() {
         overviewText.topAnchor.constraint(equalTo: overviewLabel.bottomAnchor, constant: 3).isActive = true
         overviewText.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5).isActive = true
@@ -93,7 +79,7 @@ extension PreviewViewController {
         overviewText.font = .systemFont(ofSize: 16, weight: .light)
         overviewText.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.75)
         overviewText.text = viewModel?.overview
-        }
+    }
     
     final func setupFavoriteButton() {
         favoriteButton.topAnchor.constraint(equalTo: overviewText.bottomAnchor, constant: 10).isActive = true
@@ -103,7 +89,7 @@ extension PreviewViewController {
         favoriteButton.backgroundColor = .systemGreen
         favoriteButton.titleLabel?.textColor = .white
         favoriteButton.layer.cornerRadius = 10
-      
+        
     }
     
 }
