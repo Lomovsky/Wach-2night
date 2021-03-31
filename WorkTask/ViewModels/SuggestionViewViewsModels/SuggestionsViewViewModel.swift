@@ -14,8 +14,6 @@ final class SuggestionsViewViewModel: SuggestionsViewViewModelType {
     var suggestionsDelegate: SuggestionsDelegate?
     var favoriteFilmsArrayIsEmpty: Bool = true
     
-  
-    
     func downloadFilms(condition: Conditions) {
         if Reachability.isConnectedToNetwork() {
             switch condition {
@@ -39,20 +37,4 @@ final class SuggestionsViewViewModel: SuggestionsViewViewModelType {
         }
         
     }
-    
-    
-    
-    
 }
-//
-//enum Y {
-//    case upload
-//    case download
-//}
-//
-//
-//extension String {
-//
-//    static var some: [Y : String] = [.upload: "upload", .download:"Download"]
-//
-//}
