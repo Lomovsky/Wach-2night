@@ -17,6 +17,7 @@ final class SearchViewViewModel: SearchViewViewModelType {
     func search(url: String) {
         let networkManager = NetworkManager()
         _tableViewModel.removeAllObjects()
+        searchDelegate?.updateUI()
         networkManager.fetchCurrentData(withURL: url, dataModel: FilmResponse.self) { [weak self] (result) in
             guard let self = self else { return }
             switch result {
@@ -26,8 +27,9 @@ final class SearchViewViewModel: SearchViewViewModelType {
                 filmResponse.results.forEach { [unowned self] (film) in
                     self._tableViewModel.addAFilm(film: film)
                     print(SearchViewTableViewViewModel.films.count)
+                    self.searchDelegate?.updateUI()
+
                 }
-                self.searchDelegate?.updateUI()
                 print("reloaded the data")
             }
         }

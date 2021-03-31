@@ -45,7 +45,7 @@ class SearchViewTableViewViewModel: SearchViewTableViewViewModelType {
     }
     
     func downloadPosters(itemNumber: NSNumber, film: Film, indexPath: IndexPath, cell: UITableViewCell) {
-        
+        cell.imageView?.image = #imageLiteral(resourceName: "1024px-No_image_available.svg")
         if let posterPath = film.posterPath {
             let posterUrlString = imagePath + posterPath
             let posterURL = URL(string: posterUrlString)
