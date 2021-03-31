@@ -12,7 +12,6 @@ extension SearchViewController {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-        
         var searchURL = ""
         viewModel?.timer?.invalidate()
         viewModel?.timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false, block: { [weak self] (_) in

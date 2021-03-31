@@ -124,7 +124,7 @@
 		C0B1CFF6260A040C00456168 /* FavoritesCollectionViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCollectionViewViewModel.swift; sourceTree = "<group>"; };
 		C0B1CFFA260A041D00456168 /* FavoritesCollectionViewCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCollectionViewCellViewModel.swift; sourceTree = "<group>"; };
 		C0B1D001260A1BF400456168 /* PreviewViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewModelType.swift; sourceTree = "<group>"; };
-		C0B1D005260A1C0100456168 /* PreviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PreviewViewModel.swift; path = WorkTask/Protocols/ViewModelTypes/PreviewViewViewModelType/PreviewViewModel.swift; sourceTree = SOURCE_ROOT; };
+		C0B1D005260A1C0100456168 /* PreviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PreviewViewModel.swift; path = WorkTask/ViewModels/PreviewViewViewModel/PreviewViewModel.swift; sourceTree = SOURCE_ROOT; };
 		C0B1D00C260A41AB00456168 /* SearchViewViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewViewModelType.swift; sourceTree = "<group>"; };
 		C0B1D010260A41FA00456168 /* SearchViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewViewModel.swift; sourceTree = "<group>"; };
 		C0B1D013260A426800456168 /* SearchViewTableViewViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewTableViewViewModelType.swift; sourceTree = "<group>"; };
@@ -180,8 +180,7 @@
 		C003674A25824CBC00226ED4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				C0F2F776257D454000A1DAF9 /* CollectionViewCellClasses */,
-				C0CE78C425CADF0000A55990 /* TableViewCellClass */,
+				C0A93DAA2614A88C0033B192 /* Cells */,
 				C0D7124D2607E21B005BD6CC /* DataManager */,
 				C0B6B08D2583E61F002F1F7D /* Networking */,
 				C04D6E9725AB2E0900E4B151 /* CoreDataFiles */,
@@ -246,6 +245,7 @@
 				C0F2F773257D452400A1DAF9 /* Delegates */,
 				C0E8763826144D9D00B0198C /* Coordinator */,
 				C0F2F778257D455700A1DAF9 /* ViewControllers */,
+				C0CD0F422608A6D700A589F8 /* ViewModelTypes */,
 				C07F14F325F65DFA007FF48A /* Protocols */,
 				C0CD0F392608A67E00A589F8 /* ViewModels */,
 				C003674A25824CBC00226ED4 /* Model */,
@@ -276,8 +276,8 @@
 		C07F14F325F65DFA007FF48A /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				C0CD0F422608A6D700A589F8 /* ViewModelTypes */,
-				C0B1CFDA2609FA8000456168 /* DelegateProtocols */,
+				C0624C7525EE758100B6AD5E /* SuggestionsDelegateProtocol.swift */,
+				C0B1D020260A486A00456168 /* SearchDelegateProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -337,13 +337,13 @@
 			path = GenreViewViewModels;
 			sourceTree = "<group>";
 		};
-		C0B1CFDA2609FA8000456168 /* DelegateProtocols */ = {
+		C0A93DAA2614A88C0033B192 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				C0624C7525EE758100B6AD5E /* SuggestionsDelegateProtocol.swift */,
-				C0B1D020260A486A00456168 /* SearchDelegateProtocol.swift */,
+				C0F2F776257D454000A1DAF9 /* CollectionViewCells */,
+				C0CE78C425CADF0000A55990 /* TableViewCells */,
 			);
-			path = DelegateProtocols;
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		C0B1CFE32609FBB300456168 /* SuggestionViewViewsModelTypes */ = {
@@ -443,12 +443,12 @@
 			path = ViewModelTypes;
 			sourceTree = "<group>";
 		};
-		C0CE78C425CADF0000A55990 /* TableViewCellClass */ = {
+		C0CE78C425CADF0000A55990 /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
 				C0CE78C525CADF3700A55990 /* TableViewCell.swift */,
 			);
-			path = TableViewCellClass;
+			path = TableViewCells;
 			sourceTree = "<group>";
 		};
 		C0D7124D2607E21B005BD6CC /* DataManager */ = {
@@ -477,7 +477,7 @@
 			path = Delegates;
 			sourceTree = "<group>";
 		};
-		C0F2F776257D454000A1DAF9 /* CollectionViewCellClasses */ = {
+		C0F2F776257D454000A1DAF9 /* CollectionViewCells */ = {
 			isa = PBXGroup;
 			children = (
 				C062A58F25CDB03400C507ED /* GenreCollectionViewCell.swift */,
@@ -485,7 +485,7 @@
 				C0A19AD525D06FA700575196 /* FavouriteFilmsCollectionViewCell.swift */,
 				C058C7BB2611F20C003004E9 /* GenreViewConrtollerCollectionViewCell.swift */,
 			);
-			path = CollectionViewCellClasses;
+			path = CollectionViewCells;
 			sourceTree = "<group>";
 		};
 		C0F2F778257D455700A1DAF9 /* ViewControllers */ = {
