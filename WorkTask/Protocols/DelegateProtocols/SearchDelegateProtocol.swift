@@ -7,6 +7,7 @@
 
 import UIKit
 
-protocol SearchDelegate {
+protocol SearchDelegate: class {
+    
     func updateUI()
 }

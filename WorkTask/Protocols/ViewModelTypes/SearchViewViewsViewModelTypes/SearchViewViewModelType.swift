@@ -7,13 +7,12 @@
 
 import UIKit
 
-protocol SearchViewViewModelType {
+protocol SearchViewViewModelType: class {
     
     var films: [Film] { get set }
     var searchDelegate: SearchDelegate? { get set }
     var cache: NSCache<NSNumber, UIImage> { get set }
     var searchController: UISearchController { get }
-    var cellID: String { get }
     var timer: Timer? { get set }
     
     func search(url: String)

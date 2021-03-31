@@ -8,7 +8,10 @@
 import UIKit
 
 class TableViewCell: UITableViewCell {
-    private var _viewModel = SearchViewViewModel()
+    
+    class var cellID: String {
+        return "Cell"
+    }
     //MARK: Declarations
     
     var activityIndicator: UIActivityIndicatorView = {
@@ -30,7 +33,7 @@ class TableViewCell: UITableViewCell {
 
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: .default, reuseIdentifier: _viewModel.cellID)
+        super.init(style: .default, reuseIdentifier: TableViewCell.cellID)
 
         
     }

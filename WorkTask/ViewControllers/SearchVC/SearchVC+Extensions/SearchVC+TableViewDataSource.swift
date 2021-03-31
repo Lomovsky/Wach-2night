@@ -16,7 +16,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: viewModel!.cellID, for: indexPath) as! TableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.cellID, for: indexPath) as! TableViewCell
         let cellViewModel = tableViewViewModel?.cellViewModel(forIndexPath: indexPath, cell: cell)
         cell.viewModel = cellViewModel
         cell.imageView?.clipsToBounds = true

@@ -154,7 +154,6 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
         }
     }
     
-    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         //настройка ползунка при прокручивании
         if #available(iOS 13, *) {

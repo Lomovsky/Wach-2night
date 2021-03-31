@@ -9,10 +9,9 @@ import UIKit
 
 final class SearchViewViewModel: SearchViewViewModelType {
     
-    public let cellID = "Cell"
     var films: [Film] = []
     let searchController = UISearchController(searchResultsController: nil)
-    var searchDelegate: SearchDelegate?
+    weak var searchDelegate: SearchDelegate?
     var cache = NSCache<NSNumber, UIImage>()
     var timer: Timer?
     
@@ -24,8 +23,8 @@ final class SearchViewViewModel: SearchViewViewModelType {
             case .failure(let error):
                 print(error)
             case .success(let filmResponse):
-                filmResponse.results.enumerated().forEach { (film) in
-                    self.films.insert(film.element, at: film.offset)
+                filmResponse.results.forEach { [unowned self] (film) in
+                    self.films.append(film)
                     print(self.films.count)
                     }
                 self.searchDelegate?.updateUI()

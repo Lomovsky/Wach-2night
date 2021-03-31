@@ -79,7 +79,7 @@ final class SearchViewController: UIViewController, UISearchBarDelegate {
     private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(TableViewCell.self, forCellReuseIdentifier: viewModel!.cellID)
+        tableView.register(TableViewCell.self, forCellReuseIdentifier: TableViewCell.cellID)
         tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
