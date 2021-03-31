@@ -11,6 +11,8 @@ final class SuggestionsViewViewModel: SuggestionsViewViewModelType {
     
     private let _coreDataManager = CoreDataManager()
     private let _dataManager = DataManager()
+    
+    
     var suggestionsDelegate: SuggestionsDelegate?
     
     func downloadFilms(condition: Conditions) {

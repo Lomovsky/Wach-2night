@@ -29,11 +29,10 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let previewVC = PreviewViewController()
-//        tableViewViewModel?.selectRow(atIndexPath: indexPath)
-//        let model = tableViewViewModel?.viewModelForSelectedRow()
-//        previewVC.viewModel = model
-//        navigationController?.present(previewVC, animated: true, completion: nil)
+        tableViewViewModel?.selectRow(atIndexPath: indexPath)
+        guard let vm = tableViewViewModel?.viewModelForSelectedRow() else { return }
+        coordinator?.presentPreviewFromSearch(viewModel: vm)
+
         
     }
     

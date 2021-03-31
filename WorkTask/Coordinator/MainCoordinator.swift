@@ -59,6 +59,14 @@ final class MainCoordinator: Coordinator {
         }
     }
     
+    func presentPreviewFromSearch(viewModel: PreviewViewModelType) {
+        let vc = PreviewViewController()
+        vc.coordinator = self
+        
+        vc.viewModel = viewModel
+        navigationController.present(vc, animated: true, completion: nil)
+    }
+    
     func showMoreVC() {
         let vc = GenreViewController()
         vc.coordinator = self

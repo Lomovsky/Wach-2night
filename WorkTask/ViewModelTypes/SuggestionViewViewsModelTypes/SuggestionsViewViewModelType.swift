@@ -11,5 +11,4 @@ protocol SuggestionsViewViewModelType {
     
     func downloadFilms(condition: Conditions)
     var suggestionsDelegate: SuggestionsDelegate? { get set }
-
 }

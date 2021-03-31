@@ -97,7 +97,7 @@ extension SuggestionsViewController {
         recommendationsStack.topAnchor.constraint(equalTo: recommendationsLabel.bottomAnchor, constant: 5).isActive = true
         recommendationsStack.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         recommendationsStack.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
-        recommendationsStack.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.41).isActive = true
+        recommendationsStack.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.45).isActive = true
         recommendationsStack.addSubview(recommendationsCollectionView)
         recommendationsStack.addSubview(activityIndicator)
         
