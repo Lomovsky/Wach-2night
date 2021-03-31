@@ -19,13 +19,19 @@ final class GenreViewController: UIViewController {
         return cv
     }()
     
+    let viewModel: GenreViewViewModelType = GenreViewViewModel()
+    let collectionViewModel: GenreViewCollectionViewViewModelType = GenreViewCollectionViewViewModel()
+    
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.delegate = self
         collectionView.dataSource = self
         view.addSubview(collectionView)
-        
+        viewModel.downloadFilms(condition: .download)
         setupView()
         setupCollectionView()
     }
@@ -56,14 +62,15 @@ final class GenreViewController: UIViewController {
 extension GenreViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return collectionViewModel.numberOfItems()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GenreViewConrtollerCollectionViewCell.reuseIdentifier, for: indexPath) as? GenreViewConrtollerCollectionViewCell {
-            
-            cell.backgroundColor = .red
-            cell.layer.cornerRadius = 10
+            let viewModel = collectionViewModel.cellViewModel(forIndexPath: indexPath)
+            cell.viewModel = viewModel
+//            cell.backgroundColor = .red
+//            cell.layer.cornerRadius = 10
             return cell
         }
         return UICollectionViewCell()

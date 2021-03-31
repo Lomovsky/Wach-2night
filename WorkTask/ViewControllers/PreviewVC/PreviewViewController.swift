@@ -8,7 +8,9 @@
 import UIKit
 
 final class PreviewViewController: UIViewController {
+    
     var viewModel: PreviewViewModelType?
+    weak var coordinator: MainCoordinator?
     
     //MARK: Declarations
     let scrollView: UIScrollView = {

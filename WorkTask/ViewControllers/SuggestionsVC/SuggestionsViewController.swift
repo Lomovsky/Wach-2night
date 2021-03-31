@@ -14,7 +14,7 @@ final class SuggestionsViewController: UIViewController {
     var suggestionsCollectionViewViewModel: SuggestionsCollectionViewViewModelType = SuggestionsCollectionViewViewModel()
     var favoritesCollectionViewViewModel: FavoritesCollectionViewViewModelType = FavoritesCollectionViewViewModel()
     var refreshControl = UIRefreshControl()
-    
+    weak var coordinator: MainCoordinator?
     
     //MARK: UIElements
     let scrollView: UIScrollView = {

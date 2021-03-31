@@ -13,9 +13,10 @@ final class DataManager {
     
     let downloadQueue = DispatchQueue(label: "networkQueue", qos: .utility)
     let savingQueue = DispatchQueue(label: "savingQueue", qos: .userInitiated)
-    let page = "1"
+    var page = "1"
     
     func downloadGenres(condition: Conditions) {
+
         let urlString = "https://api.themoviedb.org/3/genre/movie/list?api_key=\(apiKey)&language=ru-RU"
         let coreDataManager = CoreDataManager()
         NetworkManager.fetchCurrentData(withURL: urlString, dataModel: Genres.self) { (result) in
@@ -45,6 +46,17 @@ final class DataManager {
     
     
     func downloadFilms(conditions: Conditions) {
+        
+        switch conditions {
+        case .download:
+            self.page = "1"
+            
+        case .update:
+            self.page = "2"
+
+        
+        }
+        
         let urlString = "https://api.themoviedb.org/3/discover/movie?api_key=\(apiKey)&language=ru-RU&sort_by=popularity.desc&include_adult=false&include_video=false&page=\(page)"
         let coreDataManager = CoreDataManager()
         NetworkManager.fetchCurrentData(withURL: urlString, dataModel: FilmResponse.self) { [weak self] (result) in

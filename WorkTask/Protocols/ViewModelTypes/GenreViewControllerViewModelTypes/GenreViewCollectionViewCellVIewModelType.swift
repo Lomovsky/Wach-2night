@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol GenreViewCollectionViewCellViewModelType {
+protocol GenreViewCollectionViewCellViewModelType: class {
     
-    var poster: UIImage? { get set }
+    var poster: UIImage { get }
 }

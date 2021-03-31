@@ -10,8 +10,7 @@ import UIKit
 extension SuggestionsViewController {
     
     @objc final func showSearch() {
-        let searchVC = SearchViewController()
-        navigationController?.pushViewController(searchVC, animated: true)
+        coordinator?.showSearch()
     }
     
     @objc final func refresh(_ sender: AnyObject) {

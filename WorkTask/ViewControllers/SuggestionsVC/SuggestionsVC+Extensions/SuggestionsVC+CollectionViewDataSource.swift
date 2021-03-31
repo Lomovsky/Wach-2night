@@ -141,14 +141,7 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
             guard let cell = collectionView.cellForItem(at: indexPath) else { return }
             animateCell(cell: cell)
             suggestionsCollectionViewViewModel.selectRow(atIndexPath: indexPath)
-            let previewVC = PreviewViewController()
-            previewVC.viewModel = suggestionsCollectionViewViewModel.viewModelForSelectedRow()
-            previewVC.viewModel?.suggestionsDelegate = self
-            navigationController?.present(previewVC, animated: true, completion: {
-                previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.addToFavorites),
-                                                   for: .touchUpInside)
-                previewVC.favoriteButton.setTitle("Добавить в избранное", for: .normal)
-            })
+            coordinator?.showPreview(suggestionsCollectionViewViewModel: suggestionsCollectionViewViewModel, favoriteCollectionViewViewModel: nil, selfDelegate: self, action: .save)
             
         case favouriteFilmsCollectionView:
             if favoritesCollectionViewViewModel.numberOfItems() == 0 {
@@ -157,13 +150,16 @@ extension SuggestionsViewController: UICollectionViewDataSource, UICollectionVie
                 guard let cell = collectionView.cellForItem(at: indexPath) else { return }
                 animateCell(cell: cell)
                 favoritesCollectionViewViewModel.selectRow(atIndexPath: indexPath)
-                let previewVC = PreviewViewController()
-                previewVC.viewModel = favoritesCollectionViewViewModel.viewModelForSelectedRow()
-                previewVC.viewModel?.suggestionsDelegate = self
-                navigationController?.present(previewVC, animated: true, completion: {
-                    previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.deleteFromFavorites), for: .touchUpInside)
-                    previewVC.favoriteButton.setTitle("Удалить из избранного", for: .normal)
-                })
+                coordinator?.showPreview(suggestionsCollectionViewViewModel: nil, favoriteCollectionViewViewModel: favoritesCollectionViewViewModel, selfDelegate: self, action: .delete)
+                
+                
+//                let previewVC = PreviewViewController()
+//                previewVC.viewModel = favoritesCollectionViewViewModel.viewModelForSelectedRow()
+//                previewVC.viewModel?.suggestionsDelegate = self
+//                navigationController?.present(previewVC, animated: true, completion: {
+//                    previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.deleteFromFavorites), for: .touchUpInside)
+//                    previewVC.favoriteButton.setTitle("Удалить из избранного", for: .normal)
+//                })
             }
             
         default:
