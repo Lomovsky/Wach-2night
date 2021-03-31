@@ -7,7 +7,7 @@
 
 import Foundation
 
-class GenreCollectionViewCellViewModel: GenreCollectionViewCellViewModelType {
+final class GenreCollectionViewCellViewModel: GenreCollectionViewCellViewModelType {
     
     private var genre: Genre
     

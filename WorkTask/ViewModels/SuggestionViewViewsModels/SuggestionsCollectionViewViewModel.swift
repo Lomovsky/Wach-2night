@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SuggestionsCollectionViewViewModel: SuggestionsCollectionViewViewModelType {    
+final class SuggestionsCollectionViewViewModel: SuggestionsCollectionViewViewModelType {    
     
     private var _selectedIndexPath: IndexPath?
     private let _coreDataManager = CoreDataManager()

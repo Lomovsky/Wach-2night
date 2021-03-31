@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GenreViewCollectionViewCellViewModel: GenreViewCollectionViewCellViewModelType {
+final class GenreViewCollectionViewCellViewModel: GenreViewCollectionViewCellViewModelType {
     
     private var _film: CurrentFilm
     

@@ -17,6 +17,7 @@ protocol SearchViewViewModelType {
     var timer: Timer? { get set }
     
     func search(url: String)
+    func removeAllObjects()
     
 }
 

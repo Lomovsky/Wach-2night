@@ -7,7 +7,7 @@
 
 import Foundation
 
-class GenreViewCollectionViewViewModel: GenreViewCollectionViewViewModelType {
+final class GenreViewCollectionViewViewModel: GenreViewCollectionViewViewModelType {
     
     private let _coreDataManager = CoreDataManager()
     

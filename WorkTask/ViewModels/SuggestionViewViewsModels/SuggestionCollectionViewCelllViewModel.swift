@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SuggestionsCollectionViewCellViewModel: SuggestionsCollectionViewCellViewModelType {
+final class SuggestionsCollectionViewCellViewModel: SuggestionsCollectionViewCellViewModelType {
     
     private var _film: CurrentFilm
     

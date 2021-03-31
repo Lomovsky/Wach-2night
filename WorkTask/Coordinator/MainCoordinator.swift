@@ -58,4 +58,11 @@ final class MainCoordinator: Coordinator {
             }
         }
     }
+    
+    func showMoreVC() {
+        let vc = GenreViewController()
+        vc.coordinator = self
+        vc.navigationController?.visibleViewController?.title = "Рекомендации"
+        navigationController.pushViewController(vc, animated: true)
+    }
 }

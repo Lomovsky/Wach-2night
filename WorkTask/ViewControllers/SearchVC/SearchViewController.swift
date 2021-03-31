@@ -91,8 +91,7 @@ final class SearchViewController: UIViewController, UISearchBarDelegate {
     }
     
     deinit {
-        viewModel?.cache.removeAllObjects()
-        viewModel?.films.removeAll()
+        viewModel?.removeAllObjects()
         print("search vc was dealocated")
     }
     

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class FavoritesCollectionViewViewModel: FavoritesCollectionViewViewModelType {
+final class FavoritesCollectionViewViewModel: FavoritesCollectionViewViewModelType {
     
     private let _coreDataManager = CoreDataManager()
     private var _selectedIndexPath: IndexPath?    

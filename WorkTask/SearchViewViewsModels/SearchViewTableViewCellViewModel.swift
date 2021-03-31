@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SearchTableViewCellViewModel: SearchViewTableViewCellViewModelType {
+final class SearchTableViewCellViewModel: SearchViewTableViewCellViewModelType {
     
     
     var title: String

@@ -9,7 +9,7 @@ import UIKit
 
 
 
-class PreviewViewModel: PreviewViewModelType {
+final class PreviewViewModel: PreviewViewModelType {
     
     var suggestionsDelegate: SuggestionsDelegate?
     var film: CurrentFilm?

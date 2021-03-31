@@ -9,6 +9,8 @@ import UIKit
 
 final class GenreViewController: UIViewController {
 
+    weak var coordinator: MainCoordinator?
+    
     private var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical

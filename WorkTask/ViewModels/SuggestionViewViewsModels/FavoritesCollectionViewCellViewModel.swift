@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FavoritesCollectionViewCellViewModel: FavoritesCollectionViewCellViewModelType {
+final class FavoritesCollectionViewCellViewModel: FavoritesCollectionViewCellViewModelType {
     
     private var _film: CurrentFilm
     

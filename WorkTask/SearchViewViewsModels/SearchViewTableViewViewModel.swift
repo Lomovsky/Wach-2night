@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SearchViewTableViewViewModel: SearchViewTableViewViewModelType {
+final class SearchViewTableViewViewModel: SearchViewTableViewViewModelType {
     
     let queue = DispatchQueue(label: "images", qos: .utility)
     var searchDelegate: SearchDelegate?

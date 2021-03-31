@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SearchViewViewModel: SearchViewViewModelType {
+final class SearchViewViewModel: SearchViewViewModelType {
     
     public let cellID = "Cell"
     var films: [Film] = []
@@ -34,4 +34,8 @@ class SearchViewViewModel: SearchViewViewModelType {
         }
     }
     
+    func removeAllObjects() {
+        cache.removeAllObjects()
+        films.removeAll()
+    }
 }
