@@ -12,8 +12,8 @@ class TableViewCell: UITableViewCell {
     class var cellID: String {
         return "Cell"
     }
-    //MARK: Declarations
     
+    //MARK: Declarations
     var activityIndicator: UIActivityIndicatorView = {
         let acrivityIndicator = UIActivityIndicatorView()
         acrivityIndicator.translatesAutoresizingMaskIntoConstraints = false
@@ -25,16 +25,13 @@ class TableViewCell: UITableViewCell {
         willSet(viewModel) {
             guard let viewModel = viewModel else { return }
             self.textLabel?.text = viewModel.title
-            self.imageView?.image = viewModel.poster
         }
     }
     
     //MARK: Initializer -
-
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: TableViewCell.cellID)
-
+        imageView?.image = #imageLiteral(resourceName: "1024px-No_image_available.svg")
         
     }
     

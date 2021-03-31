@@ -10,6 +10,5 @@ import UIKit
 protocol SearchViewTableViewCellViewModelType: class {
     
     var title: String { get set }
-    var poster: UIImage? { get set }
     
 }
