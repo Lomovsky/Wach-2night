@@ -15,11 +15,6 @@ class SearchViewTableViewViewModel: SearchViewTableViewViewModelType {
     var cache = NSCache<NSNumber, UIImage>()
     private var _selectedIndexPath: IndexPath?
     
-//    private var _poster: UIImage = #imageLiteral(resourceName: "1024px-No_image_available.svg") {
-//        didSet {
-//            print("did set")
-//        }
-//    }
     
     func numberOfItems() -> Int {
         return SearchViewTableViewViewModel.films.count
@@ -28,7 +23,6 @@ class SearchViewTableViewViewModel: SearchViewTableViewViewModelType {
     func cellViewModel(forIndexPath indexPath: IndexPath, cell: UITableViewCell) -> SearchViewTableViewCellViewModelType? {
         let film = SearchViewTableViewViewModel.films[indexPath.row]
         downloadPosters(itemNumber: NSNumber(value: indexPath.item), film: film, indexPath: indexPath, cell: cell)
-        //        searchDelegate?.updateUI()
         return SearchTableViewCellViewModel(title: film.title)
     }
     
@@ -57,7 +51,6 @@ class SearchViewTableViewViewModel: SearchViewTableViewViewModelType {
             let posterURL = URL(string: posterUrlString)
             
             if let cashedImage = cache.object(forKey: itemNumber) {
-//                _poster = cashedImage
                 cell.imageView?.image = cashedImage
                 
             } else {
@@ -68,13 +61,11 @@ class SearchViewTableViewViewModel: SearchViewTableViewViewModelType {
                     DispatchQueue.main.async {
                         self.cache.setObject(resizedPoster!, forKey: itemNumber)
                         cell.imageView?.image = resizedPoster
-                        //                        self.searchDelegate?.updateUI()
                     }
                 }
             }
         } else {
             cell.imageView?.image = #imageLiteral(resourceName: "1024px-No_image_available.svg")
-            //            searchDelegate?.updateUI()
         }
     }
     

@@ -36,4 +36,8 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
 //        navigationController?.present(previewVC, animated: true, completion: nil)
         
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return CGFloat.init(view.frame.size.height * 0.065)
+    }
 }
