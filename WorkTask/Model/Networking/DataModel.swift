@@ -1,6 +1,6 @@
  
  
-import Foundation
+import UIKit
 
 // MARK: - WelcomeElement
 
@@ -28,6 +28,26 @@ import Foundation
         case rating = "vote_average"
     }
     
+ }
+ 
+ struct ConventedFilm {
+    var id: Int
+    var title: String
+    var originalTitle: String
+    var poster: UIImage?
+    var releaseDate: String
+    var overview: String
+    var rating: Float
+    
+    init(id: Int, title: String, originalTitle: String, poster: UIImage, releaseDate: String, overview: String, rating: Float) {
+        self.id = id
+        self.title = title
+        self.originalTitle = originalTitle
+        self.poster = poster
+        self.releaseDate = releaseDate
+        self.overview = overview
+        self.rating = rating
+    }
  }
  
  

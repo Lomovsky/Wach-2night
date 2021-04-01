@@ -31,7 +31,9 @@ class TableViewCell: UITableViewCell {
     //MARK: Initializer -
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: .default, reuseIdentifier: TableViewCell.cellID)
-        imageView?.image = #imageLiteral(resourceName: "1024px-No_image_available.svg")
+//        imageView?.image = #imageLiteral(resourceName: "1024px-No_image_available.svg")
+//        imageView?.layer.cornerRadius = (imageView?.accessibilityFrame.height)! / 2
+        
         
     }
     

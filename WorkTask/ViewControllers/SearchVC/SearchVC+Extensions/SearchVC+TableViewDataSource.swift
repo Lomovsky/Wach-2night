@@ -20,7 +20,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         let cellViewModel = tableViewViewModel?.cellViewModel(forIndexPath: indexPath, cell: cell)
         cell.viewModel = cellViewModel
         cell.imageView?.clipsToBounds = true
-        cell.imageView?.layer.cornerRadius = 20
+        cell.imageView?.layer.cornerRadius = cell.frame.height / 2
         return cell
     }
     
@@ -32,6 +32,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         tableViewViewModel?.selectRow(atIndexPath: indexPath)
         guard let vm = tableViewViewModel?.viewModelForSelectedRow() else { return }
         coordinator?.presentPreviewFromSearch(viewModel: vm)
+        tableView.deselectRow(at: indexPath, animated: true)
 
         
     }

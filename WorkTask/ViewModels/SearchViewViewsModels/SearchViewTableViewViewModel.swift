@@ -11,7 +11,7 @@ class SearchViewTableViewViewModel: SearchViewTableViewViewModelType {
     
     let queue = DispatchQueue(label: "images", qos: .utility)
     weak var searchDelegate: SearchDelegate?
-    static var films: [Film] = []
+    static var films: [ConventedFilm] = []
     var cache = NSCache<NSNumber, UIImage>()
     private var _selectedIndexPath: IndexPath?
     
@@ -22,7 +22,7 @@ class SearchViewTableViewViewModel: SearchViewTableViewViewModelType {
     
     func cellViewModel(forIndexPath indexPath: IndexPath, cell: UITableViewCell) -> SearchViewTableViewCellViewModelType? {
         let film = SearchViewTableViewViewModel.films[indexPath.row]
-        downloadPosters(itemNumber: NSNumber(value: indexPath.item), film: film, indexPath: indexPath, cell: cell)
+        downloadPosters(film: film, indexPath: indexPath, cell: cell)
         return SearchTableViewCellViewModel(title: film.title)
     }
     
@@ -35,7 +35,7 @@ class SearchViewTableViewViewModel: SearchViewTableViewViewModelType {
         return PreviewViewModel(currentFilm: nil, searchedFilm: SearchViewTableViewViewModel.films[selectedIndexPath.row])
     }
     
-    func addAFilm(film: Film) {
+    func addAFilm(film: ConventedFilm) {
         SearchViewTableViewViewModel.films.append(film)
     }
     
@@ -44,29 +44,11 @@ class SearchViewTableViewViewModel: SearchViewTableViewViewModelType {
         SearchViewTableViewViewModel.films.removeAll()
     }
     
-    func downloadPosters(itemNumber: NSNumber, film: Film, indexPath: IndexPath, cell: UITableViewCell) {
+    func downloadPosters(film: ConventedFilm, indexPath: IndexPath, cell: UITableViewCell) {
         cell.imageView?.image = #imageLiteral(resourceName: "1024px-No_image_available.svg")
-        if let posterPath = film.posterPath {
-            let posterUrlString = imagePath + posterPath
-            let posterURL = URL(string: posterUrlString)
-            
-            if let cashedImage = cache.object(forKey: itemNumber) {
-                cell.imageView?.image = cashedImage
-                
-            } else {
-                queue.async {
-                    let imageData = try? Data(contentsOf: posterURL!)
-                    let poster = UIImage(data: imageData!)
-                    let resizedPoster = poster?.resizeImageUsingVImage(size: CGSize.init(width: 50, height: 50))
-                    DispatchQueue.main.async {
-                        self.cache.setObject(resizedPoster!, forKey: itemNumber)
-                        cell.imageView?.image = resizedPoster
-                    }
-                }
-            }
-        } else {
-            cell.imageView?.image = #imageLiteral(resourceName: "1024px-No_image_available.svg")
-        }
+        
+        let resizedPoster = film.poster?.resizeImageUsingVImage(size: .init(width: 60, height: 60))
+        cell.imageView?.image = resizedPoster
     }
     
 }
