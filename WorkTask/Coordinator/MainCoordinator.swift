@@ -10,52 +10,51 @@ import UIKit
 final class MainCoordinator: Coordinator {
     
     var childCoordinators = [Coordinator]()
-    var navigationController: UINavigationController
+    var router: Router?
     
-    init(navigationController: UINavigationController) {
-        self.navigationController = navigationController
+    init(router: Router) {
+        self.router = router
     }
     
     func start() {
         let vc = SuggestionsViewController()
         vc.coordinator = self
-        navigationController.pushViewController(vc, animated: false)
+        router?.push(vc)
     }
     
     func showSearch() {
         let vc = SearchViewController()
         vc.coordinator = self
-        navigationController.pushViewController(vc, animated: true)
+        router?.push(vc)
     }
     
     func showPreview(suggestionsCollectionViewViewModel: SuggestionsCollectionViewViewModelType?,
                      favoriteCollectionViewViewModel: FavoritesCollectionViewViewModelType?, selfDelegate: SuggestionsDelegate, action: Action) {
         
-        let vc = SuggestionsViewController()
         let previewVC = PreviewViewController()
-        vc.coordinator = self
         previewVC.coordinator = self
         
         switch action {
         case .save:
             previewVC.viewModel = suggestionsCollectionViewViewModel?.viewModelForSelectedRow()
-            navigationController.present(previewVC, animated: true) {
+            router?.push(previewVC, animated: true, completion: {
                 previewVC.viewModel?.suggestionsDelegate = selfDelegate
                 
                 previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.addToFavorites),
                                                    for: .touchUpInside)
                 previewVC.favoriteButton.setTitle("Добавить в избранное", for: .normal)
-            }
+            })
             
         default:
             previewVC.viewModel?.suggestionsDelegate = selfDelegate
             previewVC.viewModel = favoriteCollectionViewViewModel?.viewModelForSelectedRow()
-            navigationController.present(previewVC, animated: true) {
+            router?.present(previewVC, animated: true, completion: {
                 previewVC.viewModel?.suggestionsDelegate = selfDelegate
                 
                 previewVC.favoriteButton.addTarget(previewVC.self, action: #selector(previewVC.deleteFromFavorites), for: .touchUpInside)
                 previewVC.favoriteButton.setTitle("Удалить из избранного", for: .normal)
-            }
+            })
+            
         }
     }
     
@@ -64,13 +63,13 @@ final class MainCoordinator: Coordinator {
         vc.coordinator = self
         
         vc.viewModel = viewModel
-        navigationController.present(vc, animated: true, completion: nil)
+        router?.present(vc)
     }
     
     func showMoreVC() {
         let vc = GenreViewController()
         vc.coordinator = self
         vc.navigationController?.visibleViewController?.title = "Рекомендации"
-        navigationController.pushViewController(vc, animated: true)
+        router?.present(vc)
     }
 }
